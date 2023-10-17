@@ -1,41 +1,45 @@
-CC = gcc
-CFLAGS = -Wall -Werror -Wextra -g
-LDFLAGS = -L./libft -lft
+NAME		=	minishell
 
-HEADERS = minishell.h
+CC			=	gcc
 
-SRCS =	./main/main.c
-		./parsing/parsing.c
-		./error/error.c
+FLAG		=	-Wall -Wextra -Werror
 
-OBJS = $(SRCS:.c=.o)
-NAME = minishell
+LIBFT_PATH	=	./libft/
+
+LIBFT_FILE	=	libft.a
+
+LIBFT_LIB	=	$(addprefix $(LIBFT_PATH), $(LIBFT_FILE))
+
+MLX_PATH	=	./mlx/
+
+MLX_LIB		=	$(addprefix $(MLX_PATH), $(MLX_FILE))
+
+MLX_EX		=	$(MLX_LIB) $(MLX_FLAG)
+
+C_FILE		=	main/main.c
+
+SRC_DIR		=	./
+
+INC_DIR		=	./includes/
+
+SRC			=	$(addprefix $(SRC_DIR),$(C_FILE))
+
+OBJ			=	$(SRC:.c=.o)
+
+.c.o:
+	$(CC) $(FLAG) -c $< -o $@
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME)
-
-%.o: %.c $(HEADERS)
-	$(CC) $(CFLAGS) -c $< -o $@
-
-norme:
-	norminette $(SRCS) $(HEADERS)
+$(NAME): $(OBJ)
+	$(CC) $(OBJ) -o $(NAME) -lreadline
 
 clean:
-	rm -f $(OBJS) $(BOBJS)
+	@rm -f $(OBJ)
 
 fclean: clean
-	rm -f $(NAME) $(OBJS) $(BOBJS) $(BNAME)
-	rm -f debug
+	@rm -f $(NAME)
 
 re: fclean all
 
-debug: $(OBJS)
-	clear
-	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o debug
-
-	colour-valgrind -s --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes --error-exitcode=1 \
-	./debug
-
-.PHONY: all clean fclean re debug
+.PHONY: all clean fclean re
