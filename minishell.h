@@ -6,15 +6,31 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/17 07:37:11 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/10/17 08:18:17 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <signal.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <dirent.h>
+#include <string.h>
+#include <errno.h>
+#include <termios.h>
+#include <stdlib.h>
+#include <term.h>
 
-
+typedef struct s_minishell
+{
+char	***cmd;
+}t_ms;
 
 // Text colors
 # define COLOR_BLACK   "\033[30m"

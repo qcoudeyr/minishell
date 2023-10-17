@@ -1,12 +1,11 @@
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -g
-LDFLAGS = -L./libft -lft
 
 HEADERS = minishell.h
 
 SRCS =	./main/main.c
-		./parsing/parsing.c
-		./error/error.c
+#		./parsing/parsing.c
+#		./error/error.c
 
 OBJS = $(SRCS:.c=.o)
 NAME = minishell
@@ -14,7 +13,7 @@ NAME = minishell
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 %.o: %.c $(HEADERS)
 	$(CC) $(CFLAGS) -c $< -o $@
