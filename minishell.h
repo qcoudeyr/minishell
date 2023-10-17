@@ -3,20 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
+/*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/17 07:37:11 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/10/17 14:39:08 by lheinric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+#include <stdio.h>      // Pour printf
+#include <stdlib.h>     // Pour malloc, free, exit
+#include <string.h>     // Pour strerror
+#include <unistd.h>     // Pour access, open, read, write, close, fork, getpid, getppid, getuid, getgid
+#include <sys/wait.h>   // Pour wait, waitpid, wait3, wait4
+#include <signal.h>     // Pour signal, sigaction, sigemptyset, sigaddset, kill
+#include <dirent.h>     // Pour opendir, readdir, closedir
+#include <sys/stat.h>   // Pour stat, lstat, fstat
+#include <fcntl.h>      // Pour O_RDONLY, O_WRONLY, O_CREAT, etc.
+#include <readline/readline.h> // Pour readline
+#include <readline/history.h> // Pour rl_clear_history, rl_on_new_line, rl_replace_line, rl_redisplay, add_history
+#include <ncurses.h>   // Pour les fonctions de ncurses comme tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs
+#include <termios.h>    // Pour tcgetattr, tcsetattr
+#include <sys/ioctl.h>  // Pour ioctl
+#include <pwd.h>
 
 
 
-// Text colors
+/*// Text colors
 # define COLOR_BLACK   "\033[30m"
 # define COLOR_RED     "\033[31m"
 # define COLOR_GREEN   "\033[32m"
@@ -43,6 +58,6 @@
 # define UNDERLINE "\033[4m"
 # define BLINK     "\033[5m"
 # define REVERSE   "\033[7m"
-# define HIDDEN    "\033[8m"
+# define HIDDEN    "\033[8m"*/
 
 #endif
