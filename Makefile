@@ -1,6 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -g
-LDFLAGS = -L./libft -lft
+LIB_DIR = ./libft
+LIBS = -lft
 
 HEADERS = minishell.h
 
@@ -13,8 +14,8 @@ NAME = minishell
 
 all: libft $(NAME)
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME)
+$(NAME): $(OBJS) libft
+	$(CC) $(CFLAGS) $(OBJS) -L$(LIB_DIR) $(LIBS) -o $(NAME)
 
 %.o: %.c $(HEADERS)
 	$(CC) $(CFLAGS) -c $< -o $@
