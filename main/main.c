@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/23 13:17:20 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/10/23 13:21:43 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,12 @@ int	main(int argc, char **argv, char **envp)
 		cmd = readline("$ "COLOR_RED"minishell"RESET"~: ");
 		if (ft_strncmp("env", cmd, 4) == 0)
 			printenv(envp);
+		if (ft_strncmp("clear", cmd, 5) == 0)
+			printf("\033[2J\033[H");
 	}
 	free(cmd);
-	return 0;
+
+	printf("\033[2J\033[H");
+
+	return (0);
 }
