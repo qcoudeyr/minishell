@@ -1,18 +1,18 @@
+vpath %.c %.h %.a ./libft ./parsing ./error ./main
+
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -g
-LIB_DIR = ./libft
-LIBS = -lft
+LIB_DIR = ./libft/
+LIBS = -lft -lreadline
 
 HEADERS = minishell.h
 
-SRCS =	./main/main.c
-#		./parsing/parsing.c
-#		./error/error.c
+SRCS =	main.c
 
 OBJS = $(SRCS:.c=.o)
 NAME = minishell
 
-all: libft $(NAME)
+all: $(NAME)
 
 $(NAME): $(OBJS) libft
 	$(CC) $(CFLAGS) $(OBJS) -L$(LIB_DIR) $(LIBS) -o $(NAME)
@@ -44,4 +44,4 @@ debug: $(OBJS)
 	colour-valgrind -s --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes --error-exitcode=1 \
 	./debug
 
-.PHONY: all clean fclean re debug
+.PHONY: all clean fclean re debug libft
