@@ -15,21 +15,30 @@ NAME = minishell
 all: $(NAME)
 
 $(NAME): $(OBJS) libft
-	$(CC) $(CFLAGS) $(OBJS) -L$(LIB_DIR) $(LIBS) -o $(NAME)
+	@echo "\033[2m\033[31mStart to make $(NAME)\033[0m"
+	@$(CC) $(CFLAGS) $(OBJS) -L$(LIB_DIR) $(LIBS) -o $(NAME)
+	@echo "\033[32m\t$(NAME) is done !\033[0m"
 
 %.o: %.c $(HEADERS)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 libft:
-	$(MAKE) -C ./libft
+	@echo "\033[2m\033[31mCooking the LIBFT\033[0m"
+	@$(MAKE) -s -C ./libft
+	@echo "\033[32m\tLIBFT is done!\033[0m"
 
 clean:
-	rm -f $(OBJS)
-	$(MAKE) -C ./libft clean
+	@echo "\033[2m\033[31mStart to CLEAN\033[0m"
+	@rm -f $(OBJS)
+	@$(MAKE) -s -C ./libft clean
+	@echo "\033[32m\tCLEAN is done!\033[0m"
 
 fclean: clean
-	rm -f $(NAME)
-	$(MAKE) -C ./libft fclean
+	@clear
+	@echo "\033[2m\033[31mStart to FCLEAN\033[0m"
+	@rm -f $(NAME)
+	@$(MAKE) -s -C ./libft fclean
+	@echo "\033[32m\tFCLEAN is done!\033[0m"
 
 re: fclean all
 
@@ -38,9 +47,8 @@ norme:
 	norminette $(SRCS) $(HEADERS)
 
 debug: $(OBJS)
-	clear
-	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o debug
-
+	@clear
+	@$(CC) $(CFLAGS) $(OBJS) -L$(LIB_DIR) $(LIBS) -o debug
 	colour-valgrind -s --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes --error-exitcode=1 \
 	./debug
 

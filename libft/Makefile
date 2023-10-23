@@ -61,8 +61,8 @@ NAME = libft.a
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	ar r $(NAME) $(OBJS)
-	ranlib $(NAME)
+	@ar r $(NAME) $(OBJS)>/dev/null 2>&1
+	@ranlib $(NAME)
 
 %.o: %.c libft.h
 	$(CC) $(CFLAGS) -c $< -o $@
