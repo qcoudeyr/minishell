@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/23 10:40:10 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/10/23 13:17:20 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void printenv(char **envp)
 	int j;
 
 	j = -1;
+	char* env_variable = getenv("PATH");
+	printf("%s\n",env_variable);
 	while (envp[++j] != NULL)
 		printf("%s\n", envp[j]);
 }
@@ -47,10 +49,13 @@ int	main(int argc, char **argv, char **envp)
 	(void)envp;
 
 	printf("\033[2J\033[H");
+
 	if (argc > 1)
 		return (printf("ERROR: usage ./minishell\n"), 1);
+
 	if (print_header( ) == -1)
 		return (-1);
+
 	rl_initialize();
 	cmd = malloc(sizeof(char*));
 	while (ft_strncmp("exit", cmd, 4) != 0)
