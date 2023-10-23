@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/17 08:18:17 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/10/23 07:08:07 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define MINISHELL_H
 
 #include <stdio.h>
+#include <readline/readline.h>
+#include <readline/history.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <signal.h>
@@ -26,6 +28,7 @@
 #include <termios.h>
 #include <stdlib.h>
 #include <term.h>
+#include "./libft/libft.h"
 
 typedef struct s_minishell
 {

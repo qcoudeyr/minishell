@@ -1,5 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -g
+LDFLAGS = -L./libft -lft
 
 HEADERS = minishell.h
 
@@ -10,25 +11,30 @@ SRCS =	./main/main.c
 OBJS = $(SRCS:.c=.o)
 NAME = minishell
 
-all: $(NAME)
+all: libft $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME)
 
 %.o: %.c $(HEADERS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-norme:
-	norminette $(SRCS) $(HEADERS)
+libft:
+	$(MAKE) -C ./libft
 
 clean:
-	rm -f $(OBJS) $(BOBJS)
+	rm -f $(OBJS)
+	$(MAKE) -C ./libft clean
 
 fclean: clean
-	rm -f $(NAME) $(OBJS) $(BOBJS) $(BNAME)
-	rm -f debug
+	rm -f $(NAME)
+	$(MAKE) -C ./libft fclean
 
 re: fclean all
+
+
+norme:
+	norminette $(SRCS) $(HEADERS)
 
 debug: $(OBJS)
 	clear
