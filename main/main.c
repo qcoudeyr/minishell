@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/23 13:21:43 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/10/23 13:59:25 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ void printenv(char **envp)
 	int j;
 
 	j = -1;
-	char* env_variable = getenv("PATH");
-	printf("%s\n",env_variable);
 	while (envp[++j] != NULL)
 		printf("%s\n", envp[j]);
 }
@@ -41,35 +39,96 @@ int	print_header(void)
 	free(str);
 	return (0);
 }
-
-int	main(int argc, char **argv, char **envp)
+int	start_minishell(t_ms *t)
 {
-	char *cmd;
+	int	i;
+
+	i = 0;
+	if (print_header( ) == -1)
+		return (-1);
+	rl_initialize();
+	t->cmd = malloc(sizeof(char**));
+	t->cmd[0] = malloc(sizeof(char *));
+	while (ft_strncmp("exit", t->cmd[i], 4) != 0)
+	{
+		free(t->cmd[i]);
+		t->cmd[i] = readline("$ "COLOR_RED"minishell"RESET"~: ");
+		if (t->cmd[i] == NULL)
+			break;
+		if (ft_strncmp("env", t->cmd[i], 4) == 0)
+			printenv(t->env);
+		if (ft_strncmp("clear", t->cmd[i], 5) == 0)
+			printf("\033[2J\033[H");
+	}
+	return (0);
+}
+
+void	ft_freecmdlist(t_ms *t)
+{
+	int	i;
+	int	y;
+
+	i = 0;
+	if (t->cmdlist != NULL)
+	{
+		while (i < (t->narg + 1))
+		{
+			if (t->cmdlist[i] != NULL)
+			{
+				y = 0;
+				while (t->cmdlist[i][y] != NULL)
+					free(t->cmdlist[i][y++]);
+			}
+			free(t->cmdlist[i]);
+			i++;
+		}
+		free(t->cmdlist);
+	}
+}
+
+void	ft_free(t_ms *t)
+{
+	int	i;
+
+	i = 0;
+	if (t->cmd != NULL)
+	{
+		while (i <= t->narg + 1)
+		{
+			free(t->cmd[i]);
+			i++;
+		}
+		free(t->cmd);
+	}
+	i = 0;
+	while (t->path[i] != NULL)
+		free(t->path[i++]);
+	free(t->path);
+	ft_freecmdlist(t);
+	free(t->infile);
+	free(t->outfile);
+	if (t->fpath != NULL)
+		free(t->fpath);
+	free(t);
+}
+
+int	main(int argc, char **argv, char **env)
+{
+	t_ms	*t;
 	(void)argv;
-	(void)envp;
+
+	t = malloc(sizeof(t_ms));
+	t->env = env;
 
 	printf("\033[2J\033[H");
 
 	if (argc > 1)
 		return (printf("ERROR: usage ./minishell\n"), 1);
 
-	if (print_header( ) == -1)
-		return (-1);
+	parsing(t);
+	start_minishell(t);
 
-	rl_initialize();
-	cmd = malloc(sizeof(char*));
-	while (ft_strncmp("exit", cmd, 4) != 0)
-	{
-		free(cmd);
-		cmd = readline("$ "COLOR_RED"minishell"RESET"~: ");
-		if (ft_strncmp("env", cmd, 4) == 0)
-			printenv(envp);
-		if (ft_strncmp("clear", cmd, 5) == 0)
-			printf("\033[2J\033[H");
-	}
-	free(cmd);
-
+	ft_free(t);
 	printf("\033[2J\033[H");
-
 	return (0);
 }

@@ -7,7 +7,7 @@ LIBS = -lft -lreadline -lncurses
 
 HEADERS = minishell.h
 
-SRCS =	main.c
+SRCS =	main.c parsing.c error.c
 
 OBJS = $(SRCS:.c=.o)
 NAME = minishell
