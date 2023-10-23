@@ -11,12 +11,7 @@
 #                                                                                         #
 ###########################################################################################
 #                                                                                         #
-#                                \033[41m- Welcome to MINISHELL -\033[0m                                 #
+#                                ~ Welcome to MINISHELL ~                                 #
 #                                                                                         #
-#               \033[2mYour Command-Line Companion for Quick and Efficient Tasks.\033[0m                #
-#                 \033[2mTake control of your system, run commands,\033[0m                              #
-#                 \033[2mand automate your daily routines with ease.\033[0m                             #
-#                 \033[2mExplore the power of the terminal in style!\033[0m                             #
-#                                                                                         #
-#  \033[42mType 'help' for a list of available commands.\033[0m                                          #
+#  Type 'help' for a list of available commands.                                          #
 ###########################################################################################
