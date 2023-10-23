@@ -6,7 +6,7 @@
 /*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/17 14:39:08 by lheinric         ###   ########.fr       */
+/*   Updated: 2023/10/18 07:58:27 by lheinric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,19 @@
 #include <sys/ioctl.h>  // Pour ioctl
 #include <pwd.h>
 
+#include "./libft/libft.h"
 
 
-/*// Text colors
-# define COLOR_BLACK   "\033[30m"
-# define COLOR_RED     "\033[31m"
-# define COLOR_GREEN   "\033[32m"
-# define COLOR_YELLOW  "\033[33m"
-# define COLOR_BLUE    "\033[34m"
-# define COLOR_MAGENTA "\033[35m"
-# define COLOR_CYAN    "\033[36m"
-# define COLOR_WHITE   "\033[37m"
+
+// Text colors
+# define C_BLACK   "\033[30m"
+# define C_RED     "\033[31m"
+# define C_GREEN   "\033[32m"
+# define C_YELLOW  "\033[33m"
+# define C_BLUE    "\033[34m"
+# define C_MAGENTA "\033[35m"
+# define C_CYAN    "\033[36m"
+# define C_WHITE   "\033[37m"
 
 // Background colors
 # define BG_BLACK   "\033[40m"
@@ -58,6 +60,6 @@
 # define UNDERLINE "\033[4m"
 # define BLINK     "\033[5m"
 # define REVERSE   "\033[7m"
-# define HIDDEN    "\033[8m"*/
+# define HIDDEN    "\033[8m"
 
 #endif

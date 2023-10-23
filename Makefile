@@ -34,11 +34,16 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	$(CC) $(OBJ) -o $(NAME) -lreadline
 
+lib:
+	@make -C $(LIBFT_PATH)
+
 clean:
+	@make clean -sC $(LIBFT_PATH)
 	@rm -f $(OBJ)
 
 fclean: clean
 	@rm -f $(NAME)
+	@make fclean -C $(LIBFT_PATH)
 
 re: fclean all
 

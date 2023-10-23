@@ -1,25 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
+/*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/18 07:58:05 by lheinric         ###   ########.fr       */
+/*   Created: 2023/02/07 11:51:53 by qcoudeyr          #+#    #+#             */
+/*   Updated: 2023/04/21 22:56:25 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
-
-void printenv(char **envp)
-{
-	int j;
-
-	j = -1;
-	while (envp[++j] != NULL)
-		printf(C_RED"%s\n", envp[j]);
-}
+#include "../libft.h"
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
@@ -31,22 +22,4 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	while (i < n - 1 && s1[i] == s2[i] && (s1[i] != 0 && s2[i] != 0))
 		i++;
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-}
-
-int	main(int argc, char **argv, char **envp)
-{
-	char *commande;
-	(void)argv;
-	(void)envp;
-
-	if (argc > 1)
-		return (printf("ERROR: usage ./minishell\n"), 1);
-	rl_initialize();
-	while (ft_strncmp("exit", commande, 5) != 0)
-	{
-		commande = readline("minishell : ");
-		if (ft_strncmp("env", commande, 4) == 0)
-			printenv(envp);
-	}
-	return 0;
 }
