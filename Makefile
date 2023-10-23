@@ -3,7 +3,7 @@ vpath %.c %.h %.a ./libft ./parsing ./error ./main
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -g
 LIB_DIR = ./libft/
-LIBS = -lft -lreadline -lncurses
+LIBS = -lft -lreadline -lncurses -lhistory
 
 HEADERS = minishell.h
 
