@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/24 13:28:29 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/10/24 13:32:33 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,10 @@ int	start_minishell(t_ms *t)
 			else if (t->pid == 0)
 				ft_execve(t, i);
 			else
+			{
 				waitpid(t->pid, &t->status, WNOHANG);
+				wait
+			}
 		}
 	}
 	return (0);
