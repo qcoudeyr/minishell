@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/24 08:53:49 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/10/24 09:35:56 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,23 @@ int	start_minishell(t_ms *t)
 		if (ft_strncmp("clear", t->cmd[i], 5) == 0)
 			printf("\033[2J\033[H");
 // Here is to handle the normal cases:
-		cmdformat(t);
-		for(int x = 0; t->cmdlist[0][x] != 0; x++)
-			printf("%s\n", t->cmdlist[0][x]);
+		if (cmdformat(t) != -1)
+		{
+			t->pid = fork();
+			if (t->pid == -1)
+				ft_perror(t, "fork");
+			else if (t->pid == 0)
+				ft_execve(t, i);
+			else
+			{
+				waitpid(t->pid, &t->status, WNOHANG);
+				t->file_fd[0] = t->pipefd[0];
+				close(t->pipefd[1]);
+				i++;
+			}
+		}
+/* 		for(int x = 0; t->cmdlist[0][x] != 0; x++)
+			printf("%s\n", t->cmdlist[0][x]); */
 	}
 	return (0);
 }

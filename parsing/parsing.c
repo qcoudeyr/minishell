@@ -6,14 +6,14 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:59 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/24 09:12:37 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/10/24 09:33:10 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 
-void	pathfinder(t_ms *t)
+int	pathfinder(t_ms *t)
 {
 	int	i;
 	int	arg;
@@ -25,9 +25,8 @@ void	pathfinder(t_ms *t)
 		t->fpath = ft_strjoin(t->path[i], t->cmdlist[arg][0]);
 		while (access (t->fpath, X_OK) < 0 && t->path[i + 1] != NULL)
 		{
-			i++;
 			free(t->fpath);
-			t->fpath = ft_strjoin(t->path[i], t->cmdlist[arg][0]);
+			t->fpath = ft_strjoin(t->path[i++], t->cmdlist[arg][0]);
 		}
 		if (access(t->fpath, X_OK) == 0)
 		{
@@ -35,14 +34,15 @@ void	pathfinder(t_ms *t)
 			t->cmdlist[arg][0] = ft_strdup(t->fpath);
 		}
 		else
-			ft_cmdnotfound(t, t->cmdlist[arg][0]);
+			return(ft_cmdnotfound(t, t->cmdlist[arg][0]));
 		arg++;
 		free(t->fpath);
 		t->fpath = NULL;
 	}
+	return (0);
 }
 
-void	cmdformat(t_ms *t)
+int	cmdformat(t_ms *t)
 {
 	int		i;
 
@@ -53,7 +53,7 @@ void	cmdformat(t_ms *t)
 		t->cmdlist[i] = ft_splitq(t->cmd[i]);
 		i++;
 	}
-	pathfinder(t);
+	return (pathfinder(t));
 }
 
 void	env_pars(t_ms *t)
