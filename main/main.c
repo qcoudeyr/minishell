@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/24 11:50:29 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/10/24 13:28:29 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	start_minishell(t_ms *t)
 			break;
 		if (t->cmd[i][0] != '\0')
 			add_history(t->cmd[i]);
-		if (is_builtins(t,i) == 0 && cmdformat(t) != -1)
+		if (is_builtins(t,i) == 0 && cmdformat(t) != -1 && *t->cmd[i] != 0)
 		{
 			t->pid = fork();
 			if (t->pid == -1)
