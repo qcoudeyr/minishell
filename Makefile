@@ -1,7 +1,7 @@
 vpath %.c %.o %.h %.a ./libft ./parsing ./error ./main
 
 CC = clang
-CFLAGS = -Wall -Werror -Wextra -g
+CFLAGS = -Wall -Werror -Wextra
 LIB_DIR = ./libft/
 LIBS = -lft -lreadline -lncurses -lhistory
 
