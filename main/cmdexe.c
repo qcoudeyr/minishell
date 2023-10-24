@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 09:45:55 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/24 09:51:39 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/10/24 11:29:18 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ int	is_builtins(t_ms *t, int i)
 	{
 		is_b += 1;
 		printf("\033[2J\033[H");
+	}
+	if (ft_strncmp("pwd", t->cmd[i], 3) == 0)
+	{
+		is_b += 1;
+		printf("%s\n", t->pwd);
 	}
 	return (is_b);
 }

@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/24 10:40:30 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/10/24 11:24:42 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ void	ft_free(t_ms *t)
 	while (t->path[i] != NULL)
 		free(t->path[i++]);
 	free(t->path);
+	free(t->pwd);
 	ft_freecmdlist(t);
 	free(t->infile);
 	free(t->outfile);
