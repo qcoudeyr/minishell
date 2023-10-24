@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/23 14:14:23 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/10/24 08:08:29 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,23 @@ int	start_minishell(t_ms *t)
 	i = 0;
 	if (print_header( ) == -1)
 		return (-1);
+
 	rl_initialize();
+	using_history();
+
 	t->cmd = malloc(sizeof(char**));
 	t->cmd[0] = malloc(sizeof(char *));
+
 	while (ft_strncmp("exit", t->cmd[i], 4) != 0)
 	{
 		free(t->cmd[i]);
+
 		t->cmd[i] = readline("$ "COLOR_RED"minishell"RESET"~: ");
+
 		if (t->cmd[i] == NULL)
 			break;
+		if (t->cmd[i][0] != '\0')
+			add_history(t->cmd[i]);
 		if (ft_strncmp("env", t->cmd[i], 4) == 0)
 			printenv(t->env);
 		if (ft_strncmp("clear", t->cmd[i], 5) == 0)
