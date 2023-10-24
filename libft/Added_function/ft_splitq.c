@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 09:43:46 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/23 07:00:25 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/10/24 09:00:32 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,7 @@ char	**ft_splitq(char const *str)
 		while (s[i] == ' ' && s[i] != 0)
 			i++;
 		tab[index] = malloc(sizeof(char) * ft_wordlen(&s[i], ' ') + 1);
-		if (s[i] == 34 || s[i] == 39)
-			ft_strlcpy(tab[index++], &s[i + 1], ft_wordlen(&s[i], ' ') - 1);
-		else
-			ft_strlcpy(tab[index++], &s[i], ft_wordlen(&s[i], ' ') + 1);
+		ft_strlcpy(tab[index++], &s[i], ft_wordlen(&s[i], ' ') + 1);
 		i += ft_wordlen(&s[i], ' ');
 	}
 	tab[index] = NULL;
