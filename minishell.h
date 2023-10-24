@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/24 09:33:18 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/10/24 09:50:18 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 #include <stdlib.h>
 #include <term.h>
 #include "./libft/libft.h"
+#include <sys/types.h>
+#include <sys/wait.h>
 
 typedef struct s_minishell
 {
@@ -46,10 +48,11 @@ typedef struct s_minishell
 	char	**path;
 }t_ms;
 
-void	env_pars(t_ms *t);
 int		cmdformat(t_ms *t);
 int		pathfinder(t_ms *t);
 int		ft_cmdnotfound(t_ms *t, char *str);
+int		is_builtins(t_ms *t, int i);
+void	env_pars(t_ms *t);
 void	ft_acceserror(t_ms *t);
 void	ft_perror(t_ms *t, char *s);
 void	ft_free(t_ms *t);

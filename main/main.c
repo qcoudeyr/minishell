@@ -6,19 +6,24 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/24 09:35:56 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/10/24 10:02:56 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void printenv(char **envp)
+void	ft_execve(t_ms *t, int i)
 {
-	int j;
-
-	j = -1;
-	while (envp[++j] != NULL)
-		printf("%s\n", envp[j]);
+	dup2(t->file_fd[0], 0);
+	dup2(t->pipefd[1], 1);
+	if (t->cmdlist[i +1] == NULL)
+		dup2(t->file_fd[1], 1);
+	if (execve(t->cmdlist[i][0], t->cmdlist[i], t->env) == -1)
+	{
+		ft_perror(t, "execve");
+		exit(EXIT_FAILURE);
+	}
+	exit(EXIT_FAILURE);
 }
 
 int	print_header(void)
@@ -63,16 +68,9 @@ int	start_minishell(t_ms *t)
 			break;
 		if (t->cmd[i][0] != '\0')
 			add_history(t->cmd[i]);
-
-// Here is to handle builtins:
-//  To do (if builtins_functions != 1 do normal cases)
-		if (ft_strncmp("env", t->cmd[i], 4) == 0)
-			printenv(t->env);
-		if (ft_strncmp("clear", t->cmd[i], 5) == 0)
-			printf("\033[2J\033[H");
-// Here is to handle the normal cases:
-		if (cmdformat(t) != -1)
+		if (is_builtins(t,i) == 0 && cmdformat(t) != -1)
 		{
+			pipe(t->pipefd);
 			t->pid = fork();
 			if (t->pid == -1)
 				ft_perror(t, "fork");
@@ -83,11 +81,8 @@ int	start_minishell(t_ms *t)
 				waitpid(t->pid, &t->status, WNOHANG);
 				t->file_fd[0] = t->pipefd[0];
 				close(t->pipefd[1]);
-				i++;
 			}
 		}
-/* 		for(int x = 0; t->cmdlist[0][x] != 0; x++)
-			printf("%s\n", t->cmdlist[0][x]); */
 	}
 	return (0);
 }

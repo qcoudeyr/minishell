@@ -1,4 +1,4 @@
-vpath %.c %.h %.a ./libft ./parsing ./error ./main
+vpath %.c %.o %.h %.a ./libft ./parsing ./error ./main
 
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -g
@@ -7,7 +7,7 @@ LIBS = -lft -lreadline -lncurses -lhistory
 
 HEADERS = minishell.h
 
-SRCS =	main.c parsing.c error.c
+SRCS =	main.c parsing.c error.c cmdexe.c
 
 OBJS = $(SRCS:.c=.o)
 NAME = minishell
