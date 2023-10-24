@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:01 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/24 08:48:28 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/10/24 09:18:03 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,10 @@ void	getsignal()
 }
 
 
-void	ft_cmdnotfound(t_ms *t)
+void	ft_cmdnotfound(t_ms *t, char *str)
 {
-	perror("Command not found !");
-	ft_free(t);
-	exit(EXIT_FAILURE);
+	(void) t;
+	printf("Command not found: %s\n",str);
 }
 
 void	ft_acceserror(t_ms *t)

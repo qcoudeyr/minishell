@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/24 08:29:17 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/10/24 09:14:13 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct s_minishell
 void	env_pars(t_ms *t);
 void	cmdformat(t_ms *t);
 void	pathfinder(t_ms *t);
-void	ft_cmdnotfound(t_ms *t);
+void	ft_cmdnotfound(t_ms *t, char *str);
 void	ft_acceserror(t_ms *t);
 void	ft_perror(t_ms *t, char *s);
 void	ft_free(t_ms *t);
