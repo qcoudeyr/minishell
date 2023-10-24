@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/24 10:02:56 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/10/24 10:40:30 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 
 void	ft_execve(t_ms *t, int i)
 {
-	dup2(t->file_fd[0], 0);
-	dup2(t->pipefd[1], 1);
-	if (t->cmdlist[i +1] == NULL)
-		dup2(t->file_fd[1], 1);
 	if (execve(t->cmdlist[i][0], t->cmdlist[i], t->env) == -1)
 	{
 		ft_perror(t, "execve");
@@ -70,18 +66,13 @@ int	start_minishell(t_ms *t)
 			add_history(t->cmd[i]);
 		if (is_builtins(t,i) == 0 && cmdformat(t) != -1)
 		{
-			pipe(t->pipefd);
 			t->pid = fork();
 			if (t->pid == -1)
 				ft_perror(t, "fork");
 			else if (t->pid == 0)
 				ft_execve(t, i);
 			else
-			{
 				waitpid(t->pid, &t->status, WNOHANG);
-				t->file_fd[0] = t->pipefd[0];
-				close(t->pipefd[1]);
-			}
 		}
 	}
 	return (0);
