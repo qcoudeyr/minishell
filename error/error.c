@@ -6,30 +6,30 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:01 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/23 13:56:17 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/10/24 08:48:28 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void sigint_handler(int signo)
+void	sigint_handler(int signo)
 {
 	(void)signo;
-	// Gérer Ctrl-C (SIGINT) ici
 	printf("\n");
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
 }
 
-void nothing_handler(int signo)
+void	nothing_handler(int signo)
 {
 	(void)signo;
 }
 
-int getsignal()
+void	getsignal()
 {
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, nothing_handler);
-
-	return 0;
 }
 
 

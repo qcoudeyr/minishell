@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:59 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/23 13:37:11 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/10/24 08:55:54 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,14 @@ void	cmdformat(t_ms *t)
 
 	i = 0;
 	t->cmdlist = ft_calloc((t->narg +1), sizeof(char **));
-	while (i < t->narg)
+	while (i <= t->narg)
 	{
-		if (ft_isalpha(*t->cmd[i]) == 0)
-		{
-			ft_printf(COLOR_RED "Command can't \
-start with : '%c' !\n", *t->cmd[i]);
-			ft_perror(t, 0);
-		}
 		t->cmdlist[i] = ft_splitq(t->cmd[i]);
 		i++;
 	}
 }
 
-void	parsing(t_ms *t)
+void	env_pars(t_ms *t)
 {
 	int		i;
 	char	*temp;

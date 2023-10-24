@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/24 08:08:29 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/10/24 08:53:49 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +56,24 @@ int	start_minishell(t_ms *t)
 	while (ft_strncmp("exit", t->cmd[i], 4) != 0)
 	{
 		free(t->cmd[i]);
-
+		signal(SIGINT, getsignal);
 		t->cmd[i] = readline("$ "COLOR_RED"minishell"RESET"~: ");
 
 		if (t->cmd[i] == NULL)
 			break;
 		if (t->cmd[i][0] != '\0')
 			add_history(t->cmd[i]);
+
+// Here is to handle builtins:
+//  To do (if builtins_functions != 1 do normal cases)
 		if (ft_strncmp("env", t->cmd[i], 4) == 0)
 			printenv(t->env);
 		if (ft_strncmp("clear", t->cmd[i], 5) == 0)
 			printf("\033[2J\033[H");
+// Here is to handle the normal cases:
+		cmdformat(t);
+		for(int x = 0; t->cmdlist[0][x] != 0; x++)
+			printf("%s\n", t->cmdlist[0][x]);
 	}
 	return (0);
 }
@@ -132,8 +139,7 @@ int	main(int argc, char **argv, char **env)
 
 	if (argc > 1)
 		return (printf("ERROR: usage ./minishell\n"), 1);
-
-	parsing(t);
+	env_pars(t);
 	start_minishell(t);
 
 	ft_free(t);
