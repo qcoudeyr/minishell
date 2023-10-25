@@ -1,37 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_heco.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/11 16:10:26 by qcoudeyr          #+#    #+#             */
-/*   Updated: 2023/10/24 14:12:47 by lheinric         ###   ########.fr       */
+/*   Created: 2023/10/24 13:56:50 by lheinric          #+#    #+#             */
+/*   Updated: 2023/10/25 11:33:43 by lheinric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "../minishell.h"
 
-char	*ft_strnstr(const char *str, const char *tosearch, size_t len)
+echo_redirect
+
+int	ft_heco(t_ms *t, char **ordre)
 {
-	int		n;
-	char	*ptr;
-	size_t	i;
+	int i;
+	int j;
 
-	if (!tosearch || *tosearch == 0)
-		return ((char *)str);
-	i = 0;
-	while (str != NULL && i < len && str[i])
+	t_heco heco;
+
+	i = -1
+	while(ordre[++i] != NULL)
 	{
-		n = 0;
-		ptr = (char *)&str[i];
-		while (str[i + n] == tosearch[n] && i + n < len)
+		j = -1
+		while (ordre[i][++j])
 		{
-			if (tosearch[n +1] == 0)
-				return (ptr);
-			n++;
+			if (ordre[i][0] == '-' && ordre[i][1] == 'n')
+				heco.nobackslash = 1;
 		}
-		i++;
 	}
-	return (NULL);
 }
