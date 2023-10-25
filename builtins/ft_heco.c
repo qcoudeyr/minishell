@@ -6,7 +6,7 @@
 /*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:56:50 by lheinric          #+#    #+#             */
-/*   Updated: 2023/10/25 12:24:24 by lheinric         ###   ########.fr       */
+/*   Updated: 2023/10/25 12:27:19 by lheinric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ void	find_bn(t_echo *echo, char **ordre, int i, int j)
 	if (ordre[i+1] = NULL && (ordre[i][0] == '-'
 					&& ordre[i][1] == 'n'))
 				{
-					heco.nobackslash = 1;
-					heco.no_bs_position = i;
+					echo.nobackslash = 1;
+					echo.no_bs_position = i;
 				}
 			else if (strncmp(ordre[i-1], "echo") == 0 && (ordre[i][0] == '-'
 					&& ordre[i][1] == 'n'))
 				{
-					heco.nobackslash = 1;
-					heco.no_bs_position = i;
+					echo.nobackslash = 1;
+					echo.no_bs_position = i;
 				}
 }
 
@@ -39,7 +39,7 @@ void	print_echo(int fd, t_echo *echo, char **ordre, t_ms *t)
 	i = -1
 	while(ordre[++i] != NULL)
 	{
-		if (i != heco.no_bs_position)
+		if (i != echo.no_bs_position)
 			fd_printf(fd, "%s", ordre[i]);
 	}
 	if (echo.nobackslash == 0)
@@ -53,7 +53,7 @@ int	ft_echo(int fd, t_ms *t, char **ordre)
 	t_echo echo;
 
 	echo.nobackslash = 0;
-	heco.no_bs_position = -1;
+	echo.no_bs_position = -1;
 	i = -1
 	while(ordre[++i] != NULL)
 	{

@@ -6,7 +6,7 @@
 /*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/25 10:39:51 by lheinric         ###   ########.fr       */
+/*   Updated: 2023/10/25 12:26:32 by lheinric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-typedef struct s_heco
+typedef struct s_echo
 {
 	int	nobackslash;
 	int	no_bs_position;
-}t_heco;
+}t_echo;
 
 typedef struct s_minishell
 {
