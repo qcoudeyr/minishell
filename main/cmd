@@ -1,0 +1,39 @@
+\033[1;34m## Common Linux Commands\033[0m
+
+Here is a list of common and universal Linux commands that are essential for managing and interacting with the system:
+
+1. \033[1m\033[94mls\033[0m: List files and directories in the current directory.
+2. \033[1m\033[94mpwd\033[0m: Print the current working directory.
+3. \033[1m\033[94mcd\033[0m: Change the current directory.
+4. \033[1m\033[94mtouch\033[0m: Create an empty file.
+5. \033[1m\033[94mmkdir\033[0m: Create a new directory.
+6. \033[1m\033[94mrm\033[0m: Remove files or directories.
+7. \033[1m\033[94mcp\033[0m: Copy files and directories.
+8. \033[1m\033[94mmv\033[0m: Move or rename files and directories.
+9. \033[1m\033[94mcat\033[0m: Concatenate and display file content.
+10. \033[1m\033[94mless\033[0m or \033[1m\033[94mmore\033[0m: View file content one screen at a time.
+11. \033[1m\033[94mhead\033[0m and \033[1m\033[94mtail\033[0m: Display the beginning or end of a file.
+12. \033[1m\033[94mgrep\033[0m: Search for text in files using regular expressions.
+13. \033[1m\033[94mfind\033[0m: Search for files and directories.
+14. \033[1m\033[94mps\033[0m: List running processes.
+15. \033[1m\033[94mkill\033[0m: Terminate processes.
+16. \033[1m\033[94mtop\033[0m or \033[1m\033[94mhtop\033[0m: Monitor system processes and resource usage.
+17. \033[1m\033[94mdf\033[0m: Display disk space usage.
+18. \033[1m\033[94mdu\033[0m: Estimate file and directory space usage.
+19. \033[1m\033[94mfree\033[0m: Show system memory usage.
+20. \033[1m\033[94mtar\033[0m: Create and extract compressed archive files.
+21. \033[1m\033[94mchmod\033[0m: Change file permissions.
+22. \033[1m\033[94mchown\033[0m: Change file ownership.
+23. \033[1m\033[94msudo\033[0m: Execute commands with superuser privileges.
+24. \033[1m\033[94mman\033[0m: Display manual pages for commands.
+25. \033[1m\033[94mhistory\033[0m: View command history.
+26. \033[1m\033[94mdate\033[0m: Show the current date and time.
+27. \033[1m\033[94muname\033[0m: Display system information.
+28. \033[1m\033[94mifconfig\033[0m or \033[1m\033[94mip\033[0m: View and configure network interfaces.
+29. \033[1m\033[94mping\033[0m: Test network connectivity.
+30. \033[1m\033[94mssh\033[0m: Securely access remote systems.
+31. \033[1m\033[94mscp\033[0m: Securely copy files between systems.
+32. \033[1m\033[94mwget\033[0m or \033[1m\033[94mcurl\033[0m: Download files from the internet.
+33. \033[1m\033[94mnc\033[0m: Network utility for reading from and writing to network connections.
+
+These commands cover a wide range of system administration and everyday tasks and are available on most Linux distributions. You can use the \033[1m\033[94mman\033[0m command followed by the command name to access the manual pages for more information about each command and its options.

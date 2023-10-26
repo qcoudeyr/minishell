@@ -6,18 +6,21 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 09:45:55 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/26 08:18:35 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/10/26 08:44:53 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	print_help(void)
+int	print_help(int i)
 {
 	int		fd;
 	char	*str;
 
-	fd = open("./main/header", O_RDONLY);
+	if (i == 1)
+		fd = open("./main/cmd", O_RDONLY);
+	else
+		fd = open("./main/help", O_RDONLY);
 	if (fd == -1)
 		return (-1);
 	str = get_next_line(fd);
@@ -62,8 +65,11 @@ int	is_builtins(t_ms *t, int i)
 	}
 	if (ft_strncmp("help", t->cmd[i], 3) == 0)
 	{
+		if (ft_strncmp("help cmd", t->cmd[i], 3) == 0)
+			print_help(1);
+		else
+			print_help(0);
 		is_b += 1;
-
 	}
 	return (is_b);
 }

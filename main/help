@@ -53,6 +53,9 @@ Welcome to \033[93mMinishell\033[0m, a minimalistic shell program that we have c
     - 'env' to display environment variables.
     - 'exit' to gracefully exit \033[93mMinishell\033[0m.
 
-Feel free to explore more about each feature, and if you need in-depth information about specific commands, you can always type 'man <command>' to get the details.
+Feel free to explore more about each feature, and if you need in-depth information about specific commands, you can always type '\033[31man <command>\033[0m' to get the details.
+
+If you don't know what to test, or can't remember the name of a cmd,
+don't hesitate to type '\033[31help cmd\033[0m' to get a list of some Linux command.
 
 I hope this guide helps you navigate \033[93mMinishell\033[0m with ease. Happy shell scripting!
