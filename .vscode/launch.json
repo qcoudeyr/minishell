@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "C/C++ Runner: Debug Session",
+      "name": "Minishell Debug",
       "type": "cppdbg",
       "request": "launch",
       "args": [],
@@ -10,6 +10,25 @@
       "externalConsole": false,
       "cwd": "/home/qcoudeyr/Desktop/42/minishell/",
       "program": "/home/qcoudeyr/Desktop/42/minishell/minishell",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    },
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": false,
+      "cwd": "/home/qcoudeyr/Desktop/42/minishell/main",
+      "program": "/home/qcoudeyr/Desktop/42/minishell/main/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
