@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
+/*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/24 11:07:13 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/10/25 12:26:32 by lheinric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@
 #include "./libft/libft.h"
 #include <sys/types.h>
 #include <sys/wait.h>
+
+typedef struct s_echo
+{
+	int	nobackslash;
+	int	no_bs_position;
+}t_echo;
 
 typedef struct s_minishell
 {

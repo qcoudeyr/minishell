@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
+/*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 09:38:47 by qcoudeyr          #+#    #+#             */
-/*   Updated: 2023/09/28 11:07:54 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/10/25 11:29:13 by lheinric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include "./Added_function/ft_fprintf/fd_printf.h"
 
 typedef struct s_list
 {
