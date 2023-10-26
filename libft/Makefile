@@ -1,5 +1,5 @@
-CC = clang
-CFLAGS = -Wall -Wextra -Werror
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror -g
 
 SRCS =	./Original_function/ft_strlcpy.c\
 		./Original_function/ft_lstsize.c\

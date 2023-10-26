@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/26 08:57:41 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/10/26 10:35:59 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,9 @@ int	start_minishell(t_ms *t)
 
 	rl_initialize();
 	using_history();
-
 	t->cmd = malloc(sizeof(char**));
 	t->cmd[0] = malloc(sizeof(char *));
-
+	t->cmd[0][0] = '\0';
 	while (ft_strncmp("exit", t->cmd[i], 4) != 0)
 	{
 		free(t->cmd[i]);
@@ -63,7 +62,10 @@ int	start_minishell(t_ms *t)
 		if (t->cmd[i] == NULL)
 			break;
 		if (t->cmd[i][0] != '\0')
+		{
+			rl_redisplay();
 			add_history(t->cmd[i]);
+		}
 		if (is_builtins(t,i) == 0 && cmdformat(t) != -1 && *t->cmd[i] != 0)
 		{
 			for(int x = 0; t->cmdlist[i][x] != NULL; x++)
@@ -91,7 +93,7 @@ void	ft_freecmdlist(t_ms *t)
 	i = 0;
 	if (t->cmdlist != NULL)
 	{
-		while (i < (t->narg + 1))
+		while (t->cmdlist != NULL && t->cmdlist[i] != NULL)
 		{
 			if (t->cmdlist[i] != NULL)
 			{
@@ -113,7 +115,7 @@ void	ft_free(t_ms *t)
 	i = 0;
 	if (t->cmd != NULL)
 	{
-		while (i <= t->narg + 1)
+		if ((t->cmd[i]) != NULL)
 		{
 			free(t->cmd[i]);
 			i++;
@@ -139,8 +141,11 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 
 	t = malloc(sizeof(t_ms));
+	t->infile = malloc(sizeof(char *));
+	t->outfile = malloc(sizeof(char *));
+	t->infile = 0;
+	t->outfile = 0;
 	t->env = env;
-
 	printf("\033[2J\033[H");
 
 	if (argc > 1)
@@ -150,6 +155,6 @@ int	main(int argc, char **argv, char **env)
 
 	ft_free(t);
 	printf("\033[2J\033[H");
-
+	rl_clear_history();
 	return (0);
 }

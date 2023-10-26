@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:59 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/26 08:14:18 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/10/26 10:16:44 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int	cmdformat(t_ms *t)
 	int		i;
 
 	i = 0;
-	t->cmdlist = ft_calloc((t->narg +1), sizeof(char **));
+	t->cmdlist = ft_calloc(2 , sizeof(char **));
+	t->cmdlist[i] = NULL;
 	if (t->cmd[i] != NULL && *t->cmd[i] != 0)
 	{
 		t->cmdlist[i] = ft_splitq(t->cmd[i]);
