@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:59 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/24 14:02:53 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/10/26 08:14:18 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	pathfinder(t_ms *t)
 	int	arg;
 
 	arg = 0;
-	while (arg < t->narg+1)
+	if (t->cmdlist[arg][0] != NULL && *t->cmdlist[arg][0] != 0)
 	{
 		i = 0;
 		t->fpath = ft_strjoin(t->path[i], t->cmdlist[arg][0]);
@@ -49,12 +49,12 @@ int	cmdformat(t_ms *t)
 
 	i = 0;
 	t->cmdlist = ft_calloc((t->narg +1), sizeof(char **));
-	while (i <= t->narg)
+	if (t->cmd[i] != NULL && *t->cmd[i] != 0)
 	{
 		t->cmdlist[i] = ft_splitq(t->cmd[i]);
-		i++;
+		return (pathfinder(t));
 	}
-	return (pathfinder(t));
+	return (-1);
 }
 
 void	env_pars(t_ms *t)

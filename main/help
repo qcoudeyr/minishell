@@ -1,0 +1,34 @@
+Minishell Help:
+
+Welcome to Minishell, a minimalist shell program with the following features:
+
+1. Display a prompt and wait for a new command.
+2. Maintain a functional command history.
+3. Search and execute the correct executable based on the PATH environment variable, or a relative or absolute path.
+4. Do not interpret unclosed quotes or unrequested special characters, such as backslashes or semicolons.
+5. Handle single quotes (') to prevent the shell from interpreting metacharacters within the quoted sequence.
+6. Handle double quotes (") to prevent the shell from interpreting metacharacters within the quoted sequence, except for the dollar sign ($).
+7. Implement file redirections:
+   - '<' redirects input.
+   - '>' redirects output.
+   - '<<' reads input until a delimiter is encountered (no need to update history).
+   - '>>' appends output to a file.
+8. Implement pipes (|) to connect the output of one command to the input of the next.
+9. Manage environment variables (a $ followed by a sequence of characters) that are substituted with their content.
+10. Handle '$?' to be replaced with the exit status of the last foreground pipeline.
+11. Manage ctrl-C, ctrl-D, and ctrl-\ as follows:
+    - ctrl-C displays a new prompt on a new line.
+    - ctrl-D exits the shell.
+    - ctrl-\ does nothing.
+12. In interactive mode, implement the following built-in commands:
+    - 'echo' with the '-n' option.
+    - 'cd' only with a relative or absolute path.
+    - 'pwd' with no options.
+    - 'export' with no options.
+    - 'unset' with no options.
+    - 'env' with no options or arguments.
+    - 'exit' with no options.
+
+For more information on specific commands, type 'man <command>' where <command> is the command you want to learn more about.
+
+Minishell is as cute as a real shell and provides basic shell functionality. Enjoy using it!

@@ -1,7 +1,7 @@
 vpath %.c %.o %.h %.a ./libft ./parsing ./error ./main
 
 CC = clang
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g
 LIB_DIR = ./libft/
 LIBS = -lft -lreadline -lncurses -lhistory
 
@@ -48,7 +48,7 @@ norme:
 
 debug: $(OBJS)
 	@clear
-	@$(CC) $(CFLAGS) $(OBJS) -L$(LIB_DIR) $(LIBS) -o debug
+	@$(CC) $(CFLAGS) -g $(OBJS) -L$(LIB_DIR) $(LIBS) -o debug
 	colour-valgrind -s --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes --error-exitcode=1 \
 	./debug
 
