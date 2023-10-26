@@ -1,34 +1,58 @@
-Minishell Help:
+\033[1m\033[94mMinishell Developer's Guide:\033[0m
 
-Welcome to Minishell, a minimalist shell program with the following features:
+Hello there, fellow developer!
+Welcome to \033[93mMinishell\033[0m, a minimalistic shell program that we have created. In this guide, I'll provide you with insights into the key features and functionalities of Minishell:
 
-1. Display a prompt and wait for a new command.
-2. Maintain a functional command history.
-3. Search and execute the correct executable based on the PATH environment variable, or a relative or absolute path.
-4. Do not interpret unclosed quotes or unrequested special characters, such as backslashes or semicolons.
-5. Handle single quotes (') to prevent the shell from interpreting metacharacters within the quoted sequence.
-6. Handle double quotes (") to prevent the shell from interpreting metacharacters within the quoted sequence, except for the dollar sign ($).
-7. Implement file redirections:
-   - '<' redirects input.
-   - '>' redirects output.
-   - '<<' reads input until a delimiter is encountered (no need to update history).
-   - '>>' appends output to a file.
-8. Implement pipes (|) to connect the output of one command to the input of the next.
-9. Manage environment variables (a $ followed by a sequence of characters) that are substituted with their content.
-10. Handle '$?' to be replaced with the exit status of the last foreground pipeline.
-11. Manage ctrl-C, ctrl-D, and ctrl-\ as follows:
-    - ctrl-C displays a new prompt on a new line.
-    - ctrl-D exits the shell.
-    - ctrl-\ does nothing.
-12. In interactive mode, implement the following built-in commands:
+\033[1m\033[96m1. Prompt and Command Input\033[0m
+   \033[93mMinishell\033[0m presents a prompt and patiently awaits your command input.
+
+\033[1m\033[96m2. Command History\033[0m
+   It's got a handy command history feature that allows you to access previously executed commands.
+
+\033[1m\033[96m3. Command Execution\033[0m
+   \033[93mMinishell\033[0m shines when it comes to executing commands. It intelligently searches for and runs the right executable. It does so by utilizing the \033[92mPATH\033[0m environment variable or accepting a relative or absolute path.
+
+\033[1m\033[96m4. Quoting and Special Characters\033[0m
+   We've taken care of the tricky parts for you. \033[93mMinishell\033[0m doesn't interpret unclosed quotes or unrequested special characters, such as backslashes or semicolons.
+
+\033[1m\033[96m5. Single Quotes ('')\033[0m
+   You'll be pleased to know that \033[93mMinishell\033[0m handles single quotes, ensuring that metacharacters within the quoted sequence are not misinterpreted.
+
+\033[1m\033[96m6. Double Quotes ("")\033[0m
+   For double quotes, \033[93mMinishell\033[0m keeps things safe by preventing metacharacters within the quoted sequence from causing trouble. The only exception is the dollar sign ($).
+
+\033[1m\033[96m7. File Redirections\033[0m
+   When it comes to file redirection, \033[93mMinishell\033[0m offers all the essentials:
+   - '<' for input redirection.
+   - '>' for output redirection.
+   - '<<' for reading input until a delimiter is encountered (without updating history).
+   - '>>' for appending output to a file.
+
+\033[1m\033[96m8. Pipes (|)\033[0m
+   \033[93mMinishell\033[0m doesn't miss a beat when it comes to pipes. It connects the output of one command to the input of the next.
+
+\033[1m\033[96m9. Environment Variables\033[0m
+   If you need to work with environment variables (you know, the ones with a '$' followed by a sequence of characters), \033[93mMinishell\033[0m handles their substitution with ease.
+
+\033[1m\033[96m10. '$?' Placeholder\033[0m
+    \033[93mMinishell\033[0m manages the '$?' placeholder, which gets replaced with the exit status of the last foreground pipeline.
+
+\033[1m\033[96m11. Signal Handling\033[0m
+    Let's talk signals. \033[93mMinishell\033[0m has got you covered:
+    - ctrl-C: Displays a new prompt on a new line.
+    - ctrl-D: Gracefully exits the shell.
+    - ctrl-\: Doesn't do much, just as expected.
+
+\033[1m\033[96m12. Built-in Commands\033[0m
+    \033[93mMinishell\033[0m is interactive, and that's why it offers some handy built-in commands:
     - 'echo' with the '-n' option.
-    - 'cd' only with a relative or absolute path.
-    - 'pwd' with no options.
-    - 'export' with no options.
-    - 'unset' with no options.
-    - 'env' with no options or arguments.
-    - 'exit' with no options.
+    - 'cd' for navigating directories with a relative or absolute path.
+    - 'pwd' for a quick look at the current directory.
+    - 'export' for managing environment variables.
+    - 'unset' for removing environment variables.
+    - 'env' to display environment variables.
+    - 'exit' to gracefully exit \033[93mMinishell\033[0m.
 
-For more information on specific commands, type 'man <command>' where <command> is the command you want to learn more about.
+Feel free to explore more about each feature, and if you need in-depth information about specific commands, you can always type 'man <command>' to get the details.
 
-Minishell is as cute as a real shell and provides basic shell functionality. Enjoy using it!
+I hope this guide helps you navigate \033[93mMinishell\033[0m with ease. Happy shell scripting!
