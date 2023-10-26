@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
+/*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/25 12:26:32 by lheinric         ###   ########.fr       */
+/*   Updated: 2023/10/26 08:56:13 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 #include <stdio.h>
+#include <curses.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <stdlib.h>
@@ -69,14 +70,14 @@ void	nothing_handler(int signo);
 void	getsignal();
 
 // Text colors
-# define COLOR_BLACK   "\033[30m"
-# define COLOR_RED     "\033[31m"
-# define COLOR_GREEN   "\033[32m"
-# define COLOR_YELLOW  "\033[33m"
-# define COLOR_BLUE    "\033[34m"
-# define COLOR_MAGENTA "\033[35m"
-# define COLOR_CYAN    "\033[36m"
-# define COLOR_WHITE   "\033[37m"
+# define CL_BLACK   "\033[30m"
+# define CL_RED     "\033[31m"
+# define CL_GREEN   "\033[32m"
+# define CL_YELLOW  "\033[33m"
+# define CL_BLUE    "\033[34m"
+# define CL_MAGENTA "\033[35m"
+# define CL_CYAN    "\033[36m"
+# define CL_WHITE   "\033[37m"
 
 // Background colors
 # define BG_BLACK   "\033[40m"

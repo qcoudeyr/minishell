@@ -59,6 +59,6 @@
   "files.associations": {
     "stdlib.h": "c"
   },
-  "C_Cpp.intelliSenseEngineFallback": "enabled",
+  "C_Cpp.intelliSenseEngineFallback": "disabled",
   "C_Cpp.default.compilerPath": "/usr/bin/gcc"
 }

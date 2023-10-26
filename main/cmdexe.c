@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 09:45:55 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/26 08:44:53 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/10/26 09:02:20 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	is_builtins(t_ms *t, int i)
 	}
 	if (ft_strncmp("help", t->cmd[i], 3) == 0)
 	{
-		if (ft_strncmp("help cmd", t->cmd[i], 3) == 0)
+		if (ft_strncmp("help cmd", t->cmd[i], 8) == 0)
 			print_help(1);
 		else
 			print_help(0);

@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/24 14:00:02 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/10/26 08:57:41 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	start_minishell(t_ms *t)
 	{
 		free(t->cmd[i]);
 		signal(SIGINT, getsignal);
-		t->cmd[i] = readline("$ "COLOR_RED"minishell"RESET"~: ");
+		t->cmd[i] = readline("$ "CL_RED"minishell"RESET"~: ");
 
 		if (t->cmd[i] == NULL)
 			break;
@@ -150,5 +150,6 @@ int	main(int argc, char **argv, char **env)
 
 	ft_free(t);
 	printf("\033[2J\033[H");
+
 	return (0);
 }
