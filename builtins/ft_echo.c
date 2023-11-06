@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:56:50 by lheinric          #+#    #+#             */
-/*   Updated: 2023/11/06 10:55:59 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/06 10:59:57 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,18 @@ echo appelee.*/
 
 void	find_bn(t_echo *echo, char **ordre, int i, int j)
 {
-	if (ordre[i+1] = NULL && (ordre[i][0] == '-'
-					&& ordre[i][1] == 'n'))
-				{
-					echo.nobackslash = 1;
-					echo.no_bs_position = i;
-				}
-			else if (strncmp(ordre[i-1], "echo") == 0 && (ordre[i][0] == '-'
-					&& ordre[i][1] == 'n'))
-				{
-					echo.nobackslash = 1;
-					echo.no_bs_position = i;
-				}
+	if (ordre[i+1] = NULL && (ordre[i][0] == '-' \
+&& ordre[i][1] == 'n'))
+	{
+		echo.nobackslash = 1;
+		echo.no_bs_position = i;
+	}
+	else if (strncmp(ordre[i-1], "echo") == 0 && (ordre[i][0] == '-'\
+&& ordre[i][1] == 'n'))
+	{
+		echo.nobackslash = 1;
+		echo.no_bs_position = i;
+	}
 }
 
 void	print_echo(int fd, t_echo *echo, char **ordre, t_ms *t)
@@ -54,10 +54,10 @@ int	ft_echo(int fd, t_ms *t, char **ordre)
 
 	echo.nobackslash = 0;
 	echo.no_bs_position = -1;
-	i = -1
+	i = -1;
 	while(ordre[++i] != NULL)
 	{
-		j = -1
+		j = -1;
 		while (ordre[i][++j])
 		{
 			find_bn(&echo, ordre, i, j);
