@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_heco.c                                          :+:      :+:    :+:   */
+/*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
+/*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:56:50 by lheinric          #+#    #+#             */
-/*   Updated: 2023/10/25 12:27:19 by lheinric         ###   ########.fr       */
+/*   Updated: 2023/11/06 10:55:59 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*echo prend en charactere un fd (fichier ou sortie), la struct ms comme d'habitude 
-et un tableau de string le tableau de string doit commancer juste apres la string 
+/*echo prend en charactere un fd (fichier ou sortie), la struct ms comme d'habitude
+et un tableau de string le tableau de string doit commancer juste apres la string
 echo appelee.*/
 
 #include "../minishell.h"
@@ -36,7 +36,7 @@ void	print_echo(int fd, t_echo *echo, char **ordre, t_ms *t)
 {
 	int i;
 
-	i = -1
+	i = -1;
 	while(ordre[++i] != NULL)
 	{
 		if (i != echo.no_bs_position)
