@@ -3,33 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
+/*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:56:50 by lheinric          #+#    #+#             */
-/*   Updated: 2023/11/06 11:09:13 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/08 12:16:14 by lheinric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*echo prend en charactere un fd (fichier ou sortie), la struct ms comme d'habitude
-et un tableau de string le tableau de string doit commancer juste apres la string
+/*echo prend en charactere un fd (fichier ou sortie), la struct minishell comme d'habitude
+et un tableau de string le tableau de string doit commencer juste apres la string
 echo appelee.*/
 
 #include "../minishell.h"
 
 void	find_bn(t_echo *echo, char **ordre, int i)
 {
-	if (ordre[i + 1] == NULL && \
-	(ordre[i][0] == '-' && ordre[i][1] == 'n'))
-	{
-		echo->nobackslash = 1;
-		echo->no_bs_position = i;
-	}
-	else if (ft_strncmp(ordre[i-1], "echo", 5) == 0 && \
-	(ordre[i][0] == '-' && ordre[i][1] == 'n'))
-	{
-		echo->nobackslash = 1;
-		echo->no_bs_position = i;
-	}
+	if (ordre[i+1] == NULL && (ordre[i][0] == '-'
+					&& ordre[i][1] == 'n'))
+				{
+					echo->nobackslash = 1;
+					echo->no_bs_position = i;
+				}
+			else if (strncmp(ordre[i-1], "echo", 4) == 0 && (ordre[i][0] == '-'
+					&& ordre[i][1] == 'n'))
+				{
+					echo->nobackslash = 1;
+					echo->no_bs_position = i;
+				}
 }
 
 void	print_echo(int fd, t_echo *echo, char **ordre)
@@ -46,12 +46,13 @@ void	print_echo(int fd, t_echo *echo, char **ordre)
 		fd_printf(fd, "\n");
 }
 
-int	ft_echo(int fd, char **ordre)
+int	ft_echo(int fd, t_ms *t, char **ordre)
 {
 	int i;
 	int j;
 	t_echo echo;
 
+	(void)t;
 	echo.nobackslash = 0;
 	echo.no_bs_position = -1;
 	i = -1;

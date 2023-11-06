@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmdexe.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
+/*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 09:45:55 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/06 11:10:17 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/08 13:08:48 by lheinric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,14 @@ int	is_builtins(t_ms *t, int i)
 		is_b += 1;
 		printf("%s\n", t->pwd);
 	}
-	if (ft_strncmp("echo", t->cmd[i], 3) == 0)
+	if (ft_strncmp("echo", t->cmd[i], 4) == 0)
 	{
 		is_b += 1;
-		ft_echo();
+	}
+	if (ft_strncmp("cd", t->cmd[i], 2) == 0)
+	{
+		is_b += 1;
+		ft_cd(t, t->cmd[i]);
 	}
 	if (ft_strncmp("help", t->cmd[i], 3) == 0)
 	{

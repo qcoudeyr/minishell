@@ -6,13 +6,32 @@
 /*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/10/24 13:56:46 by lheinric         ###   ########.fr       */
+/*   Updated: 2023/11/08 14:01:52 by lheinric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	gotopath(t_ms *t, char *chemin)
+int gotoprevpath(t_ms *t)
+{
+	int i;
+	int j;
+	char *newpwd;
+
+	j = -1;
+	i = ft_strlen(t->pwd);
+	while (t->pwd[i] != '/')
+		i--;
+	newpwd = malloc(sizeof(char) * (i + 1));
+	while (++j < i)
+		newpwd[j] = t->pwd[j];
+	newpwd[j] = '\0';
+	free(t->pwd);
+	t->pwd = newpwd;
+	return (1);
+}
+
+int	gotopath(char *chemin, t_ms *t)
 {
 	if (chdir(chemin) == 0)
 	{
@@ -22,26 +41,35 @@ int	gotopath(t_ms *t, char *chemin)
 	}
 	else
 	{
-		printf("bash: cd: %s: Aucun fichier ou dossier de ce type", chemin);
+		printf("bash: cd: %s: Aucun fichier ou dossier de ce type\n", chemin);
 		return 0;
 	}
 }
 
-int	ft_cd(t_ms *t, char *path)
+int	ft_cd(t_ms *t, char *cmd)
 {
-	char * temppath;
+	char *temppath;
+	char **path;
 
-	if (path == NULL)
+	path = ft_split(cmd, ' ');
+	if (path[1] == NULL)
 	{
 		chdir("/~");
-		return 1;
+		return (1);
 	}
-	if (path[0] == '/')
-		return (gotopath(path, t));
+	else if (path[1][0] == '/')
+		return (gotopath(path[1], t));
+	else if	(path[1][0] == '.' && path[1][1] == '.' && path[1][2] == '\0')
+	{
+		gotoprevpath(t);
+		return (1);
+	}
+	else if (path[1][0] == '.' && path[1][1] == '\0')
+		return (1);
 	else
 	{
 		temppath = ft_strjoin(t->pwd, "/");
-		temppath = ft_strjoin(temppath, path);
+		temppath = ft_strjoin(temppath, path[1]);
 		gotopath(temppath, t);
 		return (1);
 	}

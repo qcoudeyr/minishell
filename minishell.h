@@ -6,7 +6,7 @@
 /*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/29 12:44:32 by lheinric         ###   ########.fr       */
+/*   Updated: 2023/11/08 13:04:29 by lheinric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_minishell
 	char	**env;
 	char	**path;
 	char	*pwd;
+	char	*prev_pwd;
 
 }t_ms;
 
@@ -61,6 +62,7 @@ int		cmdformat(t_ms *t);
 int		pathfinder(t_ms *t);
 int		ft_cmdnotfound(t_ms *t, char *str);
 int		is_builtins(t_ms *t, int i);
+int		ft_cd(t_ms *t, char *path);
 void	env_pars(t_ms *t);
 void	ft_acceserror(t_ms *t);
 void	ft_perror(t_ms *t, char *s);
