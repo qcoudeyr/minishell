@@ -6,7 +6,11 @@
 /*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:56:50 by lheinric          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/11/08 12:16:14 by lheinric         ###   ########.fr       */
+=======
+/*   Updated: 2023/11/06 10:59:57 by  qcoudeyr        ###   ########.fr       */
+>>>>>>> 98ca943 (Nov 6, 2023, 11:02 AM)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +22,7 @@ echo appelee.*/
 
 void	find_bn(t_echo *echo, char **ordre, int i)
 {
+<<<<<<< HEAD
 	if (ordre[i+1] == NULL && (ordre[i][0] == '-'
 					&& ordre[i][1] == 'n'))
 				{
@@ -30,6 +35,20 @@ void	find_bn(t_echo *echo, char **ordre, int i)
 					echo->nobackslash = 1;
 					echo->no_bs_position = i;
 				}
+=======
+	if (ordre[i+1] = NULL && (ordre[i][0] == '-' \
+&& ordre[i][1] == 'n'))
+	{
+		echo.nobackslash = 1;
+		echo.no_bs_position = i;
+	}
+	else if (strncmp(ordre[i-1], "echo") == 0 && (ordre[i][0] == '-'\
+&& ordre[i][1] == 'n'))
+	{
+		echo.nobackslash = 1;
+		echo.no_bs_position = i;
+	}
+>>>>>>> 98ca943 (Nov 6, 2023, 11:02 AM)
 }
 
 void	print_echo(int fd, t_echo *echo, char **ordre)
