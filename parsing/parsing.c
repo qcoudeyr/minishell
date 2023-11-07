@@ -6,7 +6,11 @@
 /*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:59 by  qcoudeyr         #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/10/29 13:33:19 by lheinric         ###   ########.fr       */
+=======
+/*   Updated: 2023/11/06 10:52:31 by  qcoudeyr        ###   ########.fr       */
+>>>>>>> origin/qcoudeyr
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +105,11 @@ void	env_pars(t_ms *t)
 		i++;
 	t->path = ft_split((t->env[i] + 5), ':');
 	i = 0;
+<<<<<<< HEAD
 	while (ft_strnstr(t->env[i], "PWD=", 5) == 0)
+=======
+	while (ft_strnstr(t->env[i], "PWD=", 4) == 0)
+>>>>>>> origin/qcoudeyr
 		i++;
 	t->pwd = ft_strdup(t->env[i] + 4);
 	i = 0;
