@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:56:50 by lheinric          #+#    #+#             */
-/*   Updated: 2023/11/06 10:59:57 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/06 11:09:13 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,37 +16,37 @@ echo appelee.*/
 
 #include "../minishell.h"
 
-void	find_bn(t_echo *echo, char **ordre, int i, int j)
+void	find_bn(t_echo *echo, char **ordre, int i)
 {
-	if (ordre[i+1] = NULL && (ordre[i][0] == '-' \
-&& ordre[i][1] == 'n'))
+	if (ordre[i + 1] == NULL && \
+	(ordre[i][0] == '-' && ordre[i][1] == 'n'))
 	{
-		echo.nobackslash = 1;
-		echo.no_bs_position = i;
+		echo->nobackslash = 1;
+		echo->no_bs_position = i;
 	}
-	else if (strncmp(ordre[i-1], "echo") == 0 && (ordre[i][0] == '-'\
-&& ordre[i][1] == 'n'))
+	else if (ft_strncmp(ordre[i-1], "echo", 5) == 0 && \
+	(ordre[i][0] == '-' && ordre[i][1] == 'n'))
 	{
-		echo.nobackslash = 1;
-		echo.no_bs_position = i;
+		echo->nobackslash = 1;
+		echo->no_bs_position = i;
 	}
 }
 
-void	print_echo(int fd, t_echo *echo, char **ordre, t_ms *t)
+void	print_echo(int fd, t_echo *echo, char **ordre)
 {
 	int i;
 
 	i = -1;
 	while(ordre[++i] != NULL)
 	{
-		if (i != echo.no_bs_position)
+		if (i != echo->no_bs_position)
 			fd_printf(fd, "%s", ordre[i]);
 	}
-	if (echo.nobackslash == 0)
+	if (echo->nobackslash == 0)
 		fd_printf(fd, "\n");
 }
 
-int	ft_echo(int fd, t_ms *t, char **ordre)
+int	ft_echo(int fd, char **ordre)
 {
 	int i;
 	int j;
@@ -60,9 +60,9 @@ int	ft_echo(int fd, t_ms *t, char **ordre)
 		j = -1;
 		while (ordre[i][++j])
 		{
-			find_bn(&echo, ordre, i, j);
+			find_bn(&echo, ordre, i);
 		}
 	}
-	print_echo(fd, &echo, ordre, t);
+	print_echo(fd, &echo, ordre);
 	return (0);
 }
