@@ -6,7 +6,7 @@
 /*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:56:50 by lheinric          #+#    #+#             */
-/*   Updated: 2023/11/08 14:05:02 by lheinric         ###   ########.fr       */
+/*   Updated: 2023/11/08 14:08:38 by lheinric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ echo appelee.*/
 
 #include "../minishell.h"
 
-void	find_bn(t_echo *echo, char **ordre, int i, int j)
+void	find_bn(t_echo *echo, char **ordre, int i)
 {
-	if (ordre[i+1] = NULL && (ordre[i][0] == '-' \
+	if (ordre[i+1] == NULL && (ordre[i][0] == '-' \
 && ordre[i][1] == 'n'))
 	{
 		echo->nobackslash = 1;
@@ -30,7 +30,6 @@ void	find_bn(t_echo *echo, char **ordre, int i, int j)
 		echo->nobackslash = 1;
 		echo->no_bs_position = i;
 	}
->>>>>>> 98ca943 (Nov 6, 2023, 11:02 AM)
 }
 
 void	print_echo(int fd, t_echo *echo, char **ordre)
@@ -53,7 +52,6 @@ int	ft_echo(int fd, char **ordre)
 	int j;
 	t_echo echo;
 
-	(void)t;
 	echo.nobackslash = 0;
 	echo.no_bs_position = -1;
 	i = -1;
