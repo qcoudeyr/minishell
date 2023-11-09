@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmdexe.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
+/*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 09:45:55 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/09 15:48:11 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/09 23:57:36 by lheinric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,39 +46,45 @@ void printenv(char **envp)
 int	is_builtins(t_ms *t, int i)
 {
 	int	is_b;
+	char **cmd;
+	char	*cmdone;
+
+	cmd = ft_split(t->cmd[i], ' ');
+	cmdone = remove_quotes(cmd[0]);
 
 	is_b = 0;
-	if (ft_strncmp("env", t->cmd[i], 4) == 0)
+	if (ft_strncmp("env", cmdone, 4) == 0)
 	{
 		is_b += 1;
 		printenv(t->env);
 	}
-	if (ft_strncmp("clear", t->cmd[i], 5) == 0)
+	if (ft_strncmp("clear", cmdone, 5) == 0)
 	{
 		is_b += 1;
 		printf("\033[2J\033[H");
 	}
-	if (ft_strncmp("pwd", t->cmd[i], 3) == 0)
+	if (ft_strncmp("pwd", cmdone, 3) == 0)
 	{
 		is_b += 1;
 		printf("%s\n", t->pwd);
 	}
-	if (ft_strncmp("echo", t->cmd[i], 4) == 0)
+	if (ft_strncmp("echo", cmdone, 4) == 0)
 	{
 		is_b += 1;
 	}
-	if (ft_strncmp("cd", t->cmd[i], 3) == 0)
+	if (ft_strncmp("cd", cmdone, 3) == 0)
 	{
 		is_b += 1;
-		ft_cd(t, t->cmd[i]);
+		ft_cd(t, cmdone);
 	}
-	if (ft_strncmp("help", t->cmd[i], 3) == 0)
+	if (ft_strncmp("help", cmdone, 3) == 0)
 	{
-		if (ft_strncmp("help cmd", t->cmd[i], 8) == 0)
+		if (ft_strncmp("help cmd", cmdone, 8) == 0)
 			print_help(1);
 		else
 			print_help(0);
 		is_b += 1;
 	}
+	free(cmdone);
 	return (is_b);
 }
