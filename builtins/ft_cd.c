@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
+/*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/11/08 14:06:44 by lheinric         ###   ########.fr       */
+/*   Updated: 2023/11/09 15:46:39 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,12 @@ int	ft_cd(t_ms *t, char *cmd)
 	char **path;
 
 	path = ft_split(cmd, ' ');
-	if (path[1] == NULL)
-	{
-		chdir("/~");
-		return (1);
-	}
+	if (path[1] == NULL || path[1][0] == '~')
+		gotopath(t->home, t);
 	else if (path[1][0] == '/')
 		return (gotopath(path[1], t));
 	else if	(path[1][0] == '.' && path[1][1] == '.' && path[1][2] == '\0')
-	{
 		gotoprevpath(t);
-		return (1);
-	}
 	else if (path[1][0] == '.' && path[1][1] == '\0')
 		return (1);
 	else
@@ -71,6 +65,6 @@ int	ft_cd(t_ms *t, char *cmd)
 		temppath = ft_strjoin(t->pwd, "/");
 		temppath = ft_strjoin(temppath, path[1]);
 		gotopath(temppath, t);
-		return (1);
 	}
+	return (1);
 }

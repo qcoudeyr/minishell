@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
+/*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/29 13:31:17 by lheinric         ###   ########.fr       */
+/*   Updated: 2023/11/09 15:45:36 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	print_header(void)
 int	start_minishell(t_ms *t)
 {
 	int	i;
+	char *rl_str;
 
 	i = 0;
 	if (print_header( ) == -1)
@@ -57,7 +58,8 @@ int	start_minishell(t_ms *t)
 	{
 		free(t->cmd[i]);
 		signal(SIGINT, getsignal);
-		t->cmd[i] = readline("$ "CL_RED"minishell"RESET"~: ");
+		rl_str = ft_strjoin("$ "CL_RED"minishell"RESET"~", t->pwd);
+		t->cmd[i] = readline(ft_strjoin(rl_str, " : "));
 
 		if (t->cmd[i] == NULL)
 			break;
@@ -145,6 +147,7 @@ int	main(int argc, char **argv, char **env)
 	t->outfile = malloc(sizeof(char *));
 	t->infile = 0;
 	t->outfile = 0;
+	t->env = env;
 	t->env = env;
 	printf("\033[2J\033[H");
 
