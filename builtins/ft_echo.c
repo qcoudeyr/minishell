@@ -6,7 +6,7 @@
 /*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:56:50 by lheinric          #+#    #+#             */
-/*   Updated: 2023/11/08 14:08:38 by lheinric         ###   ########.fr       */
+/*   Updated: 2023/11/15 18:37:21 by lheinric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ echo appelee.*/
 void	find_bn(t_echo *echo, char **ordre, int i)
 {
 	if (ordre[i+1] == NULL && (ordre[i][0] == '-' \
-&& ordre[i][1] == 'n'))
+	&& ordre[i][1] == 'n'))
 	{
 		echo->nobackslash = 1;
 		echo->no_bs_position = i;

@@ -6,11 +6,7 @@
 /*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/11/09 23:54:43 by lheinric         ###   ########.fr       */
-=======
-/*   Updated: 2023/11/15 10:26:17 by  qcoudeyr        ###   ########.fr       */
->>>>>>> origin/qcoudeyr
+/*   Updated: 2023/11/15 18:24:29 by lheinric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +68,7 @@ char	*remove_quotes(char *input);
 int		cmdformat(t_ms *t);
 int		pathfinder(t_ms *t);
 int		ft_cmdnotfound(t_ms *t, char *str);
-<<<<<<< HEAD
-=======
 int		change_env(t_ms *t, char *var, char *tochange);
->>>>>>> origin/qcoudeyr
 void	env_pars(t_ms *t);
 void	ft_acceserror(t_ms *t);
 void	ft_perror(t_ms *t, char *s);
