@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
+/*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/11/09 23:51:57 by lheinric         ###   ########.fr       */
+/*   Updated: 2023/11/14 08:54:30 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int	ft_cd(t_ms *t, char *cmd)
 	char *temppath;
 	char **path;
 
+	cmd = *t->cmd;
 	path = ft_split(cmd, ' ');
 	if (path[1] == NULL || path[1][0] == '~' || path[1][0] == '\0')
 		gotopath(t->home, t);
