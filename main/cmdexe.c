@@ -6,7 +6,7 @@
 /*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 18:25:06 by lheinric          #+#    #+#             */
-/*   Updated: 2023/11/15 18:25:12 by lheinric         ###   ########.fr       */
+/*   Updated: 2023/11/15 21:48:18 by lheinric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int	is_builtins(t_ms *t, int i)
 	if (ft_strncmp("echo", cmdone, 4) == 0)
 	{
 		is_b += 1;
+		ft_echo(t->cmd[0]);
 	}
 	if (ft_strncmp("cd", cmdone, 3) == 0)
 	{

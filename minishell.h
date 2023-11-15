@@ -6,7 +6,7 @@
 /*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/15 18:24:29 by lheinric         ###   ########.fr       */
+/*   Updated: 2023/11/15 21:50:38 by lheinric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,11 @@ typedef struct s_minishell
 //		builtins
 int		is_builtins(t_ms *t, int i);
 int		ft_cd(t_ms *t, char *path);
+int		ft_echo(char *cmd);
 //		utils
 char	*remove_quotes(char *input);
+void	free_tabstr(char **strs);
+int	find_redirect(int *fd, char **cmd);
 
 int		cmdformat(t_ms *t);
 int		pathfinder(t_ms *t);

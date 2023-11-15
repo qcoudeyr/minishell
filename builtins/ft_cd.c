@@ -6,7 +6,7 @@
 /*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/11/15 18:34:08 by lheinric         ###   ########.fr       */
+/*   Updated: 2023/11/15 20:15:37 by lheinric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,6 @@ int	ft_cd(t_ms *t, char *cmd)
 		temppath = ft_strjoin(temppath, path[1]);
 		gotopath(temppath, t);
 	}
+	free_tabstr(path);
 	return (1);
 }

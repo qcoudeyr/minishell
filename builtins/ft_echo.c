@@ -6,13 +6,9 @@
 /*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:56:50 by lheinric          #+#    #+#             */
-/*   Updated: 2023/11/15 18:37:21 by lheinric         ###   ########.fr       */
+/*   Updated: 2023/11/15 22:01:37 by lheinric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*echo prend en charactere un fd (fichier ou sortie), la struct minishell comme d'habitude
-et un tableau de string le tableau de string doit commencer juste apres la string
-echo appelee.*/
 
 #include "../minishell.h"
 
@@ -39,30 +35,26 @@ void	print_echo(int fd, t_echo *echo, char **ordre)
 	i = -1;
 	while(ordre[++i] != NULL)
 	{
-		if (i != echo->no_bs_position)
-			fd_printf(fd, "%s", ordre[i]);
+		if (i != echo->no_bs_position && i != 0)
+			fd_printf(fd, "%s ", ordre[i]);
 	}
 	if (echo->nobackslash == 0)
 		fd_printf(fd, "\n");
 }
 
-int	ft_echo(int fd, char **ordre)
+int	ft_echo(char *cmd)
 {
-	int i;
-	int j;
+	int fd;
 	t_echo echo;
+	char	**ordre;
 
+	fd = 1;
+
+	ordre = ft_split(cmd, ' ');
 	echo.nobackslash = 0;
 	echo.no_bs_position = -1;
-	i = -1;
-	while(ordre[++i] != NULL)
-	{
-		j = -1;
-		while (ordre[i][++j])
-		{
-			find_bn(&echo, ordre, i);
-		}
-	}
+	find_redirect(&fd, ordre);
 	print_echo(fd, &echo, ordre);
-	return (0);
+	free_tabstr(ordre);
+	return (1);
 }
