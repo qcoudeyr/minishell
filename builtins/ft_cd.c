@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/11/14 08:54:30 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/15 10:30:14 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int gotoprevpath(t_ms *t)
 	newpwd[j] = '\0';
 	free(t->pwd);
 	t->pwd = newpwd;
+	change_env(t, "PWD=", t->pwd);
 	return (1);
 }
 
@@ -37,6 +38,7 @@ int	gotopath(char *chemin, t_ms *t)
 	{
 		free(t->pwd);
 		t->pwd = chemin;
+		change_env(t, "PWD=", t->pwd);
 		return 1;
 	}
 	else
