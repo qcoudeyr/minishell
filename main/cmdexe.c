@@ -6,11 +6,29 @@
 /*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 09:45:55 by  qcoudeyr         #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/11/09 23:57:36 by lheinric         ###   ########.fr       */
+=======
+/*   Updated: 2023/11/15 10:42:30 by  qcoudeyr        ###   ########.fr       */
+>>>>>>> origin/qcoudeyr
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int	change_env(t_ms *t, char *var, char *tochange)
+{
+	int		i;
+	i = 0;
+
+	while (ft_strnstr(t->env[i], var, ft_strlen(var)) == 0)
+		i++;
+	if (ft_strnstr(t->env[i], var, ft_strlen(var)) == 0)
+		return (-1);
+	t->env[i] = ft_strjoin(var, tochange);
+	return (0);
+
+}
 
 int	print_help(int i)
 {
