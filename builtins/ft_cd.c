@@ -6,32 +6,11 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/11/15 10:43:47 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/15 10:50:59 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-int gotoprevpath(t_ms *t)
-{
-	int i;
-	int j;
-	char *newpwd;
-
-	j = -1;
-	i = ft_strlen(t->pwd);
-	while (t->pwd[i] != '/')
-		i--;
-	newpwd = malloc(sizeof(char) * (i + 1));
-	while (++j < i)
-		newpwd[j] = t->pwd[j];
-	newpwd[j] = '\0';
-	change_env(t, "OLDPWD=", t->pwd);
-	free(t->pwd);
-	t->pwd = newpwd;
-	change_env(t, "PWD=", t->pwd);
-	return (1);
-}
 
 int	gotopath(char *chemin, t_ms *t)
 {
@@ -48,6 +27,24 @@ int	gotopath(char *chemin, t_ms *t)
 		printf("bash: cd: %s: Aucun fichier ou dossier de ce type\n", chemin);
 		return 0;
 	}
+}
+
+int gotoprevpath(t_ms *t)
+{
+	int i;
+	int j;
+	char *newpwd;
+
+	j = -1;
+	i = ft_strlen(t->pwd);
+	while (t->pwd[i] != '/')
+		i--;
+	newpwd = malloc(sizeof(char) * (i + 1));
+	while (++j < i)
+		newpwd[j] = t->pwd[j];
+	newpwd[j] = '\0';
+	gotopath(newpwd, t);
+	return (1);
 }
 
 int	ft_cd(t_ms *t, char *cmd)
