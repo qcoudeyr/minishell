@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 09:45:55 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/15 10:25:55 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/15 10:42:30 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,10 @@ int	change_env(t_ms *t, char *var, char *tochange)
 	int		i;
 	i = 0;
 
-	while (ft_strnstr(t->env[i], var, 5) == 0)
+	while (ft_strnstr(t->env[i], var, ft_strlen(var)) == 0)
 		i++;
-	if (ft_strnstr(t->env[i], var, 5) != 0)
+	if (ft_strnstr(t->env[i], var, ft_strlen(var)) == 0)
 		return (-1);
-	free(t->env[i]);
 	t->env[i] = ft_strjoin(var, tochange);
 	return (0);
 
