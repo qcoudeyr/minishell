@@ -6,7 +6,7 @@
 /*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/11/15 20:15:37 by lheinric         ###   ########.fr       */
+/*   Updated: 2023/11/17 17:16:08 by lheinric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,24 @@ int gotoprevpath(t_ms *t)
 		printf("bash: cd: %s: Aucun fichier ou dossier de ce type\n", newpwd);
 		return 0;
 	}
+	return (1);
+}
+
+int gotoprevpath(t_ms *t)
+{
+	int i;
+	int j;
+	char *newpwd;
+
+	j = -1;
+	i = ft_strlen(t->pwd);
+	while (t->pwd[i] != '/')
+		i--;
+	newpwd = malloc(sizeof(char) * (i + 1));
+	while (++j < i)
+		newpwd[j] = t->pwd[j];
+	newpwd[j] = '\0';
+	gotopath(newpwd, t);
 	return (1);
 }
 

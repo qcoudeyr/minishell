@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/15 18:25:06 by lheinric          #+#    #+#             */
-/*   Updated: 2023/11/15 21:48:18 by lheinric         ###   ########.fr       */
+/*   Created: 2023/10/24 09:45:55 by  qcoudeyr         #+#    #+#             */
+/*   Updated: 2023/11/17 17:18:52 by lheinric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	is_builtins(t_ms *t, int i)
 	}
 	if (ft_strncmp("help", cmdone, 3) == 0)
 	{
-		if (ft_strncmp("help cmd", cmdone, 8) == 0)
+		if (ft_strncmp("cmd", t->cmd[i+1], 8) == 0)
 			print_help(1);
 		else
 			print_help(0);
