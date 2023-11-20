@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 09:43:46 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/24 09:00:32 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/20 09:49:14 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	ft_wordctq(const char *s, char chr)
 	}
 	return (c);
 }
-
+				
 static size_t	ft_wordlen(const char *s, char chr)
 {
 	int	c;

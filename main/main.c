@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/09 15:45:36 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/20 09:55:07 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	start_minishell(t_ms *t)
 			rl_redisplay();
 			add_history(t->cmd[i]);
 		}
-		if (is_builtins(t,i) == 0 && cmdformat(t) != -1 && *t->cmd[i] != 0)
+		if (*t->cmd[i] != 0 && is_builtins(t,i) == 0 && cmdformat(t) != -1)
 		{
 			for(int x = 0; t->cmdlist[i][x] != NULL; x++)
 				printf("%i = %s\n",x, t->cmdlist[i][x]);
