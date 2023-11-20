@@ -6,11 +6,21 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/11/20 13:32:17 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/20 14:16:31 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int	check_path(t_ms *t)
+{
+	if (t->cmdlist[0][0] != NULL && *t->cmdlist[0][0] != 0)
+	{
+		if (access(t->cmdlist[0][0], X_OK) != 0)
+			return(ft_cmdnotfound(t, t->cmdlist[0][0]));
+	}
+	return (0);
+}
 
 int	pathfinder(t_ms *t)
 {
@@ -37,7 +47,6 @@ int	pathfinder(t_ms *t)
 			return(ft_cmdnotfound(t, t->cmdlist[arg][0]));
 		arg++;
 		free(t->fpath);
-		t->fpath = NULL;
 	}
 	return (0);
 }
@@ -93,6 +102,8 @@ int	cmdformat(t_ms *t)
 			t->cmdlist[i][j] = handle_env_var(t, t->cmdlist[i][j]);
 			t->cmdlist[i][j] = remove_quotes(t->cmdlist[i][j]);
 		}
+		if (*t->cmd[i] == '/')
+			return (check_path(t));
 		if (*t->cmd[i] == '$' && t->cmd[i][1] != 0)
 		{
 			if (*t->cmdlist[i][0] == 0)

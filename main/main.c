@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/20 13:16:38 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/20 14:01:50 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ int	start_minishell(t_ms *t)
 	{
 		free(t->cmd[i]);
 		signal(SIGINT, getsignal);
-		rl_str = ft_strjoin("$ "CL_RED"minishell"RESET"~", t->pwd);
-		t->cmd[i] = readline(ft_strjoin(rl_str, " : "));
+		rl_str = ft_strjoin("$ "CL_RED"minishell"RESET"~ [", t->pwd);
+		t->cmd[i] = readline(ft_strjoin(rl_str, "] : "));
 		if (t->cmd[i] == NULL)
 			break;
 		if (t->cmd[i][0] != '\0')
