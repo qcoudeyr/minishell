@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 09:43:46 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/20 10:29:48 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/20 14:27:19 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,14 @@ static size_t	ft_wordlen(const char *s, char chr)
 	qu = *s;
 	if (qu == 39 || qu == 34)
 		quote = 1;
+	else
+		qu = 0;
 	while ((*s != 0 && *s != chr) || (quote % 2 != 0))
 	{
-		c++;
-		s++;
 		if (*s == qu)
 			quote += 1;
+		c++;
+		s++;
 	}
 	return (c);
 }
