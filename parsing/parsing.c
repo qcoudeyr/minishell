@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/11/20 12:32:34 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/20 12:45:58 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,12 @@ char	*env_var(t_ms *t, char *str)
 	i = 0;
 	if (str != NULL && *str == '$')
 		str++;
-	while (str != NULL && t->env[i] &&ft_strnstr(t->env[i], str, ft_strlen(str)) == 0)
+	if (str != 0 && *str == '$' && ft_isalpha(*str+1) == 0)
+		return (str);
+	while (str != 0 && t->env[i] &&ft_strnstr(t->env[i], str, ft_strlen(str)) == 0)
 		i++;
-	if (str == NULL || ft_strnstr(t->env[i], str, ft_strlen(str)) == 0)
-		return (NULL);
+	if (str == 0 || ft_strnstr(t->env[i], str, ft_strlen(str)) == 0)
+		return (0);
 	else
 		return (t->env[i] + ft_strlen(str) + 1);
 }
@@ -91,7 +93,7 @@ int	cmdformat(t_ms *t)
 			t->cmdlist[i][j] = handle_env_var(t, t->cmdlist[i][j]);
 			t->cmdlist[i][j] = remove_quotes(t->cmdlist[i][j]);
 		}
-		env_var_detect(t);
+		/* env_var_detect(t); */
 		return (pathfinder(t));
 	}
 	return (-1);

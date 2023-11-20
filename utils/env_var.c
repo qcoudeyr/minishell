@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 10:31:40 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/20 12:35:05 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/20 12:50:37 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,17 @@ int	detect_env_var(char *str)
 		return 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] == 34 && quote == 0)
+		if (str[i] == 39 && quote == 0)
 			quote = 1;
+		if (str[i] == 39 && quote == 1)
+			quote = 0;
 		if (quote == 1 && str[i] == '$')
-			env_var = 1;
-		if (str[i] == 34 && quote == 1)
-		{
-			quote = 2;
-			break;
-		}
+			i++;
+		else if (quote == 0 && str[i] == '$')
+			env_var += 1;
 		i++;
 	}
-	if (quote == 2 && env_var == 1)
-		return (1);
-	return (0);
+	return (env_var);
 }
 
 char	*handle_env_var(t_ms *t, char *str)
@@ -69,7 +66,7 @@ char	*handle_env_var(t_ms *t, char *str)
 			quote = 0;
 		if (str[i] == 39 && squote == 1)
 			squote = 0;
-		if ((quote == 1 || (squote == 0 && quote == 0)) && str[i] == '$')
+		if ((quote == 1 || (squote == 0 && quote == 0)) && str[i] == '$' && ft_isalpha(str[i+1]))
 		{
 			while(ft_isalpha(str[i++]) != 0)
 				var[len++] = str[i];
