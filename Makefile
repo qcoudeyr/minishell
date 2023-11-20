@@ -7,7 +7,10 @@ LIBS = -lft -lreadline -lncurses -lhistory
 
 HEADERS = minishell.h
 
-SRCS =	main.c parsing.c error.c cmdexe.c ft_cd.c ft_echo.c remove_quotes.c find_redirect.c free_tabstr.c
+SRCS =	main.c \
+		parsing.c error.c cmdexe.c ft_cd.c ft_echo.c \
+		remove_quotes.c find_redirect.c free_tabstr.c \
+		env_var.c
 
 OBJS = $(SRCS:.c=.o)
 NAME = minishell
