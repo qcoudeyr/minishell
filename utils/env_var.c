@@ -6,24 +6,81 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 10:31:40 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/20 11:21:05 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/20 12:35:05 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	is_env_var(char *str)
+int	detect_env_var(char *str)
 {
 	int	i;
 	int	quote;
+	int	env_var;
 
 	i = 0;
 	quote = 0;
+	env_var = 0;
 	if (!str)
-		return (0);
+		return 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] == 34 || str[i] == 39)
-			
+		if (str[i] == 34 && quote == 0)
+			quote = 1;
+		if (quote == 1 && str[i] == '$')
+			env_var = 1;
+		if (str[i] == 34 && quote == 1)
+		{
+			quote = 2;
+			break;
+		}
+		i++;
 	}
+	if (quote == 2 && env_var == 1)
+		return (1);
+	return (0);
+}
+
+char	*handle_env_var(t_ms *t, char *str)
+{
+	int	i;
+	int	quote;
+	int	squote;
+	int	len;
+	char *var;
+	char *newstr;
+
+	i = 0;
+	quote = 0;
+	len = 0;
+	if (!str)
+		return NULL;
+	if (detect_env_var(str) == 0)
+		return (str);
+	newstr = ft_calloc(ft_strlen(str), sizeof(char));
+	var = ft_calloc(1000, sizeof(char));
+	while (str[i] != '\0')
+	{
+		if (str[i] == 39 && squote == 0)
+			squote = 1;
+		if (str[i] == 34 && quote == 0)
+			quote = 1;
+		if (str[i] == 34 && quote == 1)
+			quote = 0;
+		if (str[i] == 39 && squote == 1)
+			squote = 0;
+		if ((quote == 1 || (squote == 0 && quote == 0)) && str[i] == '$')
+		{
+			while(ft_isalpha(str[i++]) != 0)
+				var[len++] = str[i];
+			var[len] = 0;
+			newstr = ft_strjoin(newstr, env_var(t, var));
+			free(var);
+			var = ft_calloc(1000, sizeof(char));
+		}
+		newstr[i] = str[i];
+		i++;
+	}
+	free(var);
+	return (newstr);
 }

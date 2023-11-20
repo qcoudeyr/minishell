@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
+/*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/15 21:50:38 by lheinric         ###   ########.fr       */
+/*   Updated: 2023/11/20 12:16:43 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,13 @@ typedef struct s_minishell
 //		builtins
 int		is_builtins(t_ms *t, int i);
 int		ft_cd(t_ms *t, char *path);
-int		ft_echo(char *cmd);
+int		ft_echo(char **cmd);
 //		utils
 char	*remove_quotes(char *input);
 void	free_tabstr(char **strs);
 int	find_redirect(int *fd, char **cmd);
-
+char	*env_var(t_ms *t, char *str);
+char	*handle_env_var(t_ms *t, char *str);
 int		cmdformat(t_ms *t);
 int		pathfinder(t_ms *t);
 int		ft_cmdnotfound(t_ms *t, char *str);

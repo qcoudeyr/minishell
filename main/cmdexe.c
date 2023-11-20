@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmdexe.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
+/*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 09:45:55 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/17 17:18:52 by lheinric         ###   ########.fr       */
+/*   Updated: 2023/11/20 12:22:14 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,39 +60,34 @@ void printenv(char **envp)
 int	is_builtins(t_ms *t, int i)
 {
 	int	is_b;
-	char **cmd;
-	char	*cmdone;
-
-	cmd = ft_split(t->cmd[i], ' ');
-	cmdone = remove_quotes(cmd[0]);
 
 	is_b = 0;
-	if (ft_strncmp("env", cmdone, 4) == 0)
+	if (ft_strncmp("env", t->cmd[0], 4) == 0)
 	{
 		is_b += 1;
 		printenv(t->env);
 	}
-	if (ft_strncmp("clear", cmdone, 5) == 0)
+	if (ft_strncmp("clear", t->cmd[0], 5) == 0)
 	{
 		is_b += 1;
 		printf("\033[2J\033[H");
 	}
-	if (ft_strncmp("pwd", cmdone, 3) == 0)
+	if (ft_strncmp("pwd", t->cmd[0], 3) == 0)
 	{
 		is_b += 1;
 		printf("%s\n", t->pwd);
 	}
-	if (ft_strncmp("echo", cmdone, 4) == 0)
+	if (ft_strncmp("echo", t->cmd[0], 4) == 0)
 	{
 		is_b += 1;
-		ft_echo(t->cmd[0]);
+		ft_echo(t->cmdlist[0]);
 	}
-	if (ft_strncmp("cd", cmdone, 3) == 0)
+	if (ft_strncmp("cd", t->cmd[0], 3) == 0)
 	{
 		is_b += 1;
-		ft_cd(t, cmdone);
+		ft_cd(t, t->cmd[0]);
 	}
-	if (ft_strncmp("help", cmdone, 3) == 0)
+	if (ft_strncmp("help", t->cmd[0], 3) == 0)
 	{
 		if (ft_strncmp("cmd", t->cmd[i+1], 8) == 0)
 			print_help(1);
@@ -100,6 +95,5 @@ int	is_builtins(t_ms *t, int i)
 			print_help(0);
 		is_b += 1;
 	}
-	free(cmdone);
 	return (is_b);
 }
