@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/20 14:01:50 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/20 14:39:24 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,14 @@ int	print_header(void)
 	free(str);
 	return (0);
 }
+
+int	command_handler(t_ms *t)
+{
+	int	return_value;
+
+	if (cmdformat(t) != -1 && is_builtins(t,i) == 0)
+}
+
 int	start_minishell(t_ms *t)
 {
 	int	i;
@@ -67,7 +75,7 @@ int	start_minishell(t_ms *t)
 			rl_redisplay();
 			add_history(t->cmd[i]);
 		}
-		if (*t->cmd[i] != 0 && cmdformat(t) != -1 && is_builtins(t,i) == 0 )
+		if (*t->cmd[i] != 0 && command_handler(t))
 		{
 			for(int x = 0; t->cmdlist[i][x] != NULL; x++)
 				printf("%i = %s\n",x, t->cmdlist[i][x]);
