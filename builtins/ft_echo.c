@@ -6,7 +6,7 @@
 /*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:56:50 by lheinric          #+#    #+#             */
-/*   Updated: 2023/11/17 19:25:29 by lheinric         ###   ########.fr       */
+/*   Updated: 2023/11/18 17:20:11 by lheinric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	print_echo(int fd, t_echo *echo, char **ordre)
 	i = 0;
 	while(ordre[++i] != NULL && ft_strncmp(ordre[i], ">", 2) != 0 && ft_strncmp(ordre[i], ">>", 3) != 0)
 	{
-		if (ft_strncmp(ordre[i], "-n", 3) != 0)
+		if (ft_strncmp(ordre[i], "-n", 3) != 0 && echo->no_bs_position != i)
 			fd_printf(fd, "%s ", ordre[i]);
 	}
 	if (echo->nobackslash == 0)
