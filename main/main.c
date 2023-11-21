@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/21 09:34:56 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/21 11:57:20 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,6 @@ int	start_minishell(t_ms *t)
 		}
 		if (*t->cmd[i] != 0 && cmdformat(t) != -1)
 		{
-			for(int x = 0; t->cmdlist[i][x] != NULL; x++)
-				printf("%i = %s\n",x, t->cmdlist[i][x]);
-
 			t->pid = fork();
 			if (t->pid == -1)
 				ft_perror(t, "fork");

@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/11/21 11:13:47 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/21 11:57:32 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,9 @@ int	cmdformat(t_ms *t)
 		{
 			t->cmdlist[i][j] = handle_env_var(t, t->cmdlist[i][j]);
 			t->cmdlist[i][j] = remove_quotes(t->cmdlist[i][j]);
-			printf("%s\n", t->cmdlist[i][j]);
 		}
+		if (have_pipe(t->cmdlist[i]) == 1)
+			handle_pipe(t);
 		if (*t->cmd[i] == '/')
 			return (check_path(t));
 		if (*t->cmd[i] == '$' && t->cmd[i][1] != 0)

@@ -10,7 +10,7 @@ HEADERS = minishell.h
 SRCS =	main.c \
 		parsing.c error.c cmdexe.c ft_cd.c ft_echo.c \
 		remove_quotes.c find_redirect.c free_tabstr.c \
-		env_var.c
+		env_var.c pipe.c
 
 OBJS = $(SRCS:.c=.o)
 NAME = minishell
