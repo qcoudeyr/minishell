@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 09:43:46 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/21 10:20:37 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/21 10:27:12 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,11 @@ static size_t	ft_wordlen(const char *s, char chr)
 	quote = 0;
 	qu = *s;
 	if (qu == 39 || qu == 34)
+	{
 		quote = 1;
+		c++;
+		s++;
+	}
 	else
 		qu = 0;
 	while ((*s != 0 && *s != chr) || (quote % 2 != 0))
@@ -92,7 +96,7 @@ char	**ft_splitq(char const *str)
 			i++;
 		if (s[i] == 0)
 			break;
-		tab[index] = malloc(sizeof(char) * ft_wordlen(&s[i], ' ') + 1);
+		tab[index] = ft_calloc(ft_wordlen(&s[i], ' ') + 2,sizeof(char));
 		ft_strlcpy(tab[index++], &s[i], ft_wordlen(&s[i], ' ') + 1);
 		i += ft_wordlen(&s[i], ' ');
 	}
