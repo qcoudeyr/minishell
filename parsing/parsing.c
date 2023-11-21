@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/11/21 11:57:32 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/21 13:37:19 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,33 +90,57 @@ void	env_var_detect(t_ms *t)
 int	cmdformat(t_ms *t)
 {
 	int		i;
+	int		j;
 
+	j = 0;
 	i = 0;
 	t->cmdlist = ft_calloc(2 , sizeof(char **));
 	t->cmdlist[i] = NULL;
 	if (t->cmd[i] != NULL && *t->cmd[i] != 0)
 	{
 		t->cmdlist[i] = ft_splitq(t->cmd[i]);
-		for (int j = 0; t->cmdlist[i][j] != 0; j++)
+		while ( t->cmdlist[i][j] != 0)
 		{
 			t->cmdlist[i][j] = handle_env_var(t, t->cmdlist[i][j]);
 			t->cmdlist[i][j] = remove_quotes(t->cmdlist[i][j]);
+			j++;
 		}
 		if (have_pipe(t->cmdlist[i]) == 1)
 			handle_pipe(t);
-		if (*t->cmd[i] == '/')
-			return (check_path(t));
-		if (*t->cmd[i] == '$' && t->cmd[i][1] != 0)
-		{
-			if (*t->cmdlist[i][0] == 0)
-				return (-1);
-			printf("%s\n", t->cmdlist[i][0]);
-			return(-1);
-		}
-		if (is_builtins(t,i) == 0)
-			return (pathfinder(t));
+		return (cmd_handler(t));
 	}
 	return (-1);
+}
+
+int	cmd_handler(t_ms *t)
+{
+	int	i;
+	int	j;
+	int	return_v;
+
+	i = 0;
+	return_v = 0;
+	while (t->cmdlist[i] != NULL)
+	{
+		j = 0;
+		while (t->cmdlist[i][j] != NULL)
+		{
+			if (*t->cmdlist[i][j] == '/')
+				return_v = check_path(t);
+			if (*t->cmdlist[i][j] == '$' && t->cmdlist[i][j][1] != 0)
+			{
+				if (*t->cmdlist[i][0] == 0)
+					return_v = -1;
+				printf("%s\n", t->cmdlist[i][0]);
+				return_v = -1;
+			}
+			if (is_builtins(t,i) == 0)
+				return_v = pathfinder(t);
+			j++;
+		}
+		i++;
+	}
+	return(return_v);
 }
 
 void	env_pars(t_ms *t)
