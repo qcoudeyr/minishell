@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 10:31:40 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/20 13:30:47 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/21 10:55:19 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ char	*handle_env_var(t_ms *t, char *str)
 	char *newstr;
 
 	i = 0;
+	j = 0;
 	quote = 0;
 	squote = 0;
 	len = 0;
@@ -56,8 +57,8 @@ char	*handle_env_var(t_ms *t, char *str)
 		return NULL;
 	if (detect_env_var(str) == 0)
 		return (str);
-	newstr = ft_calloc(ft_strlen(str), sizeof(char));
-	var = ft_calloc(1000, sizeof(char));
+	newstr = ft_calloc(ft_strlen(str) * 100, sizeof(char));
+	var = ft_calloc(100000, sizeof(char));
 	while (str[i] != '\0')
 	{
 		if (str[i] == 39 && squote == 0)
@@ -76,8 +77,8 @@ char	*handle_env_var(t_ms *t, char *str)
 			newstr = ft_strjoin(newstr, env_var(t, var));
 			free(var);
 			var = ft_calloc(1000, sizeof(char));
+			j = ft_strlen(newstr);
 		}
-		j = ft_strlen(newstr);
 		if (str[i] != 0)
 			newstr[j++] = str[i++];
 	}
