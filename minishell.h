@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/21 11:58:34 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/21 12:23:42 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ int		is_builtins(t_ms *t, int i);
 int		ft_cd(t_ms *t, char *path);
 int		ft_echo(char **cmd);
 //		utils
+int		is_or(char *str);
+int		is_and(char *str);
 void	handle_pipe(t_ms *t);
 int		have_pipe(char **cmds);
 char	*remove_quotes(char *input);
