@@ -6,32 +6,32 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/20 12:16:43 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/21 10:36:41 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include <stdio.h>
-#include <curses.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <signal.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <dirent.h>
-#include <string.h>
-#include <errno.h>
-#include <termios.h>
-#include <stdlib.h>
-#include <term.h>
-#include "./libft/libft.h"
-#include <sys/types.h>
-#include <sys/wait.h>
+# include <stdio.h>
+# include <curses.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <signal.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <dirent.h>
+# include <string.h>
+# include <errno.h>
+# include <termios.h>
+# include <stdlib.h>
+# include <term.h>
+# include "./libft/libft.h"
+# include <sys/types.h>
+# include <sys/wait.h>
 
 typedef struct s_echo
 {
@@ -66,7 +66,7 @@ int		ft_echo(char **cmd);
 //		utils
 char	*remove_quotes(char *input);
 void	free_tabstr(char **strs);
-int	find_redirect(int *fd, char **cmd);
+int		find_redirect(int *fd, char **cmd);
 char	*env_var(t_ms *t, char *str);
 char	*handle_env_var(t_ms *t, char *str);
 int		cmdformat(t_ms *t);
@@ -79,7 +79,8 @@ void	ft_perror(t_ms *t, char *s);
 void	ft_free(t_ms *t);
 void	sigint_handler(int signo);
 void	nothing_handler(int signo);
-void	getsignal();
+void	getsignal(int signal_number);
+
 
 // Text colors
 # define CL_BLACK   "\033[30m"

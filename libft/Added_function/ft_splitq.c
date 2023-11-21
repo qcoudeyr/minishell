@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 09:43:46 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/21 10:27:12 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/21 10:32:31 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ char	**ft_splitq(char const *str)
 		while (s[i] == ' ' && s[i] != 0)
 			i++;
 		if (s[i] == 0)
-			break;
-		tab[index] = ft_calloc(ft_wordlen(&s[i], ' ') + 2,sizeof(char));
+			break ;
+		tab[index] = ft_calloc(ft_wordlen(&s[i], ' ') + 2, sizeof(char));
 		ft_strlcpy(tab[index++], &s[i], ft_wordlen(&s[i], ' ') + 1);
 		i += ft_wordlen(&s[i], ' ');
 	}

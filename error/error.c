@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:01 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/24 09:29:30 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/21 10:38:39 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@ void	nothing_handler(int signo)
 	(void)signo;
 }
 
-void	getsignal()
+void getsignal(int signal_number)
 {
-	signal(SIGINT, sigint_handler);
+	if (signal_number == 2)
+		signal(SIGINT, sigint_handler);
+	else if (signal_number == 3)
 	signal(SIGQUIT, nothing_handler);
 }
 
