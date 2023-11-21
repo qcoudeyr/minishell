@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/21 13:51:51 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/21 14:20:22 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,14 @@ typedef struct s_minishell
 }t_ms;
 
 //		builtins
-int		is_builtins(t_ms *t, int i);
+int		is_builtins(char *str);
 int		ft_cd(t_ms *t, char *path);
 int		ft_echo(char **cmd);
 //		utils
 int		is_or(char *str);
 int		cmd_handler(t_ms *t);
 int		is_and(char *str);
+void	handle_builtins(t_ms *t, int i);
 void	handle_pipe(t_ms *t);
 int		have_pipe(char **cmds);
 char	*remove_quotes(char *input);
