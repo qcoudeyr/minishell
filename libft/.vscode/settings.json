@@ -40,5 +40,6 @@
     "fcntl.h": "c",
     "stdarg.h": "c",
     "random": "c"
-  }
+  },
+  "cmake.configureOnOpen": false
 }
