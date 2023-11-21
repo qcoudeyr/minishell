@@ -39,7 +39,8 @@
     "stddef.h": "c",
     "fcntl.h": "c",
     "stdarg.h": "c",
-    "random": "c"
+    "random": "c",
+    "fd_printf.h": "c"
   },
   "cmake.configureOnOpen": false
 }
