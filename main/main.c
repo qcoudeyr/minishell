@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/22 09:49:17 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/22 11:28:12 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,29 @@ int	start_minishell(t_ms *t)
 	return (0);
 }
 
+void	handle_redirect(t_ms *t, int index)
+{
+	int	i;
+
+	i = 0;
+	while (t->cmdlist[index][i] != NULL)
+	{
+		if (t->cmdlist[index][i][0] == '<')
+			input_redirect(t, index, i);
+		else if (t->cmdlist[index][i][0] == '>')
+			output_redirect(t, index, i);
+		else
+		{
+			t->input_fd = stdin;
+			t->output_fd = stdout;
+		}
+		if (t->file_fd == -1)
+			ft_perror(t, "open");
+
+		i++;
+	}
+}
+
 void	exec_cmd(t_ms *t)
 {
 	int	index;
@@ -89,6 +112,7 @@ void	exec_cmd(t_ms *t)
 	index = 0;
 	while (t->cmdlist[index]!= NULL)
 	{
+		handle_redirect(t, index);
 		if (is_builtins(t->cmdlist[index][0]) > 0)
 		{
 			handle_builtins(t, index);
@@ -152,8 +176,6 @@ void	ft_free(t_ms *t)
 	free(t->path);
 	free(t->pwd);
 	ft_freecmdlist(t);
-	free(t->infile);
-	free(t->outfile);
 	if (t->fpath != NULL)
 		free(t->fpath);
 	free(t);
@@ -165,10 +187,6 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 
 	t = malloc(sizeof(t_ms));
-	t->infile = malloc(sizeof(char *));
-	t->outfile = malloc(sizeof(char *));
-	t->infile = 0;
-	t->outfile = 0;
 	t->env = env;
 	t->env = env;
 	printf("\033[2J\033[H");

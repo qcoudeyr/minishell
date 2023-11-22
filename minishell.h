@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/22 10:07:48 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/22 11:27:21 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,16 @@ typedef struct s_echo
 
 typedef struct s_minishell
 {
-	int		file_fd[100];
+	int		file_fd;
 	char	***cmdlist;
 	pid_t	pid;
-	char	*infile;
-	char	*outfile;
 	char	**cmd;
 	int		narg;
 	char	*fpath;
 	int		status;
 	int		ncmd;
+	int		input_fd;
+	int		output_fd;
 	int		pipefd[2];
 	char	**env;
 	char	**path;
@@ -66,6 +66,9 @@ int		ft_cd(t_ms *t, char *path);
 int		ft_echo(char **cmd);
 //		utils
 int		is_or(char *str);
+void	input_redirect(t_ms *t, int index, int i);
+void	output_redirect(t_ms *t, int index, int i);
+void	handle_redirect(t_ms *t, int index);
 int		cmd_handler(t_ms *t);
 void	exec_cmd(t_ms *t);
 int		is_and(char *str);

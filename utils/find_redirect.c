@@ -3,30 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   find_redirect.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
+/*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 20:18:44 by lheinric          #+#    #+#             */
-/*   Updated: 2023/11/17 17:53:22 by lheinric         ###   ########.fr       */
+/*   Updated: 2023/11/22 11:31:44 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	find_redirect(int *fd, char **cmd)
+int	find_redirect(t_ms *t, int i)
 {
-	int i;
-
-	i = 0;
-	while ((ft_strncmp(cmd[i], ">", 2) != 0 && ft_strncmp(cmd[i], ">>", 3) != 0 && cmd[i + 1] != NULL))
+	while ((ft_strncmp(t->cmdlist[i], ">", 2) != 0 && ft_strncmp(t->cmdlist[i], ">>", 3) != 0 && t->cmdlist[i + 1] != NULL))
 		i++;
-	if (cmd[i] != NULL)
+	if (t->cmdlist[i] != NULL)
 	{
-		if(ft_strncmp(cmd[i], ">", 2) == 0)
-			*fd = open(cmd[i+1], O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
-		else if (ft_strncmp(cmd[i], ">>", 3) == 0)
-			*fd = open(cmd[i+1], O_WRONLY | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
+		if(ft_strncmp(t->cmdlist[i], ">", 2) == 0)
+			t->file_fd = open(t->cmdlist[i+1], O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+		else if (ft_strncmp(t->cmdlist[i], ">>", 3) == 0)
+			t->file_fd = open(t->cmdlist[i+1], O_WRONLY | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
 		else
-			fd[0] = 1;
+			t->file_fd = 1;
 	}
 	return 1;
 }
+
+void	handle_heredoc(t_ms *t, int index, int i)
+{
+	char *limiter;
+
+	
+}
+
+void	input_redirect(t_ms *t, int index, int i)
+{
+		if (ft_strnstr(t->cmdlist[index][i], "<<", 3) != 0)
+		{
+			handle_heredoc(t);
+		}
+		else if (ft_strnstr(t->cmdlist[index][i], "<", 2) != 0)
+		{
+			t->input_fd = open(t->cmdlist[index][i + 1], O_RDONLY);
+		}
+}
+
+void	output_redirect(t_ms *t, int index, int i)
+{
+	if (ft_strnstr(t->cmdlist[index][i], ">>", 3) != 0)
+	{
+		t->file_fd = open(t->cmdlist[index][i + 1], O_WRONLY | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
+	}
+	else if (ft_strnstr(t->cmdlist[index][i], ">", 2) != 0)
+	{
+		t->file_fd = open(t->cmdlist[index][i + 1], O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+	}
+}
+
+
