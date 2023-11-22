@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 20:18:44 by lheinric          #+#    #+#             */
-/*   Updated: 2023/11/22 11:40:04 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/22 12:26:14 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int	find_redirect(t_ms *t, int i)
 
 void	handle_heredoc(t_ms *t, int index, int i)
 {
-	get_next_line()->cmdlist[index][i + 1]
+	t->cmdlist[index][i + 1]
+	get_next_line()
 
 }
 
