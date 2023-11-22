@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/21 12:34:55 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/22 09:49:17 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,18 +76,37 @@ int	start_minishell(t_ms *t)
 					printf("index = %i, line =%i value =%s\n", index,j,t->cmdlist[index][j]);
 			}
 			printf("%i\n", t->ncmd);
+			exec_cmd(t);
+		}
+	}
+	return (0);
+}
+
+void	exec_cmd(t_ms *t)
+{
+	int	index;
+
+	index = 0;
+	while (t->cmdlist[index]!= NULL)
+	{
+		if (is_builtins(t->cmdlist[index][0]) > 0)
+		{
+			handle_builtins(t, index);
+		}
+		else
+		{
 			t->pid = fork();
 			if (t->pid == -1)
 				ft_perror(t, "fork");
 			else if (t->pid == 0)
-				ft_execve(t, i);
+				ft_execve(t, index);
 			else
 			{
 				waitpid(t->pid, &t->status, 0);
 			}
 		}
+		index++;
 	}
-	return (0);
 }
 
 void	ft_freecmdlist(t_ms *t)
