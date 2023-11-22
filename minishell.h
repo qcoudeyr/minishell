@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/22 09:48:52 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/22 10:07:48 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_echo
 
 typedef struct s_minishell
 {
-	int		file_fd[2];
+	int		file_fd[100];
 	char	***cmdlist;
 	pid_t	pid;
 	char	*infile;
