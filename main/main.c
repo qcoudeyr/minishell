@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/22 11:28:12 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/22 11:43:15 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,11 @@ void	exec_cmd(t_ms *t)
 	index = 0;
 	while (t->cmdlist[index]!= NULL)
 	{
+		if (pipe(t->pipefd) == -1)
+		{
+			perror("pipe");
+			break ;
+		}
 		handle_redirect(t, index);
 		if (is_builtins(t->cmdlist[index][0]) > 0)
 		{
