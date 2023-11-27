@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/27 10:02:44 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/27 10:25:30 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	ft_execve(t_ms *t, int i)
 {
 	dup2(t->input_fd, 0);
 	dup2(t->pipefd[1], 1);
-	if (t->cmdlist[i +1] == NULL)
-		dup2(t->output_fd, 1);
+	if (t->cmdlist[i + 1] == NULL)
+		dup2(t->pipefd[1] , t->output_fd);
 	if (execve(t->cmdlist[i][0], t->cmdlist[i], t->env) == -1)
 	{
 		ft_perror(t, "execve");
