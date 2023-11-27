@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   remoove_quotes.c                                   :+:      :+:    :+:   */
+/*   remove_quotes.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -19,6 +19,7 @@ char	*remove_quotes(char *input)
 	int j;
 	int i;
 
+	if (!input) return NULL;
 	length = (int)ft_strlen(input);
 	result = malloc(length + 1);
 	if (!result) return NULL;

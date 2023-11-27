@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
+/*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:56:50 by lheinric          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/11/18 17:20:11 by lheinric         ###   ########.fr       */
+=======
+/*   Updated: 2023/11/27 09:02:07 by  qcoudeyr        ###   ########.fr       */
+>>>>>>> origin/qcoudeyr
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +47,15 @@ void	print_echo(int fd, t_echo *echo, char **ordre)
 		fd_printf(fd, "\n");
 }
 
-int	ft_echo(char *cmd)
+int	ft_echo(t_ms *t, int i)
 {
-	int fd[0];
 	t_echo echo;
-	char	**ordre;
 
-	fd[0] = 1;
-
-	ordre = ft_split(cmd, ' ');
 	echo.nobackslash = 0;
 	echo.no_bs_position = -1;
-	find_redirect(fd, ordre);
-	find_bn(&echo, ordre);
-	print_echo(fd[0], &echo, ordre);
-	free_tabstr(ordre);
-	if (fd[0] > 1)
-		close(fd[0]);
+	find_bn(&echo, t->cmdlist[i]);
+	print_echo(t->output_fd, &echo, t->cmdlist[i]);
+	if (t->output_fd > 1)
+		close(t->output_fd);
 	return (1);
 }

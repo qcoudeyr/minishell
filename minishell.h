@@ -3,35 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
+/*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/15 21:50:38 by lheinric         ###   ########.fr       */
+/*   Updated: 2023/11/27 09:36:57 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include <stdio.h>
-#include <curses.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <signal.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <dirent.h>
-#include <string.h>
-#include <errno.h>
-#include <termios.h>
-#include <stdlib.h>
-#include <term.h>
-#include "./libft/libft.h"
-#include <sys/types.h>
-#include <sys/wait.h>
+# include <stdio.h>
+# include <curses.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <signal.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <dirent.h>
+# include <string.h>
+# include <errno.h>
+# include <termios.h>
+# include <stdlib.h>
+# include <term.h>
+# include "./libft/libft.h"
+# include <sys/types.h>
+# include <sys/wait.h>
 
 typedef struct s_echo
 {
@@ -41,15 +41,15 @@ typedef struct s_echo
 
 typedef struct s_minishell
 {
-	int		file_fd[2];
 	char	***cmdlist;
 	pid_t	pid;
-	char	*infile;
-	char	*outfile;
 	char	**cmd;
 	int		narg;
 	char	*fpath;
 	int		status;
+	int		ncmd;
+	int		input_fd;
+	int		output_fd;
 	int		pipefd[2];
 	char	**env;
 	char	**path;
@@ -60,16 +60,28 @@ typedef struct s_minishell
 }t_ms;
 
 //		builtins
-int		is_builtins(t_ms *t, int i);
+int		is_builtins(char *str);
 int		ft_cd(t_ms *t, char *path);
-int		ft_echo(char *cmd);
+int		ft_echo(t_ms *t, int i);
 //		utils
+int		is_or(char *str);
+void	input_redirect(t_ms *t, int index, int i);
+void	output_redirect(t_ms *t, int index, int i);
+void	format_cmd_redirect(t_ms *t, int index, int i);
+void	handle_redirect(t_ms *t, int index);
+int		cmd_handler(t_ms *t);
+void	exec_cmd(t_ms *t);
+int		is_and(char *str);
+void	handle_builtins(t_ms *t, int i);
+void	handle_pipe(t_ms *t);
+int		have_pipe(char **cmds);
 char	*remove_quotes(char *input);
 void	free_tabstr(char **strs);
-int	find_redirect(int *fd, char **cmd);
-
+int		find_redirect(t_ms *t, int i);
+char	*env_var(t_ms *t, char *str);
+char	*handle_env_var(t_ms *t, char *str);
 int		cmdformat(t_ms *t);
-int		pathfinder(t_ms *t);
+int		pathfinder(t_ms *t, char *str);
 int		ft_cmdnotfound(t_ms *t, char *str);
 int		change_env(t_ms *t, char *var, char *tochange);
 void	env_pars(t_ms *t);
@@ -78,7 +90,8 @@ void	ft_perror(t_ms *t, char *s);
 void	ft_free(t_ms *t);
 void	sigint_handler(int signo);
 void	nothing_handler(int signo);
-void	getsignal();
+void	getsignal(int signal_number);
+
 
 // Text colors
 # define CL_BLACK   "\033[30m"

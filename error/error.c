@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:01 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/24 09:29:30 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/27 08:55:18 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@ void	nothing_handler(int signo)
 	(void)signo;
 }
 
-void	getsignal()
+void getsignal(int signal_number)
 {
-	signal(SIGINT, sigint_handler);
+	if (signal_number == 2)
+		signal(SIGINT, sigint_handler);
+	else if (signal_number == 3)
 	signal(SIGQUIT, nothing_handler);
 }
 
@@ -56,7 +58,7 @@ void	ft_perror(t_ms *t, char *s)
 {
 	if (s != NULL)
 		perror(s);
-	write(t->file_fd[1], "1", 1);
+	write(t->output_fd, "1", 1);
 	ft_free(t);
 	exit(EXIT_FAILURE);
 }

@@ -6,38 +6,47 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/11/09 15:45:12 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/22 09:39:25 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	pathfinder(t_ms *t)
+int	check_path(t_ms *t)
+{
+	if (t->cmdlist[0][0] != NULL && *t->cmdlist[0][0] != 0)
+	{
+		if (access(t->cmdlist[0][0], X_OK) != 0)
+			return(ft_cmdnotfound(t, t->cmdlist[0][0]));
+	}
+	return (0);
+}
+
+int	pathfinder(t_ms *t, char *str)
 {
 	int	i;
 	int	arg;
 
 	arg = 0;
-	if (t->cmdlist[arg][0] != NULL && *t->cmdlist[arg][0] != 0)
+	if (str != NULL && *str != 0)
 	{
 		i = 0;
-		t->fpath = ft_strjoin(t->path[i], t->cmdlist[arg][0]);
+		t->fpath = ft_strjoin(t->path[i], str);
 		while (access (t->fpath, X_OK) < 0 && t->path[i + 1] != NULL)
 		{
 			free(t->fpath);
-			t->fpath = ft_strjoin(t->path[i++], t->cmdlist[arg][0]);
+			t->fpath = ft_strjoin(t->path[i++], str);
 		}
 		if (access(t->fpath, X_OK) == 0)
 		{
-			if (t->cmdlist[arg][0] != NULL)
-				free(t->cmdlist[arg][0]);
-			t->cmdlist[arg][0] = ft_strdup(t->fpath);
+			if (str != NULL)
+				free(str);
+			str = ft_strdup(t->fpath);
 		}
 		else
-			return(ft_cmdnotfound(t, t->cmdlist[arg][0]));
+			return(ft_cmdnotfound(t, str));
 		arg++;
 		free(t->fpath);
-		t->fpath = NULL;
 	}
 	return (0);
 }
@@ -47,10 +56,14 @@ char	*env_var(t_ms *t, char *str)
 	int		i;
 
 	i = 0;
-	while (ft_strnstr(t->env[i], str, ft_strlen(str)) == 0)
+	if (str != NULL && *str == '$')
+		str++;
+	if (str != 0 && *str == '$' && ft_isalpha(*str+1) == 0)
+		return (str);
+	while (str != 0 && t->env[i] &&ft_strnstr(t->env[i], str, ft_strlen(str)) == 0)
 		i++;
-	if (ft_strnstr(t->env[i], str, ft_strlen(str)) == 0)
-		return (NULL);
+	if (str == 0 || ft_strnstr(t->env[i], str, ft_strlen(str)) == 0)
+		return (0);
 	else
 		return (t->env[i] + ft_strlen(str) + 1);
 }
@@ -77,17 +90,57 @@ void	env_var_detect(t_ms *t)
 int	cmdformat(t_ms *t)
 {
 	int		i;
+	int		j;
 
+	j = 0;
 	i = 0;
 	t->cmdlist = ft_calloc(2 , sizeof(char **));
 	t->cmdlist[i] = NULL;
 	if (t->cmd[i] != NULL && *t->cmd[i] != 0)
 	{
 		t->cmdlist[i] = ft_splitq(t->cmd[i]);
-		env_var_detect(t);
-		return (pathfinder(t));
+		while ( t->cmdlist[i][j] != 0)
+		{
+			t->cmdlist[i][j] = handle_env_var(t, t->cmdlist[i][j]);
+			t->cmdlist[i][j] = remove_quotes(t->cmdlist[i][j]);
+			j++;
+		}
+		if (have_pipe(t->cmdlist[i]) == 1)
+			handle_pipe(t);
+		return (cmd_handler(t));
 	}
 	return (-1);
+}
+
+int	cmd_handler(t_ms *t)
+{
+	int	i;
+	int	j;
+	int	return_v;
+
+	i = 0;
+	return_v = 0;
+	while (t->cmdlist[i] != NULL)
+	{
+		j = 0;
+		if (is_builtins(t->cmdlist[i][0]) == 0)
+			return_v = pathfinder(t, t->cmdlist[i][0]);
+		while (t->cmdlist[i][j] != NULL)
+		{
+			if (*t->cmdlist[i][j] == '/')
+				return_v = check_path(t);
+			if (*t->cmdlist[i][j] == '$' && t->cmdlist[i][j][1] != 0)
+			{
+				if (*t->cmdlist[i][0] == 0)
+					return_v = -1;
+				printf("%s\n", t->cmdlist[i][0]);
+				return_v = -1;
+			}
+			j++;
+		}
+		i++;
+	}
+	return(return_v);
 }
 
 void	env_pars(t_ms *t)
