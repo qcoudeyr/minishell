@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/22 11:27:21 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/27 08:55:49 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	handle_pipe(t_ms *t);
 int		have_pipe(char **cmds);
 char	*remove_quotes(char *input);
 void	free_tabstr(char **strs);
-int		find_redirect(int *fd, char **cmd);
+int		find_redirect(t_ms *t, int i);
 char	*env_var(t_ms *t, char *str);
 char	*handle_env_var(t_ms *t, char *str);
 int		cmdformat(t_ms *t);

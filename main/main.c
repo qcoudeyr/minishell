@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/22 11:43:15 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/27 08:54:24 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ void	handle_redirect(t_ms *t, int index)
 			output_redirect(t, index, i);
 		else
 		{
-			t->input_fd = stdin;
-			t->output_fd = stdout;
+			t->input_fd = STDIN_FILENO;
+			t->output_fd = STDOUT_FILENO;
 		}
 		if (t->file_fd == -1)
 			ft_perror(t, "open");
