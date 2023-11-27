@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/27 09:18:34 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/27 09:39:49 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,13 @@ int	start_minishell(t_ms *t)
 		}
 		if (*t->cmd[i] != 0 && cmdformat(t) != -1)
 		{
+			exec_cmd(t);
 			for (int index = 0; t->cmdlist[index] != NULL; index++)
 			{
 				for (int j = 0; t->cmdlist[index][j] != NULL; j++)
 					printf("index = %i, line =%i value =%s\n", index,j,t->cmdlist[index][j]);
 			}
 			printf("%i\n", t->ncmd);
-			exec_cmd(t);
 		}
 	}
 	return (0);

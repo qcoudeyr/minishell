@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 20:18:44 by lheinric          #+#    #+#             */
-/*   Updated: 2023/11/27 09:27:39 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/27 09:37:09 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	input_redirect(t_ms *t, int index, int i)
 		{
 			t->input_fd = open(t->cmdlist[index][i + 1], O_RDONLY);
 		}
+		format_cmd_redirect(t, index, i);
 }
 
 void	output_redirect(t_ms *t, int index, int i)
@@ -59,17 +60,16 @@ void	output_redirect(t_ms *t, int index, int i)
 	{
 		t->output_fd = open(t->cmdlist[index][i + 1], O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
 	}
+	format_cmd_redirect(t, index, i);
 }
 
 void	format_cmd_redirect(t_ms *t, int index, int i)
 {
-	int	ii;
-
-	ii = 2;
-	t->cmdlist[index][i] == NULL;
-	t->cmdlist[index][i + 1] == NULL;
-	while (t->cmdlist[index][i + ii] != NULL)
+	t->cmdlist[index][i] = NULL;
+	t->cmdlist[index][i + 1] = NULL;
+	while (t->cmdlist[index][i + 2] != NULL)
 	{
-		
+		t->cmdlist[index][i] = t->cmdlist[index][i + 2];
+		i++;
 	}
 }

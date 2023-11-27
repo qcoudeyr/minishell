@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/27 09:15:54 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/27 09:36:57 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int		ft_echo(t_ms *t, int i);
 int		is_or(char *str);
 void	input_redirect(t_ms *t, int index, int i);
 void	output_redirect(t_ms *t, int index, int i);
+void	format_cmd_redirect(t_ms *t, int index, int i);
 void	handle_redirect(t_ms *t, int index);
 int		cmd_handler(t_ms *t);
 void	exec_cmd(t_ms *t);
