@@ -1,24 +1,21 @@
-total 1452
-drwxrwxr-x 12 qcoudeyr qcoudeyr    4096 Nov 27 09:57 .
+total 1448
+drwxrwxr-x 12 qcoudeyr qcoudeyr    4096 Nov 27 10:03 .
 drwxr-xr-x 12 qcoudeyr qcoudeyr    4096 Oct 17 07:09 ..
 drwxrwxr-x  2 qcoudeyr qcoudeyr    4096 Nov 20 08:36 builtins
 -rw-rw-r--  1 qcoudeyr qcoudeyr       0 Nov 22 10:19 echo
 drwxrwxr-x  2 qcoudeyr qcoudeyr    4096 Nov 20 09:49 error
 -rwxrwxr-x  1 qcoudeyr qcoudeyr 1310885 Oct 26 08:03 fr.subject.pdf
-drwxrwxr-x  8 qcoudeyr qcoudeyr    4096 Nov 27 09:54 .git
+drwxrwxr-x  8 qcoudeyr qcoudeyr    4096 Nov 27 10:01 .git
 -rw-rw-r--  1 qcoudeyr qcoudeyr     138 Oct 25 11:04 .gitignore
 -rw-rw-r--  1 qcoudeyr qcoudeyr       0 Nov 22 10:12 grep
-drwxr-xr-x  5 qcoudeyr qcoudeyr    4096 Nov 27 09:57 libft
+drwxr-xr-x  5 qcoudeyr qcoudeyr    4096 Nov 27 10:02 libft
 drwxrwxr-x  2 qcoudeyr qcoudeyr    4096 Nov 20 09:49 main
 -rwxrwxr-x  1 qcoudeyr qcoudeyr    1591 Nov 21 12:22 Makefile
--rwxrwxr-x  1 qcoudeyr qcoudeyr   94272 Nov 27 09:57 minishell
+-rwxrwxr-x  1 qcoudeyr qcoudeyr   94280 Nov 27 10:02 minishell
 -rw-rw-r--  1 qcoudeyr qcoudeyr     135 Oct 26 09:01 minishell.code-workspace
 -rwxrwxr-x  1 qcoudeyr qcoudeyr    3502 Nov 27 09:36 minishell.h
-drwxrwxr-x  2 qcoudeyr qcoudeyr    4096 Nov 27 09:57 object
--rw-------  1 qcoudeyr qcoudeyr       0 Nov 27 09:11 outfile
--rw-------  1 qcoudeyr qcoudeyr       0 Nov 27 09:08 output_file
--rw-------  1 qcoudeyr qcoudeyr       0 Nov 27 09:57 outputfile
--rw-rw-r--  1 qcoudeyr qcoudeyr      98 Nov 22 10:14 output.txt
+drwxrwxr-x  2 qcoudeyr qcoudeyr    4096 Nov 27 10:02 object
+-rw-------  1 qcoudeyr qcoudeyr       0 Nov 27 10:03 out
 drwxrwxr-x  2 qcoudeyr qcoudeyr    4096 Nov 21 12:09 parsing
 drwxrwxr-x  2 qcoudeyr qcoudeyr    4096 Nov  9 15:09 redirect
 -rw-rw-r--  1 qcoudeyr qcoudeyr    1287 Nov 22 10:12 test

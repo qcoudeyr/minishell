@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/27 09:56:49 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/27 10:02:44 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ void	exec_cmd(t_ms *t)
 	int	index;
 
 	index = 0;
+	t->input_fd = STDIN_FILENO;
+	t->output_fd = STDOUT_FILENO;
 	while (t->cmdlist[index]!= NULL)
 	{
 		if (pipe(t->pipefd) == -1)
