@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/27 11:06:01 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/27 12:08:18 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 void	ft_execve(t_ms *t, int i)
 {
 	dup2(t->input_fd, 0);
-	dup2(t->pipefd[1], 1);
-	if (t->cmdlist[i +1] == NULL)
-		dup2(t->output_fd, 1);
+	dup2(t->output_fd, 1);
 	if (execve(t->cmdlist[i][0], t->cmdlist[i], t->env) == -1)
 	{
 		ft_perror(t, "execve");
@@ -57,11 +55,11 @@ int	start_minishell(t_ms *t)
 	using_history();
 	t->cmd = malloc(sizeof(char**));
 	t->cmd[0] = malloc(sizeof(char *));
-	t->cmd[0][0] = '\0';
-	while (ft_strncmp("exit", t->cmd[i], 4) != 0)
+	t->cmd[0][0] = '\0';	while (ft_strncmp("exit", t->cmd[i], 4) != 0)
 	{
 		free(t->cmd[i]);
-		free(t->cmdlist);
+		ft_freecmdlist(t);
+		t->cmd[i] = ft_calloc(10, sizeof(char));
 		signal(SIGINT, getsignal);
 		rl_str = ft_strjoin("$ "CL_RED"minishell"RESET"~ [", t->pwd);
 		t->cmd[i] = readline(ft_strjoin(rl_str, "] : "));
@@ -110,12 +108,17 @@ void	exec_cmd(t_ms *t)
 	index = 0;
 	t->input_fd = STDIN_FILENO;
 	t->output_fd = STDOUT_FILENO;
-	while (t->cmdlist[index]!= NULL)
+	while (t->cmdlist[index] != NULL)
 	{
-		if (pipe(t->pipefd) == -1)
+		if (is_special(t->cmdlist[index][0]) == 1)
 		{
-			perror("pipe");
-			break ;
+			/* Handle pipe, or, and, here
+			if (pipe(t->pipefd) == -1)
+			{
+				perror("pipe");
+				break ;
+			} */
+			index++;
 		}
 		handle_redirect(t, index);
 		if (is_builtins(t->cmdlist[index][0]) > 0)
@@ -132,8 +135,8 @@ void	exec_cmd(t_ms *t)
 			else
 			{
 				waitpid(t->pid, &t->status, 0);
-				t->input_fd = t->pipefd[0];
-				close(t->pipefd[1]);
+/* 				t->input_fd = t->pipefd[0];
+				close(t->pipefd[1]); */
 			}
 		}
 		index++;

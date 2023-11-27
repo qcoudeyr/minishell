@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:01 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/27 08:55:18 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/27 11:58:38 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	ft_acceserror(t_ms *t)
 		ft_printf("Input file is not readable or permission denied.\n");
 	else
 		ft_perror(t, "access");
-	ft_free(t);
 	exit(EXIT_FAILURE);
 }
 
@@ -59,6 +58,5 @@ void	ft_perror(t_ms *t, char *s)
 	if (s != NULL)
 		perror(s);
 	write(t->output_fd, "1", 1);
-	ft_free(t);
 	exit(EXIT_FAILURE);
 }

@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/11/22 09:39:25 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/27 11:49:45 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ int	cmd_handler(t_ms *t)
 	while (t->cmdlist[i] != NULL)
 	{
 		j = 0;
-		if (is_builtins(t->cmdlist[i][0]) == 0)
+		if (is_builtins(t->cmdlist[i][0]) == 0 && is_special(t->cmdlist[i][0]) == 0)
 			return_v = pathfinder(t, t->cmdlist[i][0]);
 		while (t->cmdlist[i][j] != NULL)
 		{
@@ -141,6 +141,14 @@ int	cmd_handler(t_ms *t)
 		i++;
 	}
 	return(return_v);
+}
+
+int	is_special(char *str)
+{
+	if (str != NULL && (*str == '|' || *str == '&'))
+		return (1);
+	else
+		return (0);
 }
 
 void	env_pars(t_ms *t)

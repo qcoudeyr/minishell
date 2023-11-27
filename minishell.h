@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/27 09:36:57 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/27 12:00:50 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void	exec_cmd(t_ms *t);
 int		is_and(char *str);
 void	handle_builtins(t_ms *t, int i);
 void	handle_pipe(t_ms *t);
+int		is_special(char *str);
+void	ft_freecmdlist(t_ms *t);
 int		have_pipe(char **cmds);
 char	*remove_quotes(char *input);
 void	free_tabstr(char **strs);
