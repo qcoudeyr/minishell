@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:56:50 by lheinric          #+#    #+#             */
-/*   Updated: 2023/11/20 12:42:23 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/27 09:02:07 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,15 @@ void	print_echo(int fd, t_echo *echo, char **ordre)
 		fd_printf(fd, "\n");
 }
 
-int	ft_echo(char **cmd)
+int	ft_echo(t_ms *t, int i)
 {
-	int fd[0];
 	t_echo echo;
 
-	fd[0] = 1;
 	echo.nobackslash = 0;
 	echo.no_bs_position = -1;
-	find_redirect(fd, cmd);
-	find_bn(&echo, cmd);
-	print_echo(fd[0], &echo, cmd);
-	if (fd[0] > 1)
-		close(fd[0]);
+	find_bn(&echo, t->cmdlist[i]);
+	print_echo(t->output_fd, &echo, t->cmdlist[i]);
+	if (t->output_fd > 1)
+		close(t->output_fd);
 	return (1);
 }

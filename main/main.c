@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/27 08:54:24 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/27 09:18:34 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,22 +87,18 @@ void	handle_redirect(t_ms *t, int index)
 	int	i;
 
 	i = 0;
+	t->input_fd = STDIN_FILENO;
+	t->output_fd = STDOUT_FILENO;
 	while (t->cmdlist[index][i] != NULL)
 	{
 		if (t->cmdlist[index][i][0] == '<')
 			input_redirect(t, index, i);
 		else if (t->cmdlist[index][i][0] == '>')
 			output_redirect(t, index, i);
-		else
-		{
-			t->input_fd = STDIN_FILENO;
-			t->output_fd = STDOUT_FILENO;
-		}
-		if (t->file_fd == -1)
-			ft_perror(t, "open");
-
 		i++;
 	}
+	if (t->input_fd == -1 || t->output_fd == -1)
+		ft_perror(t, "open");
 }
 
 void	exec_cmd(t_ms *t)
