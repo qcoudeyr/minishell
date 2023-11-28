@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/28 10:36:41 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/28 10:46:49 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,10 @@ void	exec_cmd(t_ms *t)
 					if (pipe(t->pipefd) == -1)
 						perror("pipe");
 					else
+					{
+						close(t->output_fd);
 						t->output_fd = t->pipefd[1];
+					}
 				}
 				else
 				{
