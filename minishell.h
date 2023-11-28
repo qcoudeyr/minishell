@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/28 09:20:13 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/28 10:24:56 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@
 # include <stdlib.h>
 # include <term.h>
 # include "./libft/libft.h"
-# include <sys/types.h>
+# include <sys/time.h>
+# include <sys/resource.h>
 # include <sys/wait.h>
 
 typedef struct s_echo
@@ -42,21 +43,22 @@ typedef struct s_echo
 
 typedef struct s_minishell
 {
-	char	***cmdlist;
-	pid_t	pid;
-	char	**cmd;
-	int		narg;
-	char	*fpath;
-	int		status;
-	int		ncmd;
-	int		input_fd;
-	int		output_fd;
-	int		pipefd[2];
-	char	**env;
-	char	**path;
-	char	*pwd;
-	char	*home;
-	char	*prev_pwd;
+	char			***cmdlist;
+	pid_t			pid;
+	char			**cmd;
+	int				narg;
+	char			*fpath;
+	int				status;
+	int				ncmd;
+	int				input_fd;
+	int				output_fd;
+	int				pipefd[2];
+	char			**env;
+	char			**path;
+	char			*pwd;
+	char			*home;
+	char			*prev_pwd;
+	struct rusage	*rusage;
 
 }t_ms;
 

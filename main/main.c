@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/28 10:20:35 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/28 10:25:13 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,10 +159,7 @@ void	exec_cmd(t_ms *t)
 			else if (t->pid == 0)
 				ft_execve(t, index);
 			else
-				waitpid(t->pid, &t->status, WNOHANG);
-				wait;
-				wait3;
-				wait4;
+				wait4(t->pid, &t->status, WNOHANG, t->rusage);
 		}
 		index++;
 	}
