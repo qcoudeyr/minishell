@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/28 09:30:05 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/28 10:20:35 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,13 @@ int	start_minishell(t_ms *t)
 	using_history();
 	t->cmd = malloc(sizeof(char**));
 	t->cmd[0] = malloc(sizeof(char *));
-	t->cmd[0][0] = '\0';	while (ft_strncmp("exit", t->cmd[i], 4) != 0)
+	t->cmd[0][0] = '\0';
+	while (ft_strncmp("exit", t->cmd[i], 4) != 0)
 	{
 		free(t->cmd[i]);
 		ft_freecmdlist(t);
 		t->cmd[i] = ft_calloc(10, sizeof(char));
+		t->cmdlist = ft_calloc(100, sizeof(char **));
 		signal(SIGINT, getsignal);
 		rl_str = ft_strjoin("$ "CL_RED"minishell"RESET"~ [", t->pwd);
 		t->cmd[i] = readline(ft_strjoin(rl_str, "] : "));
@@ -110,7 +112,7 @@ void	exec_cmd(t_ms *t)
 	t->output_fd = STDOUT_FILENO;
 	while (t->cmdlist[index] != NULL)
 	{
-		if (is_special(t->cmdlist[index][0]) == 1)
+		if (is_special(t->cmdlist[index][0]) == 1 ||( t->cmdlist[index +1] != NULL && is_special(t->cmdlist[index + 1][0]) == 1))
 		{
 			/* Handle here = and, or, pipe*/
 			if (is_and(t->cmdlist[index][0]) == 1)
@@ -120,17 +122,29 @@ void	exec_cmd(t_ms *t)
 				/*
 				if t->returnsignal < 1; index++; else break ou index += 2;
 				 */
+				index++;
 			}
-			else
+			else if (is_special(t->cmdlist[index + 1][0]) == 1 && is_and(t->cmdlist[index +1][0]) == 0)
 			{
 				if (pipe(t->pipefd) == -1)
 					perror("pipe");
 				else
-				{
-					
-				}
+					t->output_fd = t->pipefd[1];
 			}
-			index++;
+			else if (is_special(t->cmdlist[index][0]) == 1 && is_and(t->cmdlist[index +1][0]) == 0)
+			{
+				t->input_fd = t->pipefd[0];
+ 				if (t->cmdlist[index + 2] != NULL && ft_strnstr(t->cmdlist[index + 2][0], "|", 2) != 0)
+				{
+					if (pipe(t->pipefd) == -1)
+						perror("pipe");
+					else
+						t->output_fd = t->pipefd[1];
+				}
+				else
+					close(t->pipefd[1]);
+				index++;
+			}
 		}
 		handle_redirect(t, index);
 		if (is_builtins(t->cmdlist[index][0]) > 0)
@@ -145,11 +159,10 @@ void	exec_cmd(t_ms *t)
 			else if (t->pid == 0)
 				ft_execve(t, index);
 			else
-			{
-				waitpid(t->pid, &t->status, 0);
-/* 				t->input_fd = t->pipefd[0];
-				close(t->pipefd[1]); */
-			}
+				waitpid(t->pid, &t->status, WNOHANG);
+				wait;
+				wait3;
+				wait4;
 		}
 		index++;
 	}
@@ -168,8 +181,11 @@ void	ft_freecmdlist(t_ms *t)
 			if (t->cmdlist[i] != NULL)
 			{
 				y = 0;
-				while (t->cmdlist[i][y] != NULL)
-					free(t->cmdlist[i][y++]);
+				while (t->cmdlist[i] != NULL && t->cmdlist[i][y] != NULL)
+				{
+					free(t->cmdlist[i][y]);
+					y++;
+				}
 			}
 			free(t->cmdlist[i]);
 			i++;
