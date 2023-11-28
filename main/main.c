@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/28 10:25:13 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/28 10:36:41 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,12 @@ int	start_minishell(t_ms *t)
 		if (*t->cmd[i] != 0 && cmdformat(t) != -1)
 		{
 			exec_cmd(t);
-			for (int index = 0; t->cmdlist[index] != NULL; index++)
+/* 			for (int index = 0; t->cmdlist[index] != NULL; index++)
 			{
 				for (int j = 0; t->cmdlist[index][j] != NULL; j++)
 					printf("index = %i, line =%i value =%s\n", index,j,t->cmdlist[index][j]);
 			}
-			printf("%i\n", t->ncmd);
+			printf("%i\n", t->ncmd); */
 		}
 	}
 	return (0);
@@ -142,7 +142,10 @@ void	exec_cmd(t_ms *t)
 						t->output_fd = t->pipefd[1];
 				}
 				else
+				{
 					close(t->pipefd[1]);
+					t->output_fd = STDOUT_FILENO;
+				}
 				index++;
 			}
 		}
@@ -159,7 +162,7 @@ void	exec_cmd(t_ms *t)
 			else if (t->pid == 0)
 				ft_execve(t, index);
 			else
-				wait4(t->pid, &t->status, WNOHANG, t->rusage);
+				wait4(t->pid, &t->status, 0, t->rusage);
 		}
 		index++;
 	}
