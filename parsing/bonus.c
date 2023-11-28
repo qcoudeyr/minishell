@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 12:09:16 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/21 12:13:33 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/28 09:22:57 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,17 @@ int	is_and(char *str)
 		i++;
 	}
 	return (0);
+}
+
+int	have_wildcard(char **cmds)
+{
+	int	i;
+
+	i = 0;
+	while (cmds[i] != NULL && ft_strchr(cmds[i], '*') == 0)
+		i++;
+	if (cmds[i] != NULL && ft_strchr(cmds[i], '*') == 0)
+		return (0);
+	else
+		return (1);
 }

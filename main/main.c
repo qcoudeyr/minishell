@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/27 12:08:18 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/28 09:30:05 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,12 +112,24 @@ void	exec_cmd(t_ms *t)
 	{
 		if (is_special(t->cmdlist[index][0]) == 1)
 		{
-			/* Handle pipe, or, and, here
-			if (pipe(t->pipefd) == -1)
+			/* Handle here = and, or, pipe*/
+			if (is_and(t->cmdlist[index][0]) == 1)
+				index++;
+			else if(is_or(t->cmdlist[index][0]) == 1)
 			{
-				perror("pipe");
-				break ;
-			} */
+				/*
+				if t->returnsignal < 1; index++; else break ou index += 2;
+				 */
+			}
+			else
+			{
+				if (pipe(t->pipefd) == -1)
+					perror("pipe");
+				else
+				{
+					
+				}
+			}
 			index++;
 		}
 		handle_redirect(t, index);

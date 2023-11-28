@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/27 12:00:50 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/28 09:20:13 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <string.h>
 # include <errno.h>
 # include <termios.h>
+# include <dirent.h>
 # include <stdlib.h>
 # include <term.h>
 # include "./libft/libft.h"
@@ -65,6 +66,7 @@ int		ft_cd(t_ms *t, char *path);
 int		ft_echo(t_ms *t, int i);
 //		utils
 int		is_or(char *str);
+int		have_wildcard(char **cmds);
 void	input_redirect(t_ms *t, int index, int i);
 void	output_redirect(t_ms *t, int index, int i);
 void	format_cmd_redirect(t_ms *t, int index, int i);
