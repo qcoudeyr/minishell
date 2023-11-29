@@ -6,18 +6,18 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/11/29 10:26:52 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/29 10:34:23 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	check_path(t_ms *t)
+int	check_path(t_ms *t, int i)
 {
-	if (t->cmdlist[0][0] != NULL && *t->cmdlist[0][0] != 0)
+	if (t->cmdlist[i][0] != NULL && *t->cmdlist[i][0] != 0)
 	{
-		if (access(t->cmdlist[0][0], X_OK) != 0)
-			return(ft_cmdnotfound(t, t->cmdlist[0][0]));
+		if (access(t->cmdlist[i][0], X_OK) != 0)
+			return(ft_cmdnotfound(t, t->cmdlist[i][0]));
 	}
 	return (0);
 }
@@ -130,7 +130,7 @@ int	cmd_handler(t_ms *t)
 		while (t->cmdlist[i][j] != NULL)
 		{
 			if (*t->cmdlist[i][j] == '/')
-				return_v = check_path(t);
+				return_v = check_path(t, i);
 			if (*t->cmdlist[i][j] == '$' && t->cmdlist[i][j][1] != 0)
 			{
 				if (*t->cmdlist[i][0] == 0)

@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/28 13:48:25 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/29 10:36:16 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int		is_builtins(char *str);
 int		ft_cd(t_ms *t, char *path);
 int		ft_echo(t_ms *t, int i);
 //		utils
-int		check_path(t_ms *t);
+int		check_path(t_ms *t, int i);
 int		is_or(char *str);
 int		have_wildcard(char **cmds);
 void	input_redirect(t_ms *t, int index, int i);
@@ -89,7 +89,7 @@ char	*env_var(t_ms *t, char *str);
 char	*handle_env_var(t_ms *t, char *str);
 int		cmdformat(t_ms *t);
 int		pathfinder(t_ms *t, char *str);
-int		ft_cmdnotfound(t_ms *t, char *str);
+int		ft_cmdnotfound(t_ms *t, int index);
 int		change_env(t_ms *t, char *var, char *tochange);
 void	env_pars(t_ms *t);
 void	ft_acceserror(t_ms *t);
