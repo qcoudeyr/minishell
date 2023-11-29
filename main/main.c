@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/29 12:32:04 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/29 13:21:12 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	start_minishell(t_ms *t)
 	rl_initialize();
 	using_history();
 	t->cmd = malloc(sizeof(char**));
-	t->cmd = malloc(sizeof(char***));
+	t->cmdlist = ft_calloc(1, sizeof(char***));
 	t->cmd[0] = malloc(sizeof(char *));
 	t->cmd[0][0] = '\0';
 	while (ft_strncmp("exit", t->cmd[i], 4) != 0)
@@ -175,22 +175,15 @@ void	exec_cmd(t_ms *t)
 void	ft_freecmdlist(t_ms *t)
 {
 	int	i;
-	int	y;
+	int	j;
 
 	i = 0;
 	if (t->cmdlist != NULL)
 	{
 		while (t->cmdlist != NULL && t->cmdlist[i] != NULL)
 		{
-			if (t->cmdlist[i] != NULL)
-			{
-				y = 0;
-				while (t->cmdlist[i] != NULL && t->cmdlist[i][y] != NULL)
-				{
-					free(t->cmdlist[i][y]);
-					y++;
-				}
-			}
+			while (t->cmdlist[i][j] != NULL)
+				free(t->cmdlist[i][j++]);
 			free(t->cmdlist[i]);
 			i++;
 		}
@@ -231,14 +224,14 @@ int	main(int argc, char **argv, char **env)
 	t = malloc(sizeof(t_ms));
 	t->env = env;
 	t->env = env;
-	printf("\033[2J\033[H");
+	/* printf("\033[2J\033[H"); */
 
 	if (argc > 1)
 		return (printf("ERROR: usage ./minishell\n"), 1);
 	env_pars(t);
 	start_minishell(t);
 	ft_free(t);
-	printf("\033[2J\033[H");
+	/* printf("\033[2J\033[H"); */
 	rl_clear_history();
 	return (0);
 }

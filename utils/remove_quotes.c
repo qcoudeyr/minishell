@@ -14,15 +14,17 @@
 
 char	*remove_quotes(char *input)
 {
-	int length;
-	char *result;
-	int j;
-	int i;
+	int		length;
+	char	*result;
+	int		j;
+	int		i;
 
-	if (!input) return NULL;
+	if (!input)
+		return (NULL);
 	length = (int)ft_strlen(input);
 	result = malloc(length + 1);
-	if (!result) return NULL;
+	if (!result)
+		return (NULL);
 	j = 0;
 	i = 0;
 	while (i < length)
@@ -33,5 +35,6 @@ char	*remove_quotes(char *input)
 			result[j++] = input[i++];
 	}
 	result[j] = '\0';
-	return result;
+	free(input);
+	return (result);
 }

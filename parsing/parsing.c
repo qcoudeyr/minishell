@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/11/29 12:46:09 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/29 13:14:49 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ int	pathfinder(t_ms *t, char *str)
 		}
 		if (access(t->fpath, X_OK) == 0)
 		{
-			if (str != NULL)
-				free(str);
+			free(str);
 			str = ft_strdup(t->fpath);
 		}
 		else
 			return(ft_cmdnotfound(t, str));
 		free(t->fpath);
+		t->fpath = NULL;
 	}
 	return (0);
 }
@@ -93,13 +93,10 @@ int	cmdformat(t_ms *t)
 
 	j = 0;
 	i = 0;
-	printf("'\n\t%s\n", t->cmd[i]);
 	t->cmdlist[i] = NULL;
-	t->cmd[i] = ft_strtrim(t->cmd[i], ' ');
 	t->cmd[i] = rmcharq(t->cmd[i], '\\');
 	if (t->cmd[i] != NULL && *t->cmd[i] != 0)
 	{
-		printf("'\n\t%s\n", t->cmd[i]);
 		if (*t->cmd[i] == 0)
 			return (-1);
 		t->cmdlist[i] = ft_splitq(t->cmd[i]);
@@ -196,6 +193,8 @@ char	*rmcharq(char *str, char c)
 	temp = ft_calloc(ft_strlen(str) + 2, sizeof(char));
 	if (!str || *str == 0)
 		return (str);
+	while (str[i] == ' ')
+		i++;
 	while (str[i] != 0)
 	{
 		if (str[i] == '\'' || str[i] == '"')
