@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/11/29 11:03:48 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/29 12:09:33 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,13 @@ int	cmdformat(t_ms *t)
 
 	j = 0;
 	i = 0;
-	t->cmd[i] = rmcharq(t->cmd[i], '\\');
-	t->cmdlist = ft_calloc(2 , sizeof(char **));
+	printf("'\n\t%s\n", t->cmd[i]);
 	t->cmdlist[i] = NULL;
+	t->cmd[i] = ft_strtrim(t->cmd[i], ' ');
+	t->cmd[i] = rmcharq(t->cmd[i], '\\');
 	if (t->cmd[i] != NULL && *t->cmd[i] != 0)
 	{
-		t->cmd[i] = ft_strtrim(t->cmd[i], ' ');
+		printf("'\n\t%s\n", t->cmd[i]);
 		if (*t->cmd[i] == 0)
 			return (-1);
 		t->cmdlist[i] = ft_splitq(t->cmd[i]);
@@ -204,5 +205,6 @@ char	*rmcharq(char *str, char c)
 		else
 			temp[j++] = str[i++];
 	}
+	temp[j] = 0;
 	return (temp);
 }
