@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/11/28 14:10:03 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/29 10:26:52 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	cmdformat(t_ms *t)
 	if (t->cmd[i] != NULL && *t->cmd[i] != 0)
 	{
 		t->cmd[i] = ft_strtrim(t->cmd[i], ' ');
-		if (t->cmd[i] == NULL)
+		if (*t->cmd[i] == 0)
 			return (-1);
 		t->cmdlist[i] = ft_splitq(t->cmd[i]);
 		while ( t->cmdlist[i][j] != 0)
