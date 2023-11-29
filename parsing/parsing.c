@@ -6,18 +6,18 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/11/29 10:34:23 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/29 10:53:55 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	check_path(t_ms *t, int i)
+int	check_path(char *str)
 {
-	if (t->cmdlist[i][0] != NULL && *t->cmdlist[i][0] != 0)
+	if (str != NULL && *str != 0)
 	{
-		if (access(t->cmdlist[i][0], X_OK) != 0)
-			return(ft_cmdnotfound(t, t->cmdlist[i][0]));
+		if (access(str, X_OK) != 0)
+			return(-1);
 	}
 	return (0);
 }
@@ -29,7 +29,7 @@ int	pathfinder(t_ms *t, char *str)
 	if (str != NULL && *str != 0)
 	{
 		i = 0;
-		if (access(t->cmdlist[0][0], X_OK) == 0)
+		if (check_path(str) == 0)
 			return (0);
 		t->fpath = ft_strjoin(t->path[i], str);
 		while (access (t->fpath, X_OK) < 0 && t->path[i + 1] != NULL)
@@ -130,7 +130,7 @@ int	cmd_handler(t_ms *t)
 		while (t->cmdlist[i][j] != NULL)
 		{
 			if (*t->cmdlist[i][j] == '/')
-				return_v = check_path(t, i);
+				return_v = check_path(t->cmdlist[i][j]);
 			if (*t->cmdlist[i][j] == '$' && t->cmdlist[i][j][1] != 0)
 			{
 				if (*t->cmdlist[i][0] == 0)
@@ -179,4 +179,29 @@ void	env_pars(t_ms *t)
 		free(temp);
 		i++;
 	}
+}
+
+char	*rmcharq(char *str, char c)
+{
+	int	i;
+	int j;
+	int	quote;
+	char *temp;
+
+	i = 0;
+	j = 0;
+	quote = 0;
+	temp = ft_calloc(ft_strlen(str), sizeof(char));
+	if (!str || *str == 0)
+		return (str);
+	while (str[i] != 0)
+	{
+		if (str[i] == '\'' || str[i] == '"')
+			quote += 1;
+		if (str[i] == c && quote == 0)
+			i++;
+		else
+			temp[j++] = str[i++];
+	}
+	return (temp);
 }
