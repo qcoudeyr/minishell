@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/11/29 12:27:14 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/29 12:46:09 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,7 @@ char	*rmcharq(char *str, char c)
 	i = 0;
 	j = 0;
 	quote = 0;
-	temp = ft_calloc(ft_strlen(str), sizeof(char));
+	temp = ft_calloc(ft_strlen(str) + 2, sizeof(char));
 	if (!str || *str == 0)
 		return (str);
 	while (str[i] != 0)
