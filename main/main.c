@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/29 12:09:13 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/29 12:32:04 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	start_minishell(t_ms *t)
 	rl_initialize();
 	using_history();
 	t->cmd = malloc(sizeof(char**));
+	t->cmd = malloc(sizeof(char***));
 	t->cmd[0] = malloc(sizeof(char *));
 	t->cmd[0][0] = '\0';
 	while (ft_strncmp("exit", t->cmd[i], 4) != 0)
