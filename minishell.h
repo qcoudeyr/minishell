@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/29 10:44:19 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/29 11:04:22 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int		ft_echo(t_ms *t, int i);
 //		utils
 int		check_path(char *str);
 int		is_or(char *str);
+char	*rmcharq(char *str, char c);
 int		have_wildcard(char **cmds);
 void	input_redirect(t_ms *t, int index, int i);
 void	output_redirect(t_ms *t, int index, int i);
