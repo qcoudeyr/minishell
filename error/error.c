@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:01 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/27 11:58:38 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/28 13:48:43 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void getsignal(int signal_number)
 int	ft_cmdnotfound(t_ms *t, char *str)
 {
 	(void) t;
+	if (check_path(t))
 	printf("Command not found: %s\n",str);
 	return (-1);
 }

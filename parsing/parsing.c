@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/11/28 09:23:08 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/28 14:10:03 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ int	check_path(t_ms *t)
 int	pathfinder(t_ms *t, char *str)
 {
 	int	i;
-	int	arg;
 
-	arg = 0;
 	if (str != NULL && *str != 0)
 	{
 		i = 0;
+		if (access(t->cmdlist[0][0], X_OK) == 0)
+			return (0);
 		t->fpath = ft_strjoin(t->path[i], str);
 		while (access (t->fpath, X_OK) < 0 && t->path[i + 1] != NULL)
 		{
@@ -45,7 +45,6 @@ int	pathfinder(t_ms *t, char *str)
 		}
 		else
 			return(ft_cmdnotfound(t, str));
-		arg++;
 		free(t->fpath);
 	}
 	return (0);
@@ -98,6 +97,9 @@ int	cmdformat(t_ms *t)
 	t->cmdlist[i] = NULL;
 	if (t->cmd[i] != NULL && *t->cmd[i] != 0)
 	{
+		t->cmd[i] = ft_strtrim(t->cmd[i], ' ');
+		if (t->cmd[i] == NULL)
+			return (-1);
 		t->cmdlist[i] = ft_splitq(t->cmd[i]);
 		while ( t->cmdlist[i][j] != 0)
 		{
