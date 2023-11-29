@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/11/29 12:09:33 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/29 12:27:14 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,5 +206,6 @@ char	*rmcharq(char *str, char c)
 			temp[j++] = str[i++];
 	}
 	temp[j] = 0;
+	free(str);
 	return (temp);
 }
