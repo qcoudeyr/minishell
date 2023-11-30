@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 10:31:40 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/21 10:55:19 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/30 11:36:21 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,6 @@ char	*handle_env_var(t_ms *t, char *str)
 	}
 	newstr[j] = 0;
 	free(var);
+	free(str);
 	return (newstr);
 }

@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/11/29 13:14:49 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/30 11:44:08 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int	cmdformat(t_ms *t)
 {
 	int		i;
 	int		j;
+	void	*tf;
 
 	j = 0;
 	i = 0;
@@ -99,7 +100,9 @@ int	cmdformat(t_ms *t)
 	{
 		if (*t->cmd[i] == 0)
 			return (-1);
+		tf = (void *) t->cmdlist[i];
 		t->cmdlist[i] = ft_splitq(t->cmd[i]);
+		free (tf);
 		while ( t->cmdlist[i][j] != 0)
 		{
 			t->cmdlist[i][j] = handle_env_var(t, t->cmdlist[i][j]);

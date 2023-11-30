@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/30 11:14:52 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/30 11:42:51 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	start_minishell(t_ms *t)
 {
 	int	i;
 	char *rl_str;
+	void *temp;
 
 	i = 0;
 	if (print_header( ) == -1)
@@ -54,18 +55,20 @@ int	start_minishell(t_ms *t)
 	rl_initialize();
 	using_history();
 	t->cmd = malloc(sizeof(char**));
-	t->cmdlist = ft_calloc(1, sizeof(char***));
-	t->cmd[0] = malloc(sizeof(char *));
-	t->cmd[0][0] = '\0';
+	t->cmdlist = NULL;
+	t->cmd[0] = ft_calloc(2, sizeof(char *));
+	rl_str = ft_strjoin("$ "CL_RED"minishell"RESET"~ [", t->pwd);
+	temp = (void *) rl_str;
+	rl_str = ft_strjoin(rl_str, "] : ");
+	free(temp);
 	while (ft_strncmp("exit", t->cmd[i], 4) != 0)
 	{
 		free(t->cmd[i]);
-		ft_freecmdlist(t);
-		t->cmd[i] = ft_calloc(10, sizeof(char));
+		if (t->cmdlist != NULL)
+			ft_freecmdlist(t);
 		t->cmdlist = ft_calloc(2, sizeof(char **));
 		signal(SIGINT, getsignal);
-		rl_str = ft_strjoin("$ "CL_RED"minishell"RESET"~ [", t->pwd);
-		t->cmd[i] = readline(ft_strjoin(rl_str, "] : "));
+		t->cmd[i] = readline(rl_str);
 		if (t->cmd[i] == NULL)
 			break;
 		if (t->cmd[i][0] != '\0')
@@ -74,16 +77,9 @@ int	start_minishell(t_ms *t)
 			add_history(t->cmd[i]);
 		}
 		if (*t->cmd[i] != 0 && cmdformat(t) != -1)
-		{
 			exec_cmd(t);
-/* 			for (int index = 0; t->cmdlist[index] != NULL; index++)
-			{
-				for (int j = 0; t->cmdlist[index][j] != NULL; j++)
-					printf("index = %i, line =%i value =%s\n", index,j,t->cmdlist[index][j]);
-			}
-			printf("%i\n", t->ncmd); */
-		}
 	}
+	free(rl_str);
 	return (0);
 }
 
@@ -178,6 +174,7 @@ void	ft_freecmdlist(t_ms *t)
 	int	j;
 
 	i = 0;
+	j = 0;
 	if (t->cmdlist != NULL)
 	{
 		while (t->cmdlist != NULL && t->cmdlist[i] != NULL)
@@ -185,10 +182,12 @@ void	ft_freecmdlist(t_ms *t)
 			while (t->cmdlist[i][j] != NULL)
 				free(t->cmdlist[i][j++]);
 			free(t->cmdlist[i]);
+			t->cmdlist[i] = NULL;
 			i++;
 		}
 		free(t->cmdlist);
 	}
+	t->cmdlist = NULL;
 }
 
 void	ft_free(t_ms *t)
@@ -209,6 +208,7 @@ void	ft_free(t_ms *t)
 	while (t->path[i] != NULL)
 		free(t->path[i++]);
 	free(t->path);
+	free(t->home);
 	free(t->pwd);
 	if (t->fpath != NULL)
 		free(t->fpath);
