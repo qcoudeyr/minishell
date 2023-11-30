@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/30 11:49:23 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/30 12:02:09 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	start_minishell(t_ms *t)
 		free(t->cmd[i]);
 		if (t->cmdlist != NULL)
 			ft_freecmdlist(t);
-		t->cmdlist = ft_calloc(2, sizeof(char **));
+		t->cmdlist = ft_calloc(10, sizeof(char **));
 		signal(SIGINT, getsignal);
 		t->cmd[i] = readline(rl_str);
 		if (t->cmd[i] == NULL)
