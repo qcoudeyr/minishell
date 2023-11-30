@@ -22,7 +22,7 @@ char	*remove_quotes(char *input)
 	if (!input)
 		return (NULL);
 	length = (int)ft_strlen(input);
-	result = malloc(length + 1);
+	result = ft_calloc(length + 2, sizeof(char));
 	if (!result)
 		return (NULL);
 	j = 0;

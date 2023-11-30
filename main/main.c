@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/30 11:42:51 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/30 11:49:23 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,6 +229,7 @@ int	main(int argc, char **argv, char **env)
 		return (printf("ERROR: usage ./minishell\n"), 1);
 	env_pars(t);
 	start_minishell(t);
+	ft_freecmdlist(t);
 	ft_free(t);
 	/* printf("\033[2J\033[H"); */
 	rl_clear_history();
