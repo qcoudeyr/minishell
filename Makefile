@@ -59,7 +59,9 @@ norme:
 debug: $(OBJS)
 	@clear
 	@$(CC) $(CFLAGS) -g $(OBJS) -L$(LIB_DIR) $(LIBS) -o debug
-	colour-valgrind -s --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes --error-exitcode=1 \
+	colour-valgrind -s --tool=memcheck --leak-check=full --error-exitcode=1 \
 	./debug
 
 .PHONY: all clean fclean re debug libft
+
+#--show-leak-kinds=all --track-origins=yes

@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:18:22 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/30 11:04:59 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/11/30 11:12:06 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	have_pipe(char **cmds)
 	i = 0;
 	while (cmds[i] != NULL && ft_strchr(cmds[i], '|') == 0)
 		i++;
-	if (cmds[i] != NULL && ft_strchr(cmds[i], '|') == 0)
+	if (cmds[i] == 0 || (cmds[i] != NULL && ft_strchr(cmds[i], '|') == 0))
 		return (0);
 	else
 		return (1);
