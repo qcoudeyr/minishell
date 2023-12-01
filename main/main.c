@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/01 21:00:12 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/01 21:18:31 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ int	start_minishell(t_ms *t)
 	{
 		pfree(t->cmd[i]);
 		init_cmdlist(t);
-		t->cmdlist = ft_calloc(10, sizeof(char **));
 		signal(SIGINT, getsignal);
 		t->cmd[i] = readline(rl_str);
 		if (t->cmd[i] == NULL)
@@ -88,8 +87,7 @@ int	start_minishell(t_ms *t)
 			add_history(t->cmd[i]);
 		}
 		if (*t->cmd[i] != 0 && cmdformat(t) != -1)
-			printf("EXECCMD\n");
-			/* exec_cmd(t); */
+			exec_cmd(t);
 	}
 	pfree(rl_str);
 	return (0);
@@ -196,7 +194,7 @@ void	ft_freecmdlist(t_ms *t)
 			pfree(t->cmdlist[i]);
 			i++;
 		}
-		pfree(t->cmdlist);
+		t->cmdlist = pfree(t->cmdlist);
 	}
 }
 

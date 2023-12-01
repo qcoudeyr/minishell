@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/01 20:52:50 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/01 21:15:35 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int		find_redirect(t_ms *t, int i);
 char	*env_var(t_ms *t, char *str);
 char	*handle_env_var(t_ms *t, char *str);
 int		cmdformat(t_ms *t);
-int		pathfinder(t_ms *t, char *str);
+int		pathfinder(t_ms *t, int index);
 int		ft_cmdnotfound(t_ms *t, char *str);
 int		change_env(t_ms *t, char *var, char *tochange);
 void	env_pars(t_ms *t);
