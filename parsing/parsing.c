@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/11/30 11:55:29 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/01 20:40:01 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,9 +131,11 @@ int	cmd_handler(t_ms *t)
 			return_v = pathfinder(t, t->cmdlist[i][0]);
 		while (t->cmdlist[i][j] != NULL)
 		{
+			printf("134 j = %i\n", j);
 			if (*t->cmdlist[i][j] != 0 && *t->cmdlist[i][j] == '/')
 				return_v = check_path(t->cmdlist[i][j]);
-			if (*t->cmdlist[i][j] != 0 && *t->cmdlist[i][j] == '$' && t->cmdlist[i][j][1] != 0)
+			printf("137 j = %i\n", j);
+			if (*t->cmdlist[i][j] != 0  && t->cmdlist[i][j][1] != 0 && *t->cmdlist[i][j] == '$')
 			{
 				if (*t->cmdlist[i][0] == 0)
 					return_v = -1;
