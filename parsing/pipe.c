@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:18:22 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/30 11:12:06 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/01 21:30:24 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	handle_pipe(t_ms *t)
 	j = 0;
 	index = 0;
 	temp_tab = ft_calloc(100, sizeof(char **));
-	temp_tab[index] = ft_calloc(100, sizeof(char *));
+	temp_tab[index] = ft_calloc(100, sizeof(char **));
 	while (t->cmdlist[0][j] != NULL)
 	{
 		if ((ft_strchr(t->cmdlist[0][j], '|') == 0 || is_or(t->cmdlist[0][j]) == 1) && is_and(t->cmdlist[0][j]) == 0)
@@ -45,7 +45,7 @@ void	handle_pipe(t_ms *t)
 		{
 			temp_tab[++index] = ft_calloc(10, sizeof(char *));
 			temp_tab[index][0] = ft_strdup(t->cmdlist[0][j]);
-			temp_tab[++index] = ft_calloc(100, sizeof(char *));
+			temp_tab[++index] = ft_calloc(10, sizeof(char *));
 			i = 0;
 		}
 		j++;
