@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 09:43:46 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/21 10:32:31 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/01 21:11:06 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ char	**ft_splitq(char const *str)
 		return (ft_empty_tab());
 	i = 0;
 	index = 0;
-	tab = (char **)malloc(sizeof(char *) * (ft_wordctq(s, ' ') + 1));
+	tab = ft_calloc((ft_wordctq(s, ' ') + 2), sizeof(char *));
 	while (s[i] != 0 || (s[i] == ' ' && s[i + 1] == 0))
 	{
 		while (s[i] == ' ' && s[i] != 0)

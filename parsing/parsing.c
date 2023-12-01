@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/01 21:08:52 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/01 21:15:23 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,28 +22,28 @@ int	check_path(char *str)
 	return (0);
 }
 
-int	pathfinder(t_ms *t, char *str)
+int	pathfinder(t_ms *t, int index)
 {
 	int	i;
 
-	if (str != NULL && *str != 0)
+	if (t->cmdlist[index][0] != NULL && *t->cmdlist[index][0] != 0)
 	{
 		i = 0;
-		if (check_path(str) == 0)
+		if (check_path(t->cmdlist[index][0]) == 0)
 			return (0);
-		t->fpath = ft_strjoin(t->path[i], str);
+		t->fpath = ft_strjoin(t->path[i], t->cmdlist[index][0]);
 		while (access (t->fpath, X_OK) < 0 && t->path[i + 1] != NULL)
 		{
 			pfree(t->fpath);
-			t->fpath = ft_strjoin(t->path[i++], str);
+			t->fpath = ft_strjoin(t->path[i++], t->cmdlist[index][0]);
 		}
 		if (access(t->fpath, X_OK) == 0)
 		{
-			pfree(str);
-			str = ft_strjoin(t->fpath, (char *)'\0');
+			pfree(t->cmdlist[index][0]);
+			t->cmdlist[index][0] = ft_strjoin(t->fpath, (char *)'\0');
 		}
 		else
-			return(ft_cmdnotfound(t, str));
+			return(ft_cmdnotfound(t, t->cmdlist[index][0]));
 		pfree(t->fpath);
 	}
 	return (0);
@@ -127,7 +127,7 @@ int	cmd_handler(t_ms *t)
 	{
 		j = 0;
 		if (is_builtins(t->cmdlist[i][0]) == 0 && is_special(t->cmdlist[i][0]) == 0)
-			return_v = pathfinder(t, t->cmdlist[i][0]);
+			return_v = pathfinder(t, i);
 		while (t->cmdlist[i][j] != NULL)
 		{
 			if (*t->cmdlist[i][j] != 0 && *t->cmdlist[i][j] == '/')
