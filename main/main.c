@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/01 22:33:59 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/01 22:36:18 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,21 @@ char	*rl_string(t_ms *t, char *rl_str)
 {
 	void *temp;
 
-	pfree(rl_str);
+	if (rl_str != NULL)
+		pfree(rl_str);
 	rl_str = ft_strjoin("$ "CL_RED"minishell"RESET"~ [", t->pwd);
 	temp = (void *) rl_str;
 	rl_str = ft_strjoin(rl_str, "] : ");
 	pfree(temp);
+	return (rl_str);
 }
 int	start_minishell(t_ms *t)
 {
-	int	i;
-	char *rl_str;
+	int		i;
+	char	*rl_str;
 
 	i = 0;
+	rl_str= NULL;
 	if (print_header( ) == -1)
 		return (-1);
 	rl_initialize();
