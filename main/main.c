@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/01 20:54:01 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/01 21:00:12 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,10 @@ int	start_minishell(t_ms *t)
 	rl_str = ft_strjoin("$ "CL_RED"minishell"RESET"~ [", t->pwd);
 	temp = (void *) rl_str;
 	rl_str = ft_strjoin(rl_str, "] : ");
-	free(temp);
+	pfree(temp);
 	while (ft_strncmp("exit", t->cmd[i], 4) != 0)
 	{
-		free(t->cmd[i]);
+		pfree(t->cmd[i]);
 		init_cmdlist(t);
 		t->cmdlist = ft_calloc(10, sizeof(char **));
 		signal(SIGINT, getsignal);
@@ -88,9 +88,10 @@ int	start_minishell(t_ms *t)
 			add_history(t->cmd[i]);
 		}
 		if (*t->cmd[i] != 0 && cmdformat(t) != -1)
-			exec_cmd(t);
+			printf("EXECCMD\n");
+			/* exec_cmd(t); */
 	}
-	free(rl_str);
+	pfree(rl_str);
 	return (0);
 }
 
@@ -185,13 +186,13 @@ void	ft_freecmdlist(t_ms *t)
 	int	j;
 
 	i = 0;
-	j = 0;
+	j = -1;
 	if (t->cmdlist != NULL)
 	{
 		while (t->cmdlist != NULL && t->cmdlist[i] != NULL)
 		{
-			while (t->cmdlist[i][j] != NULL)
-				t->cmdlist[i][j] = pfree(t->cmdlist[i][j++]);
+			while (t->cmdlist[i][++j] != NULL)
+				pfree(t->cmdlist[i][j]);
 			pfree(t->cmdlist[i]);
 			i++;
 		}

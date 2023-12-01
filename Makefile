@@ -10,7 +10,7 @@ HEADERS = minishell.h
 SRCS =	main.c \
 		parsing.c error.c cmdexe.c ft_cd.c ft_echo.c \
 		remove_quotes.c find_redirect.c free_tabstr.c \
-		env_var.c pipe.c bonus.c
+		env_var.c pipe.c bonus.c utils.c
 
 OBJDIR = ./object/
 OBJS = $(addprefix $(OBJDIR),$(SRCS:.c=.o))
