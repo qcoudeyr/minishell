@@ -22,7 +22,7 @@ char	*remove_quotes(char *input)
 	if (!input)
 		return (NULL);
 	length = (int)ft_strlen(input);
-	result = ft_calloc(length + 2, sizeof(char));
+	result = ft_calloc(length + 10, sizeof(char));
 	if (!result)
 		return (NULL);
 	j = 0;
@@ -35,6 +35,6 @@ char	*remove_quotes(char *input)
 			result[j++] = input[i++];
 	}
 	result[j] = '\0';
-	free(input);
+	pfree(input);
 	return (result);
 }
