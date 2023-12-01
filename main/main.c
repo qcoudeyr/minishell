@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/01 21:23:04 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/01 22:18:54 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,11 +178,12 @@ void	ft_freecmdlist(t_ms *t)
 	int	j;
 
 	i = 0;
-	j = -1;
+
 	if (t->cmdlist != NULL)
 	{
 		while (t->cmdlist != NULL && t->cmdlist[i] != NULL)
 		{
+			j = -1;
 			while (t->cmdlist[i][++j] != NULL)
 				pfree(t->cmdlist[i][j]);
 			pfree(t->cmdlist[i]);
