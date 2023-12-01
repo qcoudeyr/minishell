@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/01 21:18:31 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/01 21:23:04 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,7 @@ void	init_cmdlist(t_ms *t)
 {
 	if (t->cmdlist != NULL)
 		ft_freecmdlist(t);
-	else
-	{
-		t->cmdlist = ft_calloc(2, sizeof(char **));
-		t->cmdlist[1] = NULL;
-		t->cmdlist[0] = ft_calloc(2, sizeof(char *));
-		t->cmdlist[0][1] = NULL;
-	}
+	t->cmdlist = ft_calloc(2, sizeof(char **));
 }
 int	start_minishell(t_ms *t)
 {
@@ -217,6 +211,7 @@ void	ft_free(t_ms *t)
 		free(t->path[i++]);
 	free(t->path);
 	free(t->home);
+	free(t->rusage);
 	free(t->pwd);
 	if (t->fpath != NULL)
 		free(t->fpath);
@@ -229,6 +224,7 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 
 	t = malloc(sizeof(t_ms));
+	t->rusage = ft_calloc(1, sizeof(struct rusage));
 	t->env = env;
 	t->env = env;
 	t->cmdlist = NULL;
