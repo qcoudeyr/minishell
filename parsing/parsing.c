@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/01 22:08:24 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/01 22:10:56 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ int	cmdformat(t_ms *t)
 
 	j = 0;
 	i = 0;
-	t->cmdlist[i] = NULL;
 	t->cmd[i] = rmcharq(t->cmd[i], '\\');
 	if (t->cmd[i] != NULL && *t->cmd[i] != 0)
 	{
