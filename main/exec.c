@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:42:16 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/04 10:45:36 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/04 10:50:20 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	ft_execve(t_ms *t, int i)
 	}
 	exit(EXIT_FAILURE);
 }
-
 
 void	exec_cmd(t_ms *t)
 {
