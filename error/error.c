@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:01 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/29 13:25:30 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/04 10:51:51 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,13 @@ void	nothing_handler(int signo)
 	(void)signo;
 }
 
-void getsignal(int signal_number)
+void	getsignal(int signal_number)
 {
 	if (signal_number == 2)
 		signal(SIGINT, sigint_handler);
 	else if (signal_number == 3)
-	signal(SIGQUIT, nothing_handler);
+		signal(SIGQUIT, nothing_handler);
 }
-
 
 int	ft_cmdnotfound(t_ms *t, char *str)
 {
@@ -51,13 +50,5 @@ void	ft_acceserror(t_ms *t)
 		ft_printf("Input file is not readable or permission denied.\n");
 	else
 		ft_perror(t, "access");
-	exit(EXIT_FAILURE);
-}
-
-void	ft_perror(t_ms *t, char *s)
-{
-	if (s != NULL)
-		perror(s);
-	write(t->output_fd, "1", 1);
 	exit(EXIT_FAILURE);
 }
