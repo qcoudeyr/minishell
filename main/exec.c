@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:42:16 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/04 12:10:51 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/04 12:13:08 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	exec_cmd(t_ms *t)
 	t->output_fd = STDOUT_FILENO;
 	while (t->cmdlist[t->index] != NULL)
 	{
-		handle_spec(t, t->index);
+		handle_spec(t);
 		handle_redirect(t, t->index);
 		if (is_builtins(t->cmdlist[t->index][0]) > 0)
 		{
