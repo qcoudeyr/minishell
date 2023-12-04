@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:56:50 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/04 10:56:00 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/04 12:55:45 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int	ft_echo(t_ms *t, int i)
 	echo.nobackslash = 0;
 	echo.no_bs_position = -1;
 	find_bn(&echo, t->cmdlist[i]);
-	printf("\n\n\t%s\n\n", t->cmdlist[i][1]);
 	print_echo(t->output_fd, &echo, t->cmdlist[i]);
 	if (t->output_fd > 1)
 		close(t->output_fd);
