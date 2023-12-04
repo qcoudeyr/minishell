@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/04 11:05:30 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/04 11:07:27 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,42 +49,6 @@ int	pathfinder(t_ms *t, int index)
 	return (0);
 }
 
-char	*env_var(t_ms *t, char *str)
-{
-	int		i;
-
-	i = 0;
-	if (str != NULL && *str == '$')
-		str++;
-	if (str != 0 && *str == '$' && ft_isalpha(*str+1) == 0)
-		return (str);
-	while (str != 0 && t->env[i] && \
-ft_strnstr(t->env[i], str, ft_strlen(str)) == 0)
-		i++;
-	if (str == 0 || ft_strnstr(t->env[i], str, ft_strlen(str)) == 0)
-		return (0);
-	else
-		return (t->env[i] + ft_strlen(str) + 1);
-}
-
-void	env_var_detect(t_ms *t)
-{
-	int		i;
-	char	*tmp;
-
-	i = 0;
-	while (t->cmdlist[0][i] != NULL)
-	{
-		if (ft_strnstr(t->cmdlist[0][i], "$", 1) != 0)
-		{
-			tmp = env_var(t, t->cmdlist[0][i]);
-			if (tmp != NULL)
-				t->cmdlist[0][i] = tmp;
-		}
-		i++;
-	}
-}
-
 int	cmdformat(t_ms *t)
 {
 	int		i;
@@ -124,21 +88,21 @@ int	cmd_handler(t_ms *t)
 		if (is_builtins(t->cmdlist[t->i][0]) == 0 && \
 is_special(t->cmdlist[t->i][0]) == 0)
 			t->return_v = pathfinder(t, t->i);
-		while (t->cmdlist[t->i][j] != NULL)
+		while (t->cmdlist[t->i][t->j] != NULL)
 		{
 			if (*t->cmdlist[t->i][t->j] != 0 && *t->cmdlist[t->i][t->j] == '/')
-				t->return_v = check_path(t->cmdlist[i][j]);
-			if (*t->cmdlist[t->i][t->j] != 0 && t->cmdlist[t->i][t->j][1] != 0 && \
-*t->cmdlist[i][j] == '$')
+				t->return_v = check_path(t->cmdlist[t->i][t->j]);
+			if (*t->cmdlist[t->i][t->j] != 0 && t->cmdlist[t->i][t->j][1] != 0 \
+	&& *t->cmdlist[t->i][t->j] == '$')
 			{
 				if (*t->cmdlist[t->i][0] == 0)
 					t->return_v = -1;
-				printf("%s\n", t->cmdlist[i][0]);
+				printf("%s\n", t->cmdlist[t->i][0]);
 				t->return_v = -1;
 			}
-			j++;
+			t->j++;
 		}
-		i++;
+		t->i++;
 	}
 	return (t->return_v);
 }
