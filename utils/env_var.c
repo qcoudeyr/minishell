@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 10:31:40 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/04 11:10:42 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/04 11:16:21 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,6 @@ int	detect_env_var(char *str)
 
 char	*handle_env_var(t_ms *t, char *str)
 {
-	int		quote;
-	int		squote;
-	int		len;
-	char	*var;
-	char	*newstr;
 
 	t->i = 0;
 	t->j = 0;
@@ -59,31 +54,35 @@ char	*handle_env_var(t_ms *t, char *str)
 	var = ft_calloc(100000, sizeof(char));
 	while (str[t->i] != '\0')
 	{
-		hev_quote(str[t->i], &squote)
-		if ((quote == 1 || (squote == 0 && quote == 0)) && str[i] == '$' && ft_isalpha(str[i+1]))
+		hev_quote(str[t->i], &squote, &quote);
+		if ((quote == 1 || (squote == 0 && quote == 0)) && str[t->i] == '$' && \
+ft_isalpha(str[t->i + 1]))
 		{
-			while(ft_isalpha(str[++i]) != 0)
-				var[len++] = str[i];
+			while (ft_isalpha(str[++t->i]) != 0)
+				var[len++] = str[t->i];
 			var[len] = 0;
 			newstr = ft_strjoin(newstr, env_var(t, var));
 			free(var);
 			var = ft_calloc(1000, sizeof(char));
-			j = ft_strlen(newstr);
+			t->j = ft_strlen(newstr);
 		}
-		if (str[i] != 0)
-			newstr[j++] = str[i++];
+		if (str[t->i] != 0)
+			newstr[t->j++] = str[t->i++];
 	}
-	newstr[j] = 0;
+	newstr[t->j] = 0;
 	free(var);
 	free(str);
 	return (newstr);
 }
 
-		if (str[i] == 39 && squote == 0)
-			squote = 1;
-		if (str[i] == 34 && quote == 0)
-			quote = 1;
-		if (str[i] == 34 && quote == 1)
-			quote = 0;
-		if (str[i] == 39 && squote == 1)
-			squote = 0;
+void	hev_quote(char c, int *squote, int *quote)
+{
+	if (c == 39 && *squote == 0)
+		*squote = 1;
+	if (c == 34 && *quote == 0)
+		*quote = 1;
+	if (c == 34 && *quote == 1)
+		*quote = 0;
+	if (c == 39 && *squote == 1)
+		*squote = 0;
+}
