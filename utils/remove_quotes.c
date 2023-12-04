@@ -29,7 +29,8 @@ char	*remove_quotes(char *input)
 	i = 0;
 	while (i < length)
 	{
-		if (input[i] == '"' && input[length - (i + 1)] == '"')
+		if ((input[i] == '"' && input[length - (i + 1)] == '"') || \
+	(input[i] == '\'' && input[length - (i + 1)] == '\''))
 			i++;
 		else
 			result[j++] = input[i++];

@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 10:31:40 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/04 11:41:19 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/04 13:48:43 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	change_str_env(t_env *e, t_ms *t, char *str)
 	{
 		hev_quote(str[t->i], &e->squote, &e->quote);
 		if ((e->quote == 1 || (e->squote == 0 && e->quote == 0)) && \
-str[t->i] == '$' && ft_isalpha(str[t->i + 1]))
+	str[t->i] == '$' && ft_isalpha(str[t->i + 1]))
 		{
 			while (ft_isalpha(str[++t->i]) != 0)
 				e->var[e->len++] = str[t->i];
@@ -83,12 +83,18 @@ str[t->i] == '$' && ft_isalpha(str[t->i + 1]))
 
 void	hev_quote(char c, int *squote, int *quote)
 {
-	if (c == 39 && *squote == 0)
-		*squote = 1;
-	if (c == 34 && *quote == 0)
-		*quote = 1;
-	if (c == 34 && *quote == 1)
-		*quote = 0;
-	if (c == 39 && *squote == 1)
-		*squote = 0;
+	if ((c == 34 && *quote == 1) || (c == 39 && *squote == 1))
+	{
+		if (c == 34 && *quote == 1)
+			*quote = 0;
+		if (c == 39 && *squote == 1)
+			*squote = 0;
+	}
+	else if ((c == 34 && *quote == 0) || (c == 39 && *squote == 0))
+	{
+		if (c == 39 && *squote == 0)
+			*squote = 1;
+		if (c == 34 && *quote == 0)
+			*quote = 1;
+	}
 }
