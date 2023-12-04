@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/04 10:46:28 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/04 10:50:09 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int	print_header(void)
 	if (fd == -1)
 		return (-1);
 	str = get_next_line(fd);
-	while(str != NULL)
+	while (str != NULL)
 	{
-		printf("%s",str);
+		printf("%s", str);
 		free(str);
 		str = get_next_line(fd);
 	}
@@ -40,7 +40,7 @@ void	init_cmdlist(t_ms *t)
 
 char	*rl_string(t_ms *t, char *rl_str)
 {
-	void *temp;
+	void	*temp;
 
 	if (rl_str != NULL)
 		pfree(rl_str);
@@ -50,6 +50,7 @@ char	*rl_string(t_ms *t, char *rl_str)
 	pfree(temp);
 	return (rl_str);
 }
+
 int	start_minishell(t_ms *t)
 {
 	int		i;
@@ -57,12 +58,6 @@ int	start_minishell(t_ms *t)
 
 	i = 0;
 	rl_str = NULL;
-	if (print_header == -1)
-		return (-1);
-	rl_initialize();
-	using_history();
-	t->cmd = malloc(sizeof(char **));
-	t->cmd[0] = ft_calloc(2, sizeof(char *));
 	while (ft_strncmp("exit", t->cmd[i], 4) != 0)
 	{
 		pfree(t->cmd[i]);
@@ -89,15 +84,21 @@ int	main(int argc, char **argv, char **env)
 	t_ms	*t;
 
 	(void)argv;
+	if (argc > 1)
+		return (printf("ERROR: usage ./minishell\n"), 1);
 	t = malloc(sizeof(t_ms));
 	t->rusage = ft_calloc(1, sizeof(struct rusage));
 	t->env = env;
 	t->env = env;
 	t->cmdlist = NULL;
+	t->cmd = malloc(sizeof(char **));
+	t->cmd[0] = ft_calloc(2, sizeof(char *));
+	rl_initialize();
+	using_history();
 	/* printf("\033[2J\033[H"); */
-	if (argc > 1)
-		return (printf("ERROR: usage ./minishell\n"), 1);
 	env_pars(t);
+	if (print_header == -1)
+		return (-1);
 	start_minishell(t);
 	ft_freecmdlist(t);
 	ft_free(t);
