@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:18:22 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/04 13:24:24 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/04 13:27:31 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	have_pipe(char **cmds)
 	while (cmds[i] != NULL)
 		printf("%s\n", cmds[i++]);
 	i = 0;
-	while (cmds[i] != NULL && (ft_strchr(cmds[i], '|') == 0 || (cmds[i][0] == '\'' && cmds[i][0] == '\"')))
+	while (cmds[i] != NULL && (ft_strchr(cmds[i], '|') == 0 || cmds[i][0] == '\'' || cmds[i][0] == '\"'))
 		i++;
 	if (cmds[i] == 0 || (cmds[i] != NULL && ft_strchr(cmds[i], '|') == 0))
 		return (0);
