@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   fd_pttostr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
+/*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 14:17:21 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/25 11:41:39 by lheinric         ###   ########.fr       */
+/*   Updated: 2023/12/04 11:26:48 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fd_printf.h"
 
-static int	fd_print_nbrbase(int fd, int len, char *digits, unsigned long long n)
+static int	fd_print_nbrbase(int fd, int len, char *dts, unsigned long long n)
 {
 	char	*buffer;
 	int		i;
@@ -22,7 +22,7 @@ static int	fd_print_nbrbase(int fd, int len, char *digits, unsigned long long n)
 	i = len - 1;
 	while (i >= 0 && n != 0)
 	{
-		buffer[i] = digits[(n % 16)];
+		buffer[i] = dts[(n % 16)];
 		n /= 16;
 		i--;
 	}

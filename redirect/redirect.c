@@ -3,10 +3,11 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
+/*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 12:59:21 by lheinric          #+#    #+#             */
-/*   Updated: 2023/10/29 12:34:16 by lheinric         ###   ########.fr       */
+/*   Updated: 2023/12/04 11:26:04 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../minishell.h"

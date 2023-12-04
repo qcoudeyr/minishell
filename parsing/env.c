@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 11:02:42 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/04 11:07:21 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/04 11:26:17 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	*env_var(t_ms *t, char *str)
 	i = 0;
 	if (str != NULL && *str == '$')
 		str++;
-	if (str != 0 && *str == '$' && ft_isalpha(*str+1) == 0)
+	if (str != 0 && *str == '$' && ft_isalpha(*str + 1) == 0)
 		return (str);
 	while (str != 0 && t->env[i] && \
 ft_strnstr(t->env[i], str, ft_strlen(str)) == 0)

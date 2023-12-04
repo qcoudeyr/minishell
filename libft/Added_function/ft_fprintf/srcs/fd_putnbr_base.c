@@ -6,13 +6,13 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 18:38:45 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/04 11:25:07 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/04 11:30:48 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fd_printf.h"
 
-static int	print_nbrbase(int len, char *dts, unsigned long n, int b_l)
+static int	print_nbrbase(int fd, int len, char *digits, unsigned long n, int base_len)
 {
 	char	*buffer;
 	int		i;
@@ -22,8 +22,8 @@ static int	print_nbrbase(int len, char *dts, unsigned long n, int b_l)
 	i = len - 1;
 	while (i >= 0)
 	{
-		buffer[i] = dts[(n % b_l)];
-		n /= b_l;
+		buffer[i] = digits[(n % base_len)];
+		n /= base_len;
 		i--;
 	}
 	write(fd, buffer, len);
