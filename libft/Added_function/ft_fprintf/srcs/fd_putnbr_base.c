@@ -6,46 +6,44 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 18:38:45 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/04 11:30:48 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/04 11:36:50 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fd_printf.h"
 
-static int	print_nbrbase(int fd, int len, char *digits, unsigned long n, int base_len)
+static int	print_nbrbase(int fd, char *digits, t_ptnb *t)
 {
 	char	*buffer;
 	int		i;
 
-	buffer = malloc (sizeof(char) * len +1);
-	buffer[len] = 0;
-	i = len - 1;
+	buffer = malloc (sizeof(char) * t->len +1);
+	buffer[t->len] = 0;
+	i = t->len - 1;
 	while (i >= 0)
 	{
-		buffer[i] = digits[(n % base_len)];
-		n /= base_len;
+		buffer[i] = digits[(t->n % t->base_len)];
+		t->n /= t->base_len;
 		i--;
 	}
-	write(fd, buffer, len);
+	write(fd, buffer, t->len);
 	free (buffer);
-	return (len);
+	return (t->len);
 }
 
 int	fd_putnbr_base(int fd, unsigned long long n, char *base)
 {
-	int						len ;
-	unsigned long long		temp;
-	int						base_len;
+	t_ptnb	t;
 
-	base_len = ft_strlen(base);
-	len = 0;
-	temp = n;
+	t.base_len = ft_strlen(base);
+	t.len = 0;
+	t.n = n;
 	if (n == 0)
 		return (write(fd, "0", 1));
 	while (n > 0)
 	{
-		len++;
-		n /= base_len;
+		t.len++;
+		n /= t.base_len;
 	}
-	return (print_nbrbase(fd, len, base, temp, base_len));
+	return (print_nbrbase(fd, base, &t));
 }
