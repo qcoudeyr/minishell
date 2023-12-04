@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:42:16 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/04 11:22:13 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/04 12:05:15 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,53 +26,12 @@ void	ft_execve(t_ms *t, int i)
 
 void	exec_cmd(t_ms *t)
 {
-	int	index;
-
 	index = 0;
 	t->input_fd = STDIN_FILENO;
 	t->output_fd = STDOUT_FILENO;
 	while (t->cmdlist[index] != NULL)
 	{
-		if (is_special(t->cmdlist[index][0]) == 1 ||( t->cmdlist[index +1] != NULL && is_special(t->cmdlist[index + 1][0]) == 1))
-		{
-			/* Handle here = and, or, pipe*/
-			if (is_and(t->cmdlist[index][0]) == 1)
-				index++;
-			else if(is_or(t->cmdlist[index][0]) == 1)
-			{
-				/*
-				if t->returnsignal < 1; index++; else break ou index += 2;
-				 */
-				index++;
-			}
-			else if (is_special(t->cmdlist[index + 1][0]) == 1 && is_and(t->cmdlist[index +1][0]) == 0)
-			{
-				if (pipe(t->pipefd) == -1)
-					perror("pipe");
-				else
-					t->output_fd = t->pipefd[1];
-			}
-			else if (is_special(t->cmdlist[index][0]) == 1 && is_and(t->cmdlist[index +1][0]) == 0)
-			{
-				t->input_fd = t->pipefd[0];
- 				if (t->cmdlist[index + 2] != NULL && ft_strnstr(t->cmdlist[index + 2][0], "|", 2) != 0)
-				{
-					if (pipe(t->pipefd) == -1)
-						perror("pipe");
-					else
-					{
-						close(t->output_fd);
-						t->output_fd = t->pipefd[1];
-					}
-				}
-				else
-				{
-					close(t->pipefd[1]);
-					t->output_fd = STDOUT_FILENO;
-				}
-				index++;
-			}
-		}
+		handle_spec(t, index);
 		handle_redirect(t, index);
 		if (is_builtins(t->cmdlist[index][0]) > 0)
 		{
@@ -89,6 +48,49 @@ void	exec_cmd(t_ms *t)
 				wait4(t->pid, &t->status, 0, t->rusage);
 		}
 		index++;
+	}
+}
+void	handle_spec(t_ms *t, int *index)
+{
+	if (is_special(t->cmdlist[index][0]) == 1 || (\
+t->cmdlist[index + 1] != NULL && is_special(t->cmdlist[index + 1][0]) == 1))
+	{
+		if (is_and(t->cmdlist[index][0]) == 1)
+			index++;
+		else if (is_or(t->cmdlist[index][0]) == 1)
+		{
+			/*
+			if t->returnsignal < 1; index++; else break ou index += 2;
+				*/
+			index++;
+		}
+		else if (is_special(t->cmdlist[index + 1][0]) == 1 && is_and(t->cmdlist[index +1][0]) == 0)
+		{
+			if (pipe(t->pipefd) == -1)
+				perror("pipe");
+			else
+				t->output_fd = t->pipefd[1];
+		}
+		else if (is_special(t->cmdlist[index][0]) == 1 && is_and(t->cmdlist[index +1][0]) == 0)
+		{
+			t->input_fd = t->pipefd[0];
+			if (t->cmdlist[index + 2] != NULL && ft_strnstr(t->cmdlist[index + 2][0], "|", 2) != 0)
+			{
+				if (pipe(t->pipefd) == -1)
+					perror("pipe");
+				else
+				{
+					close(t->output_fd);
+					t->output_fd = t->pipefd[1];
+				}
+			}
+			else
+			{
+				close(t->pipefd[1]);
+				t->output_fd = STDOUT_FILENO;
+			}
+			index++;
+		}
 	}
 }
 
