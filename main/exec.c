@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:42:16 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/04 12:05:15 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/04 12:07:39 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,16 @@ void	ft_execve(t_ms *t, int i)
 
 void	exec_cmd(t_ms *t)
 {
-	index = 0;
+	t->index = 0;
 	t->input_fd = STDIN_FILENO;
 	t->output_fd = STDOUT_FILENO;
-	while (t->cmdlist[index] != NULL)
+	while (t->cmdlist[t->index] != NULL)
 	{
-		handle_spec(t, index);
-		handle_redirect(t, index);
-		if (is_builtins(t->cmdlist[index][0]) > 0)
+		handle_spec(t, t->index);
+		handle_redirect(t, t->index);
+		if (is_builtins(t->cmdlist[t->index][0]) > 0)
 		{
-			handle_builtins(t, index);
+			handle_builtins(t, t->index);
 		}
 		else
 		{
@@ -43,38 +43,39 @@ void	exec_cmd(t_ms *t)
 			if (t->pid == -1)
 				ft_perror(t, "fork");
 			else if (t->pid == 0)
-				ft_execve(t, index);
+				ft_execve(t, t->index);
 			else
 				wait4(t->pid, &t->status, 0, t->rusage);
 		}
-		index++;
+		t->index++;
 	}
 }
-void	handle_spec(t_ms *t, int *index)
+void	handle_spec(t_ms *t)
 {
-	if (is_special(t->cmdlist[index][0]) == 1 || (\
-t->cmdlist[index + 1] != NULL && is_special(t->cmdlist[index + 1][0]) == 1))
+	if (is_special(t->cmdlist[t->index][0]) == 1 || (t->cmdlist[t->index + 1] \
+	!= NULL && is_special(t->cmdlist[t->index + 1][0]) == 1))
 	{
-		if (is_and(t->cmdlist[index][0]) == 1)
-			index++;
-		else if (is_or(t->cmdlist[index][0]) == 1)
+		if (is_and(t->cmdlist[t->index][0]) == 1)
+			t->index++;
+		else if (is_or(t->cmdlist[t->index][0]) == 1)
 		{
-			/*
-			if t->returnsignal < 1; index++; else break ou index += 2;
-				*/
-			index++;
+//			if t->returnsignal < 1; t->index++; else break ou t->index += 2;
+			t->index++;
 		}
-		else if (is_special(t->cmdlist[index + 1][0]) == 1 && is_and(t->cmdlist[index +1][0]) == 0)
+		else if (is_special(t->cmdlist[t->index + 1][0]) == 1 && \
+		is_and(t->cmdlist[t->index +1][0]) == 0)
 		{
 			if (pipe(t->pipefd) == -1)
 				perror("pipe");
 			else
 				t->output_fd = t->pipefd[1];
 		}
-		else if (is_special(t->cmdlist[index][0]) == 1 && is_and(t->cmdlist[index +1][0]) == 0)
+		else if (is_special(t->cmdlist[t->index][0]) == 1 && \
+		is_and(t->cmdlist[t->index +1][0]) == 0)
 		{
 			t->input_fd = t->pipefd[0];
-			if (t->cmdlist[index + 2] != NULL && ft_strnstr(t->cmdlist[index + 2][0], "|", 2) != 0)
+			if (t->cmdlist[t->index + 2] != NULL && \
+			ft_strnstr(t->cmdlist[t->index + 2][0], "|", 2) != 0)
 			{
 				if (pipe(t->pipefd) == -1)
 					perror("pipe");
@@ -89,7 +90,7 @@ t->cmdlist[index + 1] != NULL && is_special(t->cmdlist[index + 1][0]) == 1))
 				close(t->pipefd[1]);
 				t->output_fd = STDOUT_FILENO;
 			}
-			index++;
+			t->index++;
 		}
 	}
 }

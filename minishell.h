@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/04 11:39:22 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/04 12:05:31 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_minishell
 	int				narg;
 	char			*fpath;
 	int				status;
+	int				index;
 	int				ncmd;
 	int				input_fd;
 	int				output_fd;
