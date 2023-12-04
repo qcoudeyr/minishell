@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/04 11:07:27 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/04 13:06:04 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,14 @@ int	cmdformat(t_ms *t)
 		tf = (void *) t->cmdlist[i];
 		t->cmdlist[i] = ft_splitq(t->cmd[i]);
 		free (tf);
+		if (have_pipe(t->cmdlist[i]) == 1)
+			handle_pipe(t);
 		while (t->cmdlist[i][j] != 0)
 		{
 			t->cmdlist[i][j] = handle_env_var(t, t->cmdlist[i][j]);
 			t->cmdlist[i][j] = remove_quotes(t->cmdlist[i][j]);
 			j++;
 		}
-		if (have_pipe(t->cmdlist[i]) == 1)
-			handle_pipe(t);
 		return (cmd_handler(t));
 	}
 	return (-1);
