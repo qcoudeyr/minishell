@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 10:49:28 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/04 11:30:42 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/04 11:37:17 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,11 @@ static int	ft_putargument(int fd, char value, va_list args)
 	if (value == 'u')
 		return (fd_putnbru(fd, va_arg(args, unsigned int)));
 	if (value == 'x')
-		return (fd_putnbr_base(fd, va_arg(args, unsigned int), "0123456789abcdef"));
+		return \
+	(fd_putnbr_base(fd, va_arg(args, unsigned int), "0123456789abcdef"));
 	if (value == 'X')
-		return (fd_putnbr_base(fd, va_arg(args, unsigned int), "0123456789ABCDEF"));
+		return \
+	(fd_putnbr_base(fd, va_arg(args, unsigned int), "0123456789ABCDEF"));
 	if (value == '%')
 		return (fd_putchar_fd('%', fd));
 	return (0);

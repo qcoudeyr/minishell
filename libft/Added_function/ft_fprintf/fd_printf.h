@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 10:50:34 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/04 11:34:47 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/04 11:37:49 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,9 @@
 
 typedef struct s_putnbrbase
 {
-	int					fd;
 	int					len;
 	int					base_len;
-	unsigned long long	temp;
+	unsigned long long	n;
 }	t_ptnb;
 
 int		fd_printf(int fd, const char *str, ...);

@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/04 11:17:29 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/04 11:39:22 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ int		is_builtins(char *str);
 int		ft_cd(t_ms *t, char *path);
 int		ft_echo(t_ms *t, int i);
 //		utils
+void	change_str_env(t_env *e, t_ms *t, char *str);
+void	hev_quote(char c, int *squote, int *quote);
 int		check_path(char *str);
 int		is_or(char *str);
 char	*rmcharq(char *str, char c);

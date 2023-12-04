@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/04 10:50:09 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/04 11:38:36 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	main(int argc, char **argv, char **env)
 	using_history();
 	/* printf("\033[2J\033[H"); */
 	env_pars(t);
-	if (print_header == -1)
+	if (print_header() == -1)
 		return (-1);
 	start_minishell(t);
 	ft_freecmdlist(t);
