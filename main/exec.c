@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:42:16 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/04 12:07:39 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/04 12:10:51 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	exec_cmd(t_ms *t)
 		t->index++;
 	}
 }
+
 void	handle_spec(t_ms *t)
 {
 	if (is_special(t->cmdlist[t->index][0]) == 1 || (t->cmdlist[t->index + 1] \
@@ -72,27 +73,30 @@ void	handle_spec(t_ms *t)
 		}
 		else if (is_special(t->cmdlist[t->index][0]) == 1 && \
 		is_and(t->cmdlist[t->index +1][0]) == 0)
+			end_pipe(t);
+	}
+}
+
+void	end_pipe(t_ms *t)
+{
+	t->input_fd = t->pipefd[0];
+	if (t->cmdlist[t->index + 2] != NULL && \
+	ft_strnstr(t->cmdlist[t->index + 2][0], "|", 2) != 0)
+	{
+		if (pipe(t->pipefd) == -1)
+			perror("pipe");
+		else
 		{
-			t->input_fd = t->pipefd[0];
-			if (t->cmdlist[t->index + 2] != NULL && \
-			ft_strnstr(t->cmdlist[t->index + 2][0], "|", 2) != 0)
-			{
-				if (pipe(t->pipefd) == -1)
-					perror("pipe");
-				else
-				{
-					close(t->output_fd);
-					t->output_fd = t->pipefd[1];
-				}
-			}
-			else
-			{
-				close(t->pipefd[1]);
-				t->output_fd = STDOUT_FILENO;
-			}
-			t->index++;
+			close(t->output_fd);
+			t->output_fd = t->pipefd[1];
 		}
 	}
+	else
+	{
+		close(t->pipefd[1]);
+		t->output_fd = STDOUT_FILENO;
+	}
+	t->index++;
 }
 
 void	handle_redirect(t_ms *t, int index)
