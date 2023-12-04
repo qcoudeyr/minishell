@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/01 21:15:35 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/04 10:58:54 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ typedef struct s_minishell
 	char			***cmdlist;
 	pid_t			pid;
 	char			**cmd;
+	int				i;
+	int				j;
 	int				narg;
 	char			*fpath;
 	int				status;

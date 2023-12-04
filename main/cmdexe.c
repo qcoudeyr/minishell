@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 09:45:55 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/28 11:02:38 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/04 10:55:36 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,15 @@
 
 int	change_env(t_ms *t, char *var, char *tochange)
 {
-	int		i;
-	i = 0;
+	int	i;
 
+	i = 0;
 	while (ft_strnstr(t->env[i], var, ft_strlen(var)) == 0)
 		i++;
 	if (ft_strnstr(t->env[i], var, ft_strlen(var)) == 0)
 		return (-1);
 	t->env[i] = ft_strjoin(var, tochange);
 	return (0);
-
 }
 
 int	print_help(int i)
@@ -38,9 +37,9 @@ int	print_help(int i)
 	if (fd == -1)
 		return (-1);
 	str = get_next_line(fd);
-	while(str != NULL)
+	while (str != NULL)
 	{
-		printf("%s",str);
+		printf("%s", str);
 		free(str);
 		str = get_next_line(fd);
 	}
@@ -48,9 +47,9 @@ int	print_help(int i)
 	return (0);
 }
 
-void printenv(char **envp)
+void	printenv(char **envp)
 {
-	int j;
+	int	j;
 
 	j = -1;
 	while (envp[++j] != NULL)
@@ -74,8 +73,6 @@ int	is_builtins(char *str)
 		is_b += 1;
 	if (ft_strncmp("export", str, 7) == 0)
 		is_b += 1;
-/* 	if (ft_strncmp("help", str, 5) == 0)
-		is_b += 1; */
 	if (ft_strncmp("unset", str, 6) == 0)
 		is_b += 1;
 	return (is_b);
@@ -93,11 +90,4 @@ void	handle_builtins(t_ms *t, int i)
 		ft_echo(t, i);
 	if (ft_strncmp("cd", t->cmdlist[i][0], 3) == 0)
 		ft_cd(t, t->cmdlist[i][0]);
-/* 	if (ft_strncmp("help", t->cmdlist[i][0], 4) == 0)
-	{
-		if (t->cmdlist[i][1] && ft_strncmp("cmd", t->cmdlist[i][1], 4) == 0)
-			print_help(1);
-		else if (t->cmdlist[i][1] == NULL)
-			print_help(0);
-	} */
 }
