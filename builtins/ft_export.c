@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:28:07 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/05 16:38:53 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 16:46:35 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,7 @@ void	ft_export(t_ms *t, int i)
 	index = 0;
 	while (t->cmdlist[i][j] != NULL)
 	{
-
-		while (t->env[index] != NULL)
+		while (t->env[index] != NULL && ft_strchr(t->cmdlist[i][j], '=') != 0)
 		{
 			if (ft_strncmp(t->env[index], t->cmdlist[i][j], varlen_env(t->cmdlist[i][j])) == 0)
 			{
