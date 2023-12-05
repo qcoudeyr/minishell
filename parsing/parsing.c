@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/05 18:38:19 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 19:00:54 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ int	pathfinder(t_ms *t, int index)
 		t->fpath = ft_strjoin(t->path[i], t->cmdlist[index][0]);
 		while (access (t->fpath, X_OK) < 0 && t->path[i + 1] != NULL)
 		{
-			pfree(t->fpath);
+			t->fpath =pfree(t->fpath);
 			t->fpath = ft_strjoin(t->path[i++], t->cmdlist[index][0]);
 		}
 		if (access(t->fpath, X_OK) == 0)
 		{
-			pfree(t->cmdlist[index][0]);
+			t->cmdlist[index][0] = pfree(t->cmdlist[index][0]);
 			t->cmdlist[index][0] = ft_strjoin(t->fpath, (char *) '\0');
 		}
 		else

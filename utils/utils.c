@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 20:50:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/05 18:51:32 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 19:02:21 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,11 @@ void	*tabfree(void **ptr)
 	if (ptr == NULL)
 		return (ptr);
 	while (ptr[i] != NULL)
-		pfree(ptr[i++]);
-	pfree(ptr);
+	{
+		ptr[i] = pfree(ptr[i]);
+		i++;
+	}
+	ptr = pfree(ptr);
 	return (NULL);
 }
 

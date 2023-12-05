@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 15:01:23 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/05 18:57:51 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 19:03:04 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ void	remove_var_env(t_ms *t, int index)
 	}
 	j = 0;
 	while (t->env[j] != NULL)
-		t->env[j] = pfree(t->env[j++]);
+	{
+		t->env[j] = pfree(t->env[j]);
+		j++;
+	}
 	t->env = pfree(t->env);
 	t->env = newenv;
 }

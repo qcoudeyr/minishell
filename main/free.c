@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:43:26 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/05 18:59:58 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 19:02:48 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ void	ft_freecmdlist(t_ms *t)
 	if (t->cmdlist != NULL)
 	{
 		while (t->cmdlist != NULL && t->cmdlist[i] != NULL)
-			t->cmdlist[i] = tabfree((void **) t->cmdlist[i++]);
+		{
+			t->cmdlist[i] = tabfree((void **) t->cmdlist[i]);
+			i++;
+		}
 		t->cmdlist = pfree(t->cmdlist);
 	}
 }

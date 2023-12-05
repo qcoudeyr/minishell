@@ -36,6 +36,6 @@ char	*remove_quotes(char *input)
 			result[j++] = input[i++];
 	}
 	result[j] = '\0';
-	pfree(input);
+	input = pfree(input);
 	return (result);
 }
