@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 10:31:40 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/04 14:14:48 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 09:47:15 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,24 @@ int	detect_env_var(char *str)
 	return (env_var);
 }
 
+int	is_set_env_var(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str != NULL && ft_strchr(str, '=') == 0)
+		return (0);
+	else
+	{
+		while (str[i] != 0)
+		{
+			if (ft_isal)
+			i++;
+		}
+	}
+
+}
+
 char	*handle_env_var(t_ms *t, char *str)
 {
 	struct s_henv	e;
@@ -50,6 +68,8 @@ char	*handle_env_var(t_ms *t, char *str)
 	if (!str)
 		return (NULL);
 	if (detect_env_var(str) == 0)
+		return (str);
+	if (is_set_env_var(str) == 0)
 		return (str);
 	e.newstr = ft_calloc(ft_strlen(str) * 100, sizeof(char));
 	e.var = ft_calloc(100000, sizeof(char));

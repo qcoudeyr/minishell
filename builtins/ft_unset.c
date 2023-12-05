@@ -6,10 +6,14 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 15:01:23 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/04 15:01:50 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 09:40:32 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+void	ft_unset(t_ms *t, int i)
+{
+	
 
+}

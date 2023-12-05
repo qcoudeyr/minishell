@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/04 11:38:36 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 09:37:35 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ int	main(int argc, char **argv, char **env)
 		return (printf("ERROR: usage ./minishell\n"), 1);
 	t = malloc(sizeof(t_ms));
 	t->rusage = ft_calloc(1, sizeof(struct rusage));
-	t->env = env;
 	t->env = env;
 	t->cmdlist = NULL;
 	t->cmd = malloc(sizeof(char **));
