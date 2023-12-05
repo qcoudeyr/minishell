@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/05 10:17:55 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 10:35:07 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,35 @@ int	pathfinder(t_ms *t, int index)
 	}
 	return (0);
 }
-char **set_env_var()
+
+char	**set_env_var(char **cmd)
+{
+	int		i;
+	int		j;
+	char	*temp;
+
+	i = 0;
+	j = 0;
+	if (!cmd || !cmd[0] || !cmd[0][0])
+		return (cmd);
+	if (is_set_env_var(cmd[0]) == 0)
+		return (cmd);
+	while (cmd[0][i] != 0)
+	{
+		while (cmd[0][i] != 0 && cmd[0][i] != '=')
+			i++;
+		if (cmd[0][i] == '=')
+		{
+			j = i++;
+			while (j != 0 && ft_isalpha(cmd[0][j]) == 1)
+				j--;
+			while (cmd[0][i] != 0 && ft_isalpha(cmd[0][i]) == 1)
+				i++;
+			ft_strlcpy(temp, (cmd[0] + j), (i - j));
+		}
+	}
+	return
+}
 
 int	cmdformat(t_ms *t)
 {
