@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/05 19:14:09 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 19:17:28 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	gotoprevpath(t_ms *t)
 		newpwd = pfree(newpwd);
 		return (2);
 	}
-	return (0);
+	return (2);
 }
 
 int	ft_cd(t_ms *t, char *cmd)
