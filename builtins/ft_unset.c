@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 15:01:23 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/05 14:14:41 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 14:25:15 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,23 @@ int	varlen_env(char *str)
 
 void	remove_var_env(t_ms *t, int index)
 {
-	int	i;
+	int		i;
+	int		j;
+	char	**newenv;
 
-	i = index + 1;
-	while (t->env[i] != NULL)
+	newenv = ft_calloc(1000, sizeof(char *));
+	i = 0;
+	j = 0;
+	while (t->env[i] != NULL && t->env[i + 1] != NULL)
 	{
-		pfree(t->env[index]);
-		t->env[index++] = ft_strdup(t->env[i++]);
+		if (i == index)
+			i++;
+		newenv[j++] = t->env[i++];
 	}
-	pfree(t->env[index]);
+	j = 0;
+	while (t->env[i] != NULL)
+		pfree(t->env[i++]);
+	pfree()
 }
 
 void	ft_unset(t_ms *t, int i)
