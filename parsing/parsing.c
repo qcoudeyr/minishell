@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/05 16:39:18 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 17:48:56 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ is_special(t->cmdlist[t->i][0]) == 0)
 			if (*t->cmdlist[t->i][t->j] != 0 && *t->cmdlist[t->i][t->j] == '/')
 				t->return_v = check_path(t->cmdlist[t->i][t->j]);
 			if (*t->cmdlist[t->i][t->j] != 0 && *t->cmdlist[t->i][t->j] == '$' \
-			&& t->cmdlist[t->i][t->j][1] != 0)
+			&& t->cmdlist[t->i][t->j][1] == 0)
 			{
 				if (*t->cmdlist[t->i][0] == 0)
 					t->return_v = -1;
