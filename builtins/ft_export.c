@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:28:07 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/05 16:29:22 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 16:37:55 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	varlen_env(char *str)
 	return (i);
 }
 
-void	add_var_env(t_ms *t, int index)
+void	add_var_env(t_ms *t, char *str)
 {
 	int		i;
 	int		j;
@@ -35,11 +35,9 @@ void	add_var_env(t_ms *t, int index)
 	j = 0;
 	while (t->env[i] != NULL)
 	{
-		if (i == index)
-			i++;
-		if (t->env[i] != NULL)
 			newenv[j++] = ft_strdup(t->env[i++]);
 	}
+	newenv[j] = ft_strdup(str);
 	j = 0;
 	while (t->env[j] != NULL)
 		pfree(t->env[j++]);
@@ -66,6 +64,7 @@ void	ft_export(t_ms *t, int i)
 			}
 			index++;
 		}
+		add_var_env(t, t->cmdlist[i][j]);
 		j++;
 	}
 
