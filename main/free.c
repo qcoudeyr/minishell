@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:43:26 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/04 10:44:58 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 14:19:39 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ void	ft_free(t_ms *t)
 	i = 0;
 	while (t->path[i] != NULL)
 		free(t->path[i++]);
+	i = 0;
+	while (t->env[i] != NULL)
+		free(t->env[i++]);
 	free(t->path);
 	free(t->home);
 	free(t->rusage);
