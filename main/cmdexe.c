@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 09:45:55 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/05 18:05:36 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 18:58:03 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	change_env(t_ms *t, char *var, char *tochange)
 		return (-1);
 	ptr = t->env[i];
 	t->env[i] = ft_strjoin(var, tochange);
-	pfree(ptr);
+	ptr = pfree(ptr);
 	return (0);
 
 }
