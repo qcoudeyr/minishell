@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/05 18:35:54 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 18:38:19 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	pathfinder(t_ms *t, int index)
 		}
 		else
 			return (ft_cmdnotfound(t, t->cmdlist[index][0]));
-		pfree(t->fpath);
+		t->fpath = pfree(t->fpath);
 	}
 	return (0);
 }
