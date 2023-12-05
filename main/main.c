@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/05 18:46:44 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 18:52:43 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,22 +102,23 @@ int	main(int argc, char **argv, char **env)
 	t = malloc(sizeof(t_ms));
 	t->rusage = ft_calloc(1, sizeof(struct rusage));
 	t->cmdlist = NULL;
-	t->cmd = malloc(sizeof(char **));
-	t->cmd[0] = ft_calloc(2, sizeof(char *));
+	t->cmd = ft_calloc(10, sizeof(char *));
 	t->path = ft_calloc(1, sizeof(char **));
 	t->home = ft_calloc(1, sizeof(char *));
 	t->pwd = ft_calloc(1, sizeof(char *));
-	t->env = ft_calloc(1, sizeof(char **));
+
 	rl_initialize();
 	using_history();
 	get_env(t, env);
-	/* printf("\033[2J\033[H"); */
+
+	 printf("\033[2J\033[H");
 	if (print_header() == -1)
 		return (-1);
 	start_minishell(t);
+	 printf("\033[2J\033[H");
+
+	rl_clear_history();
 	ft_freecmdlist(t);
 	ft_free(t);
-	/* printf("\033[2J\033[H"); */
-	rl_clear_history();
 	return (0);
 }
