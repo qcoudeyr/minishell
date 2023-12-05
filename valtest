@@ -1,0 +1,22 @@
+total 1780
+drwxrwxr-x 12 qcoudeyr qcoudeyr    4096 Dec  1 21:23 .
+drwxr-xr-x 12 qcoudeyr qcoudeyr    4096 Nov 27 11:21 ..
+drwxrwxr-x  2 qcoudeyr qcoudeyr    4096 Nov 20 08:36 builtins
+-rwxrwxr-x  1 qcoudeyr qcoudeyr  103032 Dec  1 21:23 debug
+-rw-rw-r--  1 qcoudeyr qcoudeyr  226457 Dec  1 20:42 debugoutput
+drwxrwxr-x  2 qcoudeyr qcoudeyr    4096 Nov 20 09:49 error
+-rwxrwxr-x  1 qcoudeyr qcoudeyr 1310885 Oct 26 08:03 fr.subject.pdf
+drwxrwxr-x  8 qcoudeyr qcoudeyr    4096 Dec  1 21:22 .git
+-rw-rw-r--  1 qcoudeyr qcoudeyr     138 Oct 25 11:04 .gitignore
+drwxr-xr-x  5 qcoudeyr qcoudeyr    4096 Dec  1 21:23 libft
+drwxrwxr-x  2 qcoudeyr qcoudeyr    4096 Nov 20 09:49 main
+-rwxrwxr-x  1 qcoudeyr qcoudeyr    1601 Dec  1 20:54 Makefile
+-rwxrwxr-x  1 qcoudeyr qcoudeyr  103032 Dec  1 21:23 minishell
+-rw-rw-r--  1 qcoudeyr qcoudeyr     154 Nov 29 10:55 minishell.code-workspace
+-rwxrwxr-x  1 qcoudeyr qcoudeyr    3808 Dec  1 21:15 minishell.h
+drwxrwxr-x  2 qcoudeyr qcoudeyr    4096 Dec  1 21:23 object
+drwxrwxr-x  2 qcoudeyr qcoudeyr    4096 Nov 29 12:27 parsing
+drwxrwxr-x  2 qcoudeyr qcoudeyr    4096 Nov  9 15:09 redirect
+drwxrwxr-x  2 qcoudeyr qcoudeyr    4096 Dec  1 20:50 utils
+-rw-------  1 qcoudeyr qcoudeyr       0 Dec  1 21:23 valtest
+drwxrwxr-x  2 qcoudeyr qcoudeyr    4096 Nov  9 15:03 .vscode

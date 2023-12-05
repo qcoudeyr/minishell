@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/27 09:36:57 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 14:05:58 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,12 @@
 # include <string.h>
 # include <errno.h>
 # include <termios.h>
+# include <dirent.h>
 # include <stdlib.h>
 # include <term.h>
 # include "./libft/libft.h"
-# include <sys/types.h>
+# include <sys/time.h>
+# include <sys/resource.h>
 # include <sys/wait.h>
 
 typedef struct s_echo
@@ -39,23 +41,38 @@ typedef struct s_echo
 	int	no_bs_position;
 }t_echo;
 
+typedef struct s_henv
+{
+	int		quote;
+	int		squote;
+	int		len;
+	char	*var;
+	char	*newstr;
+
+}	t_env;
+
 typedef struct s_minishell
 {
-	char	***cmdlist;
-	pid_t	pid;
-	char	**cmd;
-	int		narg;
-	char	*fpath;
-	int		status;
-	int		ncmd;
-	int		input_fd;
-	int		output_fd;
-	int		pipefd[2];
-	char	**env;
-	char	**path;
-	char	*pwd;
-	char	*home;
-	char	*prev_pwd;
+	char			***cmdlist;
+	pid_t			pid;
+	char			**cmd;
+	int				i;
+	int				j;
+	int				return_v;
+	int				narg;
+	char			*fpath;
+	int				status;
+	int				index;
+	int				ncmd;
+	int				input_fd;
+	int				output_fd;
+	int				pipefd[2];
+	char			**env;
+	char			**path;
+	char			*pwd;
+	char			*home;
+	char			*prev_pwd;
+	struct rusage	*rusage;
 
 }t_ms;
 
@@ -63,8 +80,19 @@ typedef struct s_minishell
 int		is_builtins(char *str);
 int		ft_cd(t_ms *t, char *path);
 int		ft_echo(t_ms *t, int i);
+void	ft_unset(t_ms *t, int i);
+void	remove_var_env(t_ms *t, int index);
+int		varlen_env(char *str);
 //		utils
+int		is_set_env_var(char *str);
+void	end_pipe(t_ms *t);
+void	handle_spec(t_ms *t);
+void	change_str_env(t_env *e, t_ms *t, char *str);
+void	hev_quote(char c, int *squote, int *quote);
+int		check_path(char *str);
 int		is_or(char *str);
+char	*rmcharq(char *str, char c);
+int		have_wildcard(char **cmds);
 void	input_redirect(t_ms *t, int index, int i);
 void	output_redirect(t_ms *t, int index, int i);
 void	format_cmd_redirect(t_ms *t, int index, int i);
@@ -74,6 +102,10 @@ void	exec_cmd(t_ms *t);
 int		is_and(char *str);
 void	handle_builtins(t_ms *t, int i);
 void	handle_pipe(t_ms *t);
+int		is_special(char *str);
+void	ft_freecmdlist(t_ms *t);
+void	init_cmdlist(t_ms *t);
+void	*pfree(void *ptr);
 int		have_pipe(char **cmds);
 char	*remove_quotes(char *input);
 void	free_tabstr(char **strs);
@@ -81,7 +113,7 @@ int		find_redirect(t_ms *t, int i);
 char	*env_var(t_ms *t, char *str);
 char	*handle_env_var(t_ms *t, char *str);
 int		cmdformat(t_ms *t);
-int		pathfinder(t_ms *t, char *str);
+int		pathfinder(t_ms *t, int index);
 int		ft_cmdnotfound(t_ms *t, char *str);
 int		change_env(t_ms *t, char *var, char *tochange);
 void	env_pars(t_ms *t);
@@ -91,7 +123,6 @@ void	ft_free(t_ms *t);
 void	sigint_handler(int signo);
 void	nothing_handler(int signo);
 void	getsignal(int signal_number);
-
 
 // Text colors
 # define CL_BLACK   "\033[30m"

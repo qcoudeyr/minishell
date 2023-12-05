@@ -6,25 +6,11 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/11/27 10:25:30 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 14:19:07 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-void	ft_execve(t_ms *t, int i)
-{
-	dup2(t->input_fd, 0);
-	dup2(t->pipefd[1], 1);
-	if (t->cmdlist[i + 1] == NULL)
-		dup2(t->pipefd[1] , t->output_fd);
-	if (execve(t->cmdlist[i][0], t->cmdlist[i], t->env) == -1)
-	{
-		ft_perror(t, "execve");
-		exit(EXIT_FAILURE);
-	}
-	exit(EXIT_FAILURE);
-}
 
 int	print_header(void)
 {
@@ -35,178 +21,98 @@ int	print_header(void)
 	if (fd == -1)
 		return (-1);
 	str = get_next_line(fd);
-	while(str != NULL)
+	while (str != NULL)
 	{
-		printf("%s",str);
+		printf("%s", str);
 		free(str);
 		str = get_next_line(fd);
 	}
 	free(str);
 	return (0);
 }
+
+void	init_cmdlist(t_ms *t)
+{
+	if (t->cmdlist != NULL)
+		ft_freecmdlist(t);
+	t->cmdlist = ft_calloc(2, sizeof(char **));
+}
+
+char	*rl_string(t_ms *t, char *rl_str)
+{
+	void	*temp;
+
+	if (rl_str != NULL)
+		pfree(rl_str);
+	rl_str = ft_strjoin("$ "CL_RED"minishell"RESET"~ [", t->pwd);
+	temp = (void *) rl_str;
+	rl_str = ft_strjoin(rl_str, "] : ");
+	pfree(temp);
+	return (rl_str);
+}
+
 int	start_minishell(t_ms *t)
 {
-	int	i;
-	char *rl_str;
+	int		i;
+	char	*rl_str;
 
 	i = 0;
-	if (print_header( ) == -1)
-		return (-1);
-
-	rl_initialize();
-	using_history();
-	t->cmd = malloc(sizeof(char**));
-	t->cmd[0] = malloc(sizeof(char *));
-	t->cmd[0][0] = '\0';
+	rl_str = NULL;
 	while (ft_strncmp("exit", t->cmd[i], 4) != 0)
 	{
-		free(t->cmd[i]);
-		free(t->cmdlist);
+		pfree(t->cmd[i]);
+		init_cmdlist(t);
 		signal(SIGINT, getsignal);
-		rl_str = ft_strjoin("$ "CL_RED"minishell"RESET"~ [", t->pwd);
-		t->cmd[i] = readline(ft_strjoin(rl_str, "] : "));
+		rl_str = rl_string(t, rl_str);
+		t->cmd[i] = readline(rl_str);
 		if (t->cmd[i] == NULL)
-			break;
+			break ;
 		if (t->cmd[i][0] != '\0')
 		{
 			rl_redisplay();
 			add_history(t->cmd[i]);
 		}
 		if (*t->cmd[i] != 0 && cmdformat(t) != -1)
-		{
 			exec_cmd(t);
-			for (int index = 0; t->cmdlist[index] != NULL; index++)
-			{
-				for (int j = 0; t->cmdlist[index][j] != NULL; j++)
-					printf("index = %i, line =%i value =%s\n", index,j,t->cmdlist[index][j]);
-			}
-			printf("%i\n", t->ncmd);
-		}
 	}
+	pfree(rl_str);
 	return (0);
 }
-
-void	handle_redirect(t_ms *t, int index)
+void	get_env(t_ms *t, char **env)
 {
-	int	i;
-
-	i = 0;
-	if (t->input_fd < 1)
-		t->input_fd = STDIN_FILENO;
-	t->output_fd = STDOUT_FILENO;
-	while (t->cmdlist[index][i] != NULL)
+	t->env = ft_calloc(1000, sizeof(char *));
+	t->i = 0;
+	while (env[t->i] != NULL)
 	{
-		if (t->cmdlist[index][i][0] == '<')
-			input_redirect(t, index, i);
-		else if (t->cmdlist[index][i][0] == '>')
-			output_redirect(t, index, i);
-		i++;
+		t->env[t->i] = ft_strdup(env[t->i]);
+		t->i++;
 	}
-	if (t->input_fd == -1 || t->output_fd == -1)
-		ft_perror(t, "open");
-}
-
-void	exec_cmd(t_ms *t)
-{
-	int	index;
-
-	index = 0;
-	t->input_fd = STDIN_FILENO;
-	t->output_fd = STDOUT_FILENO;
-	while (t->cmdlist[index]!= NULL)
-	{
-		if (pipe(t->pipefd) == -1)
-		{
-			perror("pipe");
-			break ;
-		}
-		handle_redirect(t, index);
-		if (is_builtins(t->cmdlist[index][0]) > 0)
-		{
-			handle_builtins(t, index);
-		}
-		else
-		{
-			t->pid = fork();
-			if (t->pid == -1)
-				ft_perror(t, "fork");
-			else if (t->pid == 0)
-				ft_execve(t, index);
-			else
-			{
-				waitpid(t->pid, &t->status, 0);
-				t->input_fd = t->pipefd[0];
-				close(t->pipefd[1]);
-			}
-		}
-		index++;
-	}
-}
-
-void	ft_freecmdlist(t_ms *t)
-{
-	int	i;
-	int	y;
-
-	i = 0;
-	if (t->cmdlist != NULL)
-	{
-		while (t->cmdlist != NULL && t->cmdlist[i] != NULL)
-		{
-			if (t->cmdlist[i] != NULL)
-			{
-				y = 0;
-				while (t->cmdlist[i][y] != NULL)
-					free(t->cmdlist[i][y++]);
-			}
-			free(t->cmdlist[i]);
-			i++;
-		}
-		free(t->cmdlist);
-	}
-}
-
-void	ft_free(t_ms *t)
-{
-	int	i;
-
-	i = 0;
-	if (t->cmd != NULL)
-	{
-		if ((t->cmd[i]) != NULL)
-		{
-			free(t->cmd[i]);
-			i++;
-		}
-		free(t->cmd);
-	}
-	i = 0;
-	while (t->path[i] != NULL)
-		free(t->path[i++]);
-	free(t->path);
-	free(t->pwd);
-	ft_freecmdlist(t);
-	if (t->fpath != NULL)
-		free(t->fpath);
-	free(t);
+	t->env[t->i] = NULL;
 }
 
 int	main(int argc, char **argv, char **env)
 {
 	t_ms	*t;
+
 	(void)argv;
-
-	t = malloc(sizeof(t_ms));
-	t->env = env;
-	t->env = env;
-	printf("\033[2J\033[H");
-
 	if (argc > 1)
 		return (printf("ERROR: usage ./minishell\n"), 1);
+	t = malloc(sizeof(t_ms));
+	t->rusage = ft_calloc(1, sizeof(struct rusage));
+	get_env(t, env);
+	t->cmdlist = NULL;
+	t->cmd = malloc(sizeof(char **));
+	t->cmd[0] = ft_calloc(2, sizeof(char *));
+	rl_initialize();
+	using_history();
+	/* printf("\033[2J\033[H"); */
 	env_pars(t);
+	if (print_header() == -1)
+		return (-1);
 	start_minishell(t);
+	ft_freecmdlist(t);
 	ft_free(t);
-	printf("\033[2J\033[H");
+	/* printf("\033[2J\033[H"); */
 	rl_clear_history();
 	return (0);
 }

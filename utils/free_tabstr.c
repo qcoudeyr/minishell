@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_tabstr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
+/*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 20:12:27 by lheinric          #+#    #+#             */
-/*   Updated: 2023/11/15 21:53:16 by lheinric         ###   ########.fr       */
+/*   Updated: 2023/12/04 11:41:38 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	free_tabstr(char **strs)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (strs[i] != NULL)

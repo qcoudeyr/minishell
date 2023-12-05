@@ -10,7 +10,8 @@ HEADERS = minishell.h
 SRCS =	main.c \
 		parsing.c error.c cmdexe.c ft_cd.c ft_echo.c \
 		remove_quotes.c find_redirect.c free_tabstr.c \
-		env_var.c pipe.c bonus.c
+		env_var.c pipe.c bonus.c utils.c free.c exec.c \
+		error_2.c env.c ft_unset.c
 
 OBJDIR = ./object/
 OBJS = $(addprefix $(OBJDIR),$(SRCS:.c=.o))
@@ -59,7 +60,9 @@ norme:
 debug: $(OBJS)
 	@clear
 	@$(CC) $(CFLAGS) -g $(OBJS) -L$(LIB_DIR) $(LIBS) -o debug
-	colour-valgrind -s --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes --error-exitcode=1 \
+	colour-valgrind -s --tool=memcheck --leak-check=full --error-exitcode=1 \
 	./debug
 
 .PHONY: all clean fclean re debug libft
+
+#--show-leak-kinds=all --track-origins=yes

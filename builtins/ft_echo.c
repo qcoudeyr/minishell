@@ -7,9 +7,13 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:56:50 by lheinric          #+#    #+#             */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*   Updated: 2023/11/18 17:20:11 by lheinric         ###   ########.fr       */
 =======
 /*   Updated: 2023/11/27 09:02:07 by  qcoudeyr        ###   ########.fr       */
+>>>>>>> origin/qcoudeyr
+=======
+/*   Updated: 2023/12/04 12:55:45 by  qcoudeyr        ###   ########.fr       */
 >>>>>>> origin/qcoudeyr
 /*                                                                            */
 /* ************************************************************************** */
@@ -18,7 +22,7 @@
 
 void	find_bn(t_echo *echo, char **ordre)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (ordre[i + 1] != NULL)
@@ -27,7 +31,7 @@ void	find_bn(t_echo *echo, char **ordre)
 		{
 			echo->no_bs_position = i;
 			echo->nobackslash = 1;
-			break;
+			break ;
 		}
 		i++;
 	}
@@ -35,10 +39,11 @@ void	find_bn(t_echo *echo, char **ordre)
 
 void	print_echo(int fd, t_echo *echo, char **ordre)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(ordre[++i] != NULL && ft_strncmp(ordre[i], ">", 2) != 0 && ft_strncmp(ordre[i], ">>", 3) != 0)
+	while (ordre[++i] != NULL && ft_strncmp(ordre[i], ">", 2) != 0 && \
+ft_strncmp(ordre[i], ">>", 3) != 0)
 	{
 		if (ft_strncmp(ordre[i], "-n", 3) != 0 && echo->no_bs_position != i)
 			fd_printf(fd, "%s ", ordre[i]);
@@ -49,7 +54,7 @@ void	print_echo(int fd, t_echo *echo, char **ordre)
 
 int	ft_echo(t_ms *t, int i)
 {
-	t_echo echo;
+	t_echo	echo;
 
 	echo.nobackslash = 0;
 	echo.no_bs_position = -1;

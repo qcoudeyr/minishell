@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fd_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
+/*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 10:50:34 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/10/25 11:42:31 by lheinric         ###   ########.fr       */
+/*   Updated: 2023/12/04 11:37:49 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include "../../libft.h"
+
+typedef struct s_putnbrbase
+{
+	int					len;
+	int					base_len;
+	unsigned long long	n;
+}	t_ptnb;
 
 int		fd_printf(int fd, const char *str, ...);
 int		fd_putstr_fd(char *s, int fd);

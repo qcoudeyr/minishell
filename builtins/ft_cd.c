@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lheinric <lheinric@student.42.fr>          +#+  +:+       +#+        */
+/*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/11/17 17:40:58 by lheinric         ###   ########.fr       */
+/*   Updated: 2023/12/04 10:51:25 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
 
 int	gotopath(char *chemin, t_ms *t)
 {
@@ -19,21 +18,20 @@ int	gotopath(char *chemin, t_ms *t)
 	{
 		free(t->pwd);
 		t->pwd = chemin;
-		return 1;
+		return (1);
 	}
 	else
 	{
 		printf("bash: cd: %s: Aucun fichier ou dossier de ce type\n", chemin);
-		return 0;
+		return (0);
 	}
-	
 }
 
-int gotoprevpath(t_ms *t)
+int	gotoprevpath(t_ms *t)
 {
-	int i;
-	int j;
-	char *newpwd;
+	int		i;
+	int		j;
+	char	*newpwd;
 
 	j = -1;
 	i = ft_strlen(t->pwd);
@@ -47,20 +45,20 @@ int gotoprevpath(t_ms *t)
 	{
 		free(t->pwd);
 		t->pwd = newpwd;
-		return 1;
+		return (1);
 	}
 	else
 	{
 		printf("bash: cd: %s: Aucun fichier ou dossier de ce type\n", newpwd);
-		return 0;
+		return (0);
 	}
 	return (1);
 }
 
 int	ft_cd(t_ms *t, char *cmd)
 {
-	char *temppath;
-	char **path;
+	char	*temppath;
+	char	**path;
 
 	cmd = *t->cmd;
 	path = ft_split(cmd, ' ');
@@ -68,7 +66,7 @@ int	ft_cd(t_ms *t, char *cmd)
 		gotopath(t->home, t);
 	else if (path[1][0] == '/')
 		return (gotopath(path[1], t));
-	else if	(path[1][0] == '.' && path[1][1] == '.' && path[1][2] == '\0')
+	else if (path[1][0] == '.' && path[1][1] == '.' && path[1][2] == '\0')
 		gotoprevpath(t);
 	else if (path[1][0] == '.' && path[1][1] == '\0')
 		return (1);
