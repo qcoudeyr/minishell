@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/05 17:39:11 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 18:14:05 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	start_minishell(t_ms *t)
 		if (*t->cmd[i] != 0 && cmdformat(t) != -1)
 			exec_cmd(t);
 	}
+	env_pars(t);
 	pfree(rl_str);
 	return (0);
 }
