@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/05 09:37:35 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 14:19:07 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,17 @@ int	start_minishell(t_ms *t)
 	pfree(rl_str);
 	return (0);
 }
+void	get_env(t_ms *t, char **env)
+{
+	t->env = ft_calloc(1000, sizeof(char *));
+	t->i = 0;
+	while (env[t->i] != NULL)
+	{
+		t->env[t->i] = ft_strdup(env[t->i]);
+		t->i++;
+	}
+	t->env[t->i] = NULL;
+}
 
 int	main(int argc, char **argv, char **env)
 {
@@ -88,7 +99,7 @@ int	main(int argc, char **argv, char **env)
 		return (printf("ERROR: usage ./minishell\n"), 1);
 	t = malloc(sizeof(t_ms));
 	t->rusage = ft_calloc(1, sizeof(struct rusage));
-	t->env = env;
+	get_env(t, env);
 	t->cmdlist = NULL;
 	t->cmd = malloc(sizeof(char **));
 	t->cmd[0] = ft_calloc(2, sizeof(char *));
