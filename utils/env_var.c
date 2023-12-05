@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 10:31:40 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/05 10:03:15 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 10:16:46 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ int	detect_env_var(char *str)
 	return (env_var);
 }
 
-void	set_env_var(t_ms *t)
+void	set_env_var(t_ms *t, int index)
 {
 	int	i;
 
-	while (str[i] != 0)
+	while ()
 	{
 		if (ft_isalpha(str[i]) == 0)
 		{
@@ -53,10 +53,6 @@ void	set_env_var(t_ms *t)
 		}
 		i++;
 	}
-	if (have_equal == 1 && str[i - 1] != '=')
-		return (1);
-	}
-	return (0);
 }
 
 int	is_set_env_var(char *str)
@@ -99,8 +95,6 @@ char	*handle_env_var(t_ms *t, char *str)
 	if (!str)
 		return (NULL);
 	if (detect_env_var(str) == 0)
-		return (str);
-	if (is_set_env_var(str) == 0)
 		return (str);
 	e.newstr = ft_calloc(ft_strlen(str) * 100, sizeof(char));
 	e.var = ft_calloc(100000, sizeof(char));
