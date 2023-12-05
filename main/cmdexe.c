@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 09:45:55 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/05 14:05:28 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 16:11:16 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ int	print_help(int i)
 	return (0);
 }
 
-void	printenv(char **envp)
+void	printenv(t_ms *t)
 {
 	int	j;
 
 	j = -1;
-	while (envp[++j] != NULL)
-		printf("%s\n", envp[j]);
+	while (t->env[++j] != NULL)
+		fd_printf(t->output_fd,"%s\n", t->env[j]);
 }
 
 int	is_builtins(char *str)
@@ -81,7 +81,7 @@ int	is_builtins(char *str)
 void	handle_builtins(t_ms *t, int i)
 {
 	if (ft_strncmp("env", t->cmdlist[i][0], 4) == 0)
-		printenv(t->env);
+		printenv(t);
 	if (ft_strncmp("clear", t->cmdlist[i][0], 5) == 0)
 		printf("\033[2J\033[H");
 	if (ft_strncmp("pwd", t->cmdlist[i][0], 3) == 0)
