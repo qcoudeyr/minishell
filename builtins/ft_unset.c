@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 15:01:23 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/05 16:22:49 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 16:26:07 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,12 @@ void	remove_var_env(t_ms *t, int index)
 	newenv = ft_calloc(1000, sizeof(char *));
 	i = 0;
 	j = 0;
-	while (t->env[i] != NULL && t->env[i + 1] != NULL)
+	while (t->env[i] != NULL)
 	{
 		if (i == index)
 			i++;
-		newenv[j++] = ft_strdup(t->env[i++]);
+		if (t->env[i] != NULL)
+			newenv[j++] = ft_strdup(t->env[i++]);
 	}
 	j = 0;
 	while (t->env[j] != NULL)
