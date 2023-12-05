@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 10:31:40 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/05 09:47:15 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 10:03:15 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,53 @@ int	detect_env_var(char *str)
 	return (env_var);
 }
 
-int	is_set_env_var(char *str)
+void	set_env_var(t_ms *t)
 {
 	int	i;
 
+	while (str[i] != 0)
+	{
+		if (ft_isalpha(str[i]) == 0)
+		{
+			if (str[i] != '=' && str[i + 1] != NULL)
+				return (0);
+			else if (str[i] == '=' && str[i + 1] != NULL)
+				have_equal = 1;
+		}
+		i++;
+	}
+	if (have_equal == 1 && str[i - 1] != '=')
+		return (1);
+	}
+	return (0);
+}
+
+int	is_set_env_var(char *str)
+{
+	int	i;
+	int	have_equal;
+
 	i = 0;
+	have_equal = 0;
 	if (str != NULL && ft_strchr(str, '=') == 0)
 		return (0);
 	else
 	{
 		while (str[i] != 0)
 		{
-			if (ft_isal)
+			if (ft_isalpha(str[i]) == 0)
+			{
+				if (str[i] != '=' && str[i + 1] != NULL)
+					return (0);
+				else if (str[i] == '=' && str[i + 1] != NULL)
+					have_equal = 1;
+			}
 			i++;
 		}
+		if (have_equal == 1 && str[i - 1] != '=')
+			return (1);
 	}
-
+	return (0);
 }
 
 char	*handle_env_var(t_ms *t, char *str)
