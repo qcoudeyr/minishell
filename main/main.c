@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/05 18:52:43 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 18:53:58 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ int	main(int argc, char **argv, char **env)
 	t->cmdlist = NULL;
 	t->cmd = ft_calloc(10, sizeof(char *));
 	t->path = ft_calloc(1, sizeof(char **));
+	t->fpath = NULL;
 	t->home = ft_calloc(1, sizeof(char *));
 	t->pwd = ft_calloc(1, sizeof(char *));
 
