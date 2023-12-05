@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 09:45:55 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/05 17:01:40 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 18:05:36 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ int	is_builtins(char *str)
 	if (ft_strncmp("export", str, 7) == 0)
 		is_b += 1;
 	if (ft_strncmp("unset", str, 6) == 0)
+		is_b += 1;
+	if (ft_strncmp("exit", str, 6) == 0)
 		is_b += 1;
 	return (is_b);
 }
