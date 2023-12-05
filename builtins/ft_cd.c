@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/05 19:19:59 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 19:24:10 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,19 +62,19 @@ int	ft_cd(t_ms *t, char *cmd)
 	cmd = *t->cmd;
 	path = ft_split(cmd, ' ');
 	if (path[1] == NULL || path[1][0] == '~' || path[1][0] == '\0')
-		gotopath(t->home, t);
+		t->return_v = gotopath(t->home, t);
 	else if (path[1][0] == '/')
-		return (gotopath(path[1], t));
+		t->return_v = gotopath(path[1], t);
 	else if (path[1][0] == '.' && path[1][1] == '.' && path[1][2] == '\0')
-		gotoprevpath(t);
+		t->return_v = gotoprevpath(t);
 	else if (path[1][0] == '.' && path[1][1] == '\0')
-		return (1);
+		t->return_v = 0;
 	else if (path[1][0] != '\0')
 	{
 		temppath = ft_strjoin(t->pwd, "/");
 		temppath = ft_strjoin(temppath, path[1]);
-		gotopath(temppath, t);
+		t->return_v = gotopath(temppath, t);
 	}
 	free_tabstr(path);
-	return (1);
+	return (t->return_v);
 }

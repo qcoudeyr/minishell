@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:28:07 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/05 19:03:23 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 19:28:36 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	add_var_env(t_ms *t, char *str, int index)
 	t->env = newenv;
 }
 
-void	ft_export(t_ms *t, int i)
+int	ft_export(t_ms *t, int i)
 {
 	int		j;
 	int		index;
@@ -75,5 +75,5 @@ void	ft_export(t_ms *t, int i)
 			add_var_env(t, t->cmdlist[i][j], -1);
 		j++;
 	}
-
+	return (0);
 }
