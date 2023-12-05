@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 15:01:23 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/05 13:56:39 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 14:03:55 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,20 @@ int	varlen_env(char *str)
 	return (i);
 }
 
+void	remove_var_env(t_ms *t, int index)
+{
+	int	i;
+
+	i = index + 1;
+	pfree(t->env[index]);
+	while (t->env[i] != NULL)
+	{
+		pfree(t->env[index]);
+		t->env[index++] = ft_strdup(t->env[i++]);
+	}
+
+}
+
 void	ft_unset(t_ms *t, int i)
 {
 	int		j;
@@ -36,9 +50,11 @@ void	ft_unset(t_ms *t, int i)
 
 		while (t->env[index] != NULL)
 		{
-			if (ft_strncmp(t->env[index], t->cmdlist[i][j], varlen_env(t->cmdlist[i][j])) != 0)
-				t->env[i]
+			if (ft_strncmp(t->env[index], t->cmdlist[i][j], ft_strlen(t->cmdlist[i][j])) != 0)
+				remove_var_env(t, index);
+			index++;
 		}
+		j++;
 	}
 
 }
