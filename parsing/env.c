@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 11:02:42 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/04 11:26:17 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 17:29:14 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,19 @@ void	env_var_detect(t_ms *t)
 	i = 0;
 	while (t->cmdlist[0][i] != NULL)
 	{
-		if (ft_strnstr(t->cmdlist[0][i], "$", 1) != 0)
+		if (ft_strnstr(t->cmdlist[0][i], "$?", 1) != 0)
+		{
+			pfree(t->cmdlist[0][i]);
+			t->cmdlist[0][i] = ft_itoa(t->return_v);
+		}
+		else if (ft_strnstr(t->cmdlist[0][i], "$", 1) != 0)
 		{
 			tmp = env_var(t, t->cmdlist[0][i]);
 			if (tmp != NULL)
+			{
+				pfree(t->cmdlist[0][i]);
 				t->cmdlist[0][i] = tmp;
+			}
 		}
 		i++;
 	}
