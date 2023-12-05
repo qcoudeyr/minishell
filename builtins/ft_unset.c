@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 15:01:23 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/05 19:08:45 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 19:28:25 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	remove_var_env(t_ms *t, int index)
 	t->env = newenv;
 }
 
-void	ft_unset(t_ms *t, int i)
+int	ft_unset(t_ms *t, int i)
 {
 	int		j;
 	int		index;
@@ -52,5 +52,5 @@ void	ft_unset(t_ms *t, int i)
 		}
 		j++;
 	}
-
+	return (0);
 }

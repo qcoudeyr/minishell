@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/05 18:30:24 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 19:28:19 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,10 @@ typedef struct s_minishell
 int		is_builtins(char *str);
 int		ft_cd(t_ms *t, char *path);
 int		ft_echo(t_ms *t, int i);
-void	ft_unset(t_ms *t, int i);
+int		ft_unset(t_ms *t, int i);
 void	remove_var_env(t_ms *t, int index);
 int		varlen_env(char *str);
-void	ft_export(t_ms *t, int i);
+int		ft_export(t_ms *t, int i);
 void	add_var_env(t_ms *t, char *str, int index);
 //		utils
 void	*tabfree(void **ptr);

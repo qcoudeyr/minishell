@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:56:50 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/04 12:55:45 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 19:28:02 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,5 @@ int	ft_echo(t_ms *t, int i)
 	print_echo(t->output_fd, &echo, t->cmdlist[i]);
 	if (t->output_fd > 1)
 		close(t->output_fd);
-	return (1);
+	return (0);
 }
