@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 11:02:42 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/05 18:28:08 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 18:33:36 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,16 @@ void	env_pars(t_ms *t)
 	int		i;
 
 	i = 0;
-
-	pfree();
+	t->path = tabfree((void **)t->path);
 	pfree(t->pwd);
 	pfree(t->home);
 	while (t->env[i] != NULL)
 	{
-		if (ft_strnstr(t->env[i], "PATH=", 5) != 0)
+		if (ft_strnstr(t->env[i], "PATH=", 6) != 0)
 			t->path = ft_split((t->env[i] + 5), ':');
-		if (ft_strnstr(t->env[i], "PWD=", 4) != 0)
+		if (ft_strnstr(t->env[i], "PWD=", 5) != 0)
 			t->pwd = ft_strdup(t->env[i] + 4);
-		if (ft_strnstr(t->env[i], "HOME=", 5) != 0)
+		if (ft_strnstr(t->env[i], "HOME=", 6) != 0)
 			t->home = ft_strdup(t->env[i] + 5);
 		i++;
 	}
