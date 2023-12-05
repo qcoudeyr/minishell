@@ -6,11 +6,24 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 20:50:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/04 11:03:15 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 18:30:08 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	*tabfree(void **ptr)
+{
+	int	i;
+
+	i = 0;
+	if (ptr == NULL)
+		return (ptr);
+	while (ptr[i] != NULL)
+		pfree(ptr[i++]);
+	pfree(ptr);
+	return (NULL);
+}
 
 void	*pfree(void *ptr)
 {
