@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/04 10:51:25 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 19:14:09 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int	gotopath(char *chemin, t_ms *t)
 {
 	if (chdir(chemin) == 0)
 	{
-		free(t->pwd);
-		t->pwd = chemin;
+		t->pwd = pfree(t->pwd);
+		t->pwd = ft_strdup(chemin);
 		return (1);
 	}
 	else
@@ -43,16 +43,17 @@ int	gotoprevpath(t_ms *t)
 	newpwd[j] = '\0';
 	if (chdir(newpwd) == 0)
 	{
-		free(t->pwd);
+		t->pwd = pfree(t->pwd);
 		t->pwd = newpwd;
-		return (1);
+		return (0);
 	}
 	else
 	{
 		printf("bash: cd: %s: Aucun fichier ou dossier de ce type\n", newpwd);
-		return (0);
+		newpwd = pfree(newpwd);
+		return (2);
 	}
-	return (1);
+	return (0);
 }
 
 int	ft_cd(t_ms *t, char *cmd)
