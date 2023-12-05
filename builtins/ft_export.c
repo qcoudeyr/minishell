@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:28:07 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/05 16:37:55 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 16:38:53 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	ft_export(t_ms *t, int i)
 
 		while (t->env[index] != NULL)
 		{
-			if (ft_strncmp(t->env[index], t->cmdlist[i][j], ft_strlen(t->cmdlist[i][j])) == 0)
+			if (ft_strncmp(t->env[index], t->cmdlist[i][j], varlen_env(t->cmdlist[i][j])) == 0)
 			{
 				remove_var_env(t, index);
 				break ;
@@ -68,37 +68,4 @@ void	ft_export(t_ms *t, int i)
 		j++;
 	}
 
-}
-
-char	*set_env_var(char *cmd)
-{
-	int		i;
-	int		j;
-	char	*temp;
-
-	i = 0;
-	j = 0;
-	if (!cmd || !cmd)
-		return (cmd);
-	if (is_set_env_var(cmd) == 0)
-		return (cmd);
-	temp = ft_calloc(ft_strlen(cmd), sizeof(char));
-	while (cmd[i] != 0)
-	{
-		while (cmd[i] != 0 && cmd[i] != '=')
-			i++;
-		if (cmd[i] == '=')
-		{
-			j = (i++ - 1);
-			while (j != 0 && ft_isalpha(cmd[j]) == 1)
-				j--;
-			while (cmd[i] != 0 && (\
-ft_isalpha(cmd[i]) == 1 || ft_isalnum(cmd[i]) == 1))
-				i++;
-			ft_strlcpy(temp, (cmd + j), (i - j) + 1);
-			printf("%s \n", temp);
-		}
-	}
-	free(temp);
-	return (cmd);
 }

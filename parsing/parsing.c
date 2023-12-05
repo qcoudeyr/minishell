@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/05 16:28:40 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 16:39:18 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	cmdformat(t_ms *t)
 		if (*t->cmd[i] == 0)
 			return (-1);
 		tf = (void *) t->cmdlist[i];
-		t->cmdlist[i] = ft_splitq(set_env_var(t->cmd[0]));
+		t->cmdlist[i] = ft_splitq(t->cmd[0]);
 		free (tf);
 		if (have_pipe(t->cmdlist[i]) == 1)
 			handle_pipe(t);

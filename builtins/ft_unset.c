@@ -6,23 +6,11 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 15:01:23 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/05 16:26:07 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 16:38:59 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-int	varlen_env(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (str == NULL || *str == 0)
-		return (0);
-	while (str[i] != 0 && str[i] != '=')
-		i++;
-	return (i);
-}
 
 void	remove_var_env(t_ms *t, int index)
 {
