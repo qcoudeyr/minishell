@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/05 18:25:39 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 18:46:44 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void	get_env(t_ms *t, char **env)
 		t->i++;
 	}
 	t->env[t->i] = NULL;
+	env_pars(t);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -100,14 +101,17 @@ int	main(int argc, char **argv, char **env)
 		return (printf("ERROR: usage ./minishell\n"), 1);
 	t = malloc(sizeof(t_ms));
 	t->rusage = ft_calloc(1, sizeof(struct rusage));
-	get_env(t, env);
 	t->cmdlist = NULL;
 	t->cmd = malloc(sizeof(char **));
 	t->cmd[0] = ft_calloc(2, sizeof(char *));
+	t->path = ft_calloc(1, sizeof(char **));
+	t->home = ft_calloc(1, sizeof(char *));
+	t->pwd = ft_calloc(1, sizeof(char *));
+	t->env = ft_calloc(1, sizeof(char **));
 	rl_initialize();
 	using_history();
+	get_env(t, env);
 	/* printf("\033[2J\033[H"); */
-	env_pars(t);
 	if (print_header() == -1)
 		return (-1);
 	start_minishell(t);
