@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:28:07 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/05 17:13:50 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 17:17:30 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,25 +27,21 @@ int	varlen_env(char *str)
 void	add_var_env(t_ms *t, char *str, int index)
 {
 	int		i;
-	int		j;
 	char	**newenv;
 
 	newenv = ft_calloc(1000, sizeof(char *));
 	i = 0;
-	j = 0;
 	while (t->env[i] != NULL)
 	{
 			if (i == index)
-			{
-				newenv[j++] = ft_strdup(str);
-				i++;
-			}
-			newenv[j++] = ft_strdup(t->env[i++]);
+				newenv[i++] = ft_strdup(str);
+			newenv[i] = ft_strdup(t->env[i++]);
 	}
-	newenv[j] = ft_strdup(str);
-	j = 0;
-	while (t->env[j] != NULL)
-		pfree(t->env[j++]);
+	if (printed == 0)
+		newenv[i] = ft_strdup(str);
+	i = 0;
+	while (t->env[i] != NULL)
+		pfree(t->env[i++]);
 	pfree(t->env);
 	t->env = newenv;
 }
