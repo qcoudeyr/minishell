@@ -6,14 +6,18 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 11:02:42 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/05 18:17:22 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 18:19:37 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	path_format(t_ms *t, char *temp, int i)
+void	path_format(t_ms *t)
 {
+	char	*temp;
+	int		i;
+
+	i = 0;
 	while (t->path[i])
 	{
 		temp = ft_strdup(t->path[i]);
@@ -27,25 +31,19 @@ void	path_format(t_ms *t, char *temp, int i)
 void	env_pars(t_ms *t)
 {
 	int		i;
-	char	*temp;
 
 	i = 0;
-	while (ft_strnstr(t->env[i], "PATH=", 5) == 0)
+	while (t->env[i] != NULL)
+	{
+		if (ft_strnstr(t->env[i], "PATH=", 5) == 0)
+			t->path = ft_split((t->env[i] + 5), ':');
+		if (ft_strnstr(t->env[i], "PWD=", 4) == 0)
+			t->pwd = ft_strdup(t->env[i] + 4);
+		if (ft_strnstr(t->env[i], "HOME=", 5) == 0)
+			t->home = ft_strdup(t->env[i] + 5);
 		i++;
-	if (t->env[i] != NULL)
-		t->path = ft_split((t->env[i] + 5), ':');
-	i = 0;
-	while (ft_strnstr(t->env[i], "PWD=", 4) == 0)
-		i++;
-	if (t->env[i] != NULL)
-		t->pwd = ft_strdup(t->env[i] + 4);
-	i = 0;
-	while (ft_strnstr(t->env[i], "HOME=", 5) == 0)
-		i++;
-	if (t->env[i] != NULL)
-		t->home = ft_strdup(t->env[i] + 5);
-	i = 0;
-	path_format(t, temp, i);
+	}
+	path_format(t);
 }
 
 void	env_var_detect(t_ms *t)
