@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/05 17:57:43 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 18:35:54 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	pathfinder(t_ms *t, int index)
 {
 	int	i;
 
+	if (t->path == NULL && is_builtins(t->cmdlist[index][0]) == 0)
+		return (ft_cmdnotfound(t, t->cmdlist[index][0]));
 	if (t->cmdlist[index][0] != NULL && *t->cmdlist[index][0] != 0)
 	{
 		i = 0;
