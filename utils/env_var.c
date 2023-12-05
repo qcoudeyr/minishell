@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 10:31:40 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/05 10:25:25 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 10:50:50 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,6 @@ int	detect_env_var(char *str)
 	return (env_var);
 }
 
-void	set_env_var(t_ms *t, int index)
-{
-	int	i;
-
-	while ()
-	{
-		if (ft_isalpha(str[i]) == 0)
-		{
-			if (str[i] != '=' && str[i + 1] != NULL)
-				return (0);
-			else if (str[i] == '=' && str[i + 1] != NULL)
-				have_equal = 1;
-		}
-		i++;
-	}
-}
-
 int	is_set_env_var(char *str)
 {
 	int	i;
@@ -68,11 +51,11 @@ int	is_set_env_var(char *str)
 	{
 		while (str[i] != 0)
 		{
-			if (ft_isalpha(str[i]) == 0)
+			if (ft_isalpha(str[i]) == 0 && ft_isalnum(str[i]) == 0)
 			{
-				if (str[i] != '=' && str[i + 1] != NULL)
+				if (str[i] != '=' && str[i + 1] != 0)
 					return (0);
-				else if (str[i] == '=' && str[i + 1] != NULL)
+				else if (str[i] == '=' && str[i + 1] != 0)
 					have_equal = 1;
 			}
 			i++;

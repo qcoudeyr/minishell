@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/05 10:35:07 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/05 10:57:07 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	pathfinder(t_ms *t, int index)
 	return (0);
 }
 
-char	**set_env_var(char **cmd)
+char	*set_env_var(char *cmd)
 {
 	int		i;
 	int		j;
@@ -57,25 +57,29 @@ char	**set_env_var(char **cmd)
 
 	i = 0;
 	j = 0;
-	if (!cmd || !cmd[0] || !cmd[0][0])
+	if (!cmd || !cmd)
 		return (cmd);
-	if (is_set_env_var(cmd[0]) == 0)
+	if (is_set_env_var(cmd) == 0)
 		return (cmd);
-	while (cmd[0][i] != 0)
+	temp = ft_calloc(ft_strlen(cmd), sizeof(char));
+	while (cmd[i] != 0)
 	{
-		while (cmd[0][i] != 0 && cmd[0][i] != '=')
+		while (cmd[i] != 0 && cmd[i] != '=')
 			i++;
-		if (cmd[0][i] == '=')
+		if (cmd[i] == '=')
 		{
-			j = i++;
-			while (j != 0 && ft_isalpha(cmd[0][j]) == 1)
+			j = (i++ - 1);
+			while (j != 0 && ft_isalpha(cmd[j]) == 1)
 				j--;
-			while (cmd[0][i] != 0 && ft_isalpha(cmd[0][i]) == 1)
+			while (cmd[i] != 0 && (\
+ft_isalpha(cmd[i]) == 1 || ft_isalnum(cmd[i]) == 1))
 				i++;
-			ft_strlcpy(temp, (cmd[0] + j), (i - j));
+			ft_strlcpy(temp, (cmd + j), (i - j) + 1);
+			printf("%s \n", temp);
 		}
 	}
-	return
+	free(temp);
+	return (cmd);
 }
 
 int	cmdformat(t_ms *t)
@@ -92,7 +96,7 @@ int	cmdformat(t_ms *t)
 		if (*t->cmd[i] == 0)
 			return (-1);
 		tf = (void *) t->cmdlist[i];
-		t->cmdlist[i] = ft_splitq(t->cmd[i]);
+		t->cmdlist[i] = ft_splitq(set_env_var(t->cmd[0]));
 		free (tf);
 		if (have_pipe(t->cmdlist[i]) == 1)
 			handle_pipe(t);
