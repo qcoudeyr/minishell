@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/06 20:58:29 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/06 21:08:41 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,7 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	if (argc > 1)
 		return (printf("ERROR: usage ./minishell\n"), 1);
-	signal(SIGINT, getsignal);
-	signal(SIGQUIT, getsignal);
+	handle_signal(t);
 	t = malloc(sizeof(t_ms));
 	t_init(t);
 	rl_initialize();
