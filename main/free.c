@@ -6,25 +6,25 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:43:26 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/05 19:02:48 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/06 09:25:11 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_freecmdlist(t_ms *t)
+void	ft_freecmdl(t_ms *t)
 {
 	int	i;
 
 	i = 0;
-	if (t->cmdlist != NULL)
+	if (t->cmdl != NULL)
 	{
-		while (t->cmdlist != NULL && t->cmdlist[i] != NULL)
+		while (t->cmdl != NULL && t->cmdl[i] != NULL)
 		{
-			t->cmdlist[i] = tabfree((void **) t->cmdlist[i]);
+			t->cmdl[i] = tabfree((void **) t->cmdl[i]);
 			i++;
 		}
-		t->cmdlist = pfree(t->cmdlist);
+		t->cmdl = pfree(t->cmdl);
 	}
 }
 

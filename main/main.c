@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/05 19:00:21 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/06 09:25:11 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ int	print_header(void)
 	return (0);
 }
 
-void	init_cmdlist(t_ms *t)
+void	init_cmdl(t_ms *t)
 {
-	if (t->cmdlist != NULL)
-		ft_freecmdlist(t);
-	t->cmdlist = ft_calloc(2, sizeof(char **));
+	if (t->cmdl != NULL)
+		ft_freecmdl(t);
+	t->cmdl = ft_calloc(2, sizeof(char **));
 }
 
 char	*rl_string(t_ms *t, char *rl_str)
@@ -61,7 +61,7 @@ int	start_minishell(t_ms *t)
 	while (ft_strncmp("exit", t->cmd[i], 4) != 0)
 	{
 		t->cmd[i] = pfree(t->cmd[i]);
-		init_cmdlist(t);
+		init_cmdl(t);
 		signal(SIGINT, getsignal);
 		rl_str = rl_string(t, rl_str);
 		t->cmd[i] = readline(rl_str);
@@ -101,7 +101,7 @@ int	main(int argc, char **argv, char **env)
 		return (printf("ERROR: usage ./minishell\n"), 1);
 	t = malloc(sizeof(t_ms));
 	t->rusage = ft_calloc(1, sizeof(struct rusage));
-	t->cmdlist = NULL;
+	t->cmdl = NULL;
 	t->cmd = ft_calloc(10, sizeof(char *));
 	t->path = ft_calloc(1, sizeof(char **));
 	t->fpath = NULL;
@@ -119,7 +119,7 @@ int	main(int argc, char **argv, char **env)
 	 printf("\033[2J\033[H");
 
 	rl_clear_history();
-	ft_freecmdlist(t);
+	ft_freecmdl(t);
 	ft_free(t);
 	return (0);
 }

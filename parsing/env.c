@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 11:02:42 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/05 19:00:41 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/06 09:25:11 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,20 +56,20 @@ void	env_var_detect(t_ms *t)
 	char	*tmp;
 
 	i = 0;
-	while (t->cmdlist[0][i] != NULL)
+	while (t->cmdl[0][i] != NULL)
 	{
-		if (ft_strnstr(t->cmdlist[0][i], "$?", 1) != 0)
+		if (ft_strnstr(t->cmdl[0][i], "$?", 1) != 0)
 		{
-			t->cmdlist[0][i] = pfree(t->cmdlist[0][i]);
-			t->cmdlist[0][i] = ft_itoa(t->return_v);
+			t->cmdl[0][i] = pfree(t->cmdl[0][i]);
+			t->cmdl[0][i] = ft_itoa(t->return_v);
 		}
-		else if (ft_strnstr(t->cmdlist[0][i], "$", 1) != 0)
+		else if (ft_strnstr(t->cmdl[0][i], "$", 1) != 0)
 		{
-			tmp = env_var(t, t->cmdlist[0][i]);
+			tmp = env_var(t, t->cmdl[0][i]);
 			if (tmp != NULL)
 			{
-				t->cmdlist[0][i] = pfree(t->cmdlist[0][i]);
-				t->cmdlist[0][i] = tmp;
+				t->cmdl[0][i] = pfree(t->cmdl[0][i]);
+				t->cmdl[0][i] = tmp;
 			}
 		}
 		i++;

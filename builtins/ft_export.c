@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:28:07 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/05 19:28:36 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/06 09:26:15 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ void	add_var_env(t_ms *t, char *str, int index)
 	i = 0;
 	while (t->env[i] != NULL)
 	{
-			if (i == index)
-				newenv[i++] = ft_strdup(str);
-			newenv[i] = ft_strdup(t->env[i]);
-			i++;
+		if (i == index)
+			newenv[i++] = ft_strdup(str);
+		newenv[i] = ft_strdup(t->env[i]);
+		i++;
 	}
 	if (index < 0)
 		newenv[i] = ft_strdup(str);
@@ -56,23 +56,24 @@ int	ft_export(t_ms *t, int i)
 	int		index;
 
 	j = 1;
-	while (t->cmdlist[i][j] != NULL)
+	while (t->cmdl[i][j] != NULL)
 	{
 		index = 0;
-		while(ft_strchr(t->cmdlist[i][j], '=') == 0)
+		while (ft_strchr(t->cmdl[i][j], '=') == 0)
 			j++;
 		while (t->env[index] != NULL)
 		{
-			if (ft_strncmp(t->env[index], t->cmdlist[i][j], varlen_env(t->cmdlist[i][j])) == 0)
+			if (ft_strncmp(t->env[index], t->cmdl[i][j] \
+			, varlen_env(t->cmdl[i][j])) == 0)
 			{
-				add_var_env(t, t->cmdlist[i][j], index);
+				add_var_env(t, t->cmdl[i][j], index);
 				index = -1;
 				break ;
 			}
 			index++;
 		}
-		if (t->cmdlist[i][j] != NULL && index > -1)
-			add_var_env(t, t->cmdlist[i][j], -1);
+		if (t->cmdl[i][j] != NULL && index > -1)
+			add_var_env(t, t->cmdl[i][j], -1);
 		j++;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/05 19:28:19 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/06 09:25:11 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_henv
 
 typedef struct s_minishell
 {
-	char			***cmdlist;
+	char			***cmdl;
 	pid_t			pid;
 	char			**cmd;
 	int				i;
@@ -106,8 +106,8 @@ int		is_and(char *str);
 void	handle_builtins(t_ms *t, int i);
 void	handle_pipe(t_ms *t);
 int		is_special(char *str);
-void	ft_freecmdlist(t_ms *t);
-void	init_cmdlist(t_ms *t);
+void	ft_freecmdl(t_ms *t);
+void	init_cmdl(t_ms *t);
 void	*pfree(void *ptr);
 int		have_pipe(char **cmds);
 char	*remove_quotes(char *input);

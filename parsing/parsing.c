@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/05 19:00:54 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/06 09:25:11 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,26 @@ int	pathfinder(t_ms *t, int index)
 {
 	int	i;
 
-	if (t->path == NULL && is_builtins(t->cmdlist[index][0]) == 0)
-		return (ft_cmdnotfound(t, t->cmdlist[index][0]));
-	if (t->cmdlist[index][0] != NULL && *t->cmdlist[index][0] != 0)
+	if (t->path == NULL && is_builtins(t->cmdl[index][0]) == 0)
+		return (ft_cmdnotfound(t, t->cmdl[index][0]));
+	if (t->cmdl[index][0] != NULL && *t->cmdl[index][0] != 0)
 	{
 		i = 0;
-		if (check_path(t->cmdlist[index][0]) == 0)
+		if (check_path(t->cmdl[index][0]) == 0)
 			return (0);
-		t->fpath = ft_strjoin(t->path[i], t->cmdlist[index][0]);
+		t->fpath = ft_strjoin(t->path[i], t->cmdl[index][0]);
 		while (access (t->fpath, X_OK) < 0 && t->path[i + 1] != NULL)
 		{
 			t->fpath =pfree(t->fpath);
-			t->fpath = ft_strjoin(t->path[i++], t->cmdlist[index][0]);
+			t->fpath = ft_strjoin(t->path[i++], t->cmdl[index][0]);
 		}
 		if (access(t->fpath, X_OK) == 0)
 		{
-			t->cmdlist[index][0] = pfree(t->cmdlist[index][0]);
-			t->cmdlist[index][0] = ft_strjoin(t->fpath, (char *) '\0');
+			t->cmdl[index][0] = pfree(t->cmdl[index][0]);
+			t->cmdl[index][0] = ft_strjoin(t->fpath, (char *) '\0');
 		}
 		else
-			return (ft_cmdnotfound(t, t->cmdlist[index][0]));
+			return (ft_cmdnotfound(t, t->cmdl[index][0]));
 		t->fpath = pfree(t->fpath);
 	}
 	return (0);
@@ -64,15 +64,15 @@ int	cmdformat(t_ms *t)
 	{
 		if (*t->cmd[i] == 0)
 			return (-1);
-		tf = (void *) t->cmdlist[i];
-		t->cmdlist[i] = ft_splitq(t->cmd[0]);
+		tf = (void *) t->cmdl[i];
+		t->cmdl[i] = ft_splitq(t->cmd[0]);
 		free (tf);
-		if (have_pipe(t->cmdlist[i]) == 1)
+		if (have_pipe(t->cmdl[i]) == 1)
 			handle_pipe(t);
-		while (t->cmdlist[i][j] != 0)
+		while (t->cmdl[i][j] != 0)
 		{
-			t->cmdlist[i][j] = handle_env_var(t, t->cmdlist[i][j]);
-			t->cmdlist[i][j] = remove_quotes(t->cmdlist[i][j]);
+			t->cmdl[i][j] = handle_env_var(t, t->cmdl[i][j]);
+			t->cmdl[i][j] = remove_quotes(t->cmdl[i][j]);
 			j++;
 		}
 		return (cmd_handler(t));
@@ -84,22 +84,22 @@ int	cmd_handler(t_ms *t)
 {
 	t->i = 0;
 	t->return_v = 0;
-	while (t->cmdlist[t->i] != NULL)
+	while (t->cmdl[t->i] != NULL)
 	{
 		t->j = 0;
-		if (is_builtins(t->cmdlist[t->i][0]) == 0 && \
-is_special(t->cmdlist[t->i][0]) == 0)
+		if (is_builtins(t->cmdl[t->i][0]) == 0 && \
+is_special(t->cmdl[t->i][0]) == 0)
 			t->return_v = pathfinder(t, t->i);
-		while (t->cmdlist[t->i][t->j] != NULL)
+		while (t->cmdl[t->i][t->j] != NULL)
 		{
-			if (*t->cmdlist[t->i][t->j] != 0 && *t->cmdlist[t->i][t->j] == '/')
-				t->return_v = check_path(t->cmdlist[t->i][t->j]);
-			if (*t->cmdlist[t->i][t->j] != 0 && *t->cmdlist[t->i][t->j] == '$' \
-			&& t->cmdlist[t->i][t->j][1] == 0)
+			if (*t->cmdl[t->i][t->j] != 0 && *t->cmdl[t->i][t->j] == '/')
+				t->return_v = check_path(t->cmdl[t->i][t->j]);
+			if (*t->cmdl[t->i][t->j] != 0 && *t->cmdl[t->i][t->j] == '$' \
+			&& t->cmdl[t->i][t->j][1] == 0)
 			{
-				if (*t->cmdlist[t->i][0] == 0)
+				if (*t->cmdl[t->i][0] == 0)
 					t->return_v = -1;
-				printf("%s\n", t->cmdlist[t->i][0]);
+				printf("%s\n", t->cmdl[t->i][0]);
 				t->return_v = -1;
 			}
 			t->j++;

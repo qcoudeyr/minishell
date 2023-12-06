@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:18:22 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/04 13:29:48 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/06 09:25:11 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,21 @@ void	handle_pipe(t_ms *t)
 	index = 0;
 	temp_tab = ft_calloc(100, sizeof(char **));
 	temp_tab[index] = ft_calloc(100, sizeof(char **));
-	while (t->cmdlist[0][t->j] != NULL)
+	while (t->cmdl[0][t->j] != NULL)
 	{
-		if ((ft_strchr(t->cmdlist[0][t->j], '|') == 0 || \
-is_or(t->cmdlist[0][t->j]) == 1) && is_and(t->cmdlist[0][t->j]) == 0)
-			temp_tab[index][t->i++] = ft_strdup(t->cmdlist[0][t->j]);
+		if ((ft_strchr(t->cmdl[0][t->j], '|') == 0 || \
+is_or(t->cmdl[0][t->j]) == 1) && is_and(t->cmdl[0][t->j]) == 0)
+			temp_tab[index][t->i++] = ft_strdup(t->cmdl[0][t->j]);
 		else
 		{
 			temp_tab[++index] = ft_calloc(100, sizeof(char *));
-			temp_tab[index][0] = ft_strdup(t->cmdlist[0][t->j]);
+			temp_tab[index][0] = ft_strdup(t->cmdl[0][t->j]);
 			temp_tab[++index] = ft_calloc(100, sizeof(char *));
 			t->i = 0;
 		}
 		t->j++;
 	}
-	ft_freecmdlist(t);
-	t->cmdlist = temp_tab;
+	ft_freecmdl(t);
+	t->cmdl = temp_tab;
 	t->ncmd = index + 1;
 }
