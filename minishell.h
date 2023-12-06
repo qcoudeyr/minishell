@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/06 10:14:33 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/06 11:47:23 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_minishell
 	int				pipefd[2];
 	char			**env;
 	char			**path;
+	void			*temp;
 	char			*pwd;
 	char			*home;
 	char			*prev_pwd;

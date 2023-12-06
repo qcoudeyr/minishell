@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 10:31:40 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/06 11:12:30 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/06 12:00:20 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char	*handle_env_var(t_ms *t, char *str)
 		e.newstr = ft_itoa(t->status >> 8);
 	else
 	{
-		e.newstr = ft_calloc(ft_strlen(str) * 100, sizeof(char));
+		e.newstr = ft_calloc(ft_strlen(str) * 3, sizeof(char));
 		e.var = ft_calloc(100000, sizeof(char));
 		change_str_env(&e, t, str);
 		e.var = pfree(e.var);
@@ -103,7 +103,9 @@ void	change_str_env(t_env *e, t_ms *t, char *str)
 			while (ft_isalpha(str[++t->i]) != 0)
 				e->var[e->len++] = str[t->i];
 			e->var[e->len] = 0;
+			t->temp = e->newstr;
 			e->newstr = ft_strjoin(e->newstr, env_var(t, e->var));
+			t->temp = pfree(t->temp);
 			e->var = pfree(e->var);
 			e->var = ft_calloc(1000, sizeof(char));
 			t->j = ft_strlen(e->newstr);
