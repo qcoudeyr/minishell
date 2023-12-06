@@ -21,7 +21,7 @@ char	*remove_quotes(char *input)
 
 	if (!input)
 		return (NULL);
-	length = (int)ft_strlen(input);
+	length = (int)ft_strlen(input) + 1;
 	result = ft_calloc(length + 10, sizeof(char));
 	if (!result)
 		return (NULL);
