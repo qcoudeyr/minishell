@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 11:02:42 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/06 09:25:11 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/06 09:33:24 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,17 @@ ft_strnstr(t->env[i], str, ft_strlen(str)) == 0)
 		return (0);
 	else
 		return (t->env[i] + ft_strlen(str) + 1);
+}
+
+void	get_env(t_ms *t, char **env)
+{
+	t->env = ft_calloc(1000, sizeof(char *));
+	t->i = 0;
+	while (env[t->i] != NULL)
+	{
+		t->env[t->i] = ft_strdup(env[t->i]);
+		t->i++;
+	}
+	t->env[t->i] = NULL;
+	env_pars(t);
 }

@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:43:26 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/06 09:25:11 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/06 09:33:46 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_free(t_ms *t)
 {
 	t->cmd = tabfree((void **) t->cmd);
 	t->path = tabfree((void **) t->path);
-	t->env = tabfree((void **) t->env);;
+	t->env = tabfree((void **) t->env);
 	t->home = pfree(t->home);
 	t->rusage = pfree(t->rusage);
 	t->pwd = pfree(t->pwd);

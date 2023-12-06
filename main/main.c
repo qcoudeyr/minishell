@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/06 09:25:11 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/06 09:38:37 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,17 +79,16 @@ int	start_minishell(t_ms *t)
 	rl_str = pfree(rl_str);
 	return (0);
 }
-void	get_env(t_ms *t, char **env)
+
+void	t_init(t_ms *t)
 {
-	t->env = ft_calloc(1000, sizeof(char *));
-	t->i = 0;
-	while (env[t->i] != NULL)
-	{
-		t->env[t->i] = ft_strdup(env[t->i]);
-		t->i++;
-	}
-	t->env[t->i] = NULL;
-	env_pars(t);
+	t->rusage = ft_calloc(1, sizeof(struct rusage));
+	t->cmdl = NULL;
+	t->cmd = ft_calloc(10, sizeof(char *));
+	t->path = ft_calloc(1, sizeof(char **));
+	t->fpath = NULL;
+	t->home = ft_calloc(1, sizeof(char *));
+	t->pwd = ft_calloc(1, sizeof(char *));
 }
 
 int	main(int argc, char **argv, char **env)
@@ -100,24 +99,15 @@ int	main(int argc, char **argv, char **env)
 	if (argc > 1)
 		return (printf("ERROR: usage ./minishell\n"), 1);
 	t = malloc(sizeof(t_ms));
-	t->rusage = ft_calloc(1, sizeof(struct rusage));
-	t->cmdl = NULL;
-	t->cmd = ft_calloc(10, sizeof(char *));
-	t->path = ft_calloc(1, sizeof(char **));
-	t->fpath = NULL;
-	t->home = ft_calloc(1, sizeof(char *));
-	t->pwd = ft_calloc(1, sizeof(char *));
-
+	t_init(t);
 	rl_initialize();
 	using_history();
 	get_env(t, env);
-
-	 printf("\033[2J\033[H");
+	printf("\033[2J\033[H");
 	if (print_header() == -1)
 		return (-1);
 	start_minishell(t);
-	 printf("\033[2J\033[H");
-
+	printf("\033[2J\033[H");
 	rl_clear_history();
 	ft_freecmdl(t);
 	ft_free(t);
