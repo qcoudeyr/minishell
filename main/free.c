@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:43:26 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/06 11:57:48 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/06 12:30:33 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,23 @@ void	ft_freecmdl(t_ms *t)
 	i = 0;
 	if (t->cmdl != NULL)
 	{
-		while (t->cmdl != NULL && t->cmdl[i] != NULL)
+		while (t->cmdl[i] != NULL)
 		{
 			t->cmdl[i] = tabfree((void **) t->cmdl[i]);
 			i++;
 		}
+		t->cmdl = pfree(t->cmdl);
 	}
 }
 
 void	ft_free(t_ms *t)
 {
-	t->cmd = tabfree((void **) t->cmd);
+ 	while (t->nc >= 0)
+	{
+		t->cmd[t->nc] = pfree(t->cmd[t->nc]);
+		t->nc--;
+	}
+	t->cmd = pfree(t->cmd);
 	t->path = tabfree((void **) t->path);
 	t->env = tabfree((void **) t->env);
 	t->home = pfree(t->home);

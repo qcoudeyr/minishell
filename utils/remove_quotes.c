@@ -21,7 +21,6 @@ char	*remove_quotes(char *input)
 
 	if (!input)
 		return (NULL);
-	printf("pf = %s\n", input);
 	length = ft_strlen(input);
 	result = ft_calloc(length + 10, sizeof(char));
 	if (!result)

@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/06 11:19:31 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/06 12:27:17 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,13 @@ int	start_minishell(t_ms *t)
 	char	*rl_str;
 
 	rl_str = NULL;
-	while (ft_strncmp("exit", t->cmd[t->nc], 4) != 0)
+	while (1)
 	{
-		if (t->nc > 0 && *t->cmd[t->nc] != 0)
-			t->nc++;
 		init_cmdl(t);
 		signal(SIGINT, getsignal);
 		rl_str = rl_string(t, rl_str);
 		t->cmd[t->nc] = readline(rl_str);
-		if (t->cmd[t->nc] == NULL)
+		if (t->cmd[t->nc] == NULL || ft_strncmp("exit", t->cmd[t->nc], 5) == 0)
 			break ;
 		if (t->cmd[t->nc][0] != '\0')
 		{
@@ -67,6 +65,7 @@ int	start_minishell(t_ms *t)
 		if (*t->cmd[t->nc] != 0 && cmdformat(t) != -1)
 			exec_cmd(t);
 		env_pars(t);
+		t->nc++;
 	}
 	rl_str = pfree(rl_str);
 	return (0);
