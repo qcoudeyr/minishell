@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 20:18:44 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/06 09:25:11 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/06 21:50:56 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,18 @@ O_WRONLY | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
 	}
 	return (1);
 }
-/*
+
 void	handle_heredoc(t_ms *t, int index, int i)
 {
-	t->cmdl[index][i + 1]
-	get_next_line()
+	t->cmdl[index][i + 1];
+	get_next_line();
 }
- */
 
 void	input_redirect(t_ms *t, int index, int i)
 {
 	if (ft_strnstr(t->cmdl[index][i], "<<", 3) != 0)
 	{
-		/* handle_heredoc(t); */
+		handle_heredoc(t);
 	}
 	else if (ft_strnstr(t->cmdl[index][i], "<", 2) != 0)
 	{
