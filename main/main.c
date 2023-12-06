@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/06 10:27:22 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/06 11:15:44 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	start_minishell(t_ms *t)
 	char	*rl_str;
 
 	rl_str = NULL;
-	while (ft_strncmp("exit", t->cmd[t->nc], 4) != 0)
+	while (ft_strncmp("exit", t->cmd[t->nc - 1], 4) != 0)
 	{
 		init_cmdl(t);
 		signal(SIGINT, getsignal);
