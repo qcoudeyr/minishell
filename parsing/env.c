@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 11:02:42 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/06 09:33:24 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/06 10:37:17 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void	path_format(t_ms *t)
 	int		i;
 
 	i = 0;
-	while (t->path[i])
+	while (t->path[i] != NULL)
 	{
 		temp = ft_strdup(t->path[i]);
-		free(t->path[i]);
+		t->path[i] = pfree(t->path[i]);
 		t->path[i] = ft_strjoin(temp, "/");
-		free(temp);
+		temp = pfree(temp);
 		i++;
 	}
 }
