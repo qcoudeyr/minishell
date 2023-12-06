@@ -6,30 +6,11 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:01 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/06 21:20:14 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/06 21:44:35 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-/*
-void	sigint_handler(int signo)
-{
-	(void)signo;
-
-}
-
-void	nothing_handler(int signo)
-{
-	(void)signo;
-}
-
-void	getsignal(int signal_number)
-{
-	if (signal_number == 2)
-		signal(SIGINT, sigint_handler);
-	else if (signal_number == 3)
-		signal(SIGQUIT, nothing_handler);
-} */
 
 int	ft_cmdnotfound(t_ms *t, char *str)
 {
