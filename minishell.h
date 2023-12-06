@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/06 09:39:07 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/06 10:14:33 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef struct s_minishell
 	char			*fpath;
 	int				status;
 	int				index;
-	int				ncmd;
+	int				nc;
 	int				input_fd;
 	int				output_fd;
 	int				pipefd[2];
@@ -90,6 +90,7 @@ void	*tabfree(void **ptr);
 int		is_set_env_var(char *str);
 void	get_env(t_ms *t, char **env);
 void	end_pipe(t_ms *t);
+void	t_init(t_ms *t);
 void	handle_spec(t_ms *t);
 void	change_str_env(t_env *e, t_ms *t, char *str);
 void	hev_quote(char c, int *squote, int *quote);
@@ -109,6 +110,7 @@ void	handle_pipe(t_ms *t);
 int		is_special(char *str);
 void	ft_freecmdl(t_ms *t);
 void	init_cmdl(t_ms *t);
+void	t_init(t_ms *t);
 void	*pfree(void *ptr);
 int		have_pipe(char **cmds);
 char	*remove_quotes(char *input);

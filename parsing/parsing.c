@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/06 09:33:57 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/06 10:25:21 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ int	cmdformat(t_ms *t)
 
 	j = 0;
 	i = 0;
-	t->cmd[i] = rmcharq(t->cmd[i], '\\');
-	if (t->cmd[i] != NULL && *t->cmd[i] != 0)
+	t->cmd[t->nc] = rmcharq(t->cmd[t->nc], '\\');
+	if (t->cmd[t->nc] != NULL && *t->cmd[t->nc] != 0)
 	{
-		if (*t->cmd[i] == 0)
+		if (*t->cmd[t->nc] == 0)
 			return (-1);
 		tf = (void *) t->cmdl[i];
 		t->cmdl[i] = ft_splitq(t->cmd[0]);
@@ -82,31 +82,25 @@ int	cmdformat(t_ms *t)
 
 int	cmd_handler(t_ms *t)
 {
+	int	return_v;
+
 	t->i = 0;
-	t->return_v = 0;
+	return_v = 0;
 	while (t->cmdl[t->i] != NULL)
 	{
 		t->j = 0;
 		if (is_builtins(t->cmdl[t->i][0]) == 0 && \
 is_special(t->cmdl[t->i][0]) == 0)
-			t->return_v = pathfinder(t, t->i);
+			return_v = pathfinder(t, t->i);
 		while (t->cmdl[t->i][t->j] != NULL)
 		{
 			if (*t->cmdl[t->i][t->j] != 0 && *t->cmdl[t->i][t->j] == '/')
-				t->return_v = check_path(t->cmdl[t->i][t->j]);
-			if (*t->cmdl[t->i][t->j] != 0 && *t->cmdl[t->i][t->j] == '$' \
-			&& t->cmdl[t->i][t->j][1] == 0)
-			{
-				if (*t->cmdl[t->i][0] == 0)
-					t->return_v = -1;
-				printf("%s\n", t->cmdl[t->i][0]);
-				t->return_v = -1;
-			}
+				return_v = check_path(t->cmdl[t->i][t->j]);
 			t->j++;
 		}
 		t->i++;
 	}
-	return (t->return_v);
+	return (return_v);
 }
 
 char	*rmcharq(char *str, char c)

@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/06 09:38:37 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/06 10:27:22 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,6 @@ int	print_header(void)
 	return (0);
 }
 
-void	init_cmdl(t_ms *t)
-{
-	if (t->cmdl != NULL)
-		ft_freecmdl(t);
-	t->cmdl = ft_calloc(2, sizeof(char **));
-}
-
 char	*rl_string(t_ms *t, char *rl_str)
 {
 	void	*temp;
@@ -53,42 +46,30 @@ char	*rl_string(t_ms *t, char *rl_str)
 
 int	start_minishell(t_ms *t)
 {
-	int		i;
 	char	*rl_str;
 
-	i = 0;
 	rl_str = NULL;
-	while (ft_strncmp("exit", t->cmd[i], 4) != 0)
+	while (ft_strncmp("exit", t->cmd[t->nc], 4) != 0)
 	{
-		t->cmd[i] = pfree(t->cmd[i]);
 		init_cmdl(t);
 		signal(SIGINT, getsignal);
 		rl_str = rl_string(t, rl_str);
-		t->cmd[i] = readline(rl_str);
-		if (t->cmd[i] == NULL)
+		t->cmd[t->nc] = readline(rl_str);
+		if (t->cmd[t->nc] == NULL)
 			break ;
-		if (t->cmd[i][0] != '\0')
+		if (t->cmd[t->nc][0] != '\0')
 		{
 			rl_redisplay();
-			add_history(t->cmd[i]);
+			add_history(t->cmd[t->nc]);
 		}
-		if (*t->cmd[i] != 0 && cmdformat(t) != -1)
+		if (*t->cmd[t->nc] != 0 && cmdformat(t) != -1)
 			exec_cmd(t);
+		if (*t->cmd[t->nc] != 0)
+			t->nc++;
 		env_pars(t);
 	}
 	rl_str = pfree(rl_str);
 	return (0);
-}
-
-void	t_init(t_ms *t)
-{
-	t->rusage = ft_calloc(1, sizeof(struct rusage));
-	t->cmdl = NULL;
-	t->cmd = ft_calloc(10, sizeof(char *));
-	t->path = ft_calloc(1, sizeof(char **));
-	t->fpath = NULL;
-	t->home = ft_calloc(1, sizeof(char *));
-	t->pwd = ft_calloc(1, sizeof(char *));
 }
 
 int	main(int argc, char **argv, char **env)

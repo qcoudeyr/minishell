@@ -8,10 +8,10 @@ LIBS = -lft -lreadline -lncurses -lhistory
 HEADERS = minishell.h
 
 SRCS =	main.c \
-		parsing.c error.c cmdexe.c ft_cd.c ft_echo.c \
+		parsing.c error.c bultinexe.c ft_cd.c ft_echo.c \
 		remove_quotes.c find_redirect.c free_tabstr.c \
 		env_var.c pipe.c bonus.c utils.c free.c exec.c \
-		error_2.c env.c ft_unset.c ft_export.c
+		error_2.c env.c ft_unset.c ft_export.c init.c
 
 OBJDIR = ./object/
 OBJS = $(addprefix $(OBJDIR),$(SRCS:.c=.o))

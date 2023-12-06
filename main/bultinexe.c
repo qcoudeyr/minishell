@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmdexe.c                                           :+:      :+:    :+:   */
+/*   bultinexe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 09:45:55 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/06 09:27:38 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/06 10:05:31 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,28 +25,6 @@ int	change_env(t_ms *t, char *var, char *tochange)
 	ptr = t->env[i];
 	t->env[i] = ft_strjoin(var, tochange);
 	ptr = pfree(ptr);
-	return (0);
-}
-
-int	print_help(int i)
-{
-	int		fd;
-	char	*str;
-
-	if (i == 1)
-		fd = open("./main/cmd", O_RDONLY);
-	else
-		fd = open("./main/help", O_RDONLY);
-	if (fd == -1)
-		return (-1);
-	str = get_next_line(fd);
-	while (str != NULL)
-	{
-		printf("%s", str);
-		free(str);
-		str = get_next_line(fd);
-	}
-	free(str);
 	return (0);
 }
 
