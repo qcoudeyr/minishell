@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/06 12:27:17 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/06 20:58:29 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	start_minishell(t_ms *t)
 	while (1)
 	{
 		init_cmdl(t);
-		signal(SIGINT, getsignal);
 		rl_str = rl_string(t, rl_str);
 		t->cmd[t->nc] = readline(rl_str);
 		if (t->cmd[t->nc] == NULL || ft_strncmp("exit", t->cmd[t->nc], 5) == 0)
@@ -78,6 +77,8 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	if (argc > 1)
 		return (printf("ERROR: usage ./minishell\n"), 1);
+	signal(SIGINT, getsignal);
+	signal(SIGQUIT, getsignal);
 	t = malloc(sizeof(t_ms));
 	t_init(t);
 	rl_initialize();
