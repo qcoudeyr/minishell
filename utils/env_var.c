@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 10:31:40 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/06 13:17:18 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/06 13:47:19 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ char	*handle_env_var(t_ms *t, char *str)
 		e.newstr = ft_itoa(t->status >> 8);
 	else
 	{
-		e.newstr = ft_calloc(ft_strlen(str) * 3, sizeof(char));
-		e.var = ft_calloc(100000, sizeof(char));
+		e.newstr = ft_calloc((ft_strlen(str) * 10), sizeof(char));
+		e.var = ft_calloc(1000, sizeof(char));
 		change_str_env(&e, t, str);
 		e.var = pfree(e.var);
 	}
@@ -104,9 +104,7 @@ void	change_str_env(t_env *e, t_ms *t, char *str)
 			while (ft_isalpha(str[++t->i]) != 0)
 				e->var[e->len++] = str[t->i];
 			e->var[e->len] = 0;
-			t->temp = e->newstr;
-			e->newstr = ft_strjoin(e->newstr, env_var(t, e->var));
-			t->temp = pfree(t->temp);
+			ft_strlcpy(e->newstr + t->j, env_var(t, e->var), ft_strlen(env_var(t, e->var)) + 1);
 			e->var = pfree(e->var);
 			e->var = ft_calloc(1000, sizeof(char));
 			t->j = ft_strlen(e->newstr);
@@ -114,6 +112,7 @@ void	change_str_env(t_env *e, t_ms *t, char *str)
 		if (str[t->i] != 0)
 			e->newstr[t->j++] = str[t->i++];
 	}
+	e->newstr[t->j] = 0;
 }
 
 void	hev_quote(char c, int *squote, int *quote)

@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 09:56:19 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/06 12:32:13 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/06 13:50:20 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	t_init(t_ms *t)
 
 void	init_cmdl(t_ms *t)
 {
-	if (t->cmdl != NULL && *t->cmdl != NULL)
+	if (t->cmdl != NULL)
 		ft_freecmdl(t);
 	t->cmdl = ft_calloc(10, sizeof(char **));
 }
