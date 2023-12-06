@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 10:31:40 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/06 12:00:20 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/06 12:08:38 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	change_str_env(t_env *e, t_ms *t, char *str)
 {
 	while (str[t->i] != '\0')
 	{
+		e->len = 0;
 		hev_quote(str[t->i], &e->squote, &e->quote);
 		if ((e->quote == 1 || (e->squote == 0 && e->quote == 0)) && \
 	str[t->i] == '$' && ft_isalpha(str[t->i + 1]))

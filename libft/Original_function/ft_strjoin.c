@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 11:51:56 by qcoudeyr          #+#    #+#             */
-/*   Updated: 2023/10/24 11:27:33 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/06 12:04:22 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	int		len;
 
 	len = ft_strlen(s1) + ft_strlen(s2);
-	str = malloc(sizeof(char) * (len + 1));
+	str = ft_calloc((len + 2), sizeof(char));
 	if (!str)
 		return (NULL);
 	while (s1 != NULL && *s1)
