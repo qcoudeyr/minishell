@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 10:31:40 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/06 12:08:38 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/06 13:17:18 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ void	change_str_env(t_env *e, t_ms *t, char *str)
 		if (str[t->i] != 0)
 			e->newstr[t->j++] = str[t->i++];
 	}
-	e->newstr[t->j] = 0;
 }
 
 void	hev_quote(char c, int *squote, int *quote)
