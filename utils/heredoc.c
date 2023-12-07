@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 09:05:39 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 10:02:00 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 10:04:09 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,18 @@ O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
 	if (t->cmdl[index][i + 1] == NULL || *t->cmdl[index][i + 1] == 0)
 		return (heredoc_error(t, index));
 	buf = NULL;
-	temp = NULL
+	temp = NULL;
 	stop = ft_strjoin(t->cmdl[index][i + 1], "\n");
-	while (ft_strnstr(buf, stop, ft_strlen(buf)) == 0)
+	while (ft_strnstr(temp, stop, ft_strlen(stop)) == 0)
 	{
 		if (temp != NULL)
 		{
 			t->temp = buf;
 			buf = ft_strjoin(temp, buf);
+			temp = pfree(temp);
+			t->temp = pfree(t->temp);
 		}
 		temp = get_next_line(STDIN_FILENO);
-		t->temp = pfree(t->temp);
-		temp = pfree(temp);
 	}
 	get_next_line(-1);
 	buf[ft_strlen(buf) - 1] = 0;
