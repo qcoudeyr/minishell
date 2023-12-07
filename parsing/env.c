@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 11:02:42 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 17:48:56 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 18:03:26 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,24 @@ ft_strnstr(t->env[i], str, ft_strlen(str)) == 0)
 		return (0);
 	else
 		return (t->env[i] + ft_strlen(str) + 1);
+}
+
+void	ask_for_env(t_ms *t)
+{
+	char *buffer;
+
+	write(1, "No env detected, do you want to load default linux env ?", 57);
+	write(1, BOLD" Y/N ->", 12);
+	buffer = NULL;
+	while (1)
+	{
+		buffer = get_next_line(0);
+		if (ft_strnstr("Y", buffer) != 0)
+		{
+			/*Load linux file*/
+		}
+	}
+
 }
 
 void	get_env(t_ms *t, char **env)

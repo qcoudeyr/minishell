@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 11:54:47 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/04 11:41:30 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 17:54:21 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	ft_pwd(t_ms *t)
 	if (t->pwd != NULL)
 	{
 		printf("%s\n", t->pwd);
-		return (1);
+		return (0);
 	}
 	else
-		return (0);
+		return (512);
 }
