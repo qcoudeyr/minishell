@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:28:07 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 22:50:12 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 22:57:27 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,21 @@ void	export_compare(t_ms *t)
 	t->export[i] = NULL;
 }
 
+void	fix_tab(char **lst,int i)
+{
+	char	*temp;
+	int		j;
+
+	temp = lst[0];
+	j = 0;
+	while (j < i - 1)
+	{
+		ft_swap(lst[j], lst[j + 1]);
+		j++;
+	}
+	lst[j] = temp;
+}
+
 int	tab_sorted(char **lst)
 {
 	int		i;
@@ -176,7 +191,7 @@ int	tab_sorted(char **lst)
 		if (*lst[i] >= *lst[i - 1] && *lst[i] > *lst[0])
 			return (0);
 		else if (*lst[i] > *lst[0])
-			ft_swap(lst[i - 1], lst[0]);
+			fix_tab(lst, i);
 	}
 	return (-1);
 
