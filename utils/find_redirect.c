@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 20:18:44 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/07 08:36:24 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 08:40:19 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@ O_WRONLY | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
 
 void	heredoc_error(t_ms *t, int index, int i)
 {
-	if (t->cmdl[index][0] != NULL)
-		fd_printf(2, "")
+	if (t->cmdl[index + 1][0] != NULL)
+		fd_printf(2, "syntax error near unexpected token \'%s\'\n", t->cmdl[index + 1][0]);
+	else
+		fd_printf(2, "syntax error near unexpected token \'\\n'\n");
 	t->status = 512;
 }
 
@@ -46,7 +48,8 @@ void	handle_heredoc(t_ms *t, int index, int i)
 	char	*temp;
 
 	if (t->cmdl[index][i + 1] == NULL || *t->cmdl[index][i + 1] == 0)
-		heredoc_error(t, index, i);
+		return (heredoc_error(t, index, i));
+	while ()
 	temp = get_next_line(STDIN_FILENO);
 
 }
