@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/06 13:27:32 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 09:11:24 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ is_special(t->cmdl[t->i][0]) == 0)
 			return_v = pathfinder(t, t->i);
 		while (t->cmdl[t->i][t->j] != NULL)
 		{
-			if (*t->cmdl[t->i][t->j] != 0 && *t->cmdl[t->i][0] == '/')
+			if (*t->cmdl[t->i][t->j] != 0 && *t->cmdl[t->i][t->j] == '/')
 				return_v = check_path(t->cmdl[t->i][t->j]);
 			t->j++;
 		}
