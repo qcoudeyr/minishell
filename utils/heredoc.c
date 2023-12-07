@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 09:05:39 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 10:31:54 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 10:38:10 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
 		if (temp != NULL)
 			write(t->input_fd, temp, ft_strlen(temp));
 		temp = pfree(temp);
-		write(1, ">", 2);
+		write(1, BOLD" -> "RESET, 13);
 		temp = get_next_line(STDIN_FILENO);
 	}
 	get_next_line(-1);
