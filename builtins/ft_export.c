@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:28:07 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 19:41:11 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 19:56:08 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,28 @@ void	add_var_env(t_ms *t, char *str, int index)
 	t->env = newenv;
 }
 
+void	add_export_var(t_ms *t, char *str)
+{
+	int	ln;
+	int	index;
+
+	index = 0;
+	ln = tablen(t->export);
+	while (t->env[index] != NULL)
+	{
+		if (ft_strncmp(t->env[index], str \
+		, varlen_env(str)) == 0)
+		{
+			add_var_env(t, str, index);
+			index = -1;
+			break ;
+		}
+		index++;
+	}
+	t->export[ln] = ft_strdup(str);
+}
+
+
 int	ft_export(t_ms *t, int i)
 {
 	t->j = 1;
@@ -57,7 +79,7 @@ int	ft_export(t_ms *t, int i)
 	{
 		t->index = 0;
 		if (ft_strchr(t->cmdl[i][t->j], '=') == 0)
-			add_export_var(t, t->cmdl[i][t->j], t->index++);
+			add_export_var(t, t->cmdl[i][t->j]);
 		while (t->cmdl[i][t->j] != NULL && t->env[t->index] != NULL)
 		{
 			if (ft_strncmp(t->env[t->index], t->cmdl[i][t->j] \
