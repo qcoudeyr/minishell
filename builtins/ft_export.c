@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:28:07 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 20:26:41 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 20:29:05 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,9 @@ int	export_compare(t_ms *t, int i)
 				lower = j;
 			j++;
 		}
-		ft_swap(t->export[i], t->export[lower]);
+		t->temp = t->export[i];
+		t->export[i] = t->export[lower];
+		t->export[lower] = t->temp;
 		i++;
 	}
 	return (i);
