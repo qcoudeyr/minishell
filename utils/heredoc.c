@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 09:05:39 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 09:40:11 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 09:44:01 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	handle_heredoc(t_ms *t, int index, int i)
 	char	*temp;
 	char	*stop;
 
-	t->input_fd = 1000;
-	open()
+	t->input_fd = open("./utils/temp", \
+O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
 	if (t->cmdl[index][i + 1] == NULL || *t->cmdl[index][i + 1] == 0)
 		return (heredoc_error(t, index));
 	temp = NULL;

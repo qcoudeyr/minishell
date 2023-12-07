@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:43:26 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 09:04:25 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 09:46:37 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@ void	ft_free(t_ms *t)
 	{
 		t->cmd[t->nc] = pfree(t->cmd[t->nc]);
 		t->nc--;
+	}
+	if (access("./utils/temp", F_OK) != -1) {
+	if (remove("./utils/temp") == 0) {
+		printf("File './utils/temp' deleted successfully.\n");
 	}
 	t->cmd = pfree(t->cmd);
 	t->path = tabfree((void **) t->path);
