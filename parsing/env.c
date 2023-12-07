@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 11:02:42 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 19:12:12 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 22:37:47 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,6 @@ int	ask_for_env(t_ms *t)
 void	get_env(t_ms *t, char **env)
 {
 	t->env = ft_calloc(1000, sizeof(char *));
-
 	if (*env != 0 || ((env == NULL || *env == 0) && ask_for_env(t) == 0))
 	{
 		t->i = 0;
