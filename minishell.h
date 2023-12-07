@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/06 21:19:21 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 09:06:26 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ void	ft_free(t_ms *t);
 void	sigint_handler(int signo);
 void	nothing_handler(int signo);
 void	getsignal(int signal_number);
+void	handle_heredoc(t_ms *t, int index, int i);
 
 // Text colors
 # define CL_BLACK   "\033[30m"
