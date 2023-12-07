@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 11:02:42 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 15:17:50 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 15:57:57 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	env_pars(t_ms *t)
 	int		i;
 
 	i = 0;
-	export_sort(t);
+	get_export(t);
 	t->path = tabfree((void **)t->path);
 	t->pwd = pfree(t->pwd);
 	t->home = pfree(t->home);

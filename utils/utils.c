@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 20:50:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 15:04:20 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 15:35:07 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	tablen(void **tabl)
 {
 	int	index;
 
+	index = 0;
 	if (tabl == NULL || *tabl == NULL)
 		return (0);
 	while (tabl[index] != NULL)

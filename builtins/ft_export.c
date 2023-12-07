@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:28:07 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 15:30:32 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 16:01:14 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,23 +92,46 @@ int	printexport(t_ms *t)
 	return (0);
 }
 
-void	export_sort(t_ms *t)
+void	get_export(t_ms *t)
 {
-	t->export = ft_calloc(tablen((void **)t->env) + 1, sizeof(char *));
+	t->export = ft_calloc((tablen((void **)t->env) + 1), sizeof(char *));
 	t->i = 0;
 	while (t->env[t->i] != NULL)
 	{
-		t->j = t->i + 1;
-		t->temp = t->env[t->j];
-		while (t->env[t->j] != NULL)
-		{
-			if (ft_strcmp(t->env[t->j], t->env[t->i]) < 0 && ft_strcmp(t->env[t->j], t->temp) < 0)
-				t->temp = t->env[t->j];
-			t->j++;
-		}
-		t->export[t->i] = t->temp;
+		t->export[t->i] = ft_strdup(t->env[t->i]);
 		t->i++;
 	}
+	t->export[t->i] = NULL;
+}
+
+void	export_compare(t_ms *t)
+{
+	int	lower;
+
+	lower = 0;
+	while (t->export[t->i] != NULL)
+	{
+		t->j = t->i + 1;
+		t->temp = t->export[t->j];
+		while (t->export[t->j] != NULL)
+		{
+			if (ft_strcmp(t->export[t->i], t->export[t->j]) > 0 && ft_strcmp(t->export[t->j], t->export[lower]) < 0)
+				lower = t->j;
+			t->j++;
+		}
+		t->temp = t->export[t->i];
+		t->export[t->i] = t->export[lower];
+		t->export[lower] = t->temp;
+		t->i++;
+	}
+}
+
+void	export_sort(t_ms *t)
+{
+	t->i = 0;
+	export_compare(t);
+	t->i = 0;
+	export_compare(t);
 	t->export[t->i] = NULL;
 	printexport(t);
 }
