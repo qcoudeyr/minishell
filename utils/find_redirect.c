@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 20:18:44 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/06 21:50:56 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 08:36:24 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,28 @@ O_WRONLY | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
 	return (1);
 }
 
+void	heredoc_error(t_ms *t, int index, int i)
+{
+	if (t->cmdl[index][0] != NULL)
+		fd_printf(2, "")
+	t->status = 512;
+}
+
 void	handle_heredoc(t_ms *t, int index, int i)
 {
-	t->cmdl[index][i + 1];
-	get_next_line();
+	char	*temp;
+
+	if (t->cmdl[index][i + 1] == NULL || *t->cmdl[index][i + 1] == 0)
+		heredoc_error(t, index, i);
+	temp = get_next_line(STDIN_FILENO);
+
 }
 
 void	input_redirect(t_ms *t, int index, int i)
 {
 	if (ft_strnstr(t->cmdl[index][i], "<<", 3) != 0)
 	{
-		handle_heredoc(t);
+		handle_heredoc(t, index, i);
 	}
 	else if (ft_strnstr(t->cmdl[index][i], "<", 2) != 0)
 	{
