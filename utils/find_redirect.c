@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 20:18:44 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/07 09:05:28 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 12:38:22 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	input_redirect(t_ms *t, int index, int i)
 {
 	if (ft_strnstr(t->cmdl[index][i], "<<", 3) != 0)
 	{
+		if (access("./utils/temp", F_OK) != -1)
+			unlink("./utils/temp");
 		handle_heredoc(t, index, i);
 	}
 	else if (ft_strnstr(t->cmdl[index][i], "<", 2) != 0)
@@ -64,8 +66,8 @@ O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
 
 void	format_cmd_redirect(t_ms *t, int index, int i)
 {
-	t->cmdl[index][i] = NULL;
-	t->cmdl[index][i + 1] = NULL;
+	t->cmdl[index][i] = pfree(t->cmdl[index][i]);
+	t->cmdl[index][i + 1] = pfree(t->cmdl[index][i + 1]);
 	while (t->cmdl[index][i + 2] != NULL)
 	{
 		t->cmdl[index][i] = t->cmdl[index][i + 2];
