@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 11:02:42 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 15:57:57 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 17:48:56 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	env_pars(t_ms *t)
 	int		i;
 
 	i = 0;
-	get_export(t);
+
 	t->path = tabfree((void **)t->path);
 	t->pwd = pfree(t->pwd);
 	t->home = pfree(t->home);
@@ -99,6 +99,8 @@ void	get_env(t_ms *t, char **env)
 {
 	t->env = ft_calloc(1000, sizeof(char *));
 	t->i = 0;
+	if (env == NULL || *env == 0)
+		ask_for_env(t);
 	while (env[t->i] != NULL)
 	{
 		t->env[t->i] = ft_strdup(env[t->i]);
@@ -106,4 +108,6 @@ void	get_env(t_ms *t, char **env)
 	}
 	t->env[t->i] = NULL;
 	env_pars(t);
+	get_export(t);
+	export_sort(t);
 }
