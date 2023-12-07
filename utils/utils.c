@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 20:50:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 15:35:07 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 19:29:08 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,13 @@ int	tablen(void **tabl)
 	while (tabl[index] != NULL)
 		index++;
 	return (index);
+}
+
+void	ft_swap(void *ptr1, void *ptr2)
+{
+	void	*temp;
+
+	temp = ptr1;
+	ptr1 = ptr2;
+	ptr2 = temp;
 }
