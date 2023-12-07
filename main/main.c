@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/06 21:17:28 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 09:51:42 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,11 @@ int	main(int argc, char **argv, char **env)
 	using_history();
 	get_env(t, env);
 	handle_signal(t);
-	printf("\033[2J\033[H");
+/* 	printf("\033[2J\033[H"); */
 	if (print_header() == -1)
 		return (-1);
 	start_minishell(t);
-	printf("\033[2J\033[H");
+/* 	printf("\033[2J\033[H"); */
 	rl_clear_history();
 	ft_freecmdl(t);
 	ft_free(t);
