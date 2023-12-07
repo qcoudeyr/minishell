@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/12/07 22:29:45 by  qcoudeyr         #+#    #+#              #
+#    Updated: 2023/12/07 22:29:46 by  qcoudeyr        ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 vpath %.c %.o %.h %.a ./libft ./parsing ./error ./main ./builtins ./utils ./object
 VPATH = . : ./libft : ./parsing : ./error : ./main : ./builtins : ./utils
 CC = gcc
@@ -19,7 +31,7 @@ OBJS = $(addprefix $(OBJDIR),$(SRCS:.c=.o))
 
 NAME = minishell
 
-all: $(OBJDIR) $(NAME) check_norme generate_env
+all: $(OBJDIR) $(NAME) norme generate_env
 
 $(NAME): $(OBJS) libft
 	@echo "\033[2m\033[31mStart to make $(NAME)\033[0m"
@@ -56,7 +68,7 @@ fclean: clean
 re: fclean all
 
 
-check_norme:
+norme:
 	@echo "\033[2m\033[31mLet's check the norme for $(NAME)\033[0m"
 	@if [ $$(norminette | grep Error | wc -c) -eq 0 ]; then \
 		echo "\033[32m\033[1m\tNorme is OK!\033[0m"; \
@@ -76,6 +88,6 @@ debug: $(OBJS)
 	colour-valgrind -s --tool=memcheck --leak-check=full --error-exitcode=1 \
 	./debug
 
-.PHONY: all clean fclean re debug libft check_norme generate_env
+.PHONY: all clean fclean re debug libft norme generate_env
 
 #--show-leak-kinds=all --track-origins=yes
