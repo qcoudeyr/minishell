@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 09:05:39 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 09:15:11 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 09:19:22 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	handle_heredoc(t_ms *t, int index, int i)
 	while (ft_strnstr(temp, t->cmdl[index][i + 1], len) == 0)
 	{
 		t->temp = temp;
-		temp = get_next_line(STDIN_FILENO);
+		temp = ft_strjoin(temp, get_next_line(STDIN_FILENO));
 		t->temp = pfree(t->temp);
 	}
 	write(t->input_fd, temp, ft_strlen(temp) + 1);
