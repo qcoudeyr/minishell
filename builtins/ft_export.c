@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:28:07 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 20:00:55 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 20:16:11 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ int	varlen_env(char *str)
 	int	i;
 
 	i = 0;
-	if (str == NULL || *str == 0)
+	if (str == NULL)
+		return (0);
+	if (*str == 0)
 		return (0);
 	while (str[i] != 0 && str[i] != '=')
 		i++;
@@ -57,6 +59,8 @@ void	add_var_export(t_ms *t, char *str, int index)
 
 	newenv = ft_calloc(1000, sizeof(char *));
 	i = 0;
+	if (ft_strchr(str, '=') != 0)
+		add_var_env(t, str, index);
 	while (t->export[i] != NULL)
 	{
 		if (i == index)
@@ -74,58 +78,36 @@ void	add_var_export(t_ms *t, char *str, int index)
 	}
 	t->export = pfree(t->export);
 	t->export = newenv;
+	export_sort(t);
 }
-
-void	add_export_var(t_ms *t, char *str)
-{
-	int	ln;
-	int	index;
-
-	index = 0;
-	ln = tablen(t->export);
-	while (t->env[index] != NULL)
-	{
-		if (ft_strncmp(t->env[index], str \
-		, varlen_env(str)) == 0)
-		{
-			add_var_env(t, str, index);
-			index = -1;
-			break ;
-		}
-		index++;
-	}
-	t->export[ln] = ft_strdup(str);
-}
-
 
 int	ft_export(t_ms *t, int i)
 {
+	int	index;
+
 	t->j = 1;
 	while (t->cmdl[i][t->j] != NULL)
 	{
-		t->index = 0;
-		if (ft_strchr(t->cmdl[i][t->j], '=') == 0)
-			add_export_var(t, t->cmdl[i][t->j]);
-		while (t->cmdl[i][t->j] != NULL && t->env[t->index] != NULL)
+		index = 0;
+		while (t->cmdl[i][t->j] != NULL && t->env[index] != NULL)
 		{
-			if (ft_strncmp(t->env[t->index], t->cmdl[i][t->j] \
+			if (ft_strncmp(t->env[index], t->cmdl[i][t->j] \
 			, varlen_env(t->cmdl[i][t->j])) == 0)
 			{
-				add_var_env(t, t->cmdl[i][t->j], t->index);
-				t->index = -1;
+				add_var_export(t, t->cmdl[i][t->j], index);
+				index = -1;
 				break ;
 			}
-			t->index++;
+			index++;
 		}
-		if (t->cmdl[i][t->j] != NULL && t->index > -1)
-			add_var_env(t, t->cmdl[i][t->j], -1);
+		if (t->cmdl[i][t->j] != NULL && index > -1)
+			add_var_export(t, t->cmdl[i][t->j], -1);
 		t->j++;
 	}
 	if (t->cmdl[i][1] == NULL)
 		printexport(t);
 	return (0);
 }
-
 
 int	printexport(t_ms *t)
 {
