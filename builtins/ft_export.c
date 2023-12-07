@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:28:07 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 22:41:00 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 22:47:23 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,11 +131,13 @@ void	get_export(t_ms *t)
 	t->export[t->i] = NULL;
 }
 
-int	export_compare(t_ms *t, int i)
+void	export_compare(t_ms *t)
 {
 	int	lower;
+	int	i;
 	int	j;
 
+	i = 0;
 	lower = 0;
 	while (t->export[i] != NULL)
 	{
@@ -152,7 +154,7 @@ int	export_compare(t_ms *t, int i)
 		t->export[lower] = t->temp;
 		i++;
 	}
-	return (i);
+	t->export[i] = NULL;
 }
 
 int	tab_sorted(char **lst)
@@ -162,7 +164,7 @@ int	tab_sorted(char **lst)
 	i = 0;
 	while (lst[i] != NULL && lst[i + 1] != NULL)
 	{
-		if (*lst[i] > *lst[i + 1])
+		if (*lst[i] >= *lst[i + 1])
 		{
 			ft_swap(lst[i], lst[i + 1]);
 			return (-1);
@@ -185,10 +187,11 @@ void	export_sort(t_ms *t)
 	int	i;
 
 	i = 0;
-	while (tab_sorted(t->export) != 0)
+	while (tab_sorted(t->export) != 0 && i < 10)
 	{
-		i = 0;
-		i = export_compare(t, i);
-		t->export[i] = NULL;
+		export_compare(t);
+		i++;
+		'_' || 'A'
 	}
 }
+
