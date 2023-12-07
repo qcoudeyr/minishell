@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:28:07 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 23:02:56 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 23:08:11 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,19 +157,16 @@ void	export_compare(t_ms *t)
 	t->export[i] = NULL;
 }
 
-void	fix_tab(char **lst,int i)
+void	fix_tab(t_ms *t, int i)
 {
-	char	*temp;
 	int		j;
 
-	temp = lst[0];
 	j = 0;
 	while (j < i - 1)
 	{
-		ft_swap(lst[j], lst[j + 1]);
+		ft_swap(t->export[j], t->export[j + 1]);
 		j++;
 	}
-	lst[j] = temp;
 }
 
 int	tab_sorted(char **lst)
@@ -198,11 +195,11 @@ int	tab_sorted(char **lst)
 void	export_sort(t_ms *t)
 {
 	int	i = 0;
-	while (tab_sorted(t->export) != 0 && i < 10)
+	while (tab_sorted(t->export) != 0)
 	{
 		export_compare(t);
-		if (*t->export[tablen((void **) t->export) - 1] > *t->export[0])
-			fix_tab(t->export, tablen((void **) t->export) - 1);
+		if (*t->export[tablen((void **) t->export) - 1] < *t->export[0])
+			fix_tab(t, tablen((void **) t->export));
 		i++;
 	}
 }
