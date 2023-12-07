@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 15:04:32 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 15:18:05 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ void	ft_free(t_ms *t);
 int		ft_exit(t_ms *t);
 void	sigint_handler(int signo);
 void	nothing_handler(int signo);
+void	export_sort(t_ms *t);
 void	getsignal(int signal_number);
 void	handle_heredoc(t_ms *t, int index, int i);
 

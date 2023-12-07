@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:43:26 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 13:52:48 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 15:18:35 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	ft_free(t_ms *t)
 		t->cmd[t->nc] = pfree(t->cmd[t->nc]);
 		t->nc--;
 	}
+	/* t->export = tabfree((void **) t->export); */
 	t->cmd = pfree(t->cmd);
 	t->path = tabfree((void **) t->path);
 	t->env = tabfree((void **) t->env);

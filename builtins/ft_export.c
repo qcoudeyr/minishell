@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:28:07 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 15:00:54 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 15:30:32 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,34 @@ int	ft_export(t_ms *t, int i)
 	return (0);
 }
 
+
+int	printexport(t_ms *t)
+{
+	int	j;
+
+	j = -1;
+	while (t->export[++j] != NULL)
+		fd_printf(t->output_fd, "%s\n", t->export[j]);
+	return (0);
+}
+
 void	export_sort(t_ms *t)
 {
-	
+	t->export = ft_calloc(tablen((void **)t->env) + 1, sizeof(char *));
+	t->i = 0;
+	while (t->env[t->i] != NULL)
+	{
+		t->j = t->i + 1;
+		t->temp = t->env[t->j];
+		while (t->env[t->j] != NULL)
+		{
+			if (ft_strcmp(t->env[t->j], t->env[t->i]) < 0 && ft_strcmp(t->env[t->j], t->temp) < 0)
+				t->temp = t->env[t->j];
+			t->j++;
+		}
+		t->export[t->i] = t->temp;
+		t->i++;
+	}
+	t->export[t->i] = NULL;
+	printexport(t);
 }
