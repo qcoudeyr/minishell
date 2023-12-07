@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 20:50:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 13:39:36 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 15:04:20 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,15 @@ int	check_access(char *str)
 			return (-1);
 	}
 	return (0);
+}
+
+int	tablen(void **tabl)
+{
+	int	index;
+
+	if (tabl == NULL || *tabl == NULL)
+		return (0);
+	while (tabl[index] != NULL)
+		index++;
+	return (index);
 }
