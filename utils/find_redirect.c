@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 20:18:44 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/07 08:40:19 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 08:41:46 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,15 @@ void	heredoc_error(t_ms *t, int index, int i)
 void	handle_heredoc(t_ms *t, int index, int i)
 {
 	char	*temp;
+	int		len;
 
 	if (t->cmdl[index][i + 1] == NULL || *t->cmdl[index][i + 1] == 0)
 		return (heredoc_error(t, index, i));
-	while ()
-	temp = get_next_line(STDIN_FILENO);
-
+	len = ft_strlen(t->cmdl[index][i + 1]);
+	while (ft_strnstr(temp, t->cmdl[index][i + 1], len))
+	{
+		temp = get_next_line(STDIN_FILENO);
+	}
 }
 
 void	input_redirect(t_ms *t, int index, int i)
