@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:43:26 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 09:48:28 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 10:26:43 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ void	ft_free(t_ms *t)
 		t->cmd[t->nc] = pfree(t->cmd[t->nc]);
 		t->nc--;
 	}
-	if (access("./utils/temp", F_OK) != -1)
-		unlink("./utils/temp");
 	t->cmd = pfree(t->cmd);
 	t->path = tabfree((void **) t->path);
 	t->env = tabfree((void **) t->env);
