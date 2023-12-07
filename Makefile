@@ -19,7 +19,7 @@ OBJS = $(addprefix $(OBJDIR),$(SRCS:.c=.o))
 
 NAME = minishell
 
-all: $(OBJDIR) $(NAME)
+all: $(OBJDIR) $(NAME) 
 
 $(NAME): $(OBJS) libft
 	@echo "\033[2m\033[31mStart to make $(NAME)\033[0m"
@@ -58,16 +58,19 @@ re: fclean all
 check_norme:
 	@echo "\033[2m\033[31mLet's check the norme for $(NAME)\033[0m"
 	@if [ $$(norminette | grep Error | wc -c) -eq 0 ]; then \
-		echo "\033[32m\tCLEAN is done!\033[0m"; \
+		echo "\033[32m\tNorme is OK!\033[0m"; \
 	else \
+		echo "\033[32m\tNorme is BAD!\033[0m";
 		norminette | grep Error \
+		echo "\033[32mNEED TO FIX ALL OF THIS !!!\033[0m";
 	fi
+
 debug: $(OBJS)
 	@clear
 	@$(CC) $(CFLAGS) -g $(OBJS) -L$(LIB_DIR) $(LIBS) -o debug
 	colour-valgrind -s --tool=memcheck --leak-check=full --error-exitcode=1 \
 	./debug
 
-.PHONY: all clean fclean re debug libft
+.PHONY: all clean fclean re debug libft check_norme
 
 #--show-leak-kinds=all --track-origins=yes
