@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 12:52:21 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 13:58:00 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_minishell
 	int				signal;
 	int				j;
 	int				return_v;
+	int				exit;
 	int				narg;
 	char			*fpath;
 	int				status;
@@ -118,7 +119,6 @@ void	t_init(t_ms *t);
 void	*pfree(void *ptr);
 int		have_pipe(char **cmds);
 char	*remove_quotes(char *input);
-void	free_tabstr(char **strs);
 int		find_redirect(t_ms *t, int i);
 char	*env_var(t_ms *t, char *str);
 char	*handle_env_var(t_ms *t, char *str);
@@ -130,6 +130,7 @@ void	env_pars(t_ms *t);
 void	ft_acceserror(t_ms *t);
 void	ft_perror(t_ms *t, char *s);
 void	ft_free(t_ms *t);
+int		ft_exit(t_ms *t);
 void	sigint_handler(int signo);
 void	nothing_handler(int signo);
 void	getsignal(int signal_number);

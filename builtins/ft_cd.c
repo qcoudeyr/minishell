@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/05 19:24:10 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 14:11:43 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,20 @@ int	gotoprevpath(t_ms *t)
 	i = ft_strlen(t->pwd);
 	while (t->pwd[i] != '/' && i > 1)
 		i--;
-	newpwd = malloc(sizeof(char) * (i + 1));
+	newpwd = ft_calloc((i + 1), sizeof(char));
 	while (++j < i)
 		newpwd[j] = t->pwd[j];
 	newpwd[j] = '\0';
 	if (chdir(newpwd) == 0)
 	{
 		change_env(t, "PWD=", newpwd);
+		newpwd = pfree(newpwd);
 		return (0);
 	}
 	else
 	{
 		printf("bash: cd: %s: Aucun fichier ou dossier de ce type\n", newpwd);
 		newpwd = pfree(newpwd);
-		return (2);
 	}
 	return (2);
 }
@@ -72,9 +72,12 @@ int	ft_cd(t_ms *t, char *cmd)
 	else if (path[1][0] != '\0')
 	{
 		temppath = ft_strjoin(t->pwd, "/");
+		t->temp = temppath;
 		temppath = ft_strjoin(temppath, path[1]);
+		t->temp = pfree(t->temp);
 		t->return_v = gotopath(temppath, t);
+		temppath = pfree(temppath);
 	}
-	free_tabstr(path);
+	path = tabfree((void **) path);
 	return (t->return_v);
 }

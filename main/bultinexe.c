@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 09:45:55 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/06 10:05:31 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 13:49:00 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,7 @@ void	handle_builtins(t_ms *t, int i)
 		t->return_v = ft_unset(t, i);
 	if (ft_strncmp("export", t->cmdl[i][0], 7) == 0)
 		t->return_v = ft_export(t, i);
+	if (ft_strncmp("exit", t->cmdl[i][0], 5) == 0)
+		t->return_v = ft_exit(t);
 	t->status = (t->return_v << 8);
 }

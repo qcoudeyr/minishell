@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 10:27:14 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 13:53:27 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ int	start_minishell(t_ms *t)
 	char	*rl_str;
 
 	rl_str = NULL;
-	while (1)
+	while (t->exit == 0)
 	{
 		init_cmdl(t);
 		rl_str = rl_string(t, rl_str);
 		t->cmd[t->nc] = readline(rl_str);
-		if (t->cmd[t->nc] == NULL || ft_strncmp("exit", t->cmd[t->nc], 5) == 0)
+		if (t->cmd[t->nc] == NULL || ft_strncmp(t->cmd[t->nc], "exit", 5) == 0)
 			break ;
 		if (t->cmd[t->nc][0] != '\0')
 		{

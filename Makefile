@@ -9,10 +9,9 @@ HEADERS = minishell.h
 
 SRCS =	main.c \
 		parsing.c error.c bultinexe.c ft_cd.c ft_echo.c \
-		remove_quotes.c find_redirect.c free_tabstr.c \
+		remove_quotes.c find_redirect.c heredoc.c signal.c\
 		env_var.c pipe.c bonus.c utils.c free.c exec.c \
-		error_2.c env.c ft_unset.c ft_export.c init.c \
-		signal.c heredoc.c
+		error_2.c env.c ft_unset.c ft_export.c init.c
 
 OBJDIR = ./object/
 OBJS = $(addprefix $(OBJDIR),$(SRCS:.c=.o))

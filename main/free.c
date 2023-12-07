@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:43:26 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 10:26:43 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 13:52:48 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,10 @@ void	ft_free(t_ms *t)
 	t->pwd = pfree(t->pwd);
 	t->fpath = pfree(t->fpath);
 	t = pfree(t);
+}
+
+int	ft_exit(t_ms *t)
+{
+	t->exit = 1;
+	return (0);
 }
