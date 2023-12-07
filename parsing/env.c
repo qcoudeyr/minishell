@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 11:02:42 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 18:03:26 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 19:01:10 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,36 +95,58 @@ ft_strnstr(t->env[i], str, ft_strlen(str)) == 0)
 		return (t->env[i] + ft_strlen(str) + 1);
 }
 
-void	ask_for_env(t_ms *t)
+void	import_env(t_ms *t)
 {
-	char *buffer;
+	if ((t->fd = open("./utils/.env", O_RDONLY)) < 0)
+	{
+		perror("open");
+		return ;
+	}
+	t->env[t->i] = get_next_line(t->fd);
+	while (t->env[t->i] != NULL)
+	{
+		t->i++;
+		t->env[t->i] = get_next_line(t->fd);
+	}
+	t->return_v = 1;
+}
 
-	write(1, "No env detected, do you want to load default linux env ?", 57);
-	write(1, BOLD" Y/N ->", 12);
-	buffer = NULL;
+int	ask_for_env(t_ms *t)
+{
+	write(1, CL_RED"No env detected, do you want to load default linux env ?"RESET, 66);
+	write(1, BOLD" y/n-> "RESET, 16);
 	while (1)
 	{
-		buffer = get_next_line(0);
-		if (ft_strnstr("Y", buffer) != 0)
+		t->buffer = get_next_line(STDIN_FILENO);
+		if (ft_strnstr("y\n", t->buffer, 2) != 0)
 		{
-			/*Load linux file*/
+			import_env(t);
+			break ;
 		}
+		if (ft_strnstr("n\n", t->buffer, 2) != 0)
+		{
+			t->return_v = 0;
+			break ;
+		}
+		t->buffer = pfree(t->buffer);
 	}
-
+	t->buffer = pfree(t->buffer);
+	return (t->return_v);
 }
 
 void	get_env(t_ms *t, char **env)
 {
 	t->env = ft_calloc(1000, sizeof(char *));
-	t->i = 0;
-	if (env == NULL || *env == 0)
-		ask_for_env(t);
-	while (env[t->i] != NULL)
+	if (*env != 0 || ((env == NULL || *env == 0) && ask_for_env(t) == 0))
 	{
-		t->env[t->i] = ft_strdup(env[t->i]);
-		t->i++;
+		t->i = 0;
+		while (env[t->i] != NULL)
+		{
+			t->env[t->i] = ft_strdup(env[t->i]);
+			t->i++;
+		}
+		t->env[t->i] = NULL;
 	}
-	t->env[t->i] = NULL;
 	env_pars(t);
 	get_export(t);
 	export_sort(t);

@@ -19,7 +19,7 @@ OBJS = $(addprefix $(OBJDIR),$(SRCS:.c=.o))
 
 NAME = minishell
 
-all: $(OBJDIR) $(NAME) check_norme
+all: $(OBJDIR) $(NAME) check_norme generate_env
 
 $(NAME): $(OBJS) libft
 	@echo "\033[2m\033[31mStart to make $(NAME)\033[0m"
@@ -48,7 +48,8 @@ fclean: clean
 	@echo "\033[2m\033[31mStart to FCLEAN\033[0m"
 	@rm -f $(NAME)
 	@$(MAKE) -s -C ./libft fclean
-	@rm -rf $(OBJDIR)    # remove Object directory
+	@rm -rf $(OBJDIR)
+	@rm -rf ./utils/.env
 	@echo "\033[32m\tFCLEAN is done!\033[0m"
 
 
@@ -65,12 +66,16 @@ check_norme:
 		echo "\033[31m\033[1mNEED TO FIX ALL OF THIS !!!\033[0m"; \
 	fi
 
+generate_env:
+	@/usr/bin/env > ./utils/.env
+
+
 debug: $(OBJS)
 	@clear
 	@$(CC) $(CFLAGS) -g $(OBJS) -L$(LIB_DIR) $(LIBS) -o debug
 	colour-valgrind -s --tool=memcheck --leak-check=full --error-exitcode=1 \
 	./debug
 
-.PHONY: all clean fclean re debug libft check_norme
+.PHONY: all clean fclean re debug libft check_norme generate_env
 
 #--show-leak-kinds=all --track-origins=yes

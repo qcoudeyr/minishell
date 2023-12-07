@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 17:55:21 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 18:53:56 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,31 +53,30 @@ typedef struct s_henv
 
 typedef struct s_minishell
 {
-	char			***cmdl;
 	pid_t			pid;
-	char			**cmd;
-	int				i;
-	int				signal;
-	int				j;
-	int				return_v;
-	int				exit;
-	int				narg;
-	char			*fpath;
-	int				status;
 	int				index;
+	int				i;
+	int				j;
 	int				nc;
+	int				signal;
+	int				exit;
+	int				status;
+	int				return_v;
 	int				input_fd;
 	int				output_fd;
+	int				fd;
 	int				pipefd[2];
-	char			**env;
-	char			**path;
 	void			*temp;
 	char			*pwd;
 	char			*home;
-	char			*prev_pwd;
+	char			*buffer;
+	char			*fpath;
+	char			**path;
 	char			**export;
+	char			**env;
+	char			**cmd;
+	char			***cmdl;
 	struct rusage	*rusage;
-
 }t_ms;
 
 //		builtins
