@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:01 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/06 21:44:35 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 12:51:41 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_cmdnotfound(t_ms *t, char *str)
 {
 	(void) t;
-	if (check_path(str) != 0 && is_builtins(str) == 0)
+	if (check_access(str) != 0 && is_builtins(str) == 0)
 	{
 		printf("Command not found: %s\n", str);
 		t->status = 32512;

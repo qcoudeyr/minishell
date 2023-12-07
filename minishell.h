@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 09:33:24 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 12:52:21 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ void	t_init(t_ms *t);
 void	handle_spec(t_ms *t);
 void	change_str_env(t_env *e, t_ms *t, char *str);
 void	hev_quote(char c, int *squote, int *quote);
-int		check_path(char *str);
+int		check_path(t_ms *t);
+int		check_access(char *str);
 int		is_or(char *str);
 char	*rmcharq(char *str, char c);
 int		have_wildcard(char **cmds);

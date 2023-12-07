@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 20:50:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/06 11:12:53 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 12:52:14 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,17 @@ int	is_special(char *str)
 		return (1);
 	else
 		return (0);
+}
+
+int	check_access(char *str)
+{
+	if (str != NULL && *str != 0)
+	{
+		if (access(str, X_OK) != 0)
+		{
+			perror("access");
+			return (-1);
+		}
+	}
+	return (0);
 }

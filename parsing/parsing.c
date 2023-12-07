@@ -6,18 +6,22 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/07 09:11:24 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 12:51:54 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	check_path(char *str)
+int	check_path(t_ms *t)
 {
-	if (str != NULL && *str != 0)
+	if (t->cmdl[t->i][t->j] != NULL && *t->cmdl[t->i][t->j] != 0 && \
+ft_strnstr(t->cmdl[t->i][0], "echo", 5))
 	{
-		if (access(str, X_OK) != 0)
+		if (access(t->cmdl[t->i][t->j], X_OK) != 0)
+		{
+			perror("access");
 			return (-1);
+		}
 	}
 	return (0);
 }
@@ -31,7 +35,7 @@ int	pathfinder(t_ms *t, int index)
 	if (t->cmdl[index][0] != NULL && *t->cmdl[index][0] != 0)
 	{
 		i = 0;
-		if (check_path(t->cmdl[index][0]) == 0)
+		if (check_path(t) == 0)
 			return (0);
 		t->fpath = ft_strjoin(t->path[i], t->cmdl[index][0]);
 		while (access (t->fpath, X_OK) < 0 && t->path[i + 1] != NULL)
@@ -93,7 +97,7 @@ is_special(t->cmdl[t->i][0]) == 0)
 		while (t->cmdl[t->i][t->j] != NULL)
 		{
 			if (*t->cmdl[t->i][t->j] != 0 && *t->cmdl[t->i][t->j] == '/')
-				return_v = check_path(t->cmdl[t->i][t->j]);
+				return_v = check_path(t);
 			t->j++;
 		}
 		t->i++;
