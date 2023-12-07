@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 10:31:40 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/06 13:47:19 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 09:04:41 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,8 @@ void	change_str_env(t_env *e, t_ms *t, char *str)
 			while (ft_isalpha(str[++t->i]) != 0)
 				e->var[e->len++] = str[t->i];
 			e->var[e->len] = 0;
-			ft_strlcpy(e->newstr + t->j, env_var(t, e->var), ft_strlen(env_var(t, e->var)) + 1);
+			ft_strlcpy(e->newstr + t->j, env_var(t, e->var), \
+			ft_strlen(env_var(t, e->var)) + 1);
 			e->var = pfree(e->var);
 			e->var = ft_calloc(1000, sizeof(char));
 			t->j = ft_strlen(e->newstr);

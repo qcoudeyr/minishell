@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:43:26 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/06 12:30:33 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 09:04:25 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_freecmdl(t_ms *t)
 
 void	ft_free(t_ms *t)
 {
- 	while (t->nc >= 0)
+	while (t->nc >= 0)
 	{
 		t->cmd[t->nc] = pfree(t->cmd[t->nc]);
 		t->nc--;

@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 20:18:44 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/07 08:49:50 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 09:05:28 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,34 +32,6 @@ O_WRONLY | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
 			t->output_fd = 1;
 	}
 	return (1);
-}
-
-void	heredoc_error(t_ms *t, int index)
-{
-	if (t->cmdl[index + 1][0] != NULL)
-		fd_printf(2, "syntax error near unexpected token \'%s\'\n", t->cmdl[index + 1][0]);
-	else
-		fd_printf(2, "syntax error near unexpected token \'\\n'\n");
-	t->status = 512;
-}
-
-void	handle_heredoc(t_ms *t, int index, int i)
-{
-	char	*temp;
-	int		len;
-
-	if (t->cmdl[index][i + 1] == NULL || *t->cmdl[index][i + 1] == 0)
-		return (heredoc_error(t, index));
-	len = ft_strlen(t->cmdl[index][i + 1]);
-	temp = NULL;
-	while (ft_strnstr(temp, t->cmdl[index][i + 1], len))
-	{
-		t->temp = temp;
-		temp = ft_strjoin(temp, get_next_line(STDIN_FILENO));
-		t->temp = pfree(t->temp);
-	}
-	write(t->input_fd, temp, ft_strlen(temp) + 1);
-	temp = pfree(temp);
 }
 
 void	input_redirect(t_ms *t, int index, int i)
