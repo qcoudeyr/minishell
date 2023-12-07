@@ -19,7 +19,7 @@ OBJS = $(addprefix $(OBJDIR),$(SRCS:.c=.o))
 
 NAME = minishell
 
-all: $(OBJDIR) $(NAME) 
+all: $(OBJDIR) $(NAME) check_norme
 
 $(NAME): $(OBJS) libft
 	@echo "\033[2m\033[31mStart to make $(NAME)\033[0m"
@@ -58,11 +58,11 @@ re: fclean all
 check_norme:
 	@echo "\033[2m\033[31mLet's check the norme for $(NAME)\033[0m"
 	@if [ $$(norminette | grep Error | wc -c) -eq 0 ]; then \
-		echo "\033[32m\tNorme is OK!\033[0m"; \
+		echo "\033[32m\033[1m\tNorme is OK!\033[0m"; \
 	else \
-		echo "\033[32m\tNorme is BAD!\033[0m";
-		norminette | grep Error \
-		echo "\033[32mNEED TO FIX ALL OF THIS !!!\033[0m";
+		echo "\033[31m\033[1m\tNorme is BAD!\033[0m"; \
+		norminette | grep Error ;\
+		echo "\033[31m\033[1mNEED TO FIX ALL OF THIS !!!\033[0m"; \
 	fi
 
 debug: $(OBJS)
