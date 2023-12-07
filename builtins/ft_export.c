@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:28:07 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 16:01:14 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 19:25:26 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,12 +126,39 @@ void	export_compare(t_ms *t)
 	}
 }
 
+int	tab_sorted(char **lst)
+{
+	int		i;
+	char	*temp;
+
+	i = 0;
+	while (lst[i] != NULL && lst[i + 1] != NULL)
+	{
+		if (*lst[i] > *lst[i + 1])
+			return (-1);
+		i++;
+	}
+	if (lst[i + 1] == NULL)
+	{
+		if (*lst[i] >= *lst[i - 1] && *lst[i] > *lst[0])
+			return (0);
+		else
+		{
+			temp = lst[0];
+			lst[0] = lst[i];
+			lst[i] = temp;
+		}
+	}
+	return (-1);
+
+}
+
 void	export_sort(t_ms *t)
 {
-	t->i = 0;
-	export_compare(t);
-	t->i = 0;
-	export_compare(t);
-	t->export[t->i] = NULL;
-	printexport(t);
+	while (tab_sorted(t->export) != 0)
+	{
+		t->i = 0;
+		export_compare(t);
+		t->export[t->i] = NULL;
+	}
 }

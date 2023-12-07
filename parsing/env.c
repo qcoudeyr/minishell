@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 11:02:42 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 19:01:10 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 19:12:12 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void	import_env(t_ms *t)
 	t->env[t->i] = get_next_line(t->fd);
 	while (t->env[t->i] != NULL)
 	{
+		t->env[t->i][ft_strlen(t->env[t->i]) - 1] = 0;
 		t->i++;
 		t->env[t->i] = get_next_line(t->fd);
 	}
@@ -113,30 +114,34 @@ void	import_env(t_ms *t)
 
 int	ask_for_env(t_ms *t)
 {
-	write(1, CL_RED"No env detected, do you want to load default linux env ?"RESET, 66);
+	char	*buffer;
+
+	write(1, CL_RED"No env detected, do you want to load default linux env ?", 62);
 	write(1, BOLD" y/n-> "RESET, 16);
+	buffer = NULL;
 	while (1)
 	{
-		t->buffer = get_next_line(STDIN_FILENO);
-		if (ft_strnstr("y\n", t->buffer, 2) != 0)
+		buffer = get_next_line(0);
+		if (ft_strnstr("y\n", buffer, 2) != 0)
 		{
 			import_env(t);
 			break ;
 		}
-		if (ft_strnstr("n\n", t->buffer, 2) != 0)
+		if (ft_strnstr("n\n", buffer, 2) != 0)
 		{
 			t->return_v = 0;
 			break ;
 		}
-		t->buffer = pfree(t->buffer);
+		buffer = pfree(buffer);
 	}
-	t->buffer = pfree(t->buffer);
+	buffer = pfree(buffer);
 	return (t->return_v);
 }
 
 void	get_env(t_ms *t, char **env)
 {
 	t->env = ft_calloc(1000, sizeof(char *));
+
 	if (*env != 0 || ((env == NULL || *env == 0) && ask_for_env(t) == 0))
 	{
 		t->i = 0;

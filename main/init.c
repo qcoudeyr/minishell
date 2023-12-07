@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 09:56:19 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 18:50:54 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 19:10:05 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	t_init(t_ms *t)
 {
 	t->rusage = ft_calloc(1, sizeof(struct rusage));
 	t->cmdl = NULL;
-	t->buffer = NULL;
 	t->cmd = ft_calloc(10000, sizeof(char *));
 	t->path = ft_calloc(1, sizeof(char **));
 	t->fpath = NULL;

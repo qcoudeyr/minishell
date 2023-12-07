@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 18:53:56 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 19:08:52 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ typedef struct s_minishell
 	void			*temp;
 	char			*pwd;
 	char			*home;
-	char			*buffer;
 	char			*fpath;
 	char			**path;
 	char			**export;
