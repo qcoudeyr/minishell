@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 20:50:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 19:29:08 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/07 23:12:41 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ int	tablen(void **tabl)
 
 void	ft_swap(void *ptr1, void *ptr2)
 {
-	void	*temp;
+	void	**temp;
 
-	temp = ptr1;
-	ptr1 = ptr2;
-	ptr2 = temp;
+	temp = &ptr1;
+	ptr1 = *ptr2;
+	*ptr2 = temp;
 }
