@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/08 17:09:57 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/08 18:50:53 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_henv
 	int		squote;
 	int		fquote;
 	int		i;
+	int		j;
 	int		env_var;
 	int		len;
 	char	*var;
