@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/08 11:00:16 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/08 13:56:28 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ typedef struct s_minishell
 
 //		builtins
 int		is_builtins(char *str);
-int		ft_cd(t_ms *t, char *path);
+int		ft_cd(t_ms *t, char **path);
 int		printexport(t_ms *t);
 int		ft_echo(t_ms *t, int i);
 int		ft_unset(t_ms *t, int i);

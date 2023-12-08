@@ -6,11 +6,28 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 09:45:55 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 17:54:48 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/08 13:55:44 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int	change_export(t_ms *t, char *var, char *tochange)
+{
+	void	*ptr;
+	int		i;
+
+	i = 0;
+	while (ft_strnstr(t->export[i], var, ft_strlen(var)) == 0)
+		i++;
+	if (ft_strnstr(t->export[i], var, ft_strlen(var)) == 0)
+		return (-1);
+	ptr = t->export[i];
+	t->export[i] = ft_strjoin(var, tochange);
+	ptr = pfree(ptr);
+	export_sort(t);
+	return (0);
+}
 
 int	change_env(t_ms *t, char *var, char *tochange)
 {
@@ -25,6 +42,7 @@ int	change_env(t_ms *t, char *var, char *tochange)
 	ptr = t->env[i];
 	t->env[i] = ft_strjoin(var, tochange);
 	ptr = pfree(ptr);
+	change_export(t, var, tochange);
 	return (0);
 }
 
@@ -73,7 +91,7 @@ void	handle_builtins(t_ms *t, int i)
 	if (ft_strncmp("echo", t->cmdl[i][0], 4) == 0)
 		t->return_v = ft_echo(t, i);
 	if (ft_strncmp("cd", t->cmdl[i][0], 3) == 0)
-		t->return_v = ft_cd(t, t->cmdl[i][0]);
+		t->return_v = ft_cd(t, t->cmdl[i]);
 	if (ft_strncmp("unset", t->cmdl[i][0], 6) == 0)
 		t->return_v = ft_unset(t, i);
 	if (ft_strncmp("export", t->cmdl[i][0], 7) == 0)

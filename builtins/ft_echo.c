@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:56:50 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/06 09:25:11 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/08 13:51:13 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	find_bn(t_echo *echo, char **ordre)
 	int	i;
 
 	i = 0;
-	while (ordre[i + 1] != NULL)
+	while (ordre[i] != NULL)
 	{
 		if (ft_strncmp(ordre[i], "-n", 3) == 0)
 		{
