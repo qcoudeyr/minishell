@@ -34,6 +34,7 @@ char	*remove_quotes(char *str)
 		return (NULL);
 	j = 0;
 	i = 0;
+	s.quote = 0 ;
 	while (i < s.len)
 	{
 		if (is_quote(str[i]) != 0)

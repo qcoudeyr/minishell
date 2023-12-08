@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 10:31:40 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/08 17:16:55 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/08 17:24:07 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	detect_env_var(char *str)
 	{
 		if ((str[s.i] == 39 || str[s.i] == '"') && s.fquote == 0)
 			s.fquote = str[s.i];
-		if (s.fquote != 0 && str[s.i] == s.fquote)
+		else if (s.fquote != 0 && str[s.i] == s.fquote)
 			s.fquote = 0;
 		if (str[s.i] == 39 && s.quote == 0)
 			s.quote = 1;
