@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 23:15:19 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/08 09:57:34 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ void	remove_var_env(t_ms *t, int index);
 int		varlen_env(char *str);
 int		ft_export(t_ms *t, int i);
 void	add_var_env(t_ms *t, char *str, int index);
+
 //		utils
-void	ft_swap(void *ptr1, void *ptr2);
 void	*tabfree(void **ptr);
 void	handle_signal(t_ms *t);
 int		is_set_env_var(char *str);
