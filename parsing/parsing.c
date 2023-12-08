@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/07 22:30:04 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/08 10:48:57 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ ft_strnstr(t->cmdl[t->i][0], "echo", 5) == 0)
 		}
 	}
 	return (0);
+}
+void	change_path(t_ms *t, int index)
+{
+	t->cmdl[index][0] = pfree(t->cmdl[index][0]);
+	t->cmdl[index][0] = ft_strjoin(t->fpath, (char *) '\0');
+	t->fpath = pfree(t->fpath);
 }
 
 int	pathfinder(t_ms *t, int index)
@@ -44,11 +50,7 @@ int	pathfinder(t_ms *t, int index)
 			t->fpath = ft_strjoin(t->path[i++], t->cmdl[index][0]);
 		}
 		if (access(t->fpath, X_OK) == 0)
-		{
-			t->cmdl[index][0] = pfree(t->cmdl[index][0]);
-			t->cmdl[index][0] = ft_strjoin(t->fpath, (char *) '\0');
-			t->fpath = pfree(t->fpath);
-		}
+			change_path(t, index);
 		else
 		{
 			t->fpath = pfree(t->fpath);

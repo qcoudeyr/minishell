@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 11:02:42 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/08 09:57:00 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/08 10:51:07 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	env_pars(t_ms *t)
 	int		i;
 
 	i = 0;
-
 	t->path = tabfree((void **)t->path);
 	t->pwd = pfree(t->pwd);
 	t->home = pfree(t->home);
@@ -93,49 +92,6 @@ ft_strnstr(t->env[i], str, ft_strlen(str)) == 0)
 		return (0);
 	else
 		return (t->env[i] + ft_strlen(str) + 1);
-}
-
-void	import_env(t_ms *t)
-{
-	if ((t->fd = open("./utils/.env", O_RDONLY)) < 0)
-	{
-		perror("open");
-		return ;
-	}
-	t->env[t->i] = get_next_line(t->fd);
-	while (t->env[t->i] != NULL)
-	{
-		t->env[t->i][ft_strlen(t->env[t->i]) - 1] = 0;
-		t->i++;
-		t->env[t->i] = get_next_line(t->fd);
-	}
-	t->return_v = 1;
-}
-
-int	ask_for_env(t_ms *t)
-{
-	char	*buffer;
-
-	write(1, CL_RED"No env detected, do you want to load default linux env ?", 62);
-	write(1, BOLD" y/n-> "RESET, 16);
-	buffer = NULL;
-	while (1)
-	{
-		buffer = get_next_line(0);
-		if (ft_strnstr("y\n", buffer, 2) != 0)
-		{
-			import_env(t);
-			break ;
-		}
-		if (ft_strnstr("n\n", buffer, 2) != 0)
-		{
-			t->return_v = 0;
-			break ;
-		}
-		buffer = pfree(buffer);
-	}
-	buffer = pfree(buffer);
-	return (t->return_v);
 }
 
 void	get_env(t_ms *t, char **env)
