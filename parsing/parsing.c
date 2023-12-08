@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/08 18:57:39 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/08 19:00:38 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,19 @@ char	*spec_format(char *str)
 	s.newstr = ft_calloc(ft_strlen(str) * 2, sizeof(char));
 	s.i = 0;
 	s.j = 0;
+	s.quote = 0;
 	if (!str || *str == 0)
 		return (str);
 	while (str[s.i] != 0)
 	{
 		if (str[s.i] == '\'' || str[s.i] == '"')
 			s.quote += 1;
-		if (str[s.i] == '|' &&  && s.quote == 0)
+		if (str[s.i] == '|' && s.quote == 0)
 		{
-			while (str[s.i] == '|')
-			{
-
-			}
+			s.newstr[s.j++] = ' ';
+			while (str[s.i] != 0 && str[s.i] == '|')
+				s.newstr[s.j++] = str[s.i++];
+			s.newstr[s.j++] = ' ';
 		}
 		else
 			s.newstr[s.j++] = str[s.i++];
