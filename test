@@ -1,21 +1,2 @@
-total 1648$
-drwxrwxr-x 12 qcoudeyr qcoudeyr    4096 Dec  8 18:02 .$
-drwxr-xr-x 12 qcoudeyr qcoudeyr    4096 Nov 27 11:21 ..$
-drwxrwxr-x  2 qcoudeyr qcoudeyr    4096 Dec  8 10:55 builtins$
--rwxrwxr-x  1 qcoudeyr qcoudeyr  150072 Dec  8 16:24 debug$
-drwxrwxr-x  2 qcoudeyr qcoudeyr    4096 Dec  4 10:52 error$
--rwxrwxr-x  1 qcoudeyr qcoudeyr 1310885 Oct 26 08:03 fr.subject.pdf$
-drwxrwxr-x  8 qcoudeyr qcoudeyr    4096 Dec  8 17:57 .git$
--rw-rw-r--  1 qcoudeyr qcoudeyr     138 Oct 25 11:04 .gitignore$
-drwxr-xr-x  5 qcoudeyr qcoudeyr    4096 Dec  8 17:48 libft$
-drwxrwxr-x  2 qcoudeyr qcoudeyr    4096 Dec  7 18:06 main$
--rwxrwxr-x  1 qcoudeyr qcoudeyr    2984 Dec  8 11:00 Makefile$
--rwxrwxr-x  1 qcoudeyr qcoudeyr  150640 Dec  8 17:48 minishell$
--rw-rw-r--  1 qcoudeyr qcoudeyr     282 Dec  8 17:13 minishell.code-workspace$
--rwxrwxr-x  1 qcoudeyr qcoudeyr    4866 Dec  8 17:58 minishell.h$
-drwxrwxr-x  2 qcoudeyr qcoudeyr    4096 Dec  8 17:47 object$
-drwxrwxr-x  2 qcoudeyr qcoudeyr    4096 Dec  8 11:00 parsing$
-drwxrwxr-x  2 qcoudeyr qcoudeyr    4096 Nov  9 15:09 redirect$
--rw-rw-r--  1 qcoudeyr qcoudeyr       0 Dec  8 18:02 test$
-drwxrwxr-x  2 qcoudeyr qcoudeyr    4096 Dec  8 17:48 utils$
-drwxrwxr-x  2 qcoudeyr qcoudeyr    4096 Nov  9 15:03 .vscode$
+test
+test$
