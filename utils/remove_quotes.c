@@ -12,30 +12,47 @@
 
 #include "../minishell.h"
 
-char	*remove_quotes(char *input)
+int	is_quote(char c)
 {
-	int		length;
-	char	*result;
-	int		j;
-	int		i;
+	if (c == '"' || c == '\'')
+		return (c);
+	else
+		return (0);
+}
 
-	if (!input)
+char	*remove_quotes(char *str)
+{
+	struct s_henv	s;
+	int				j;
+	int				i;
+
+	if (!str)
 		return (NULL);
-	length = ft_strlen(input);
-	result = ft_calloc(length + 10, sizeof(char));
-	if (!result)
+	s.len = ft_strlen(str);
+	s.newstr = ft_calloc(s.len + 10, sizeof(char));
+	if (!s.newstr)
 		return (NULL);
 	j = 0;
 	i = 0;
-	while (i < length)
+	while (i < s.len)
 	{
-		if ((input[i] == '"' && input[length - (i + 1)] == '"') || \
-	(input[i] == '\'' && input[length - (i + 1)] == '\''))
-			i++;
+		if (is_quote(str[i]) != 0)
+		{
+			if (s.quote == 0 || s.quote == is_quote(str[i]))
+			{
+				if (s.quote != 0)
+					s.quote = 0;
+				else
+					s.quote = str[i];
+				i++;
+			}
+			else
+				s.newstr[j++] = str[i++];
+		}
 		else
-			result[j++] = input[i++];
+			s.newstr[j++] = str[i++];
 	}
-	result[j] = '\0';
-	input = pfree(input);
-	return (result);
+	s.newstr[j] = '\0';
+	str = pfree(str);
+	return (s.newstr);
 }
