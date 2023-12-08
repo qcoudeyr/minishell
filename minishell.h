@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/08 09:57:34 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/08 11:00:16 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,10 @@ void	add_var_env(t_ms *t, char *str, int index);
 
 //		utils
 void	*tabfree(void **ptr);
+void	import_env(t_ms *t);
+int		check_path(t_ms *t);
+int		ask_for_env(t_ms *t);
+void	change_path(t_ms *t, int index);
 void	handle_signal(t_ms *t);
 int		is_set_env_var(char *str);
 void	get_env(t_ms *t, char **env);

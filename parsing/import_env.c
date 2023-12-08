@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   inport_env.c                                       :+:      :+:    :+:   */
+/*   import_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 10:51:17 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/08 10:54:09 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/08 11:01:02 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int	ask_for_env(t_ms *t)
 {
 	char	*buffer;
 
-	write(1, CL_RED\
-"No env detected, do you want to load default linux env ?", 62);
+	write(1, CL_RED"No env detected, do you want to load default linux env ?", \
+62);
 	write(1, BOLD" y/n-> "RESET, 16);
 	buffer = NULL;
 	while (1)
