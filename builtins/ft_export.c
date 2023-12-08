@@ -6,52 +6,11 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:28:07 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/08 10:45:42 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/08 10:55:39 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-int	varlen_env(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (str == NULL)
-		return (0);
-	if (*str == 0)
-		return (0);
-	while (str[i] != 0 && str[i] != '=')
-		i++;
-	return (i);
-}
-
-void	add_var_env(t_ms *t, char *str, int index)
-{
-	int		i;
-	char	**newenv;
-
-	newenv = ft_calloc(1000, sizeof(char *));
-	i = 0;
-	while (t->env[i] != NULL)
-	{
-		if (ft_strncmp(t->env[i], str, varlen_env(str)) == 0)
-			newenv[i] = ft_strdup(str);
-		else
-			newenv[i] = ft_strdup(t->env[i]);
-		i++;
-	}
-	if (index < 0)
-		newenv[i] = ft_strdup(str);
-	i = 0;
-	while (t->env[i] != NULL)
-	{
-		t->env[i] = pfree(t->env[i]);
-		i++;
-	}
-	t->env = pfree(t->env);
-	t->env = newenv;
-}
 
 void	add_var_export(t_ms *t, char *str, int index)
 {
@@ -80,7 +39,6 @@ void	add_var_export(t_ms *t, char *str, int index)
 	}
 	t->export = pfree(t->export);
 	t->export = newenv;
-	export_sort(t);
 }
 
 int	ft_export(t_ms *t, int i)
@@ -106,6 +64,7 @@ int	ft_export(t_ms *t, int i)
 			add_var_export(t, t->cmdl[i][t->j], -1);
 		t->j++;
 	}
+	export_sort(t);
 	if (t->cmdl[i][1] == NULL)
 		printexport(t);
 	return (0);
@@ -132,53 +91,3 @@ void	get_export(t_ms *t)
 	}
 	t->export[t->i] = NULL;
 }
-
-void	export_compare(t_ms *t)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (t->export[i] != NULL)
-	{
-		j = i + 1;
-		while (t->export[j] != NULL)
-		{
-			if (ft_strcmp(t->export[i], t->export[j]) > 0)
-			{
-				t->temp = t->export[i];
-				t->export[i] = t->export[j];
-				t->export[j] = t->temp;
-			}
-			j++;
-		}
-		i++;
-	}
-}
-
-int	tab_sorted(char **lst)
-{
-	int		i;
-
-	i = 0;
-	while (lst[i] != NULL && lst[i + 1] != NULL)
-	{
-		if (*lst[i] > *lst[i + 1])
-			return (-1);
-		i++;
-	}
-	if (lst[i + 1] == NULL)
-	{
-		if (*lst[i] >= *lst[i - 1] && *lst[i] > *lst[0])
-			return (0);
-	}
-	return (-1);
-
-}
-
-void	export_sort(t_ms *t)
-{
-	while (tab_sorted(t->export) != 0)
-		export_compare(t);
-}
-
