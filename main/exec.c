@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:42:16 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/08 11:22:57 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/08 11:26:58 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@ void	handle_spec(t_ms *t)
 			t->index++;
 		else if (is_or(t->cmdl[t->index][0]) == 1)
 		{
-			if (t->status == 0)
+			if (t->status == 512)
 				t->index++;
 			else
 				t->index += 2;
 		}
 		else if (is_special(t->cmdl[t->index + 1][0]) == 1 && \
-		is_and(t->cmdl[t->index +1][0]) == 0)
+	(is_and(t->cmdl[t->index +1][0]) + is_or(t->cmdl[t->index +1][0])) == 0)
 		{
 			if (pipe(t->pipefd) == -1)
 				perror("pipe");
