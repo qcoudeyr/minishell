@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/08 13:56:28 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/08 17:09:57 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ typedef struct s_henv
 {
 	int		quote;
 	int		squote;
+	int		fquote;
+	int		i;
+	int		env_var;
 	int		len;
 	char	*var;
 	char	*newstr;
@@ -103,7 +106,7 @@ void	end_pipe(t_ms *t);
 void	t_init(t_ms *t);
 void	handle_spec(t_ms *t);
 void	change_str_env(t_env *e, t_ms *t, char *str);
-void	hev_quote(char c, int *squote, int *quote);
+void	hev_quote(char c, int *squote, int *quote, int *fquote);
 int		check_path(t_ms *t);
 int		check_access(char *str);
 int		is_or(char *str);

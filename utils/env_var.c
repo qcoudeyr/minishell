@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 10:31:40 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 09:04:41 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/08 17:16:55 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,31 @@
 
 int	detect_env_var(char *str)
 {
-	int	i;
-	int	quote;
-	int	env_var;
+	struct s_henv	s;
 
-	i = 0;
-	quote = 0;
-	env_var = 0;
+	s.i = 0;
+	s.quote = 0;
+	s.fquote = 0;
+	s.env_var = 0;
 	if (!str)
 		return (0);
-	while (str[i] != '\0')
+	while (str[s.i] != '\0')
 	{
-		if (str[i] == 39 && quote == 0)
-			quote = 1;
-		else if (str[i] == 39 && quote == 1)
-			quote = 0;
-		if (quote == 1 && str[i] == '$')
-			i++;
-		else if (quote == 0 && str[i] == '$')
-			env_var += 1;
-		i++;
+		if ((str[s.i] == 39 || str[s.i] == '"') && s.fquote == 0)
+			s.fquote = str[s.i];
+		if (s.fquote != 0 && str[s.i] == s.fquote)
+			s.fquote = 0;
+		if (str[s.i] == 39 && s.quote == 0)
+			s.quote = 1;
+		else if (str[s.i] == 39 && s.quote == 1)
+			s.quote = 0;
+		if (s.quote == 1 && str[s.i] == '$' && s.fquote != '\"')
+			s.i++;
+		else if ((s.quote == 0 || s.fquote == '"') && str[s.i] == '$')
+			s.env_var += 1;
+		s.i++;
 	}
-	return (env_var);
+	return (s.env_var);
 }
 
 int	is_set_env_var(char *str)
@@ -97,8 +100,8 @@ void	change_str_env(t_env *e, t_ms *t, char *str)
 	while (str[t->i] != '\0')
 	{
 		e->len = 0;
-		hev_quote(str[t->i], &e->squote, &e->quote);
-		if ((e->quote == 1 || (e->squote == 0 && e->quote == 0)) && \
+		hev_quote(str[t->i], &e->squote, &e->quote, &e->fquote);
+		if ((e->quote == 1 || (e->squote == 0 && e->quote == 0) || e->fquote == '"') && \
 	str[t->i] == '$' && ft_isalpha(str[t->i + 1]))
 		{
 			while (ft_isalpha(str[++t->i]) != 0)
@@ -116,8 +119,10 @@ void	change_str_env(t_env *e, t_ms *t, char *str)
 	e->newstr[t->j] = 0;
 }
 
-void	hev_quote(char c, int *squote, int *quote)
+void	hev_quote(char c, int *squote, int *quote, int *fquote)
 {
+	if ((*quote == 0) && (*squote == 0))
+		*fquote = c;
 	if ((c == 34 && *quote == 1) || (c == 39 && *squote == 1))
 	{
 		if (c == 34 && *quote == 1)
