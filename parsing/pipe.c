@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:18:22 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/08 19:12:34 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/08 19:15:44 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,16 @@ int	pipe_in_q(char *str)
 	quote = 0;
 	while (str[i] != 0)
 	{
-		if (is_quote())
+		if (is_quote(str[i]) != 0)
+			quote += 1;
+		if (str[i] == '|' && (quote % 2) == 0)
+			return (1);
+		i++;
 	}
+	if (str[i] == 0)
+		return (0);
+	else
+		return (1);
 }
 
 void	handle_pipe(t_ms *t)
