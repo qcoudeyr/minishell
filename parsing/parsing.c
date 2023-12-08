@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/08 18:51:38 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/08 18:57:39 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,17 @@ char	*spec_format(char *str)
 	{
 		if (str[s.i] == '\'' || str[s.i] == '"')
 			s.quote += 1;
-		if (str[s.i] == '|' && s.quote == 0)
-			s.i++;
+		if (str[s.i] == '|' &&  && s.quote == 0)
+		{
+			while (str[s.i] == '|')
+			{
+
+			}
+		}
 		else
 			s.newstr[s.j++] = str[s.i++];
 	}
-	s.newstr[j] = 0;
+	s.newstr[s.j] = 0;
 	str = pfree(str);
 	return (s.newstr);
 }
