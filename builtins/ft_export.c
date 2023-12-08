@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:28:07 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/08 10:55:39 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/08 17:33:10 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	ft_export(t_ms *t, int i)
 	int	index;
 
 	t->j = 1;
+	if (t->cmdl[i][1] == NULL || *t->cmdl[i][1] == '-')
+		return (0 * printexport(t));
 	while (t->cmdl[i][t->j] != NULL)
 	{
 		index = 0;
@@ -65,8 +67,6 @@ int	ft_export(t_ms *t, int i)
 		t->j++;
 	}
 	export_sort(t);
-	if (t->cmdl[i][1] == NULL)
-		printexport(t);
 	return (0);
 }
 
