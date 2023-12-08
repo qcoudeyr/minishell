@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:28:07 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/08 10:21:10 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/08 10:32:35 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,9 @@ void	add_var_export(t_ms *t, char *str, int index)
 	}
 	t->export = pfree(t->export);
 	t->export = newenv;
+	printexport(t);
 	export_sort(t);
+	printexport(t);
 }
 
 int	ft_export(t_ms *t, int i)
