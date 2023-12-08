@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:42:16 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/08 11:26:58 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/08 11:31:48 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ void	exec_cmd(t_ms *t)
 	{
 		handle_spec(t);
 		handle_redirect(t, t->index);
-		if (is_builtins(t->cmdl[t->index][0]) > 0)
+		if (t->cmdl[t->index] != NULL && is_builtins(t->cmdl[t->index][0]) > 0)
 		{
 			handle_builtins(t, t->index);
 		}
-		else
+		else if (t->cmdl[t->index] != NULL)
 		{
 			t->pid = fork();
 			if (t->pid == -1)
@@ -62,7 +62,7 @@ void	handle_spec(t_ms *t)
 			t->index++;
 		else if (is_or(t->cmdl[t->index][0]) == 1)
 		{
-			if (t->status == 512)
+			if (t->status != 0)
 				t->index++;
 			else
 				t->index += 2;
