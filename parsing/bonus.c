@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 12:09:16 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/04 10:56:14 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/08 19:20:25 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,18 @@
 int	is_or(char *str)
 {
 	int	i;
+	int	quote;
 
 	i = 0;
+	quote = 0;
 	if (!str)
 		return (0);
 	while (str[i] != 0)
 	{
-		if (str[i] == '|' && str[i + 1] != 0 && str[i + 1] == '|')
+		if (is_quote(str[i]) != 0)
+			quote += 1;
+		if (str[i] == '|' && str[i + 1] != 0 && str[i + 1] == '|' && \
+		(quote % 2) == 0)
 		{
 			return (1);
 		}
