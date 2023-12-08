@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:42:16 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/08 11:06:18 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/08 11:22:57 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	handle_redirect(t_ms *t, int index)
 	int	i;
 
 	i = 0;
-	while (t->cmdl[index][i] != NULL)
+	while (t->cmdl[index] != NULL && t->cmdl[index][i] != NULL)
 	{
 		if (t->cmdl[index][i][0] == '<')
 			input_redirect(t, index, i);
