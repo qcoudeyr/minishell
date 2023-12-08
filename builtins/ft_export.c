@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:28:07 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 23:25:30 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/08 09:52:54 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,25 +133,24 @@ void	get_export(t_ms *t)
 
 void	export_compare(t_ms *t)
 {
-	int	lower;
 	int	i;
 	int	j;
 
 	i = 0;
-	lower = 0;
 	while (t->export[i] != NULL)
 	{
 		j = i + 1;
-		t->temp = t->export[j];
 		while (t->export[j] != NULL)
 		{
-			if (ft_strcmp(t->export[i], t->export[j]) > 0 && ft_strcmp(t->export[j], t->export[lower]) < 0)
-				lower = j;
+			if (ft_strcmp(t->export[i], t->export[j]) > 0)
+			{
+				printf("%s \t %s\n", t->export[i] ,t->export[j]);
+				t->temp = t->export[i];
+				t->export[i] = t->export[j];
+				t->export[j] = t->temp;
+			}
 			j++;
 		}
-		t->temp = t->export[i];
-		t->export[i] = t->export[lower];
-		t->export[lower] = t->temp;
 		i++;
 	}
 }
@@ -183,20 +182,6 @@ void	export_sort(t_ms *t)
 	while (tab_sorted(t->export) != 0)
 	{
 		export_compare(t);
-		export_compare(t);
-		if (*t->export[tablen((void **) t->export) - 1] < *t->export[0])
-		{
-			t->i = tablen((void **) t->export);
-			j = 0;
-			while (j < t->i - 1)
-			{
-				t->temp = t->export[j];
-				t->export[j] = t->export[j + 1];
-				t->export[j + 1] = t->temp;
-				j++;
-			}
-			break ;
-		}
 	}
 }
 
