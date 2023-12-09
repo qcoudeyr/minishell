@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:42:16 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/09 12:05:05 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/09 12:07:37 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,15 @@ int		h_nalhpa(t_ms *t)
 {
 	if (ft_strchr("<>|&", t->cmdl[t->index][0][0]) != NULL)
 	{
-		t->temp = ft_strjoin("minishell : syntax error near unexpected token ", &t->cmdl[t->index][0][0])
+		t->temp = ft_strjoin( \
+"minishell : syntax error near unexpected token ", &t->cmdl[t->index][0][0]);
 		write(0, t->temp, ft_strlen(t->temp));
+		t->temp = pfree(t->temp);
+		t->status = 512;
+		return (2);
 	}
+	else
+		return (0);
 }
 
 void	exec_cmd(t_ms *t)
