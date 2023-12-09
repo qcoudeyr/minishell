@@ -6,16 +6,16 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:52:11 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 13:38:00 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/09 11:09:18 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_perror(t_ms *t, char *s)
+int	ft_perror(t_ms *t, char *s)
 {
 	if (s != NULL)
 		perror(s);
 	t->return_v = 2;
-	exit(EXIT_FAILURE);
+	return (-1);
 }

@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/09 10:48:53 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/09 11:11:27 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int		is_set_env_var(char *str);
 void	get_env(t_ms *t, char **env);
 void	end_pipe(t_ms *t);
 void	t_init(t_ms *t);
-void	handle_spec(t_ms *t);
+int		handle_spec(t_ms *t);
 void	change_str_env(t_env *e, t_ms *t, char *str);
 void	hev_quote(char c, int *squote, int *quote, int *fquote);
 int		check_path(t_ms *t);
@@ -118,7 +118,7 @@ int		have_wildcard(char **cmds);
 void	input_redirect(t_ms *t, int index, int i);
 void	output_redirect(t_ms *t, int index, int i);
 void	format_cmd_redirect(t_ms *t, int index, int i);
-void	handle_redirect(t_ms *t, int index);
+int		handle_redirect(t_ms *t, int index);
 int		cmd_handler(t_ms *t);
 void	exec_cmd(t_ms *t);
 int		is_and(char *str);
@@ -141,7 +141,7 @@ int		ft_cmdnotfound(t_ms *t, char *str);
 int		change_env(t_ms *t, char *var, char *tochange);
 void	env_pars(t_ms *t);
 void	ft_acceserror(t_ms *t);
-void	ft_perror(t_ms *t, char *s);
+int		ft_perror(t_ms *t, char *s);
 void	ft_free(t_ms *t);
 int		ft_exit(t_ms *t);
 void	sigint_handler(int signo);
