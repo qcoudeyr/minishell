@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:42:16 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/09 11:06:10 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/09 11:09:28 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,11 +101,13 @@ void	end_pipe(t_ms *t)
 	t->index++;
 }
 
-void	handle_redirect(t_ms *t, int index)
+int	handle_redirect(t_ms *t, int index)
 {
 	int	i;
 
 	i = 0;
+	if (check_redirect_error == -1)
+		return (-1);
 	while (t->cmdl[index] != NULL && t->cmdl[index][i] != NULL)
 	{
 		if (t->cmdl[index][i][0] == '<')
@@ -115,7 +117,7 @@ void	handle_redirect(t_ms *t, int index)
 		i++;
 	}
 	if (t->input_fd == -1 || t->output_fd == -1)
-		ft_perror(t, "open");
+		return (ft_perror(t, "open"));
 }
 
 void	check_redirect_error(t_ms *t, int index)
@@ -138,6 +140,9 @@ void	check_redirect_error(t_ms *t, int index)
 	}
 	if (ft_strcmp(temp, t->temp) == 0)
 	{
-		
+		printf("%s: input file is output file", t->cmdl[index][0]);
+		t->status = 512;
+		return (2);
 	}
+	return (0);
 }
