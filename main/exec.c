@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:42:16 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/09 11:47:59 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/09 12:01:47 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	replace_index(t_ms *t, int index)
 
 int		h_nalhpa(t_ms *t)
 {
-
+	if (ft_strchr("<>|&", t->cmdl[t->index][0][0]))
 }
 
 void	exec_cmd(t_ms *t)
