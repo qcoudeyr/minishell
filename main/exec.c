@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:42:16 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/09 11:24:59 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/09 11:26:31 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	exec_cmd(t_ms *t)
 	while (t->cmdl[t->index] != NULL)
 	{
 		if (handle_spec(t) == -1 || handle_redirect(t, t->index) == -1)
-			t->cmdl[t->index] = NULL;
+			t->index = tablen((void **) t->cmdl);
 		if (t->cmdl[t->index] != NULL && is_builtins(t->cmdl[t->index][0]) > 0)
 			handle_builtins(t, t->index);
 		else if (t->cmdl[t->index] != NULL)
@@ -128,7 +128,7 @@ int	check_redirect_error(t_ms *t, int index)
 	char	*temp;
 
 	i = 0;
-	t->temp = pfree(temp);
+	temp = pfree(t->temp);
 	while (t->cmdl[index] != NULL && t->cmdl[index][i] != NULL)
 	{
 		if (t->cmdl[index][i][0] == '<' && t->cmdl[index][i + 1] != NULL)
