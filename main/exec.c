@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:42:16 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/09 12:07:37 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/09 12:09:01 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ void	replace_index(t_ms *t, int index)
 		t->cmdl[index] = ft_calloc(2, sizeof(char *));
 }
 
-int		h_nalhpa(t_ms *t)
+int	h_nalhpa(t_ms *t)
 {
 	if (ft_strchr("<>|&", t->cmdl[t->index][0][0]) != NULL)
 	{
-		t->temp = ft_strjoin( \
+		t->temp = ft_strjoin(\
 "minishell : syntax error near unexpected token ", &t->cmdl[t->index][0][0]);
 		write(0, t->temp, ft_strlen(t->temp));
 		t->temp = pfree(t->temp);
@@ -89,7 +89,7 @@ int	handle_spec(t_ms *t)
 			else
 				t->index += 2;
 		}
-		else if (is_special(t->cmdl[t->index + 1][0]) == 1 && \
+		else if (t->cmdl[t->index + 1] != NULL && is_special(t->cmdl[t->index + 1][0]) == 1 && \
 	(is_and(t->cmdl[t->index +1][0]) + is_or(t->cmdl[t->index +1][0])) == 0)
 		{
 			if (pipe(t->pipefd) == -1)
