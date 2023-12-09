@@ -20,40 +20,43 @@ int	is_quote(char c)
 		return (0);
 }
 
+void	*init_rq(t_env *s, char *str)
+{
+	s->len = ft_strlen(str);
+	s->newstr = ft_calloc(s->len + 10, sizeof(char));
+	if (!s->newstr)
+		return (NULL);
+	s->j = 0;
+	s->i = 0;
+	s->quote = 0 ;
+	return (str);
+}
+
 char	*remove_quotes(char *str)
 {
 	struct s_henv	s;
-	int				j;
-	int				i;
 
-	if (!str)
+	if (init_rq(&s, str) == NULL)
 		return (NULL);
-	s.len = ft_strlen(str);
-	s.newstr = ft_calloc(s.len + 10, sizeof(char));
-	if (!s.newstr)
-		return (NULL);
-	j = 0;
-	i = 0;
-	s.quote = 0 ;
-	while (i < s.len)
+	while (s.i < s.len)
 	{
-		if (is_quote(str[i]) != 0)
+		if (is_quote(str[s.i]) != 0)
 		{
-			if (s.quote == 0 || s.quote == is_quote(str[i]))
+			if (s.quote == 0 || s.quote == is_quote(str[s.i]))
 			{
 				if (s.quote != 0)
 					s.quote = 0;
 				else
-					s.quote = str[i];
-				i++;
+					s.quote = str[s.i];
+				s.i++;
 			}
 			else
-				s.newstr[j++] = str[i++];
+				s.newstr[s.j++] = str[s.i++];
 		}
 		else
-			s.newstr[j++] = str[i++];
+			s.newstr[s.j++] = str[s.i++];
 	}
-	s.newstr[j] = '\0';
+	s.newstr[s.j] = '\0';
 	str = pfree(str);
 	return (s.newstr);
 }
