@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:42:16 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/09 11:26:31 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/09 11:28:05 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,34 +119,5 @@ int	handle_redirect(t_ms *t, int index)
 	}
 	if (t->input_fd == -1 || t->output_fd == -1)
 		return (ft_perror(t, "open"));
-	return (0);
-}
-
-int	check_redirect_error(t_ms *t, int index)
-{
-	int		i;
-	char	*temp;
-
-	i = 0;
-	temp = pfree(t->temp);
-	while (t->cmdl[index] != NULL && t->cmdl[index][i] != NULL)
-	{
-		if (t->cmdl[index][i][0] == '<' && t->cmdl[index][i + 1] != NULL)
-			t->temp = t->cmdl[index][i + 1];
-		else if (ft_strchr(t->cmdl[index][i], '>') != 0 && \
-	t->cmdl[index][i + 1] != NULL)
-			temp = t->cmdl[index][i + 1];
-		if (temp != NULL && t->temp != NULL)
-			break ;
-		i++;
-	}
-	if (ft_strcmp(temp, t->temp) == 0)
-	{
-		temp = ft_strjoin(t->cmdl[index][0], ": input file is output file\n");
-		write(0, temp, ft_strlen(temp));
-		temp = pfree(temp);
-		t->status = 512;
-		return (-1);
-	}
 	return (0);
 }
