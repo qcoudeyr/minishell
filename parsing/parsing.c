@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/09 12:49:38 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/09 12:53:42 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,18 @@ int	check_cmd_err(t_ms *t)
 
 	len = ft_strlen(t->cmd[t->nc]);
 	if (len == 0)
-		return (-1);
-	if (h_nalhpa(t, &t->cmd[t->nc]) != 0)
-		return (-1);
-	if ()
+		return (2);
+	if (len == 1 && ft_strchr("<>|&\'\"\\", t->cmd[t->nc][0]) != NULL)
+	{
+		t->temp = ft_strjoin(\
+"minishell : syntax error near unexpected token \'", &t->cmd[t->nc][0]);
+		write(0, t->temp, ft_strlen(t->temp));
+		write(0, "\'\n", 2);
+		t->temp = pfree(t->temp);
+		t->status = 512;
+		return (2);
+	}
+	return (0);
 }
 
 int	cmdformat(t_ms *t)
@@ -89,7 +97,7 @@ int	cmdformat(t_ms *t)
 	i = 0;
 	t->cmd[t->nc] = rmcharq(t->cmd[t->nc], '\\');
 	t->cmd[t->nc] = spec_format(t->cmd[t->nc]);
-	if (t->cmd[t->nc] != NULL && *t->cmd[t->nc] != 0)
+	if (t->cmd[t->nc] != NULL && *t->cmd[t->nc] != 0 && check_cmd_err(t) == 0)
 	{
 		if (*t->cmd[t->nc] == 0)
 			return (-1);
