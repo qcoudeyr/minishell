@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:42:16 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/09 11:28:05 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/09 11:40:04 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,13 @@ void	ft_execve(t_ms *t, int i)
 	exit(EXIT_FAILURE);
 }
 
+void	replace_index(t_ms *t, int index)
+{
+	t->cmdl[index] = tabfree((void **) t->cmdl[index])
+	if t->cmdl[index]
+		t->cmdl[index] =
+}
+
 void	exec_cmd(t_ms *t)
 {
 	t->index = 0;
@@ -32,7 +39,7 @@ void	exec_cmd(t_ms *t)
 	while (t->cmdl[t->index] != NULL)
 	{
 		if (handle_spec(t) == -1 || handle_redirect(t, t->index) == -1)
-			t->index = tablen((void **) t->cmdl);
+			replace_index(t, t->index);
 		if (t->cmdl[t->index] != NULL && is_builtins(t->cmdl[t->index][0]) > 0)
 			handle_builtins(t, t->index);
 		else if (t->cmdl[t->index] != NULL)
