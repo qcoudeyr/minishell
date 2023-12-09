@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/09 11:13:15 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/09 12:15:45 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int		ft_export(t_ms *t, int i);
 void	add_var_env(t_ms *t, char *str, int index);
 
 //		utils
+int		h_nalhpa(t_ms *t);
 int		is_quote(char c);
 void	*tabfree(void **ptr);
 void	import_env(t_ms *t);

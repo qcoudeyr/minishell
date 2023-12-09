@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:42:16 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/09 12:16:39 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/09 12:20:47 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,12 @@ void	replace_index(t_ms *t, int index)
 
 int	h_nalhpa(t_ms *t)
 {
+	char c[300];
+
 	if (ft_strchr("<>|&", t->cmdl[t->index][0][0]) != NULL)
 	{
-		t->temp = ft_strjoin(\
-"minishell : syntax error near unexpected token ", &t->cmdl[t->index][0][0]);
+		ft_strl
+, &t->cmdl[t->index][0][0]);
 		write(0, t->temp"\n", ft_strlen(t->temp));
 		t->temp = pfree(t->temp);
 		t->status = 512;
