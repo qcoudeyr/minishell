@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/09 12:45:51 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/09 12:49:38 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,17 @@ char	*spec_format(char *str)
 	str = pfree(str);
 	return (s.newstr);
 }
+int	check_cmd_err(t_ms *t)
+{
+	int	len;
+
+	len = ft_strlen(t->cmd[t->nc]);
+	if (len == 0)
+		return (-1);
+	if (h_nalhpa(t, &t->cmd[t->nc]) != 0)
+		return (-1);
+	if ()
+}
 
 int	cmdformat(t_ms *t)
 {
@@ -76,8 +87,6 @@ int	cmdformat(t_ms *t)
 
 	j = 0;
 	i = 0;
-	if (h_nalhpa(t, &t->cmd[t->nc]) != 0)
-		return (-1);
 	t->cmd[t->nc] = rmcharq(t->cmd[t->nc], '\\');
 	t->cmd[t->nc] = spec_format(t->cmd[t->nc]);
 	if (t->cmd[t->nc] != NULL && *t->cmd[t->nc] != 0)
