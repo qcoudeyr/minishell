@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:42:16 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/09 11:15:02 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/09 11:21:17 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	exec_cmd(t_ms *t)
 	while (t->cmdl[t->index] != NULL)
 	{
 		if (handle_spec(t) == -1 || handle_redirect(t, t->index) == -1)
-			t->index = -1;
+			t->cmdl[t->index] = NULL;
 		if (t->cmdl[t->index] != NULL && is_builtins(t->cmdl[t->index][0]) > 0)
 			handle_builtins(t, t->index);
 		else if (t->cmdl[t->index] != NULL)
@@ -134,7 +134,8 @@ int	check_redirect_error(t_ms *t, int index)
 	{
 		if (t->cmdl[index][i][0] == '<' && t->cmdl[index][i + 1] != NULL)
 			t->temp = t->cmdl[index][i + 1];
-		else if (ft_strchr(t->cmdl[index][i], '>') != 0 && t->cmdl[index][i + 1] != NULL)
+		else if (ft_strchr(t->cmdl[index][i], '>') != 0 && \
+	t->cmdl[index][i + 1] != NULL)
 			temp = t->cmdl[index][i + 1];
 		if (temp != NULL && t->temp != NULL)
 			break;
@@ -142,7 +143,8 @@ int	check_redirect_error(t_ms *t, int index)
 	}
 	if (ft_strcmp(temp, t->temp) == 0)
 	{
-		printf("%s: input file is output file", t->cmdl[index][0]);
+		temp = ft_strjoin(t->cmdl[index][0], ": input file is output file\n");
+		write(0, temp, ft_strlen(temp));
 		t->status = 512;
 		return (-1);
 	}
