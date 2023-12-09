@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:42:16 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/08 21:21:53 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/09 11:06:10 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,4 +116,28 @@ void	handle_redirect(t_ms *t, int index)
 	}
 	if (t->input_fd == -1 || t->output_fd == -1)
 		ft_perror(t, "open");
+}
+
+void	check_redirect_error(t_ms *t, int index)
+{
+	int		i;
+	char	*temp;
+
+	i = 0;
+	t->temp = NULL;
+	temp = NULL;
+	while (t->cmdl[index] != NULL && t->cmdl[index][i] != NULL)
+	{
+		if (t->cmdl[index][i][0] == '<' && t->cmdl[index][i + 1] != NULL)
+			t->temp = t->cmdl[index][i + 1];
+		else if (ft_strchr(t->cmdl[index][i], '>') != 0 && t->cmdl[index][i + 1] != NULL)
+			temp = t->cmdl[index][i + 1];
+		if (temp != NULL && t->temp != NULL)
+			break;
+		i++;
+	}
+	if (ft_strcmp(temp, t->temp) == 0)
+	{
+		
+	}
 }
