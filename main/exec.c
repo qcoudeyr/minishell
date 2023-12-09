@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:42:16 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/09 11:09:28 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/09 11:15:02 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	exec_cmd(t_ms *t)
 	t->output_fd = STDOUT_FILENO;
 	while (t->cmdl[t->index] != NULL)
 	{
-		handle_spec(t);
-		handle_redirect(t, t->index);
+		if (handle_spec(t) == -1 || handle_redirect(t, t->index) == -1)
+			t->index = -1;
 		if (t->cmdl[t->index] != NULL && is_builtins(t->cmdl[t->index][0]) > 0)
 			handle_builtins(t, t->index);
 		else if (t->cmdl[t->index] != NULL)
@@ -51,7 +51,7 @@ void	exec_cmd(t_ms *t)
 	}
 }
 
-void	handle_spec(t_ms *t)
+int	handle_spec(t_ms *t)
 {
 	if (is_special(t->cmdl[t->index][0]) == 1 || (t->cmdl[t->index + 1] \
 	!= NULL && is_special(t->cmdl[t->index + 1][0]) == 1))
@@ -77,6 +77,7 @@ void	handle_spec(t_ms *t)
 		is_and(t->cmdl[t->index +1][0]) == 0)
 			end_pipe(t);
 	}
+	return (0);
 }
 
 void	end_pipe(t_ms *t)
@@ -106,7 +107,7 @@ int	handle_redirect(t_ms *t, int index)
 	int	i;
 
 	i = 0;
-	if (check_redirect_error == -1)
+	if (check_redirect_error(t, index) == -1)
 		return (-1);
 	while (t->cmdl[index] != NULL && t->cmdl[index][i] != NULL)
 	{
@@ -118,9 +119,10 @@ int	handle_redirect(t_ms *t, int index)
 	}
 	if (t->input_fd == -1 || t->output_fd == -1)
 		return (ft_perror(t, "open"));
+	return (0);
 }
 
-void	check_redirect_error(t_ms *t, int index)
+int	check_redirect_error(t_ms *t, int index)
 {
 	int		i;
 	char	*temp;
@@ -142,7 +144,7 @@ void	check_redirect_error(t_ms *t, int index)
 	{
 		printf("%s: input file is output file", t->cmdl[index][0]);
 		t->status = 512;
-		return (2);
+		return (-1);
 	}
 	return (0);
 }

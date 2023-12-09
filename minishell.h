@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/09 11:11:27 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/09 11:13:15 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ void	nothing_handler(int signo);
 void	getsignal(int signal_number);
 void	handle_heredoc(t_ms *t, int index, int i);
 void	get_export(t_ms *t);
+int		check_redirect_error(t_ms *t, int index);
 void	export_sort(t_ms *t);
 
 // Text colors
