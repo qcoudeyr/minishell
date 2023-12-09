@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/09 12:53:42 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/09 13:03:38 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,8 +135,6 @@ is_special(t->cmdl[t->i][0]) == 0)
 				return_v = check_path(t);
 			t->j++;
 		}
-		if (h_nalhpa(t, t->cmdl[t->i]) != 0)
-			return_v = -1;
 		t->i++;
 	}
 	return (return_v);

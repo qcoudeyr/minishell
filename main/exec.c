@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:42:16 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/09 12:57:10 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/09 13:03:03 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ int	handle_spec(t_ms *t)
 			else
 				t->output_fd = t->pipefd[1];
 		}
-		else if (is_special(t->cmdl[t->index][0]) == 1 && \
-		is_and(t->cmdl[t->index +1][0]) == 0)
+		else if (t->cmdl[t->index + 1] != NULL && is_special(t->cmdl[t->index][0]) == 1 && \
+		is_and(t->cmdl[t->index + 1][0]) == 0)
 			end_pipe(t);
 	}
 	return (0);
