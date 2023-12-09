@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:01 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/09 11:28:29 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/09 13:00:04 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	check_redirect_error(t_ms *t, int index)
 			break ;
 		i++;
 	}
-	if (ft_strcmp(temp, t->temp) == 0)
+	if (temp && t->temp && ft_strcmp(temp, t->temp) == 0)
 	{
 		temp = ft_strjoin(t->cmdl[index][0], ": input file is output file\n");
 		write(0, temp, ft_strlen(temp));
