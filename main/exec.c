@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:42:16 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/09 11:21:17 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/09 11:24:59 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,8 +128,7 @@ int	check_redirect_error(t_ms *t, int index)
 	char	*temp;
 
 	i = 0;
-	t->temp = NULL;
-	temp = NULL;
+	t->temp = pfree(temp);
 	while (t->cmdl[index] != NULL && t->cmdl[index][i] != NULL)
 	{
 		if (t->cmdl[index][i][0] == '<' && t->cmdl[index][i + 1] != NULL)
@@ -138,13 +137,14 @@ int	check_redirect_error(t_ms *t, int index)
 	t->cmdl[index][i + 1] != NULL)
 			temp = t->cmdl[index][i + 1];
 		if (temp != NULL && t->temp != NULL)
-			break;
+			break ;
 		i++;
 	}
 	if (ft_strcmp(temp, t->temp) == 0)
 	{
 		temp = ft_strjoin(t->cmdl[index][0], ": input file is output file\n");
 		write(0, temp, ft_strlen(temp));
+		temp = pfree(temp);
 		t->status = 512;
 		return (-1);
 	}
