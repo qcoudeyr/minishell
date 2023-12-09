@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/08 19:25:43 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/09 12:15:10 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int	cmdformat(t_ms *t)
 			return (-1);
 		t->temp = (void *) t->cmdl[i];
 		t->cmdl[i] = ft_splitq(t->cmd[t->nc]);
+		t->cmdl[i + 1] = NULL;
 		t->temp = pfree(t->temp);
 		if (have_pipe(t->cmdl[i]) == 1)
 			handle_pipe(t);
@@ -115,6 +116,8 @@ is_special(t->cmdl[t->i][0]) == 0)
 				return_v = check_path(t);
 			t->j++;
 		}
+		if (h_nalhpa(t) != 0)
+			return_v = -1;
 		t->i++;
 	}
 	return (return_v);
