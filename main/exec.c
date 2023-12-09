@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:42:16 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/09 12:26:02 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/09 12:29:52 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int	h_nalhpa(t_ms *t)
 	{
 		t->temp = ft_strjoin(\
 "minishell : syntax error near unexpected token ", &t->cmdl[t->index][0][0]);
-		t->temp[]
-		write(0, t->temp"\n", ft_strlen(t->temp));
+		write(0, t->temp, ft_strlen(t->temp));
+		write(0, "\n", 1);
 		t->temp = pfree(t->temp);
 		t->status = 512;
 		return (2);
