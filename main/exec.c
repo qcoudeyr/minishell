@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:42:16 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/09 11:45:43 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/09 11:47:59 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ void	replace_index(t_ms *t, int index)
 		t->cmdl[index] = ft_calloc(2, sizeof(char *));
 }
 
+int		h_nalhpa(t_ms *t)
+{
+
+}
+
 void	exec_cmd(t_ms *t)
 {
 	t->index = 0;
@@ -44,7 +49,7 @@ void	exec_cmd(t_ms *t)
 			replace_index(t, t->index);
 		if (t->cmdl[t->index] != NULL && is_builtins(t->cmdl[t->index][0]) > 0)
 			handle_builtins(t, t->index);
-		else if (t->cmdl[t->index] != NULL && ft_strchr("|" ,t->cmdl[t->index][0][0])
+		else if (t->cmdl[t->index] != NULL && h_nalhpa(t) == 0)
 		{
 			t->pid = fork();
 			if (t->pid == -1)
