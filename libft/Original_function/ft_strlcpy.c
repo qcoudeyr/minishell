@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 11:51:54 by qcoudeyr          #+#    #+#             */
-/*   Updated: 2023/04/21 22:56:17 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/10 19:54:49 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	size_t	i;
 
 	len_src = ft_strlen(src);
-	if (dstsize == 0)
+	if (dstsize == 0 || len_src == 0)
 		return (len_src);
 	i = 0;
 	while (src[i] && i < dstsize - 1)
