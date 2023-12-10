@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 20:50:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/08 11:22:26 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/10 19:43:48 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	*pfree(void *ptr)
 	return (NULL);
 }
 
-int	is_special(char *str)
+int	is_spec(char *str)
 {
 	if (str != NULL && (*str == '|' || *str == '&'))
 		return (1);

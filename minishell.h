@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/09 12:43:33 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/10 19:43:48 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int		ft_export(t_ms *t, int i);
 void	add_var_env(t_ms *t, char *str, int index);
 
 //		utils
-int		h_nalhpa(t_ms *t, char **lst);
+int		hna(t_ms *t, char **lst);
 int		is_quote(char c);
 void	*tabfree(void **ptr);
 void	import_env(t_ms *t);
@@ -108,7 +108,7 @@ int		is_set_env_var(char *str);
 void	get_env(t_ms *t, char **env);
 void	end_pipe(t_ms *t);
 void	t_init(t_ms *t);
-int		handle_spec(t_ms *t);
+int		hsc(t_ms *t);
 void	change_str_env(t_env *e, t_ms *t, char *str);
 void	hev_quote(char c, int *squote, int *quote, int *fquote);
 int		check_path(t_ms *t);
@@ -119,13 +119,13 @@ int		have_wildcard(char **cmds);
 void	input_redirect(t_ms *t, int index, int i);
 void	output_redirect(t_ms *t, int index, int i);
 void	format_cmd_redirect(t_ms *t, int index, int i);
-int		handle_redirect(t_ms *t, int index);
+int		hrd(t_ms *t, int index);
 int		cmd_handler(t_ms *t);
 void	exec_cmd(t_ms *t);
 int		is_and(char *str);
 void	handle_builtins(t_ms *t, int i);
 void	handle_pipe(t_ms *t);
-int		is_special(char *str);
+int		is_spec(char *str);
 int		tablen(void **tabl);
 void	ft_freecmdl(t_ms *t);
 void	init_cmdl(t_ms *t);

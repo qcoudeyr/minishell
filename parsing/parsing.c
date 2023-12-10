@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/10 19:33:17 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/10 19:43:48 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,26 +69,6 @@ char	*spec_format(char *str)
 	return (s.newstr);
 }
 
-int	check_cmd_err(t_ms *t)
-{
-	int	len;
-
-	len = ft_strlen(t->cmd[t->nc]);
-	if (len == 0)
-		return (2);
-	if (len == 1 && ft_strchr("<>|&\'\"\\", t->cmd[t->nc][0]) != NULL)
-	{
-		t->temp = ft_strjoin(\
-"minishell : syntax error near unexpected token \'", &t->cmd[t->nc][0]);
-		write(0, t->temp, ft_strlen(t->temp));
-		write(0, "\'\n", 2);
-		t->temp = pfree(t->temp);
-		t->status = 512;
-		return (2);
-	}
-	return (0);
-}
-
 int	cmdformat(t_ms *t)
 {
 	int		i;
@@ -128,7 +108,7 @@ int	cmd_handler(t_ms *t)
 	{
 		t->j = 0;
 		if (is_builtins(t->cmdl[t->i][0]) == 0 && \
-is_special(t->cmdl[t->i][0]) == 0)
+is_spec(t->cmdl[t->i][0]) == 0)
 			return_v = pathfinder(t, t->i);
 		while (t->cmdl[t->i][t->j] != NULL && return_v == 0)
 		{
