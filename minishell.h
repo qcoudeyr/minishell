@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/10 19:43:48 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/10 19:49:11 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,7 @@ void	handle_heredoc(t_ms *t, int index, int i);
 void	get_export(t_ms *t);
 int		check_redirect_error(t_ms *t, int index);
 void	export_sort(t_ms *t);
+int		check_cmd_err(t_ms *t);
 
 // Text colors
 # define CL_BLACK   "\033[30m"
