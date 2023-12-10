@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:42:16 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/09 13:03:03 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/10 18:45:36 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ int	h_nalhpa(t_ms *t, char **lst)
 		t->status = 512;
 		return (2);
 	}
-	else
+	else if (lst != NULL && lst[1] != NULL)
+			return (2);
 		return (0);
 }
 
