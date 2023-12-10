@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:28:07 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/08 17:33:10 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/10 20:01:41 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	add_var_export(t_ms *t, char *str, int index)
 	newenv = ft_calloc(1000, sizeof(char *));
 	i = 0;
 	if (ft_strchr(str, '=') != 0)
-		add_var_env(t, str, index);
+		add_var_env(t, str, -1);
 	while (t->export[i] != NULL)
 	{
 		if (i == index)
