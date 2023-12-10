@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:01 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/09 13:00:04 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/10 19:23:39 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,27 @@ void	ft_acceserror(t_ms *t)
 	exit(EXIT_FAILURE);
 }
 
+int	check_temp(t_ms *t, char *temp, int index)
+{
+	if (temp && t->temp && ft_strcmp(temp, t->temp) == 0)
+	{
+		temp = ft_strjoin(t->cmdl[index][0], ": input file is output file\n");
+		write(0, temp, ft_strlen(temp));
+		temp = pfree(temp);
+		t->status = 512;
+		return (-1);
+	}
+	return (0);
+}
+
 int	check_redirect_error(t_ms *t, int index)
 {
 	int		i;
 	char	*temp;
 
 	i = 0;
-	temp = pfree(t->temp);
+	temp = NULL;
+	t->temp = NULL;
 	while (t->cmdl[index] != NULL && t->cmdl[index][i] != NULL)
 	{
 		if (t->cmdl[index][i][0] == '<' && t->cmdl[index][i + 1] != NULL)
@@ -52,13 +66,24 @@ int	check_redirect_error(t_ms *t, int index)
 			break ;
 		i++;
 	}
-	if (temp && t->temp && ft_strcmp(temp, t->temp) == 0)
+
+
+	return (check_temp(t, temp, index));
+}
+
+int	h_nalhpa(t_ms *t, char **lst)
+{
+	if (lst != NULL && *lst != NULL && ft_strchr("<>|&", lst[0][0]) != NULL && t->status == 0)
 	{
-		temp = ft_strjoin(t->cmdl[index][0], ": input file is output file\n");
-		write(0, temp, ft_strlen(temp));
-		temp = pfree(temp);
+		t->temp = ft_strjoin(\
+"minishell : syntax error near unexpected token \'", &lst[0][0]);
+		write(0, t->temp, ft_strlen(t->temp));
+		write(0, "\'\n", 2);
+		t->temp = pfree(t->temp);
 		t->status = 512;
-		return (-1);
+		return (2);
 	}
+	else if (t->status != 0)
+			return (2);
 	return (0);
 }
