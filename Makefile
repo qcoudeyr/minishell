@@ -6,7 +6,7 @@
 #    By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/07 22:29:45 by  qcoudeyr         #+#    #+#              #
-#    Updated: 2023/12/08 11:00:54 by  qcoudeyr        ###   ########.fr        #
+#    Updated: 2023/12/10 20:08:59 by  qcoudeyr        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ fclean: clean
 	@$(MAKE) -s -C ./libft fclean
 	@rm -rf $(OBJDIR)
 	@rm -rf ./utils/.env
+	@rm -rf debug
 	@echo "\033[32m\tFCLEAN is done!\033[0m"
 
 

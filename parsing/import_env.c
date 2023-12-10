@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 10:51:17 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/10 20:03:32 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/10 20:12:08 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,6 @@ void	add_var_env(t_ms *t, char *str, int index)
 	}
 	if (index < 0)
 		newenv[i] = ft_strdup(str);
-	i = 0;
-	while (t->env[i] != NULL)
-	{
-		t->env[i] = pfree(t->env[i]);
-		i++;
-	}
-	t->env = pfree(t->env);
+	t->env = tabfree((void **) t->env);
 	t->env = newenv;
 }
