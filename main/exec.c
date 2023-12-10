@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:42:16 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/10 18:45:36 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/10 18:59:06 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,22 @@ void	replace_index(t_ms *t, int index)
 {
 	t->cmdl[index] = tabfree((void **) t->cmdl[index]);
 	if (t->cmdl[index + 1] != NULL)
-		t->cmdl[index] = t->cmdl[index + 1];
+	{
+		while (t->cmdl[index + 1] != NULL)
+		{
+			t->cmdl[index] = t->cmdl[index + 1];
+			index++;
+		}
+		t->cmdl[index] = tabfree((void **) t->cmdl[index]);
+	}
 	else
 		t->cmdl[index] = ft_calloc(2, sizeof(char *));
+	exec_cmd(t);
 }
 
 int	h_nalhpa(t_ms *t, char **lst)
 {
-	if (lst != NULL && *lst != NULL && ft_strchr("<>|&", lst[0][0]) != NULL)
+	if (lst != NULL && *lst != NULL && ft_strchr("<>|&", lst[0][0]) != NULL && t->status == 0)
 	{
 		t->temp = ft_strjoin(\
 "minishell : syntax error near unexpected token \'", &lst[0][0]);
@@ -45,9 +53,9 @@ int	h_nalhpa(t_ms *t, char **lst)
 		t->status = 512;
 		return (2);
 	}
-	else if (lst != NULL && lst[1] != NULL)
+	else if (t->status != 0)
 			return (2);
-		return (0);
+	return (0);
 }
 
 void	exec_cmd(t_ms *t)
