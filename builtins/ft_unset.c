@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 15:01:23 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/07 20:14:18 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/11 12:16:35 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	remove_var_env(t_ms *t, int index)
 	t->env = newenv;
 }
 
-void	remove_var_export(t_ms *t, int index)
+void	remove_var_export(t_ms *t, char *str)
 {
 	int		i;
 	int		j;
@@ -43,7 +43,7 @@ void	remove_var_export(t_ms *t, int index)
 	j = 0;
 	while (t->export[i] != NULL)
 	{
-		if (i == index)
+		if (str && !ft_strncmp(t->export[i], str, varlen_env(str)))
 			i++;
 		if (t->export[i] != NULL)
 			newenv[j++] = ft_strdup(t->export[i++]);
@@ -67,11 +67,11 @@ int	ft_unset(t_ms *t, int i)
 			, ft_strlen(t->cmdl[i][j])) == 0)
 			{
 				remove_var_env(t, index);
-				remove_var_export(t, index);
 				break ;
 			}
 			index++;
 		}
+		remove_var_export(t, t->cmdl[i][j]);
 		j++;
 	}
 	return (0);
