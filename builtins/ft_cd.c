@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/11 12:33:19 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/11 13:15:48 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,14 @@ char	*format_chemin(char *chemin)
 
 	if (!chemin)
 		return (chemin);
+	nchr = ft_calloc(ft_strlen(chemin), sizeof(char));
 	i = 0;
 	j = 0;
-	while (chemin[i] != NULL)
+	while (chemin[i] != 0)
 	{
-		
+		nchr[j++] = chemin[i++];
+		while(chemin[i] && chemin[i] == '/')
+			i++;
 	}
 }
 
@@ -74,24 +77,23 @@ int	gotoprevpath(t_ms *t)
 
 int	ft_cd(t_ms *t, char **path)
 {
-	char	*temppath;
-
-	if (path[1] == NULL || path[1][0] == '~' || path[1][0] == '\0')
+	t->i = 0;
+	if (path[t->i] == NULL || path[t->i][0] == '~' || path[t->i][0] == '\0')
 		t->return_v = gotopath(t->home, t);
-	else if (path[1][0] == '/')
-		t->return_v = gotopath(path[1], t);
-	else if (path[1][0] == '.' && path[1][1] == '.' && path[1][2] == '\0')
+	else if (path[t->i][0] == '/')
+		t->return_v = gotopath(path[t->i], t);
+	else if (ft_strcmp(path[t->i], "../") == 0 || ft_strcmp(path[t->i], "..") == 0)
 		t->return_v = gotoprevpath(t);
-	else if (path[1][0] == '.' && path[1][1] == '\0')
+	else if (ft_strcmp(path[t->i], "../") == 0)
 		t->return_v = 0;
-	else if (path[1][0] != '\0')
+	else if (path[t->i][0] != '\0')
 	{
-		temppath = ft_strjoin(t->pwd, "/");
-		t->temp = temppath;
-		temppath = ft_strjoin(temppath, path[1]);
+		t->temp = ft_strjoin(t->pwd, "/");
+		t->temp = t->temp;
+		t->temp = ft_strjoin(t->temp, path[t->i]);
 		t->temp = pfree(t->temp);
-		t->return_v = gotopath(temppath, t);
-		temppath = pfree(temppath);
+		t->return_v = gotopath(t->temp, t);
+		t->temp = pfree(t->temp);
 	}
 	return (t->return_v);
 }
