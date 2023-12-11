@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/11 18:00:13 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/11 18:01:06 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 char	*prevpath(t_ms *t, int n)
 {
 	int		i;
-	int		j;
 	char	*newpwd;
 
-	j = -1;
 	i = ft_strlen(t->pwd);
 	while (i > 1 && n > 0)
 	{
@@ -27,7 +25,7 @@ char	*prevpath(t_ms *t, int n)
 			n--;
 	}
 	newpwd = ft_calloc(i + 1, sizeof(char));
-	ft_strlcpy(newpwd, t->pwd, i);
+	ft_strlcpy(newpwd, t->pwd, i + 1);
 	return (newpwd);
 }
 
