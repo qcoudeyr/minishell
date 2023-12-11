@@ -6,18 +6,13 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/11 14:41:25 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/11 14:52:01 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-//Le but de Handle Previous Path est uniquement de gerer les ../ a la suite
-
-char	*h_ppath(char *str)
-{
-	
-}
+char *h_ppath(char *)
 
 char	*format_path(char *chemin)
 {
@@ -59,7 +54,7 @@ int	gotopath(char *chemin, t_ms *t)
 	}
 }
 
-int	gotoprevpath(t_ms *t)
+int	gotoprevpath(t_ms *t, char *pth)
 {
 	int		i;
 	int		j;
@@ -100,7 +95,7 @@ int	ft_cd(t_ms *t, char **path)
 		if (path[t->i][0] == '/')
 			t->return_v = gotopath(path[t->i], t);
 		else if (ft_strcmp(path[t->i], "../") == 0 || ft_strcmp(path[t->i], "..") == 0)
-			t->return_v = gotoprevpath(t);
+			t->return_v = gotoprevpath(t, path[t->i]);
 		else if (ft_strcmp(path[t->i], ".") == 0 || ft_strcmp(path[t->i], "./") == 0 )
 			t->return_v = 0;
 		else if (path[t->i][0] != '\0')
