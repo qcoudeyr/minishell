@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/11 17:40:18 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/11 17:45:41 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,9 @@ char	*h_ppath(t_ms *t, char *pth)
 		}
 		if (goback != 0)
 		{
-			ft_strlcpy(temp, prevpath(t, goback), 1000);
+			t->temp = ft_strjoin(temp, prevpath(t, goback));
+			temp = pfree(temp);
+			temp = t->temp;
 			j = ft_strlen(temp);
 		}
 		else
