@@ -6,11 +6,27 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/11 12:21:48 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/11 12:33:19 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+char	*format_chemin(char *chemin)
+{
+	char	*nchr;
+	int		i;
+	int		j;
+
+	if (!chemin)
+		return (chemin);
+	i = 0;
+	j = 0;
+	while (chemin[i] != NULL)
+	{
+		
+	}
+}
 
 int	gotopath(char *chemin, t_ms *t)
 {
