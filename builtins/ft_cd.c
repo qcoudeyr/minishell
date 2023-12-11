@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/11 18:11:18 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/11 18:14:03 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,32 @@ char	*prevpath(t_ms *t, int n)
 	return (newpwd);
 }
 
+void	remove_prevpath(t_ms *t, t_env *s, char *pth)
+{
+	while (pth[s->i] != 0)
+	{
+		while(ft_strncmp(pth + s->i, "../", 3) == 0)
+		{
+			s->len += 1;
+			s->i += 3;
+		}
+		if (s->len != 0)
+		{
+			t->temp = prevpath(t, s->len) ;
+			t->ptr = s->var;
+			s->var= ft_strjoin(s->var, t->temp);
+			t->ptr = pfree(t->ptr);
+			t->temp = pfree(t->temp);
+			s->j = ft_strlen(s->var);
+		}
+		else
+			s->var[s->j] = pth[s->i];
+		s->j++;
+		s->i++;
+	}
+	s->var[s->j] = 0;
+}
+
 char	*h_ppath(t_ms *t, char *pth)
 {
 	struct s_henv	s;
@@ -39,28 +65,7 @@ char	*h_ppath(t_ms *t, char *pth)
 		return (pth);
 	s.i = 0;
 	s.j = 0;
-	while (pth[s.i] != 0)
-	{
-		while(ft_strncmp(pth + s.i, "../", 3) == 0)
-		{
-			s.len += 1;
-			s.i += 3;
-		}
-		if (s.len != 0)
-		{
-			t->temp = prevpath(t, s.len) ;
-			t->ptr = s.var;
-			s.var= ft_strjoin(s.var, t->temp);
-			t->ptr = pfree(t->ptr);
-			t->temp = pfree(t->temp);
-			s.j = ft_strlen(s.var);
-		}
-		else
-			s.var[s.j] = pth[s.i];
-		s.j++;
-		s.i++;
-	}
-	s.var[s.j] = 0;
+	remove_prevpath(t, &s, pth);
 	return (s.var);
 }
 
@@ -112,14 +117,6 @@ int	gotoprevpath(t_ms *t, char *chemin)
 	char	*newpwd;
 
 	newpwd = h_ppath(t, chemin);
-/* 	j = -1;
-	i = ft_strlen(t->pwd);
-	while (t->pwd[i] != '/' && i > 1)
-		i--;
-	newpwd = ft_calloc((i + 1), sizeof(char));
-	while (++j < i)
-		newpwd[j] = t->pwd[j];
-	newpwd[j] = '\0'; */
 	if (chdir(newpwd) == 0)
 	{
 		change_env(t, "OLDPWD=", t->pwd);
