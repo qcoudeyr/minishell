@@ -6,18 +6,20 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/11 15:09:07 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/11 15:19:45 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-/* char *h_ppath(char *pth)
+char *h_ppath(t_ms *t, char *pth)
 {
 	char	*temp;
+	char	*tpwd;
 	int		i;
 	int		j;
 
+	tpwd = ft_strdup(t->pwd);
 	temp = ft_calloc(ft_strlen(pth) * 3, sizeof(char));
 	if (!pth)
 		return (pth);
@@ -35,7 +37,7 @@
 		i++;
 	}
 
-} */
+}
 
 char	*format_path(char *chemin)
 {
