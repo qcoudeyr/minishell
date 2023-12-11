@@ -6,13 +6,13 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/11 15:04:51 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/11 15:09:07 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-/*
-char *h_ppath(char *pth)
+
+/* char *h_ppath(char *pth)
 {
 	char	*temp;
 	int		i;
@@ -35,8 +35,8 @@ char *h_ppath(char *pth)
 		i++;
 	}
 
-}
- */
+} */
+
 char	*format_path(char *chemin)
 {
 	char	*nchr;
@@ -67,7 +67,7 @@ int	gotopath(char *chemin, t_ms *t)
 	if (chdir(chemin) == 0)
 	{
 		change_env(t, "OLDPWD=", t->pwd);
-		change_env(t, "PWD=", getenv("PWD"));
+		change_env(t, "PWD=", chemin);
 		return (0);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 11:54:47 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/11 14:16:05 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/11 15:05:37 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_pwd(t_ms *t)
 	{
 		if (ft_strncmp(t->export[i], "PWD=", 3) == 0)
 		{
-			printf("%s\n", t->export[i]);
+			printf("%s\n", t->export[i] + 4);
 			return (0);
 		}
 		i++;
