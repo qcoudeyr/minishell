@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/11 18:05:37 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/11 18:11:18 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,38 +31,37 @@ char	*prevpath(t_ms *t, int n)
 
 char	*h_ppath(t_ms *t, char *pth)
 {
-	char	*temp;
-	int		goback;
-	int		i;
-	int		j;
+	struct s_henv	s;
 
-	goback = 0;
-	temp = ft_calloc(ft_strlen(pth) * 3, sizeof(char));
+	s.len = 0;
+	s.var= ft_calloc(ft_strlen(pth) * 3, sizeof(char));
 	if (!pth)
 		return (pth);
-	i = 0;
-	j = 0;
-	while (pth[i] != 0)
+	s.i = 0;
+	s.j = 0;
+	while (pth[s.i] != 0)
 	{
-		while(ft_strncmp(pth + i, "../", 3) == 0)
+		while(ft_strncmp(pth + s.i, "../", 3) == 0)
 		{
-			goback += 1;
-			i += 3;
+			s.len += 1;
+			s.i += 3;
 		}
-		if (goback != 0)
+		if (s.len != 0)
 		{
-			t->temp = prevpath(t, goback) ;
-			temp = ft_strjoin(temp, t->temp);
+			t->temp = prevpath(t, s.len) ;
+			t->ptr = s.var;
+			s.var= ft_strjoin(s.var, t->temp);
+			t->ptr = pfree(t->ptr);
 			t->temp = pfree(t->temp);
-			j = ft_strlen(temp);
+			s.j = ft_strlen(s.var);
 		}
 		else
-			temp[j] = pth[i];
-		j++;
-		i++;
+			s.var[s.j] = pth[s.i];
+		s.j++;
+		s.i++;
 	}
-	temp[j] = 0;
-	return (temp);
+	s.var[s.j] = 0;
+	return (s.var);
 }
 
 char	*format_path(char *chemin)
