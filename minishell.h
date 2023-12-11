@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/10 19:49:11 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/11 11:33:03 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_minishell
 	int				signal;
 	int				exit;
 	int				status;
+	int				p_status;
 	int				return_v;
 	int				input_fd;
 	int				output_fd;

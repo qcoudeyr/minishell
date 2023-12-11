@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:01 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/10 19:39:01 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/11 11:27:41 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,9 @@ int	check_redirect_error(t_ms *t, int index)
 
 int	hna(t_ms *t, char **lst)
 {
-	if (lst != NULL && *lst != NULL && \
-ft_strchr("<>|&", lst[0][0]) != NULL && t->status == 0)
+	if (lst == NULL && *lst == NULL)
+		return (2);
+	else if (ft_strchr("<>|&", lst[0][0]) != NULL && t->status == 0)
 	{
 		t->temp = ft_strjoin(\
 "minishell : syntax error near unexpected token \'", &lst[0][0]);
@@ -84,7 +85,7 @@ ft_strchr("<>|&", lst[0][0]) != NULL && t->status == 0)
 		t->status = 512;
 		return (2);
 	}
-	else if (t->status != 0)
+	else if (ft_strchr("<>|&", lst[0][0]) == NULL && t->status != 0)
 		return (2);
 	return (0);
 }
