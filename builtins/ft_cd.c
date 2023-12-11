@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/11 15:25:22 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/11 15:30:08 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*prevpath(t_ms *t, int n)
 {
 	int		i;
 	int		j;
-	char	newpwd[1000];
+	char	*newpwd;
 
 	j = -1;
 	i = ft_strlen(t->pwd);
@@ -26,6 +26,7 @@ char	*prevpath(t_ms *t, int n)
 		if (t->pwd[i] == '/')
 			n--;
 	}
+	newpwd = ft_calloc(i + 1, sizeof(char));
 	while (++j < i)
 		newpwd[j] = t->pwd[j];
 	newpwd[j] = '\0';
@@ -45,7 +46,7 @@ char	*h_ppath(t_ms *t, char *pth)
 		return (pth);
 	i = 0;
 	j = 0;
-	while (pth[i] != NULL)
+	while (pth[i] != 0)
 	{
 		while(ft_strncmp(pth + i, "../", 3) == 0)
 		{
@@ -53,12 +54,18 @@ char	*h_ppath(t_ms *t, char *pth)
 			i += 3;
 		}
 		if (goback != 0)
-			ft_strlcpy(temp, )
-		temp[j] = pth[i];
+		{
+			ft_strlcpy(temp, prevpath(t, goback), 1000);
+			j = ft_strlen(temp);
+		}
+		else
+			temp[j] = pth[i];
 		j++;
 		i++;
 	}
-
+	temp[j] = 0;
+	pth = pfree(pth);
+	return (temp);
 }
 
 char	*format_path(char *chemin)
@@ -88,6 +95,7 @@ char	*format_path(char *chemin)
 
 int	gotopath(char *chemin, t_ms *t)
 {
+	chemin = h_ppath(t, chemin);
 	if (chdir(chemin) == 0)
 	{
 		change_env(t, "OLDPWD=", t->pwd);
