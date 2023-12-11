@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/11 18:14:03 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/11 18:20:32 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,14 +138,14 @@ int	ft_cd(t_ms *t, char **path)
 
 	t->i = 1;
 	if (path[t->i] == NULL || path[t->i][0] == '~' || path[t->i][0] == '\0')
-		t->return_v = gotopath(t->home, t);
+		t->return_v = gotopath(t->home, t) - (0 * t->i++) ;
 	while (path[t->i] != NULL )
 	{
 		if (path[t->i][0] == '/')
 			t->return_v = gotopath(path[t->i], t);
-		else if (ft_strncmp(path[t->i], "../", 3) == 0 || ft_strcmp(path[t->i], "..") == 0)
+		else if (!ft_strncmp(path[t->i], "../", 3) || !ft_strcmp(path[t->i], ".."))
 			t->return_v = gotoprevpath(t, path[t->i]);
-		else if (ft_strcmp(path[t->i], ".") == 0 || ft_strcmp(path[t->i], "./") == 0 )
+		else if (!ft_strcmp(path[t->i], ".") || !ft_strcmp(path[t->i], "./"))
 			t->return_v = 0;
 		else if (path[t->i][0] != '\0')
 		{
