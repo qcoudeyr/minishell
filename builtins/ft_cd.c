@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/11 14:52:39 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/11 15:01:07 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,21 @@ char *h_ppath(char *pth)
 {
 	char	*temp;
 	int		i;
+	int		j;
 
+	temp = ft_calloc(ft_strlen(pth) * 3, sizeof(char));
 	if (!pth)
 		return (pth);
-	
+	i = 0;
+	j = 0;
+	while (pth[i] != NULL)
+	{
+		while(ft_str)
+		temp[j] = pth[i];
+		j++;
+		i++;
+	}
+
 }
 
 char	*format_path(char *chemin)
