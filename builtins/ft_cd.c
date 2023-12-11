@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/11 13:54:49 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/11 13:55:32 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@ char	*format_path(char *chemin)
 	j = 0;
 	while (chemin[i] != 0)
 	{
-		nchr[j++] = chemin[i++];
-		while(ft_strncmp(chemin[i], "//"))
+		nchr[j++] = chemin[i];
+		while(ft_strncmp((chemin + i), "//", 2) == 0)
 			i++;
+		i++;
 	}
 	nchr[j] = 0;
 	chemin = pfree(chemin);
