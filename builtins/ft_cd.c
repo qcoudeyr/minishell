@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/11 14:26:36 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/11 14:34:52 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*format_path(char *chemin)
 		nchr[j++] = chemin[i];
 		while (ft_strncmp((chemin + i), "//", 2) == 0)
 			i++;
-		while (nchr[j - 1] == '/' && ft_strncmp((chemin + i), "./", 2) == 0)
+		while (nchr[j - 1] == '/' && ft_strncmp((chemin + i +1), "./", 2) == 0)
 			i += 2;
 		i++;
 	}
@@ -83,6 +83,8 @@ int	gotoprevpath(t_ms *t)
 
 int	ft_cd(t_ms *t, char **path)
 {
+	char *t
+
 	t->i = 1;
 	if (path[t->i] == NULL || path[t->i][0] == '~' || path[t->i][0] == '\0')
 		t->return_v = gotopath(t->home, t);
@@ -92,12 +94,12 @@ int	ft_cd(t_ms *t, char **path)
 			t->return_v = gotopath(path[t->i], t);
 		else if (ft_strcmp(path[t->i], "../") == 0 || ft_strcmp(path[t->i], "..") == 0)
 			t->return_v = gotoprevpath(t);
-		else if (ft_strcmp(path[t->i], ".") == 0)
+		else if (ft_strcmp(path[t->i], ".") == 0 || ft_strcmp(path[t->i], "./") == 0 )
 			t->return_v = 0;
 		else if (path[t->i][0] != '\0')
 		{
 			t->temp = ft_strjoin(t->pwd, "/");
-			t->temp = t->temp;
+			t->temp = t->temp
 			t->temp = ft_strjoin(t->temp, path[t->i]);
 			t->temp = pfree(t->temp);
 			t->return_v = gotopath(t->temp, t);
