@@ -6,12 +6,12 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/11 15:01:07 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/11 15:04:51 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
+/*
 char *h_ppath(char *pth)
 {
 	char	*temp;
@@ -25,14 +25,18 @@ char *h_ppath(char *pth)
 	j = 0;
 	while (pth[i] != NULL)
 	{
-		while(ft_str)
+		while(ft_strncmp(pth + i, "../", 3) == 0)
+		{
+
+			i += 3;
+		}
 		temp[j] = pth[i];
 		j++;
 		i++;
 	}
 
 }
-
+ */
 char	*format_path(char *chemin)
 {
 	char	*nchr;
@@ -63,7 +67,7 @@ int	gotopath(char *chemin, t_ms *t)
 	if (chdir(chemin) == 0)
 	{
 		change_env(t, "OLDPWD=", t->pwd);
-		change_env(t, "PWD=", chemin);
+		change_env(t, "PWD=", getenv("PWD"));
 		return (0);
 	}
 	else
@@ -73,7 +77,7 @@ int	gotopath(char *chemin, t_ms *t)
 	}
 }
 
-int	gotoprevpath(t_ms *t, char *pth)
+int	gotoprevpath(t_ms *t)
 {
 	int		i;
 	int		j;
@@ -114,7 +118,7 @@ int	ft_cd(t_ms *t, char **path)
 		if (path[t->i][0] == '/')
 			t->return_v = gotopath(path[t->i], t);
 		else if (ft_strcmp(path[t->i], "../") == 0 || ft_strcmp(path[t->i], "..") == 0)
-			t->return_v = gotoprevpath(t, path[t->i]);
+			t->return_v = gotoprevpath(t);
 		else if (ft_strcmp(path[t->i], ".") == 0 || ft_strcmp(path[t->i], "./") == 0 )
 			t->return_v = 0;
 		else if (path[t->i][0] != '\0')
