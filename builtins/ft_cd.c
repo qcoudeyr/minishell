@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/11 18:20:32 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/11 18:24:29 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	remove_prevpath(t_ms *t, t_env *s, char *pth)
 {
 	while (pth[s->i] != 0)
 	{
-		while(ft_strncmp(pth + s->i, "../", 3) == 0)
+		while(!ft_strncmp(pth + s->i, "../", 3) || ft_strncmp(pth + s->i, "..", 3))
 		{
 			s->len += 1;
 			s->i += 3;
