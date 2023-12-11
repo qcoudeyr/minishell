@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/11 13:44:57 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/11 13:51:30 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*format_path(char *chemin)
 	j = 0;
 	while (chemin[i] != 0)
 	{
-		nchr[j++] = chemin[i++];
+		nchr[j++] = chemin[i];
 		while(chemin[i] && chemin[i] == '/')
 			i++;
 	}
@@ -80,7 +80,7 @@ int	gotoprevpath(t_ms *t)
 
 int	ft_cd(t_ms *t, char **path)
 {
-	t->i = 0;
+	t->i = 1;
 	if (path[t->i] == NULL || path[t->i][0] == '~' || path[t->i][0] == '\0')
 		t->return_v = gotopath(t->home, t);
 	while (path[t->i] != NULL )
