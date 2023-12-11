@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/11 17:45:41 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/11 18:00:13 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ char	*prevpath(t_ms *t, int n)
 			n--;
 	}
 	newpwd = ft_calloc(i + 1, sizeof(char));
-	while (++j < i)
-		newpwd[j] = t->pwd[j];
-	newpwd[j] = '\0';
+	ft_strlcpy(newpwd, t->pwd, i);
 	return (newpwd);
 }
 
@@ -55,9 +53,9 @@ char	*h_ppath(t_ms *t, char *pth)
 		}
 		if (goback != 0)
 		{
-			t->temp = ft_strjoin(temp, prevpath(t, goback));
-			temp = pfree(temp);
-			temp = t->temp;
+			t->temp = temp ;
+			temp = ft_strjoin(t->temp, prevpath(t, goback));
+			t->temp= pfree(t->temp);
 			j = ft_strlen(temp);
 		}
 		else
