@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 09:45:55 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/11 14:20:36 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/11 14:51:45 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	change_env(t_ms *t, char *var, char *tochange)
 	int		i;
 
 	i = 0;
+	tochange = h_ppath(tochange);
 	if (ft_strncmp(var, "PWD=", 5) == 0)
 	{
 		t->pwd = pfree(t->pwd);

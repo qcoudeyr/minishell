@@ -6,13 +6,21 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/11 14:52:01 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/11 14:52:39 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char *h_ppath(char *)
+char *h_ppath(char *pth)
+{
+	char	*temp;
+	int		i;
+
+	if (!pth)
+		return (pth);
+	
+}
 
 char	*format_path(char *chemin)
 {
