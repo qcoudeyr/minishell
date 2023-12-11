@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 09:56:19 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/11 11:33:17 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/11 11:42:27 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	t_init(t_ms *t)
 	t->pwd = ft_calloc(1, sizeof(char *));
 	t->nc = 0;
 	t->i = 0;
-	t->p_status = 0;
 	t->status = 0;
 	t->j = 0;
 	t->fd = 0;
