@@ -6,13 +6,13 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/11 13:37:55 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/11 13:44:57 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	*format_chemin(char *chemin)
+char	*format_path(char *chemin)
 {
 	char	*nchr;
 	int		i;
@@ -29,6 +29,9 @@ char	*format_chemin(char *chemin)
 		while(chemin[i] && chemin[i] == '/')
 			i++;
 	}
+	nchr[j] = 0;
+	chemin = pfree(chemin);
+	return (nchr);
 }
 
 int	gotopath(char *chemin, t_ms *t)
@@ -78,11 +81,11 @@ int	gotoprevpath(t_ms *t)
 int	ft_cd(t_ms *t, char **path)
 {
 	t->i = 0;
+	if (path[t->i] == NULL || path[t->i][0] == '~' || path[t->i][0] == '\0')
+		t->return_v = gotopath(t->home, t);
 	while (path[t->i] != NULL )
 	{
-		if (path[t->i] == NULL || path[t->i][0] == '~' || path[t->i][0] == '\0')
-			t->return_v = gotopath(t->home, t);
-		else if (path[t->i][0] == '/')
+		if (path[t->i][0] == '/')
 			t->return_v = gotopath(path[t->i], t);
 		else if (ft_strcmp(path[t->i], "../") == 0 || ft_strcmp(path[t->i], "..") == 0)
 			t->return_v = gotoprevpath(t);
@@ -97,6 +100,7 @@ int	ft_cd(t_ms *t, char **path)
 			t->return_v = gotopath(t->temp, t);
 			t->temp = pfree(t->temp);
 		}
+		t->i++;
 	}
 	return (t->return_v);
 }
