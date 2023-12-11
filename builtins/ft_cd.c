@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/11 13:15:48 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/11 13:21:13 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,22 +78,25 @@ int	gotoprevpath(t_ms *t)
 int	ft_cd(t_ms *t, char **path)
 {
 	t->i = 0;
-	if (path[t->i] == NULL || path[t->i][0] == '~' || path[t->i][0] == '\0')
-		t->return_v = gotopath(t->home, t);
-	else if (path[t->i][0] == '/')
-		t->return_v = gotopath(path[t->i], t);
-	else if (ft_strcmp(path[t->i], "../") == 0 || ft_strcmp(path[t->i], "..") == 0)
-		t->return_v = gotoprevpath(t);
-	else if (ft_strcmp(path[t->i], "../") == 0)
-		t->return_v = 0;
-	else if (path[t->i][0] != '\0')
+	while (path[t->i] != NULL )
 	{
-		t->temp = ft_strjoin(t->pwd, "/");
-		t->temp = t->temp;
-		t->temp = ft_strjoin(t->temp, path[t->i]);
-		t->temp = pfree(t->temp);
-		t->return_v = gotopath(t->temp, t);
-		t->temp = pfree(t->temp);
+		if (path[t->i] == NULL || path[t->i][0] == '~' || path[t->i][0] == '\0')
+			t->return_v = gotopath(t->home, t);
+		else if (path[t->i][0] == '/')
+			t->return_v = gotopath(path[t->i], t);
+		else if (ft_strcmp(path[t->i], "../") == 0 || ft_strcmp(path[t->i], "..") == 0)
+			t->return_v = gotoprevpath(t);
+		else if (ft_strcmp(path[t->i], "../") == 0)
+			t->return_v = 0;
+		else if (path[t->i][0] != '\0')
+		{
+			t->temp = ft_strjoin(t->pwd, "/");
+			t->temp = t->temp;
+			t->temp = ft_strjoin(t->temp, path[t->i]);
+			t->temp = pfree(t->temp);
+			t->return_v = gotopath(t->temp, t);
+			t->temp = pfree(t->temp);
+		}
 	}
 	return (t->return_v);
 }
