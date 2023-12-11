@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/11 17:32:19 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/11 17:40:18 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*prevpath(t_ms *t, int n)
 
 	j = -1;
 	i = ft_strlen(t->pwd);
-	while (t->pwd[i] != '/' && i > 1 && n > 0)
+	while (i > 1 && n > 0)
 	{
 		i--;
 		if (t->pwd[i] == '/')
@@ -111,19 +111,19 @@ int	gotopath(char *chemin, t_ms *t)
 
 int	gotoprevpath(t_ms *t, char *chemin)
 {
-	int		i;
-	int		j;
+/* 	int		i;
+	int		j; */
 	char	*newpwd;
 
-	t->pwd = h_ppath(t, chemin);
-	j = -1;
+	newpwd = h_ppath(t, chemin);
+/* 	j = -1;
 	i = ft_strlen(t->pwd);
 	while (t->pwd[i] != '/' && i > 1)
 		i--;
 	newpwd = ft_calloc((i + 1), sizeof(char));
 	while (++j < i)
 		newpwd[j] = t->pwd[j];
-	newpwd[j] = '\0';
+	newpwd[j] = '\0'; */
 	if (chdir(newpwd) == 0)
 	{
 		change_env(t, "OLDPWD=", t->pwd);
@@ -151,7 +151,7 @@ int	ft_cd(t_ms *t, char **path)
 		if (path[t->i][0] == '/')
 			t->return_v = gotopath(path[t->i], t);
 		else if (ft_strncmp(path[t->i], "../", 3) == 0 || ft_strcmp(path[t->i], "..") == 0)
-			t->return_v = gotoprevpath(t);
+			t->return_v = gotoprevpath(t, path[t->i]);
 		else if (ft_strcmp(path[t->i], ".") == 0 || ft_strcmp(path[t->i], "./") == 0 )
 			t->return_v = 0;
 		else if (path[t->i][0] != '\0')
