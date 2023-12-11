@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:01 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/11 11:27:41 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/11 11:45:01 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	ft_cmdnotfound(t_ms *t, char *str)
 	{
 		printf("Command not found: %s\n", str);
 		t->status = 32512;
+		t->return_v = (t->status >> 8);
 	}
 	return (-1);
 }

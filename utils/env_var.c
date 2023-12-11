@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 10:31:40 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/10 19:52:25 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/11 11:46:31 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char	*handle_env_var(t_ms *t, char *str)
 	if (detect_env_var(str) == 0)
 		return (str);
 	if (ft_strncmp(str, "$?", 3) == 0)
-		e.newstr = ft_itoa(t->status >> 8);
+		e.newstr = ft_itoa(t->return_v);
 	else
 	{
 		e.newstr = ft_calloc((ft_strlen(str) * 100), sizeof(char));

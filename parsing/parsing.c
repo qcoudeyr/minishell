@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/10 19:43:48 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/11 11:58:17 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,25 +100,27 @@ int	cmdformat(t_ms *t)
 
 int	cmd_handler(t_ms *t)
 {
-	int	return_v;
+	int	rv;
 
 	t->i = 0;
-	return_v = 0;
+	rv = 0;
 	while (t->cmdl[t->i] != NULL)
 	{
 		t->j = 0;
 		if (is_builtins(t->cmdl[t->i][0]) == 0 && \
 is_spec(t->cmdl[t->i][0]) == 0)
-			return_v = pathfinder(t, t->i);
-		while (t->cmdl[t->i][t->j] != NULL && return_v == 0)
+			rv = pathfinder(t, t->i);
+		while (t->cmdl[t->i][t->j] != NULL)
 		{
-			if (*t->cmdl[t->i][t->j] != 0 && *t->cmdl[t->i][t->j] == '/')
-				return_v = check_path(t);
+			if (*t->cmdl[t->i][t->j] && *t->cmdl[t->i][t->j] == '/' && rv == 0)
+				rv = check_path(t);
+			if (rv < 0 && is_or(t->cmdl[t->i][t->j]) == 1)
+				rv = 0;
 			t->j++;
 		}
 		t->i++;
 	}
-	return (return_v);
+	return (rv);
 }
 
 char	*rmcharq(char *str, char c)
