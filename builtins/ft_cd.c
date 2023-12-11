@@ -6,11 +6,18 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/11 14:35:45 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/11 14:41:25 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+//Le but de Handle Previous Path est uniquement de gerer les ../ a la suite
+
+char	*h_ppath(char *str)
+{
+	
+}
 
 char	*format_path(char *chemin)
 {
@@ -20,7 +27,7 @@ char	*format_path(char *chemin)
 
 	if (!chemin)
 		return (chemin);
-	nchr = ft_calloc(ft_strlen(chemin), sizeof(char));
+	nchr = ft_calloc(ft_strlen(chemin) * 2, sizeof(char));
 	i = 0;
 	j = 0;
 	while (chemin[i] != 0)
