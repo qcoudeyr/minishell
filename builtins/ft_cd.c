@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/11 14:34:52 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/11 14:35:45 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	gotoprevpath(t_ms *t)
 
 int	ft_cd(t_ms *t, char **path)
 {
-	char *t
+	char *tpath;
 
 	t->i = 1;
 	if (path[t->i] == NULL || path[t->i][0] == '~' || path[t->i][0] == '\0')
@@ -98,12 +98,12 @@ int	ft_cd(t_ms *t, char **path)
 			t->return_v = 0;
 		else if (path[t->i][0] != '\0')
 		{
-			t->temp = ft_strjoin(t->pwd, "/");
-			t->temp = t->temp
-			t->temp = ft_strjoin(t->temp, path[t->i]);
+			tpath = ft_strjoin(t->pwd, "/");
+			t->temp = tpath;
+			tpath = ft_strjoin(t->temp, path[t->i]);
 			t->temp = pfree(t->temp);
-			t->return_v = gotopath(t->temp, t);
-			t->temp = pfree(t->temp);
+			t->return_v = gotopath(tpath, t);
+			tpath = pfree(tpath);
 		}
 		t->i++;
 	}
