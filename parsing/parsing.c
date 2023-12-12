@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/11 13:49:08 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/12 11:38:17 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	cmdformat(t_ms *t)
 	int		j;
 
 	i = 0;
-	t->cmd[t->nc] = spec_format(format_path(rmcharq(t->cmd[t->nc], '\\')));
+	first_format(t);
 	if (t->cmd[t->nc] != NULL && *t->cmd[t->nc] != 0 && check_cmd_err(t) == 0)
 	{
 		if (*t->cmd[t->nc] == 0)

@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:00 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/11 11:42:06 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/12 11:22:46 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,12 @@ int	print_header(void)
 
 char	*rl_string(t_ms *t, char *rl_str)
 {
-	void	*temp;
-
 	if (rl_str != NULL)
 		rl_str = pfree(rl_str);
-	rl_str = ft_strjoin("$ "CL_RED"minishell"RESET"~ [", t->pwd);
-	temp = (void *) rl_str;
-	rl_str = ft_strjoin(rl_str, "] : ");
-	temp = pfree(temp);
+	rl_str = ft_calloc(ft_strlen(t->pwd) + 100, sizeof(char));
+	ft_strlcpy(rl_str, "$ "CL_RED"minishell"RESET"~ [", 25);
+	ft_strlcpy(rl_str + 23, t->pwd, ft_strlen(t->pwd) + 1);
+	ft_strlcpy(rl_str + ft_strlen(rl_str), "] : ", 5 + 1);
 	return (rl_str);
 }
 
