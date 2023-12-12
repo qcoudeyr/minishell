@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:56:50 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/08 13:51:13 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/12 14:17:21 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,18 @@ void	find_bn(t_echo *echo, char **ordre)
 	int	i;
 
 	i = 0;
-	while (ordre[i] != NULL)
-	{
-		if (ft_strncmp(ordre[i], "-n", 3) == 0)
-		{
-			echo->no_bs_position = i;
-			echo->nobackslash = 1;
-			break ;
-		}
+	if (ordre[1] && ordre[1][0] == '-')
 		i++;
+	else
+		return ;
+	while (ordre[1] && ordre[1][i] != 0 && ordre[1][i] == 'n')
+		i++;
+	if (ordre[1][i] == 0)
+	{
+		echo->nobackslash = 1;
+		echo->no_bs_position = 1;
 	}
+	return ;
 }
 
 void	print_echo(int fd, t_echo *echo, char **ordre)
@@ -37,7 +39,7 @@ void	print_echo(int fd, t_echo *echo, char **ordre)
 	while (ordre[++i] != NULL && ft_strncmp(ordre[i], ">", 2) != 0 && \
 ft_strncmp(ordre[i], ">>", 3) != 0)
 	{
-		if (ft_strncmp(ordre[i], "-n", 3) != 0)
+		if (i != echo->no_bs_position)
 			fd_printf(fd, "%s ", ordre[i]);
 	}
 	if (echo->nobackslash == 0)

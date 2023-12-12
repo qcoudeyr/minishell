@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 10:57:13 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/12 11:39:18 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/12 19:49:05 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ char	*format_path(char *chemin)
 
 void	check_relative_path(t_ms *t, t_env *s, char *pth)
 {
-	while (!ft_strncmp(pth + s->i, "../", 3) || \
-	!ft_strncmp(pth + s->i, "..", 3))
+	while ((!ft_strncmp(pth + s->i, "../", 3) || \
+	!ft_strncmp(pth + s->i, "..", 3)) && !s->quote)
 	{
 		if (s->len < 0)
 			s->len = 0;
@@ -92,12 +92,37 @@ void	check_relative_path(t_ms *t, t_env *s, char *pth)
 	}
 }
 
+void	check_relative_spath(t_ms *t, t_env *s, char *pth)
+{
+	while ((!ft_strncmp(pth + s->i, "./", 2) || \
+	!ft_strncmp(pth + s->i, ".", 2)) && !s->quote)
+	{
+		s->i++;
+		s->len = 1;
+	}
+	if (s->len > 0)
+	{
+		t->temp = ft_strdup(t->pwd);
+		t->ptr = s->var;
+		s->var = ft_strjoin(s->var, t->temp);
+		t->ptr = pfree(t->ptr);
+		t->temp = pfree(t->temp);
+		s->j = ft_strlen(s->var);
+		s->len = -1;
+	}
+}
+
 void	remove_prevpath(t_ms *t, t_env *s, char *pth)
 {
 	while (pth[s->i] != 0)
 	{
+		if (ft_strrchr("\'\"", pth[s->i]))
+			s->quote += 1;
+		if (s->quote == 2)
+			s->quote = 0;
 		check_relative_path(t, s, pth);
-		if (pth[s->i] == '~' && s->i > 0 && pth[s->i - 1] != '/')
+		check_relative_spath(t, s, pth);
+		if (pth[s->i] == '~' && s->i > 0 && pth[s->i - 1] != '/' && !s->quote)
 		{
 			s->var = ft_strjoin(s->var, t->home);
 			s->j = ft_strlen(s->var);

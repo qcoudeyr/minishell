@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 11:02:42 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/11 14:11:09 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/12 20:07:35 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,14 @@ char	*env_var(t_ms *t, char *str)
 		str++;
 	if (str != 0 && *str == '$' && ft_isalpha(*str + 1) == 0)
 		return (str);
+	t->temp = ft_strjoin(str, "=");
 	while (str != 0 && t->env[i] && \
-ft_strnstr(t->env[i], str, ft_strlen(str)) == 0)
+ft_strnstr(t->env[i], t->temp, ft_strlen(t->temp)) == 0)
 		i++;
-	if (str == 0 || ft_strnstr(t->env[i], str, ft_strlen(str)) == 0)
-		return (0);
-	else
-		return (t->env[i] + ft_strlen(str) + 1);
+	if (str == 0 || ft_strnstr(t->env[i], t->temp, ft_strlen(t->temp)) == 0)
+		return (pfree(t->temp));
+	pfree(t->temp);
+	return (t->env[i] + ft_strlen(str) + 1);
 }
 
 void	get_env(t_ms *t, char **env)

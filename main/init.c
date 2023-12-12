@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 09:56:19 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/12 11:39:04 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/12 14:29:24 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	init_cmdl(t_ms *t)
 void	first_format(t_ms *t)
 {
 	t->cmd[t->nc] = format_path(rmcharq(t->cmd[t->nc], '\\'));
-	t->cmd[t->nc] = h_rpath(t, spec_format(t->cmd[t->nc]));
+	t->cmd[t->nc] = spec_format(t->cmd[t->nc]);
+	t->cmd[t->nc] = h_rpath(t, t->cmd[t->nc]);
 }
 
 void	change_path(t_ms *t, int index)

@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/12 11:29:41 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/12 19:44:19 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char	*h_rpath(t_ms *t, char *pth)
 		return (pth);
 	s.i = 0;
 	s.j = 0;
+	s.quote = 0;
 	remove_prevpath(t, &s, pth);
 	pth = pfree(pth);
 	return (format_path(s.var));
