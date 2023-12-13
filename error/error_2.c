@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:52:11 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/10 19:36:47 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/13 18:13:44 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,10 @@ int	check_cmd_err(t_ms *t)
 		return (2);
 	}
 	return (0);
+}
+
+int	export_error(char *str)
+{
+	ft_printf("export: not an identifier: %s\n", str);
+	return (2);
 }

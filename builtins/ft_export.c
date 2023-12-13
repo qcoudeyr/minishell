@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:28:07 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/12 19:35:56 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/13 18:13:27 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,6 @@ void	add_var_export(t_ms *t, char *str, int index)
 	}
 	t->export = pfree(t->export);
 	t->export = newenv;
-}
-
-int	export_error(char *str)
-{
-	ft_printf("export: not an identifier: %s\n", str);
-	return (2);
 }
 
 int	is_valid_arg(char *str)

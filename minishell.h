@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/12 11:40:11 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/13 18:15:48 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ typedef struct s_minishell
 	char			**cmd;
 	char			***cmdl;
 	struct rusage	*rusage;
-}t_ms;
+}	t_ms;
 
 //		builtins
 int		is_builtins(char *str);
@@ -99,6 +99,9 @@ int		ft_export(t_ms *t, int i);
 void	add_var_env(t_ms *t, char *str, int index);
 
 //		utils
+int		export_error(char *str);
+void	check_relative_path(t_ms *t, t_env *s, char *pth);
+void	check_relative_spath(t_ms *t, t_env *s, char *pth);
 void	remove_prevpath(t_ms *t, t_env *s, char *pth);
 void	first_format(t_ms *t);
 char	*spec_format(char *str);
