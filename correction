@@ -1,0 +1,6 @@
+executer avec /bin/ls apres avoir enlever le path
+retirer les invalid read des redirection, retirer les segfault de cat < minishell > test
+gerer les && correctement
+redirection a voir dans tout els sens avec valgrind plusieurs redirection dans le meme fichier
+export affiche declare -x
+heredoc vide segfautl
