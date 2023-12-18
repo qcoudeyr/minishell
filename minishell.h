@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/17 13:00:25 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/18 11:13:16 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_echo
 {
 	int	nobackslash;
 	int	no_bs_position;
-}t_echo;
+}	t_echo;
 
 typedef struct s_henv
 {

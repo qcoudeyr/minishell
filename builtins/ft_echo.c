@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:56:50 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/17 12:31:57 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/18 11:13:01 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	find_bn(t_echo *echo, char **ordre)
 	int	i;
 
 	i = 0;
-	if (ordre[1] && ordre[1][0] == '-')
+	if (ordre[1] && ft_strncmp(ordre[1], "-n", 2) == 0)
 		i++;
 	else
 		return ;
@@ -35,11 +35,14 @@ void	print_echo(int fd, t_echo *echo, char **ordre)
 {
 	int	i;
 
-	i = 0;
-	while (ordre[++i] != NULL)
+	i = 1;
+	while (ordre[i] != NULL)
 	{
 		if (i != echo->no_bs_position)
 			fd_printf(fd, "%s", ordre[i]);
+		if (ordre[i + 1] && echo->nobackslash == 0)
+			fd_printf(fd, " ", ordre[i]);
+		i++;
 	}
 	if (echo->nobackslash == 0)
 		fd_printf(fd, "\n");
