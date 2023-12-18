@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 12:59:47 by qcoudeyr          #+#    #+#             */
-/*   Updated: 2023/09/28 09:42:18 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/15 12:25:09 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ char	**ft_split(char const *str, char c)
 		return (ft_empty_tab());
 	i = 0;
 	index = 0;
-	tab = (char **)malloc(sizeof(char *) * (ft_wordct(s, c) + 1));
+	tab = (char **)ft_calloc((ft_wordct(s, c) + 2), sizeof(char *));
 	while (s[i] != 0 || (s[i] == c && s[i + 1] == 0))
 	{
 		while (s[i] == c && s[i] != 0)
 			i++;
-		tab[index] = malloc(sizeof(char) * ft_wordlen(&s[i], c) + 1);
+		tab[index] = ft_calloc(ft_wordlen(&s[i], c) + 2, sizeof(char));
 		ft_strlcpy(tab[index++], &s[i], ft_wordlen(&s[i], c) + 1);
 		i += ft_wordlen(&s[i], c);
 	}

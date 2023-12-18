@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 11:52:02 by qcoudeyr          #+#    #+#             */
-/*   Updated: 2023/12/05 16:50:56 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/17 12:40:19 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*ft_strchr(const char *s, int c)
 {
 	char	*src;
 
-	if (!s)
+	if (!s || c == 0)
 		return (0);
 	src = (char *) s;
 	while (*src)

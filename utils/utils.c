@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 20:50:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/10 19:43:48 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/15 16:13:43 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	*pfree(void *ptr)
 
 int	is_spec(char *str)
 {
-	if (str != NULL && (*str == '|' || *str == '&'))
+	if (str != NULL && ft_strchr("|&<>", *str) != 0)
 		return (1);
 	else
 		return (0);

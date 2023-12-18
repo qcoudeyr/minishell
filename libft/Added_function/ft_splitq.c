@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 09:43:46 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/06 11:54:37 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/17 12:10:35 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static size_t	ft_wordlen(const char *s, char chr)
 	}
 	else
 		qu = 0;
-	while ((s != 0 && *s != 0 && *s != chr) || (quote % 2 != 0))
+	while (s != 0 && *s != 0 && (*s != chr || (quote % 2 != 0)))
 	{
 		if (*s == qu)
 			quote += 1;
@@ -89,8 +89,8 @@ char	**ft_splitq(char const *str)
 		return (ft_empty_tab());
 	i = 0;
 	index = 0;
-	tab = ft_calloc((ft_wordctq(s, ' ') + 2), sizeof(char *));
-	while (s[i] != 0 || (s[i] == ' ' && s[i + 1] == 0))
+	tab = ft_calloc((ft_wordctq(s, ' ') * 2), sizeof(char *));
+	while (s[i] != 0 || (ft_strchr(" \n\t", s[i]) != 0 && s[i + 1] == 0))
 	{
 		while (s[i] == ' ' && s[i] != 0)
 			i++;

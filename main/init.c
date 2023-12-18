@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 09:56:19 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/12 14:29:24 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/17 11:43:06 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,21 @@ void	t_init(t_ms *t)
 	t->fpath = NULL;
 	t->home = ft_calloc(1, sizeof(char *));
 	t->pwd = ft_calloc(1, sizeof(char *));
-	t->nc = 0;
+	t->env = NULL;
+	t->export = NULL;
+	t->temp = NULL;
+	t->ptr = NULL;
+	t->index = 0;
 	t->i = 0;
-	t->status = 0;
 	t->j = 0;
-	t->fd = 0;
+	t->nc = 0;
+	t->signal = 0;
 	t->exit = 0;
+	t->status = 0;
+	t->return_v = 0;
+	t->input_fd = 0;
+	t->output_fd = 0;
+	t->fd = 0;
 }
 
 void	init_cmdl(t_ms *t)

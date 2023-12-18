@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 11:51:56 by qcoudeyr          #+#    #+#             */
-/*   Updated: 2023/12/06 13:21:44 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/15 14:42:43 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,12 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	char	*str;
 	int		len;
 
-	len = ft_strlen(s1) + ft_strlen(s2);
+	if (s1 && s2)
+		len = ft_strlen(s1) + ft_strlen(s2);
+	else if (!s1 && s2)
+		len = ft_strlen(s2);
+	else if (s1 && !s2)
+		len = ft_strlen(s1);
 	str = ft_calloc((len + 2), sizeof(char));
 	if (!str)
 		return (NULL);

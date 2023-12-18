@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 21:08:55 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/06 21:24:27 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/18 10:04:59 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	sigint_handler(int signal)
 	}
 	if (signal != SIGQUIT)
 	{
-		printf("\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();

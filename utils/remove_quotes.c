@@ -23,7 +23,7 @@ int	is_quote(char c)
 void	*init_rq(t_env *s, char *str)
 {
 	s->len = ft_strlen(str);
-	s->newstr = ft_calloc(s->len + 10, sizeof(char));
+	s->newstr = ft_calloc((s->len + 2) * 3, sizeof(char));
 	if (!s->newstr)
 		return (NULL);
 	s->j = 0;

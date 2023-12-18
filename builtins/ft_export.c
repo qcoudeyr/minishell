@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:28:07 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/13 18:13:27 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/17 13:06:10 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,18 @@ void	add_var_export(t_ms *t, char *str, int index)
 		add_var_env(t, str, -1);
 	while (t->export[i] != NULL)
 	{
-		if (i == index)
+		if (ft_strncmp(t->export[i], str, varlen_env(str)) == 0 && index < 0)
+		{
 			newenv[i] = ft_strdup(str);
+			index = 1;
+		}
 		else
 			newenv[i] = ft_strdup(t->export[i]);
 		i++;
 	}
 	if (index < 0)
 		newenv[i] = ft_strdup(str);
-	i = 0;
-	while (t->export[i] != NULL)
-	{
-		t->export[i] = pfree(t->export[i]);
-		i++;
-	}
-	t->export = pfree(t->export);
+	t->export = tabfree((void **) t->export);
 	t->export = newenv;
 }
 
@@ -92,11 +89,18 @@ int	ft_export(t_ms *t, int i)
 
 int	printexport(t_ms *t)
 {
-	int	j;
+	int		j;
+	char	**temp;
 
 	j = -1;
 	while (t->export[++j] != NULL)
-		fd_printf(t->output_fd, "%s\n", t->export[j]);
+	{
+		temp = ft_split(t->export[j], '=');
+		if (temp != NULL && !temp[1])
+			temp[1] = NULL;
+		fd_printf(t->output_fd, "declare -x %s=\"%s\"\n", temp[0], temp[1]);
+		temp = tabfree((void **)temp);
+	}
 	return (0);
 }
 

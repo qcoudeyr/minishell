@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 10:31:40 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/11 11:46:31 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/17 11:53:57 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,13 +86,23 @@ char	*handle_env_var(t_ms *t, char *str)
 		e.newstr = ft_itoa(t->return_v);
 	else
 	{
-		e.newstr = ft_calloc((ft_strlen(str) * 100), sizeof(char));
+		e.newstr = ft_calloc(((ft_strlen(str) + 1) * 100), sizeof(char));
 		e.var = ft_calloc(1000, sizeof(char));
 		change_str_env(&e, t, str);
 		e.var = pfree(e.var);
 	}
 	str = pfree(str);
 	return (e.newstr);
+}
+
+void	env_var_returnv(t_env *e, t_ms *t)
+{
+	e->var = pfree(e->var);
+	e->var = ft_itoa(t->return_v);
+	ft_strlcpy(e->newstr + t->j, e->var, ft_strlen(e->var) + 1);
+	e->var = pfree(e->var);
+	e->var = ft_calloc(1000, sizeof(char));
+	t->i += 2;
 }
 
 void	change_str_env(t_env *e, t_ms *t, char *str)
@@ -102,8 +112,7 @@ void	change_str_env(t_env *e, t_ms *t, char *str)
 		e->len = 0;
 		hev_quote(str[t->i], &e->squote, &e->quote, &e->fquote);
 		if ((e->quote == 1 || (e->squote == 0 && e->quote == 0) || \
-e->fquote == '"') && \
-	str[t->i] == '$' && ft_isalpha(str[t->i + 1]))
+	e->fquote == '"') && str[t->i] == '$' && ft_isalpha(str[t->i + 1]))
 		{
 			while (ft_isalpha(str[++t->i]) != 0)
 				e->var[e->len++] = str[t->i];
@@ -112,30 +121,13 @@ e->fquote == '"') && \
 			ft_strlen(env_var(t, e->var)) + 1);
 			e->var = pfree(e->var);
 			e->var = ft_calloc(1000, sizeof(char));
-			t->j = ft_strlen(e->newstr);
 		}
+		else if ((e->quote == 1 || (e->squote == 0 && e->quote == 0) || \
+	e->fquote == '"') && str[t->i] == '$' && str[t->i + 1] == '?')
+			env_var_returnv(e, t);
+		t->j = ft_strlen(e->newstr);
 		if (str[t->i] != 0)
 			e->newstr[t->j++] = str[t->i++];
 	}
 	e->newstr[t->j] = 0;
-}
-
-void	hev_quote(char c, int *squote, int *quote, int *fquote)
-{
-	if ((*quote == 0) && (*squote == 0))
-		*fquote = c;
-	if ((c == 34 && *quote == 1) || (c == 39 && *squote == 1))
-	{
-		if (c == 34 && *quote == 1)
-			*quote = 0;
-		if (c == 39 && *squote == 1)
-			*squote = 0;
-	}
-	else if ((c == 34 && *quote == 0) || (c == 39 && *squote == 0))
-	{
-		if (c == 39 && *squote == 0)
-			*squote = 1;
-		if (c == 34 && *quote == 0)
-			*quote = 1;
-	}
 }

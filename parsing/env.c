@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 11:02:42 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/12 20:07:35 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/17 11:24:09 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	env_pars(t_ms *t)
 			t->path = ft_split((t->env[i] + 5), ':');
 		if (ft_strnstr(t->env[i], "PWD=", 5) != 0)
 		{
-			t->pwd = pfree(t->pwd);
-			t->pwd = ft_strdup(t->env[i] + 4);
+			if (access(t->env[i] + 4, F_OK) == 0)
+				t->pwd = sf_rplc(t->pwd, ft_strdup(t->env[i] + 4));
 		}
 		if (ft_strnstr(t->env[i], "HOME=", 6) != 0)
 			t->home = ft_strdup(t->env[i] + 5);
@@ -60,7 +60,7 @@ void	env_var_detect(t_ms *t)
 	i = 0;
 	while (t->cmdl[0][i] != NULL)
 	{
-		if (ft_strnstr(t->cmdl[0][i], "$?", 1) != 0)
+		if (ft_strnstr(t->cmdl[0][i], "$?", 2) != 0)
 		{
 			t->cmdl[0][i] = pfree(t->cmdl[0][i]);
 			t->cmdl[0][i] = ft_itoa(t->return_v);

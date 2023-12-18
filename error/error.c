@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:34:01 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/12 20:16:26 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/17 12:08:28 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	ft_cmdnotfound(t_ms *t, char *str)
 		t->status = 32512;
 		t->return_v = (t->status >> 8);
 	}
+	else
+		return (0);
 	return (-1);
 }
 
@@ -86,7 +88,9 @@ int	hna(t_ms *t, char **lst)
 		t->status = 512;
 		return (2);
 	}
-	else if (ft_strchr("<>|&", lst[0][0]) == NULL && t->status != 0)
+	else if (ft_strchr("<>|&", lst[0][0]) == NULL && t->status != 0 && \
+	ft_strnstr(t->cmd[t->nc], "||", ft_strlen(t->cmd[t->nc])) == NULL && \
+	ft_strnstr(t->cmd[t->nc], "|", ft_strlen(t->cmd[t->nc])) == NULL)
 		return (2);
 	return (0);
 }

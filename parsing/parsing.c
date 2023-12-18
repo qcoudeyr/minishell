@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:40:49 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/12 11:38:17 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/17 11:13:19 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ char	*spec_format(char *str)
 {
 	struct s_henv	s;
 
-	s.newstr = ft_calloc(ft_strlen(str) * 2, sizeof(char));
 	s.i = 0;
 	s.j = 0;
 	s.quote = 0;
 	if (!str || *str == 0)
 		return (str);
+	s.newstr = ft_calloc((ft_strlen(str) + 1) * 2, sizeof(char));
 	while (str[s.i] != 0)
 	{
 		if (str[s.i] == '\'' || str[s.i] == '"')
@@ -84,8 +84,8 @@ int	cmdformat(t_ms *t)
 		t->cmdl[i] = ft_splitq(t->cmd[t->nc]);
 		t->cmdl[i + 1] = NULL;
 		t->temp = pfree(t->temp);
-		if (have_pipe(t->cmdl[i]) == 1)
-			handle_pipe(t);
+		if (have_meta(t->cmdl[i]) == 1)
+			handle_m(t);
 		while (t->cmdl[i] != NULL)
 		{
 			j = -1;
@@ -133,9 +133,9 @@ char	*rmcharq(char *str, char c)
 	i = 0;
 	j = 0;
 	quote = 0;
-	temp = ft_calloc(ft_strlen(str) + 2, sizeof(char));
 	if (!str || *str == 0)
 		return (str);
+	temp = ft_calloc(ft_strlen(str) + 2, sizeof(char));
 	while (str[i] == ' ')
 		i++;
 	while (str[i] != 0)

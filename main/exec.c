@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:42:16 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/11 11:41:38 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/17 12:00:57 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,17 @@ void	ft_execve(t_ms *t, int i)
 	exit(EXIT_FAILURE);
 }
 
+void	launch_cmd(t_ms *t)
+{
+	t->pid = fork();
+	if (t->pid == -1)
+		ft_perror(t, "fork");
+	else if (t->pid == 0)
+		ft_execve(t, t->index);
+	else
+		wait4(t->pid, &t->status, 0, t->rusage);
+}
+
 void	exec_cmd(t_ms *t)
 {
 	t->index = 0;
@@ -36,15 +47,7 @@ void	exec_cmd(t_ms *t)
 		if (t->cmdl[t->index] != NULL && is_builtins(t->cmdl[t->index][0]) > 0)
 			handle_builtins(t, t->index);
 		else if (t->cmdl[t->index] != NULL && hna(t, t->cmdl[t->index]) == 0)
-		{
-			t->pid = fork();
-			if (t->pid == -1)
-				ft_perror(t, "fork");
-			else if (t->pid == 0)
-				ft_execve(t, t->index);
-			else
-				wait4(t->pid, &t->status, 0, t->rusage);
-		}
+			launch_cmd(t);
 		t->index++;
 		t->return_v = (t->status >> 8);
 		env_pars(t);
@@ -83,28 +86,6 @@ int	hsc(t_ms *t)
 	return (0);
 }
 
-void	end_pipe(t_ms *t)
-{
-	t->input_fd = t->pipefd[0];
-	if (t->cmdl[t->index + 2] != NULL && \
-	ft_strnstr(t->cmdl[t->index + 2][0], "|", 2) != 0)
-	{
-		if (pipe(t->pipefd) == -1)
-			perror("pipe");
-		else
-		{
-			close(t->output_fd);
-			t->output_fd = t->pipefd[1];
-		}
-	}
-	else
-	{
-		close(t->pipefd[1]);
-		t->output_fd = STDOUT_FILENO;
-	}
-	t->index++;
-}
-
 //Handle Redirect permit to check error on cmd with multiple redirect
 //at the same cmd and copy it to the right fd that will be dup2 later
 
@@ -117,10 +98,13 @@ int	hrd(t_ms *t, int index)
 		return (-1);
 	while (t->cmdl[index] != NULL && t->cmdl[index][i] != NULL)
 	{
-		if (t->cmdl[index][i][0] == '<')
-			input_redirect(t, index, i);
-		else if (t->cmdl[index][i][0] == '>')
-			output_redirect(t, index, i);
+		while (t->cmdl[index][i] && ft_strchr("<>", t->cmdl[index][i][0]) != 0)
+		{
+			if (t->cmdl[index][i][0] == '<')
+				input_redirect(t, index, i);
+			else if (t->cmdl[index][i][0] == '>')
+				output_redirect(t, index, i);
+		}
 		i++;
 	}
 	if (t->input_fd == -1 || t->output_fd == -1)

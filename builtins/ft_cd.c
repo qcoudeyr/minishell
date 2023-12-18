@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:04:51 by lheinric          #+#    #+#             */
-/*   Updated: 2023/12/12 19:44:19 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/17 13:12:24 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*h_rpath(t_ms *t, char *pth)
 	struct s_henv	s;
 
 	s.len = 0;
-	s.var = ft_calloc(ft_strlen(pth) * 3, sizeof(char));
+	s.var = ft_calloc((ft_strlen(pth) + 1) * 3, sizeof(char));
 	if (!pth)
 		return (pth);
 	s.i = 0;
@@ -46,8 +46,6 @@ chemin);
 
 int	ft_cd(t_ms *t, char **path)
 {
-	char	*tpath;
-
 	t->i = 1;
 	if (path[t->i] == NULL || path[t->i][0] == '~' || path[t->i][0] == '\0')
 		t->return_v = gotopath(t->home, t) - (0 * t->i++);
@@ -59,12 +57,15 @@ int	ft_cd(t_ms *t, char **path)
 			t->return_v = 0;
 		else if (path[t->i][0] != '\0')
 		{
-			tpath = ft_strjoin(t->pwd, "/");
-			t->temp = tpath;
-			tpath = ft_strjoin(t->temp, path[t->i]);
+			if (ft_strcmp(t->pwd, "/") != 0)
+				t->temp = ft_strjoin(t->pwd, "/");
+			else
+				t->temp = ft_strdup(t->pwd);
+			t->temp = sf_rplc(t->temp, ft_strjoin(t->temp, path[t->i]));
+			if (t->temp && *(t->temp + (ft_strlen(t->temp) - 1)) == '/')
+				ft_strlcpy(t->temp, t->temp, ft_strlen(t->temp));
+			t->return_v = gotopath(t->temp, t);
 			t->temp = pfree(t->temp);
-			t->return_v = gotopath(tpath, t);
-			tpath = pfree(tpath);
 		}
 		t->i++;
 	}

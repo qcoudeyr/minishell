@@ -6,7 +6,7 @@
 #    By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/07 22:29:45 by  qcoudeyr         #+#    #+#              #
-#    Updated: 2023/12/13 18:13:59 by  qcoudeyr        ###   ########.fr        #
+#    Updated: 2023/12/15 15:59:27 by  qcoudeyr        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRCS =	main.c \
 		remove_quotes.c find_redirect.c heredoc.c signal.c\
 		env_var.c pipe.c bonus.c utils.c free.c exec.c \
 		error_2.c env.c ft_unset.c ft_export.c init.c \
-		ft_pwd.c export_utils.c import_env.c path.c path2.c
+		ft_pwd.c export_utils.c import_env.c path.c path2.c\
+		utils2.c
 
 OBJDIR = ./object/
 OBJS = $(addprefix $(OBJDIR),$(SRCS:.c=.o))
@@ -86,7 +87,7 @@ generate_env:
 debug: $(OBJS)
 	@clear
 	@$(CC) $(CFLAGS) -g $(OBJS) -L$(LIB_DIR) $(LIBS) -o debug
-	colour-valgrind -s --tool=memcheck --leak-check=full --error-exitcode=1 \
+	valgrind -s --track-origins=yes --tool=memcheck --leak-check=full --error-exitcode=1 \
 	./debug
 
 .PHONY: all clean fclean re debug libft norme generate_env

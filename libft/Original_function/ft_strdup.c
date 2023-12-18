@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 11:51:57 by qcoudeyr          #+#    #+#             */
-/*   Updated: 2023/12/08 10:08:36 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/15 14:44:54 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strdup(const char *s)
 	char	*str;
 
 	len = ft_strlen(s);
-	str = malloc(len + 1);
+	str = ft_calloc(len + 3, sizeof(char));
 	if (str == NULL || s == NULL)
 		return (NULL);
 	ft_strlcpy(str, s, len +1);

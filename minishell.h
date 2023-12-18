@@ -6,7 +6,7 @@
 /*   By:  qcoudeyr <@student.42perpignan.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 07:33:52 by  qcoudeyr         #+#    #+#             */
-/*   Updated: 2023/12/13 18:15:48 by  qcoudeyr        ###   ########.fr       */
+/*   Updated: 2023/12/17 13:00:25 by  qcoudeyr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ typedef struct s_minishell
 	int				pipefd[2];
 	int				redirectfd[2];
 	void			*ptr;
-	void			*temp;
+	char			*temp;
 	char			*pwd;
 	char			*home;
 	char			*fpath;
@@ -97,6 +97,7 @@ void	remove_var_env(t_ms *t, int index);
 int		varlen_env(char *str);
 int		ft_export(t_ms *t, int i);
 void	add_var_env(t_ms *t, char *str, int index);
+void	add_var_export(t_ms *t, char *str, int index);
 
 //		utils
 int		export_error(char *str);
@@ -111,6 +112,7 @@ void	*tabfree(void **ptr);
 void	import_env(t_ms *t);
 int		check_path(t_ms *t);
 int		ask_for_env(t_ms *t);
+char	*sf_rplc(char *str, char *toreplace);
 void	change_path(t_ms *t, int index);
 void	handle_signal(t_ms *t);
 int		is_set_env_var(char *str);
@@ -133,14 +135,14 @@ int		cmd_handler(t_ms *t);
 void	exec_cmd(t_ms *t);
 int		is_and(char *str);
 void	handle_builtins(t_ms *t, int i);
-void	handle_pipe(t_ms *t);
+void	handle_m(t_ms *t);
 int		is_spec(char *str);
 int		tablen(void **tabl);
 void	ft_freecmdl(t_ms *t);
 void	init_cmdl(t_ms *t);
 void	t_init(t_ms *t);
 void	*pfree(void *ptr);
-int		have_pipe(char **cmds);
+int		have_meta(char **cmds);
 char	*remove_quotes(char *input);
 int		find_redirect(t_ms *t, int i);
 char	*env_var(t_ms *t, char *str);
@@ -162,6 +164,7 @@ void	get_export(t_ms *t);
 int		check_redirect_error(t_ms *t, int index);
 void	export_sort(t_ms *t);
 int		check_cmd_err(t_ms *t);
+int		is_vname(char *str);
 
 // Text colors
 # define CL_BLACK   "\033[30m"
